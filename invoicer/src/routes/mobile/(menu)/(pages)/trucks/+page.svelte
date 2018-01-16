@@ -31,11 +31,8 @@
 	.main {
 		padding-top: 27px;
 		padding-bottom: 5px;
-		/* margin-bottom: 20px; */
-		/* height: 100%; */
 		overflow-y: scroll;
 		user-select: none;
-		/* overflow-y: scroll; */
 	}
 
 	.truck {
