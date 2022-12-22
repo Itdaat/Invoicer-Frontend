@@ -1,18 +1,38 @@
 :root {
-    --bg-color : #FBFBFB;
-
+    --text-thin-color: #3D5A80;
+    --main-color-dark: #3D5A80;
+    --text-thin-color-light: #FFFFFF;
+    --box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
 }
 
-body {
 
+body {
+    padding: 0;
+    margin: 0;
 }
 
 .text-thin {
-
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+    /* identical to box height */
+    
+    letter-spacing: 1px;
+    color: var(--text-thin-color);
 }
 
-.text {
-
+.text-title {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 40px;
+    line-height: 60px;
+    /* identical to box height */
+    
+    letter-spacing: 1px;
+    color: var(--text-thin-color);
 }
 
 .text-link {
@@ -20,13 +40,36 @@ body {
 }
 
 .button {
+    width: 320px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
 
+    font-family: 'Istok Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 27px;
+    letter-spacing: 1px;
 }
 
 .button.dark {
+    background-color: var(--main-color-dark);
+    color: var(--text-thin-color-light);
 
 }
 
 .button.light {
+    box-shadow: var(--box-shadow);
+}
 
+.input {
+    font-family: 'Istok Web';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 19px;
+    line-height: 27px;
+    letter-spacing: 1px;
 }

@@ -5,26 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="/main.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Istok+Web&family=Poppins:wght@500&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/login-register.css">
+    
 </head>
 <body>
     <div class="login-form__container">
         <div class="login-form">
-            <div class="login__title">Login</div>
-            <div class="input input-login login-form__input__login">
+            <div class="text-title login__title">Login</div>
+            <div class="input input-login login__input login-form__input__login">
                 <input type="text" placeholder="Login">
             </div>
-            <div class="input input-password login-form__input__password">
+            <div class="input input-password login__input login-form__input__password">
                 <input type="text" placeholder="Password">
             </div>
             <div class="login-form__forgot-password">
                 <span class="text">Забули пароль?</span>
                 <a href="" class="text-link">Відновити</a>
             </div>
-            <div class="button dark login-form__login-button"></div>
-            <div class="text-thin"></div>
-            <div class="button light login-form__login-with-google"></div>
-            <div class="text login-form__register-link"></div>
+            <div class="button dark login-form__login-button">Login</div>
+            <div class="text-thin">Або</div>
+            <div class="button light login-form__login-with-google">За допомогою Google</div>
+            <div class="text login-form__register-link">
+                <div class="text">Немаєте акаунту?</div>
+                <a href="" class="text-link">Створити</a>
+            </div>
         </div>
     </div>
 </body>
