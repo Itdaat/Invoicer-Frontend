@@ -2,14 +2,15 @@
 	import AccountIcon from './../../lib/assets/icons/AccountIcon.svelte';
 	import BigTitle from './../../lib/components/BigTitle.svelte';
     import Input from '../../lib/templates/Input.svelte'
+    import {_ ,dictionary} from 'svelte-i18n';
 
-    const placeHolder = 'Login';
+    const placeHolder = 'Register';
 
 </script>
 
 <div class="container">
     <div class="block">
-         <BigTitle>Text</BigTitle>
+         <BigTitle>{$_('registerTitle')}</BigTitle>
         <Input placeHolder={placeHolder}>
             <AccountIcon/>
         </Input>
