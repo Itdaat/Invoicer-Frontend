@@ -1,0 +1,324 @@
+@import url("https://fonts.googleapis.com/css2?family=Istok+Web&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Istok+Web&display=swap");
+body {
+  padding: 0px;
+  margin: 0px;
+  height: 100vh;
+}
+body .main {
+  background-color: #FBFBFB;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+body .main .form {
+  font-family: "Istok Web";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 27px;
+  letter-spacing: 1px;
+  color: white;
+  color: #4C4C65;
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+  padding: 0px 70px;
+  width: 350px;
+}
+body .main .form .inputs {
+  display: flex;
+  flex-direction: column;
+}
+body .main .form .inputs .logo {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  margin-bottom: 35px;
+  margin-top: 40px;
+}
+body .main .form .inputs .input-container {
+  width: 100%;
+}
+body .main .form .inputs .input-container .label {
+  font-family: "Istok Web";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  color: #4C4C65;
+  padding: 0px 0px 8px 7px;
+}
+body .main .form .inputs .input-container .input {
+  box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.068);
+  border-radius: 7px;
+  border-width: 0px;
+  height: 50px;
+  padding-left: 27px;
+  width: 91%;
+  font-family: "Istok Web";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 23px;
+  color: #4C4C65;
+  letter-spacing: 1px;
+}
+body .main .form .inputs #login-input {
+  margin-bottom: 24px;
+}
+body .main .form .inputs .forgot-password-container {
+  font-size: 16px;
+  padding-top: 14px;
+  padding-left: 8px;
+}
+body .main .form .inputs .forgot-password-container .link {
+  font-size: 17px;
+  color: #0C2EAC;
+  text-decoration: none;
+}
+body .main .form .inputs .login-button {
+  padding: 14px 0px;
+  text-align: center;
+  margin-top: 22px;
+  background-color: #4C4C65;
+  border-radius: 7px;
+  color: white;
+  font-family: "Istok Web";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 27px;
+  letter-spacing: 1px;
+  color: white;
+}
+body .main .form .inputs .register-button {
+  padding: 14px 0px;
+  text-align: center;
+  margin-top: 40px;
+  background-color: #4C4C65;
+  border-radius: 7px;
+  color: white;
+  border: none;
+  font-family: "Istok Web";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 27px;
+  letter-spacing: 1px;
+  color: white;
+}
+body .main .form .inputs .reset-button {
+  padding: 14px 0px;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 38px;
+  background-color: #4C4C65;
+  border-radius: 7px;
+  color: white;
+  border: none;
+  font-family: "Istok Web";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 27px;
+  letter-spacing: 1px;
+  color: white;
+}
+body .main .form .inputs .register-link-container {
+  font-size: 16px;
+  margin: 7px 0px 25px 0px;
+  text-align: center;
+}
+body .main .form .inputs .register-link-container .link {
+  font-size: 17px;
+  color: #0C2EAC;
+  text-decoration: none;
+}
+body .main-page {
+  background-color: #FBFBFB;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.4fr 10fr;
+  overflow-y: scroll;
+}
+body .main-page .left-panel {
+  box-shadow: 0px 0px 9px rgba(44, 44, 44, 0.1);
+}
+body .main-page .left-panel .logo {
+  text-align: center;
+  padding: 30px 20px;
+  font-size: 25px;
+  color: #6E6E8B;
+  opacity: 0.95;
+}
+body .main-page .left-panel .menu {
+  list-style: none;
+}
+body .main-page .left-panel .menu .category {
+  list-style: none;
+}
+body .main-page .left-panel .menu .category .title {
+  font-family: "Istok Web";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 27px;
+  letter-spacing: 1px;
+  color: white;
+  padding: 5px 20px;
+  color: #6E6E8B;
+  opacity: 0.6;
+}
+body .main-page .left-panel .menu .category .link-container {
+  padding-left: 30px;
+  padding-right: 20px;
+  padding: 8px 20px 8px 35px;
+}
+body .main-page .left-panel .menu .category .link-container:hover {
+  border-left: 4px solid #4C4C65;
+  padding-left: 40px;
+}
+body .main-page .left-panel .menu .category .link-container .icon {
+  display: inline;
+  font-size: 20px;
+  color: #6E6E8B;
+}
+body .main-page .left-panel .menu .category .link-container .link {
+  font-family: "Istok Web";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 27px;
+  letter-spacing: 1px;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  padding-left: 7px;
+  display: inline;
+  color: #6E6E8B;
+}
+body .main-page .main-panel {
+  display: grid;
+  padding: 20px 20px;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 50px 2fr 3fr;
+  grid-template-areas: "top-panel top-panel" "counter accounts" "invoices accounts";
+  gap: 20px;
+}
+body .main-page .main-panel .top-panel {
+  display: flex;
+  justify-content: space-between;
+  grid-area: top-panel;
+}
+body .main-page .main-panel .top-panel .left .search-container {
+  display: flex;
+  opacity: 0.7;
+}
+body .main-page .main-panel .top-panel .left .search-container .search {
+  box-shadow: 0px 0px 9px rgba(44, 44, 44, 0.1);
+  border-radius: 7px;
+  font-family: "Istok Web";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 27px;
+  letter-spacing: 1px;
+  color: white;
+  font-size: 15px;
+  padding: 11.5px 50px 11.5px 15px;
+  background-color: #FBFBFB;
+  border: none;
+  width: 200px;
+}
+body .main-page .main-panel .top-panel .left .search-container .search:focus {
+  border-color: #0C2EAC;
+  outline: none;
+  opacity: 1;
+  color: #4C4C65;
+}
+body .main-page .main-panel .top-panel .left .search-container .search .text {
+  font-family: "Istok Web";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 27px;
+  letter-spacing: 1px;
+  color: white;
+  color: #6E6E8B;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+}
+body .main-page .main-panel .top-panel .left .search-container .icon {
+  display: flex;
+  align-items: center;
+  margin-top: -2.5px;
+  margin-left: -35px;
+  cursor: pointer;
+  z-index: 10;
+}
+body .main-page .main-panel .top-panel .right {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  min-width: 300px;
+  opacity: 0.8;
+}
+body .main-page .main-panel .top-panel .right .firm-select {
+  box-shadow: 0px 0px 9px rgba(44, 44, 44, 0.1);
+  border-radius: 7px;
+  font-family: "Istok Web";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 19px;
+  line-height: 27px;
+  letter-spacing: 1px;
+  color: white;
+  font-size: 15px;
+  color: #6E6E8B;
+  background-color: #FBFBFB;
+  border: none;
+  width: 200px;
+}
+body .main-page .main-panel .top-panel .right .firm-select:focus {
+  outline: none;
+}
+body .main-page .main-panel .top-panel .right .firm-select option {
+  box-shadow: 0px 0px 9px rgba(44, 44, 44, 0.1);
+  border-radius: 7px;
+  outline: none;
+  -webkit-appearance: none;
+  padding: 10px 10px;
+}
+body .main-page .main-panel .top-panel .right .firm-select option:focus {
+  background-color: #6E6E8B !important;
+  color: #FFFFFF !important;
+}
+body .main-page .main-panel .top-panel .right .add-button {
+  box-shadow: 0px 0px 9px rgba(44, 44, 44, 0.1);
+  border-radius: 7px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100px;
+  font-size: 22px;
+}
+body .main-page .main-panel .main-data {
+  box-shadow: 0px 0px 9px rgba(44, 44, 44, 0.1);
+  border-radius: 7px;
+  grid-area: counter;
+}
+body .main-page .main-panel .invoices {
+  box-shadow: 0px 0px 9px rgba(44, 44, 44, 0.1);
+  border-radius: 7px;
+  grid-area: invoices;
+}
+body .main-page .main-panel .accounts {
+  box-shadow: 0px 0px 9px rgba(44, 44, 44, 0.1);
+  border-radius: 7px;
+  grid-area: accounts;
+}
