@@ -11,8 +11,8 @@
 <div class="container">
     <div class="block">
          <BigTitle>{$_('registerTitle')}</BigTitle>
-        <Input placeHolder={placeHolder}>
-            <AccountIcon/>
+        <Input placeHolder={placeHolder} --color="black">
+            <AccountIcon slot="left" status="error"/>
         </Input>
     </div>
 

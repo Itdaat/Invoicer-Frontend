@@ -17,5 +17,6 @@
 
         color: #3D5A80;
 
+        margin-bottom: 20px;
     }
 </style>

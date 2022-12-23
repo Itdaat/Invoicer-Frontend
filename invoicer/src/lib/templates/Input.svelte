@@ -2,15 +2,20 @@
     export let value = '';
     export let disabled = false;
     export let placeHolder = '';
+    export let success = false;
+    export let error = true;
 
 </script>
 
 
 <div class="container">
     <div class="left">
-        <slot></slot>
+        <slot name="left"></slot>
     </div>
-    <input class="input" placeholder={placeHolder} disabled={disabled} type="text" bind:value={value}>
+    <input class="input" class:success  class:error placeholder={placeHolder} disabled={disabled} type="text" bind:value={value}>
+    <div class="right">
+        <slot name="right"></slot>
+    </div>
 </div>
 
 <style>
@@ -38,7 +43,6 @@
         font-weight: 400;
         font-size: 18px;
         line-height: 23px;
-        /* identical to box height */
 
         letter-spacing: 1px;
 
@@ -49,6 +53,17 @@
     .input:focus {
         border: none;
         outline: none;
-        border-bottom: 2px solid #3D5A80;
+        border-bottom: 0.9px solid #3D5A80;
     }
+
+    .success {
+        color: #24A731;
+        border-color: #24A731 !important;
+    }
+
+    .error {
+        color: #B01A1A;
+        border-color: #B01A1A !important;
+    }
+    
 </style>
