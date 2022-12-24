@@ -1,21 +1,33 @@
 <script>
-	import AccountIcon from './../../lib/assets/icons/AccountIcon.svelte';
-	import BigTitle from './../../lib/components/BigTitle.svelte';
-    import Input from '../../lib/templates/Input.svelte'
-    import {_ ,dictionary} from 'svelte-i18n';
+	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
+	import Input from '$lib/templates/Input.svelte';
+	import BigTitle from '$lib/components/BigTitle.svelte';
+    // import { _, dictionary, register } from 'svelte-i18n';
+    /**
+    * @type {'ordinary' | 'success' | 'error'}
+   */
+   let status = 'ordinary';
 
-    const placeHolder = 'Register';
+    let login = '';
+
+    $: if(login.length == 1) {
+        alert('hello');
+        status = "error"
+    } else if(login.length >= 10) {
+        status = "success"
+    } else {
+        status = "ordinary";
+    }
 
 </script>
 
 <div class="container">
     <div class="block">
-         <BigTitle>{$_('registerTitle')}</BigTitle>
-        <Input placeHolder={placeHolder} --color="black">
-            <AccountIcon slot="left" status="error"/>
+         <BigTitle>Register</BigTitle>
+        <Input placeHolder={'Register'} bind:value={login} status={status}>
+            <AccountIcon slot="left" status={status}/>
         </Input>
     </div>
-
 </div>
 
 

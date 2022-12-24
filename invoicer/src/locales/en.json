@@ -1,3 +1,4 @@
 {
-    "registerTitle" : "Register" 
+    "registerTitle" : "Register", 
+    "registerInputPlaceHolder" : "Login"
 }

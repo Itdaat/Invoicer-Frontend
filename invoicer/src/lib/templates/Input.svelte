@@ -1,9 +1,14 @@
 <script>
+     /**
+     * @type {'ordinary' | 'success' | 'error'}
+    */
+    export let status = 'ordinary';
     export let value = '';
     export let disabled = false;
     export let placeHolder = '';
-    export let success = false;
-    export let error = true;
+    let success = false, error = false;
+    $: success = status == "success";
+    $: error = status == 'error'; 
 
 </script>
 
@@ -27,13 +32,13 @@
         height: 100%;
         display: flex;
         align-items: center;
-        padding-top: 4px;
+        padding-top: 1px;
     }
 
     .input  {
         display: block;
         border:none;
-        height: 100%;
+        height: 80%;
         border-bottom: 0.3px solid #3D5A80;
         margin-left: 13px;
         padding: 3px 13px;

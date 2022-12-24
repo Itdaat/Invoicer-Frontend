@@ -1,12 +1,9 @@
 <script>
-    import { register, init, getLocaleFromNavigator } from 'svelte-i18n';
+    export const ssr = false;
+    export const prerender = false;
+    export const csr = true;
+    
 
-    register('en', () => import('../locales/en.json'));
-
-    init({
-        fallbackLocale: 'en',
-        initialLocale: getLocaleFromNavigator(),
-    });
 </script>
 
 <slot></slot>
