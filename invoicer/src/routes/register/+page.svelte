@@ -2,18 +2,20 @@
 	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
 	import Input from '$lib/templates/Input.svelte';
 	import BigTitle from '$lib/components/BigTitle.svelte';
+	import PasswordIcon from '$lib/assets/icons/PasswordIcon.svelte';
+	import InputPassword from '$lib/components/InputPassword.svelte';
     // import { _, dictionary, register } from 'svelte-i18n';
     /**
-    * @type {'ordinary' | 'success' | 'error'}
-   */
-   let status = 'ordinary';
+        * @type {'ordinary' | 'success' | 'error'}
+    */
+    let status = 'ordinary';
 
     let login = '';
+    let password = '';
 
-    $: if(login.length == 1) {
-        alert('hello');
+    $: if(password.length == 1) {
         status = "error"
-    } else if(login.length >= 10) {
+    } else if(password.length >= 10) {
         status = "success"
     } else {
         status = "ordinary";
@@ -27,6 +29,7 @@
         <Input placeHolder={'Register'} bind:value={login} status={status}>
             <AccountIcon slot="left" status={status}/>
         </Input>
+        <InputPassword status={status} placeHolder={"Password"} bind:value={password}/>
     </div>
 </div>
 
