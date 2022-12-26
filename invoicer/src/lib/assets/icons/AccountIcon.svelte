@@ -1,11 +1,15 @@
 <script>
-    /**
-     * @type {'ordinary' | 'success' | 'error'}
+
+    const red = '#B01A1A'; 
+    const green = '#24A731'; 
+    const dark = '#284B63';
+
+      /**
+     * @type {import("src/types/InputStatus").InputStatus}
     */
     export let status = 'ordinary';
     export let color = '#284B63'
 
-    const red = '#B01A1A', green = '#24A731', dark = '#284B63';
 
     $: color = status == 'ordinary' ? dark : (status == 'error' ? red : green);
 </script>
