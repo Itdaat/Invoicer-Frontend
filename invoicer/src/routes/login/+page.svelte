@@ -4,6 +4,7 @@
 	import Input from '$lib/templates/Input.svelte';
 	import BigTitle from '$lib/components/register/BigTitle.svelte';
 	import InputPassword from '$lib/components/register/InputPassword.svelte';
+	import Button from '$lib/templates/Button.svelte';
 	// import { _, dictionary, register } from 'svelte-i18n';
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
@@ -15,6 +16,9 @@
 	let forgotPasswordText = 'Забули пароль?',
 		forgotPasswordLink = '#',
 		forgotPasswordLinkText = 'Відновити';
+
+	let loginButtonText = 'Login',
+		loginButtonLink = '#';
 
 	let login = '';
 	let password = '';
@@ -47,6 +51,9 @@
 					text={forgotPasswordText}
 				/>
 			</div>
+			<div class="button-container">
+				<Button type="dark" link={loginButtonLink}>{loginButtonText}</Button>
+			</div>
 		</div>
 	</div>
 </div>
@@ -74,6 +81,11 @@
 
 	.element {
 		margin: 16px 0px;
+	}
+
+	.button-container {
+		width: 320px;
+		height: 50px;
 	}
 
 	.invisible-block {
