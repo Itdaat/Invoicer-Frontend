@@ -20,6 +20,11 @@
 	let loginButtonText = 'Login',
 		loginButtonLink = '#';
 
+	let textOr = 'Або';
+
+	let loginWithGoogleTitle = 'За допомогою Google',
+		loginWithGoogleLink = '#loginTitle';
+
 	let login = '';
 	let password = '';
 
@@ -53,6 +58,10 @@
 			</div>
 			<div class="button-container">
 				<Button type="dark" link={loginButtonLink}>{loginButtonText}</Button>
+			</div>
+			<div class="text-container">{textOr}</div>
+			<div class="button-container">
+				<Button type="light" link={loginWithGoogleLink}>{loginWithGoogleTitle}</Button>
 			</div>
 		</div>
 	</div>
@@ -89,5 +98,20 @@
 	}
 
 	.invisible-block {
+	}
+
+	.text-container {
+		font-family: 'Roboto';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 19px;
+		/* identical to box height */
+
+		letter-spacing: 1px;
+
+		color: #3d5a80;
+
+		text-align: center;
 	}
 </style>

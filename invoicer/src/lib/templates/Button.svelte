@@ -6,12 +6,14 @@
 	export let link = '';
 </script>
 
-<div class="container" class:light={type == 'light'} class:dark={type == 'dark'}>
+<a class="container" href={link} class:light={type == 'light'} class:dark={type == 'dark'}>
 	<slot />
-</div>
+</a>
 
 <style>
 	.container {
+		display: block;
+		text-decoration: none;
 		width: 100%;
 		height: 100%;
 		display: flex;
