@@ -1,5 +1,5 @@
 <script>
-	import ForgotPassword from './../../lib/components/register/ForgotPassword.svelte';
+	import ForgotPassword from '../../lib/components/register/ForgotPassword.svelte';
 	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
 	import Input from '$lib/templates/Input.svelte';
 	import BigTitle from '$lib/components/register/BigTitle.svelte';
@@ -10,6 +10,8 @@
 	 */
 	let status = 'ordinary';
 
+	let loginTitle = 'Login';
+
 	let forgotPasswordText = 'Забули пароль?',
 		forgotPasswordLink = '#',
 		forgotPasswordLinkText = 'Відновити';
@@ -17,9 +19,9 @@
 	let login = '';
 	let password = '';
 
-	$: if (password.length == 1) {
+	$: if (login.length == 1) {
 		status = 'error';
-	} else if (password.length >= 10) {
+	} else if (login.length >= 10) {
 		status = 'success';
 	} else {
 		status = 'ordinary';
@@ -28,7 +30,7 @@
 
 <div class="container">
 	<div class="block">
-		<BigTitle>Register</BigTitle>
+		<BigTitle>{loginTitle}</BigTitle>
 		<div class="invisible-block">
 			<div class="element">
 				<Input placeHolder={'Register'} bind:value={login} {status}>
