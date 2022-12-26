@@ -1,5 +1,5 @@
 <script>
-	import ClosedEyeIcon from './../assets/icons/ClosedEyeIcon.svelte';
+	import ClosedEyeIcon from '../../assets/icons/ClosedEyeIcon.svelte';
 	import EyeIcon from '$lib/assets/icons/EyeIcon.svelte';
 	import PasswordIcon from '$lib/assets/icons/PasswordIcon.svelte';
 
@@ -63,7 +63,6 @@
 <style>
 	.container {
 		display: flex;
-		margin: 16px 0px;
 	}
 
 	.left {
