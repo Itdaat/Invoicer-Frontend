@@ -7,7 +7,11 @@
 	import InputPassword from '$lib/components/register/InputPassword.svelte';
 	import Button from '$lib/templates/Button.svelte';
 
-	import { _ } from 'svelte-i18n';
+	/** @type {import('./$types').PageData} */
+	export let data;
+
+	let t = data.t;
+
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
@@ -41,36 +45,32 @@
 
 <div class="container">
 	<div class="block">
-		<BigTitle>{$_('login_title')}</BigTitle>
+		<BigTitle>{t.login_title}</BigTitle>
 		<div class="invisible-block">
 			<div class="element">
-				<Input placeHolder={$_('login_accountPlaceHolder')} bind:value={login} {status}>
+				<Input placeHolder={t.login_accountPlaceHolder} bind:value={login} {status}>
 					<AccountIcon slot="left" {status} />
 				</Input>
 			</div>
 			<div class="element">
-				<InputPassword
-					{status}
-					placeHolder={$_('login_passwordPlaceHolder')}
-					bind:value={password}
-				/>
+				<InputPassword {status} placeHolder={t.login_passwordPlaceHolder} bind:value={password} />
 			</div>
 			<div class="element">
 				<ForgotPassword
-					linkText={$_('login_forgotPasswordLink')}
+					linkText={t.login_forgotPasswordLink}
 					link={forgotPasswordLink}
-					text={$_('login_forgotPassword')}
+					text={t.login_forgotPassword}
 				/>
 			</div>
 			<div class="button-container">
-				<Button type="dark" link={loginButtonLink}>{$_('login_loginButton')}</Button>
+				<Button type="dark" link={loginButtonLink}>{t.login_loginButton}</Button>
 			</div>
-			<div class="text-container">{$_('login_textOr')}</div>
+			<div class="text-container">{t.login_textOr}</div>
 			<div class="button-container">
 				<Button type="light" link={loginWithGoogleLink}>
 					<div class="google-button-container">
 						<div class="google-button-left"><GoogleIcon /></div>
-						<div class="google-button-right">{$_('login_loginWithGoogle')}</div>
+						<div class="google-button-right">{t.login_loginWithGoogle}</div>
 					</div>
 				</Button>
 			</div>

@@ -4,7 +4,7 @@
     "login_passwordPlaceHolder": "Password",
     "login_forgotPassword": "Forgot Password?",
     "login_forgotPasswordLink": "Reset",
-    "login_loginButton": "Увійти",
+    "login_loginButton": "Login",
     "login_textOr": "Or",
     "login_loginWithGoogle": "Login With Google"
 }
