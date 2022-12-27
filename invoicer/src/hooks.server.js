@@ -2,7 +2,7 @@
 export async function handle({ event, resolve }) {
     const host = event.url.origin;
     const userId = event.cookies.get('userId');
-    if (!userId && !event.url.pathname.startsWith('/login')) {
+    if (!userId && !(event.url.pathname.startsWith('/login') || event.url.pathname.startsWith('/register'))) {
         return Response.redirect(host + '/login');
     }
 
