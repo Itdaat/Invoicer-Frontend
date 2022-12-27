@@ -6,29 +6,20 @@
 	import BigTitle from '$lib/components/register/BigTitle.svelte';
 	import InputPassword from '$lib/components/register/InputPassword.svelte';
 	import Button from '$lib/templates/Button.svelte';
+	import cookies from 'cookie';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
 
-	let t = data.t;
+	let t = JSON.parse(data.t);
 
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
 	let status = 'ordinary';
 
-	let loginTitle = 'Login';
-
-	let forgotPasswordText = 'Забули пароль?',
-		forgotPasswordLink = '#',
-		forgotPasswordLinkText = 'Відновити';
-
-	let loginButtonText = 'Login',
-		loginButtonLink = '#';
-
-	let textOr = 'Або';
-
-	let loginWithGoogleTitle = 'За допомогою Google',
+	let forgotPasswordLink = '#',
+		loginButtonLink = '#',
 		loginWithGoogleLink = '#loginTitle';
 
 	let login = '';
