@@ -1,4 +1,5 @@
 <script>
+	import GoogleIcon from './../../lib/assets/icons/GoogleIcon.svelte';
 	import ForgotPassword from '../../lib/components/register/ForgotPassword.svelte';
 	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
 	import Input from '$lib/templates/Input.svelte';
@@ -40,29 +41,38 @@
 
 <div class="container">
 	<div class="block">
-		<BigTitle>{loginTitle}</BigTitle>
+		<BigTitle>{$_('login_title')}</BigTitle>
 		<div class="invisible-block">
 			<div class="element">
-				<Input placeHolder={$_('login')} bind:value={login} {status}>
+				<Input placeHolder={$_('login_accountPlaceHolder')} bind:value={login} {status}>
 					<AccountIcon slot="left" {status} />
 				</Input>
 			</div>
 			<div class="element">
-				<InputPassword {status} placeHolder={'Password'} bind:value={password} />
+				<InputPassword
+					{status}
+					placeHolder={$_('login_passwordPlaceHolder')}
+					bind:value={password}
+				/>
 			</div>
 			<div class="element">
 				<ForgotPassword
-					linkText={forgotPasswordLinkText}
+					linkText={$_('login_forgotPasswordLink')}
 					link={forgotPasswordLink}
-					text={forgotPasswordText}
+					text={$_('login_forgotPassword')}
 				/>
 			</div>
 			<div class="button-container">
-				<Button type="dark" link={loginButtonLink}>{loginButtonText}</Button>
+				<Button type="dark" link={loginButtonLink}>{$_('login_loginButton')}</Button>
 			</div>
-			<div class="text-container">{textOr}</div>
+			<div class="text-container">{$_('login_textOr')}</div>
 			<div class="button-container">
-				<Button type="light" link={loginWithGoogleLink}>{loginWithGoogleTitle}</Button>
+				<Button type="light" link={loginWithGoogleLink}>
+					<div class="google-button-container">
+						<div class="google-button-left"><GoogleIcon /></div>
+						<div class="google-button-right">{$_('login_loginWithGoogle')}</div>
+					</div>
+				</Button>
 			</div>
 		</div>
 	</div>
@@ -114,5 +124,19 @@
 		color: #3d5a80;
 
 		text-align: center;
+	}
+
+	.google-button-container {
+		display: flex;
+	}
+
+	.google-button-left {
+		margin-right: 20px;
+		display: flex;
+		align-items: center;
+	}
+
+	.google-button-right {
+		padding-top: 2px;
 	}
 </style>
