@@ -5,7 +5,8 @@
 	import BigTitle from '$lib/components/register/BigTitle.svelte';
 	import InputPassword from '$lib/components/register/InputPassword.svelte';
 	import Button from '$lib/templates/Button.svelte';
-	// import { _, dictionary, register } from 'svelte-i18n';
+
+	import { _ } from 'svelte-i18n';
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
@@ -42,7 +43,7 @@
 		<BigTitle>{loginTitle}</BigTitle>
 		<div class="invisible-block">
 			<div class="element">
-				<Input placeHolder={'Register'} bind:value={login} {status}>
+				<Input placeHolder={$_('login')} bind:value={login} {status}>
 					<AccountIcon slot="left" {status} />
 				</Input>
 			</div>
