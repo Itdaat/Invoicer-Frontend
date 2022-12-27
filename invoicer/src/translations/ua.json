@@ -1,0 +1,7 @@
+{
+    "login_title": "Вхід",
+    "login_passwordPlaceHolder": "Пароль",
+    "login_forgotPassword": "Забули пароль?",
+    "login_forgotPasswordLinkText": "Відновити",
+    "login_loginButton": "Увійти"
+}
