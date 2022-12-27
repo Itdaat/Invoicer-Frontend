@@ -8,6 +8,6 @@ let tt = 1;
 
 export function load() {
     return {
-        t: tt > 2 ? en : ua
+        t: tt > 2 ? en : ua,
     }
 }
