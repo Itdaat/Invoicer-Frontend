@@ -31,6 +31,7 @@
 	.container {
 		display: flex;
 		margin: 16px 0px;
+		justify-content: center;
 	}
 
 	.left {
@@ -74,5 +75,11 @@
 	.error {
 		color: #b01a1a;
 		border-color: #b01a1a !important;
+	}
+
+	@media only screen and (max-width: 400px) {
+		.input {
+			width: 50%;
+		}
 	}
 </style>

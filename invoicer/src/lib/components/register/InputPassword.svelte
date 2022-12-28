@@ -63,6 +63,7 @@
 <style>
 	.container {
 		display: flex;
+		justify-content: center;
 	}
 
 	.left {
@@ -112,5 +113,11 @@
 		margin-top: 5px;
 		margin-left: -30px;
 		margin-right: 8px;
+	}
+
+	@media only screen and (max-width: 400px) {
+		.input {
+			width: 50%;
+		}
 	}
 </style>
