@@ -62,6 +62,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Register</title>
+</svelte:head>
+
 <div class="container">
 	<div class="block">
 		<BigTitle>{t.register_title}</BigTitle>

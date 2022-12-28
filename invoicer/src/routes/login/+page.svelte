@@ -48,6 +48,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Login</title>
+</svelte:head>
+
 <div class="container">
 	<div class="block">
 		<div class="title-container">

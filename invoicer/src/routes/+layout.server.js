@@ -16,6 +16,8 @@ export async function load({ cookies }) {
   } else {
     langData = await import('../translations/ua.json');
   }
+
+
   return {
     userId: userId,
     t: JSON.stringify(langData),

@@ -1,12 +1,8 @@
 <script>
-	import RegisterOrLogin from './../../lib/components/register/RegisterOrLogin.svelte';
-	import GoogleIcon from './../../lib/assets/icons/GoogleIcon.svelte';
-	import ForgotPassword from '../../lib/components/register/ForgotPassword.svelte';
 	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
-	import Input from '$lib/templates/Input.svelte';
 	import BigTitle from '$lib/components/register/BigTitle.svelte';
-	import InputPassword from '$lib/components/register/InputPassword.svelte';
 	import Button from '$lib/templates/Button.svelte';
+	import Input from '$lib/templates/Input.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -22,6 +18,10 @@
 	// ! login
 	let login = '';
 </script>
+
+<svelte:head>
+	<title>Reset Password</title>
+</svelte:head>
 
 <div class="container">
 	<div class="block">
