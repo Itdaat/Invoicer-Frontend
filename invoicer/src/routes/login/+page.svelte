@@ -88,14 +88,13 @@
 					</div>
 				</Button>
 			</div>
-
-			<div class="goto-register-container">
-				<RegisterOrLogin
-					link={gotoRegisterLink}
-					linkText={t.login_gotoRegisterLink}
-					text={t.login_gotoRegister}
-				/>
-			</div>
+		</div>
+		<div class="goto-register-container">
+			<RegisterOrLogin
+				link={gotoRegisterLink}
+				linkText={t.login_gotoRegisterLink}
+				text={t.login_gotoRegister}
+			/>
 		</div>
 	</div>
 </div>
@@ -104,6 +103,7 @@
 	.container {
 		background: #fbfbfb;
 		height: 100%;
+		width: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -168,10 +168,25 @@
 		padding-top: 2px;
 	}
 
-	.goto-register-container {
+	.goto-register-container,
+	.goto-register-container-mobile {
 		width: 100%;
 		display: flex;
 		justify-content: center;
 		margin-top: 26px;
+	}
+
+	@media only screen and (max-width: 600px) {
+		.block {
+			height: 100%;
+			width: 100%;
+			justify-content: flex-end;
+			box-shadow: none;
+		}
+
+		.goto-register-container {
+			margin-top: 48%;
+			margin-bottom: 5%;
+		}
 	}
 </style>
