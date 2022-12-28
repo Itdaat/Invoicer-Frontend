@@ -78,7 +78,7 @@
 		height: 80%;
 		border-bottom: 0.3px solid #3d5a80;
 		margin-left: 13px;
-		padding: 3px 13px;
+		padding: 3px 30px 3px 13px;
 
 		font-family: 'Istok Web';
 		font-style: normal;
