@@ -8,5 +8,15 @@
     "login_textOr": "Or",
     "login_loginWithGoogle": "Login With Google",
     "login_gotoRegister": "Have no account ?",
-    "login_gotoRegisterLink": "Create it!"
+    "login_gotoRegisterLink": "Create it!",
+    "REGISTER": "______________________REGISTER________________________",
+    "register_title": "Register",
+    "register_accountPlaceHolder": "Login",
+    "register_passwordPlaceHolder": "Password",
+    "register_repeatPasswordPlaceHolder": "Repeat Password",
+    "register_registerButton": "Register",
+    "register_textOr": "Or",
+    "register_registerWithGoogle": "Register With Google",
+    "register_gotoLogin": "Have account already?",
+    "register_gotoLoginLink": "Login!"
 }
