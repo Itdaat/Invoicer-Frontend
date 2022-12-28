@@ -28,6 +28,8 @@
 		letter-spacing: 1px;
 
 		color: #3d5a80;
+
+		margin-right: 4px;
 	}
 
 	.link {
