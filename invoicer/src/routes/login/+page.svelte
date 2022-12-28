@@ -18,7 +18,7 @@
 	 */
 	let status = 'ordinary';
 
-	let forgotPasswordLink = '#',
+	let forgotPasswordLink = '/reset-password',
 		loginButtonLink = '#',
 		loginWithGoogleLink = '#loginTitle',
 		gotoRegisterLink = '/register';

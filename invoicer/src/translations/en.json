@@ -23,5 +23,9 @@
     "register_textOr": "Or",
     "register_registerWithGoogle": "Register With Google",
     "register_gotoLogin": "Have account already?",
-    "register_gotoLoginLink": " Login!"
+    "register_gotoLoginLink": " Login!",
+    "RESET PASS": "___________________RESET PASS _______________________",
+    "resetPass_title": "Reset password",
+    "resetPass_account": "Account",
+    "resetPass_resetButton": "Reset"
 }
