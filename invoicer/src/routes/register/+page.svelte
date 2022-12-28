@@ -187,4 +187,22 @@
 		justify-content: center;
 		margin-top: 26px;
 	}
+
+	@media only screen and (max-width: 600px) {
+		.block {
+			height: 100%;
+			width: 100%;
+			justify-content: flex-end;
+			box-shadow: none;
+		}
+
+		.element {
+			margin: 35px 0px;
+		}
+
+		.goto-register-container {
+			margin-top: 55%;
+			margin-bottom: 5%;
+		}
+	}
 </style>

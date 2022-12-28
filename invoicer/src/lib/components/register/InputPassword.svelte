@@ -115,7 +115,7 @@
 		margin-right: 8px;
 	}
 
-	@media only screen and (max-width: 400px) {
+	@media only screen and (max-width: 350px) {
 		.input {
 			width: 50%;
 		}
