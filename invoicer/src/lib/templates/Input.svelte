@@ -6,6 +6,7 @@
 	export let value = '';
 	export let disabled = false;
 	export let placeHolder = '';
+	export let message = '';
 	let success = false,
 		error = false;
 	$: success = status == 'success';
@@ -26,6 +27,9 @@
 		bind:value
 	/>
 </div>
+{#if status == 'error' && message != ''}
+	<div class="message-container">{message}</div>
+{/if}
 
 <style>
 	.container {
@@ -75,6 +79,22 @@
 	.error {
 		color: #b01a1a;
 		border-color: #b01a1a !important;
+	}
+
+	.message-container {
+		font-family: 'Istok Web';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 23px;
+		letter-spacing: 1px;
+
+		color: #b01a1a;
+
+		width: 100%;
+		text-align: center;
+		margin-top: -7px;
+		margin-bottom: -10px;
 	}
 
 	@media only screen and (max-width: 350px) {
