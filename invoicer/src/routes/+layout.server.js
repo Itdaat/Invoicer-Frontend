@@ -3,7 +3,6 @@
 export async function load({ cookies }) {
   const userId = cookies.get('userId');
 
-  console.log(userId);
 
   let currentLang = cookies.get('currentLand');
   if (!currentLang) {
@@ -16,7 +15,7 @@ export async function load({ cookies }) {
   } else {
     langData = await import('../translations/ua.json');
   }
-
+  // throw redirect(300, '/mobile');
 
   return {
     userId: userId,
