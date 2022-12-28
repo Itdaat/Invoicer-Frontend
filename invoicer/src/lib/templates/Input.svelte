@@ -42,7 +42,8 @@
 		height: 100%;
 		display: flex;
 		align-items: center;
-		padding-top: 1px;
+		padding-top: 4px;
+		margin-right: -11px;
 		width: 28px;
 	}
 
@@ -50,9 +51,9 @@
 		display: block;
 		border: none;
 		height: 80%;
-		border-bottom: 0.1px solid #3d5a80;
+		border-bottom: 0.1px solid rgba(72, 97, 129, 0.631);
 		margin-left: 13px;
-		padding: 3px 30px 3px 13px;
+		padding: 2px 30px 2px 13px;
 
 		font-family: 'Istok Web';
 		font-style: normal;
@@ -63,6 +64,17 @@
 		letter-spacing: 1px;
 
 		color: #3d5a80;
+	}
+
+	.input::placeholder {
+		font-family: 'Istok Web';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16.5px;
+		line-height: 26px;
+		letter-spacing: 1px;
+
+		color: #6e7c8d;
 	}
 
 	.input:focus {

@@ -50,9 +50,11 @@
 
 <div class="container">
 	<div class="block">
-		<BigTitle>{t.login_title}</BigTitle>
+		<div class="title-container">
+			<BigTitle>{t.login_title}</BigTitle>
+		</div>
 		<div class="invisible-block">
-			<div class="element">
+			<div class="element" id="login-input">
 				<Input
 					placeHolder={t.login_accountPlaceHolder}
 					bind:value={login}
@@ -115,6 +117,10 @@
 		align-items: center;
 	}
 
+	#login-input {
+		margin-bottom: 33px;
+	}
+
 	.block {
 		background: #ffffff;
 		box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
@@ -130,7 +136,8 @@
 	}
 
 	.element {
-		margin: 25px 0px;
+		/* margin: 0; */
+		margin-top: 25px;
 	}
 
 	.button-container {

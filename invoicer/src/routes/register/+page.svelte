@@ -1,4 +1,5 @@
 <script>
+	import { matchers } from './../../../.svelte-kit/generated/client-matchers.js';
 	import RegisterOrLogin from './../../lib/components/register/RegisterOrLogin.svelte';
 	import GoogleIcon from './../../lib/assets/icons/GoogleIcon.svelte';
 	import ForgotPassword from '../../lib/components/register/ForgotPassword.svelte';
@@ -65,25 +66,32 @@
 	<div class="block">
 		<BigTitle>{t.register_title}</BigTitle>
 		<div class="invisible-block">
-			<div class="element">
-				<Input placeHolder={t.register_accountPlaceHolder} bind:value={login} {status}>
+			<div class="element" id="login-input">
+				<Input
+					placeHolder={t.register_accountPlaceHolder}
+					bind:value={login}
+					{status}
+					message={t.register_accountErrorMessage}
+				>
 					<AccountIcon slot="left" {status} />
 				</Input>
 			</div>
 
-			<div class="element">
+			<div class="element" id="password-input">
 				<InputPassword
 					status={passwordStatus}
 					placeHolder={t.register_passwordPlaceHolder}
 					bind:value={password}
+					message={t.register_passwordErrorMessage}
 				/>
 			</div>
 
-			<div class="element">
+			<div class="element" id="repeat-password">
 				<InputPassword
 					status={repeatPasswordStatus}
 					placeHolder={t.register_repeatPasswordPlaceHolder}
 					bind:value={repeatPassword}
+					message={t.register_repeatPasswordErrorMessage}
 				/>
 			</div>
 
@@ -122,6 +130,15 @@
 		align-items: center;
 	}
 
+	#login-input,
+	#password-input {
+		margin-bottom: 33px;
+	}
+
+	#repeat-password {
+		margin-bottom: 36px;
+	}
+
 	.block {
 		background: #ffffff;
 		box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
@@ -136,7 +153,8 @@
 	}
 
 	.element {
-		margin: 25px 0px;
+		/* margin: 0; */
+		margin-top: 25px;
 	}
 
 	.button-container {
