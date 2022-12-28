@@ -1,4 +1,5 @@
 <script>
+	import RegisterOrLogin from './../../lib/components/register/RegisterOrLogin.svelte';
 	import GoogleIcon from './../../lib/assets/icons/GoogleIcon.svelte';
 	import ForgotPassword from '../../lib/components/register/ForgotPassword.svelte';
 	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
@@ -6,7 +7,6 @@
 	import BigTitle from '$lib/components/register/BigTitle.svelte';
 	import InputPassword from '$lib/components/register/InputPassword.svelte';
 	import Button from '$lib/templates/Button.svelte';
-	import cookies from 'cookie';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -20,10 +20,10 @@
 
 	let forgotPasswordLink = '#',
 		loginButtonLink = '#',
-		loginWithGoogleLink = '#loginTitle';
-
+		loginWithGoogleLink = '#loginTitle',
+		gotoRegisterLink = '/register';
+	// ! login
 	let login = '';
-	let password = '';
 
 	$: if (login.length == 1) {
 		status = 'error';
@@ -31,6 +31,20 @@
 		status = 'success';
 	} else {
 		status = 'ordinary';
+	}
+
+	// ! password
+	let password = '';
+	/**
+	 * @type {'ordinary' | 'success' | 'error'}
+	 */
+	let passwordStatus = 'ordinary';
+	$: if (password.length == 1) {
+		passwordStatus = 'error';
+	} else if (password.length >= 10) {
+		passwordStatus = 'success';
+	} else {
+		passwordStatus = 'ordinary';
 	}
 </script>
 
@@ -43,9 +57,15 @@
 					<AccountIcon slot="left" {status} />
 				</Input>
 			</div>
+
 			<div class="element">
-				<InputPassword {status} placeHolder={t.login_passwordPlaceHolder} bind:value={password} />
+				<InputPassword
+					status={passwordStatus}
+					placeHolder={t.login_passwordPlaceHolder}
+					bind:value={password}
+				/>
 			</div>
+
 			<div class="element">
 				<ForgotPassword
 					linkText={t.login_forgotPasswordLink}
@@ -53,17 +73,28 @@
 					text={t.login_forgotPassword}
 				/>
 			</div>
-			<div class="button-container">
+
+			<div class="button-container login">
 				<Button type="dark" link={loginButtonLink}>{t.login_loginButton}</Button>
 			</div>
+
 			<div class="text-container">{t.login_textOr}</div>
-			<div class="button-container">
+
+			<div class="button-container google">
 				<Button type="light" link={loginWithGoogleLink}>
 					<div class="google-button-container">
 						<div class="google-button-left"><GoogleIcon /></div>
 						<div class="google-button-right">{t.login_loginWithGoogle}</div>
 					</div>
 				</Button>
+			</div>
+
+			<div class="goto-register-container">
+				<RegisterOrLogin
+					link={gotoRegisterLink}
+					linkText={t.login_gotoRegisterLink}
+					text={t.login_gotoRegister}
+				/>
 			</div>
 		</div>
 	</div>
@@ -91,12 +122,16 @@
 	}
 
 	.element {
-		margin: 16px 0px;
+		margin: 25px 0px;
 	}
 
 	.button-container {
 		width: 320px;
 		height: 50px;
+	}
+
+	.login {
+		margin-top: 19px;
 	}
 
 	.invisible-block {
@@ -115,6 +150,8 @@
 		color: #3d5a80;
 
 		text-align: center;
+
+		margin: 13px 0px;
 	}
 
 	.google-button-container {
@@ -129,5 +166,12 @@
 
 	.google-button-right {
 		padding-top: 2px;
+	}
+
+	.goto-register-container {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		margin-top: 26px;
 	}
 </style>

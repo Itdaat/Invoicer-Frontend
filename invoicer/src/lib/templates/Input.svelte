@@ -45,7 +45,7 @@
 		display: block;
 		border: none;
 		height: 80%;
-		border-bottom: 0.3px solid #3d5a80;
+		border-bottom: 0.1px solid #3d5a80;
 		margin-left: 13px;
 		padding: 3px 13px;
 

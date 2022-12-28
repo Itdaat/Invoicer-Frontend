@@ -6,5 +6,7 @@
     "login_forgotPasswordLink": "Reset",
     "login_loginButton": "Login",
     "login_textOr": "Or",
-    "login_loginWithGoogle": "Login With Google"
+    "login_loginWithGoogle": "Login With Google",
+    "login_gotoRegister": "Have no account ?",
+    "login_gotoRegisterLink": "Create it!"
 }
