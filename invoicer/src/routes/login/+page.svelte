@@ -53,7 +53,12 @@
 		<BigTitle>{t.login_title}</BigTitle>
 		<div class="invisible-block">
 			<div class="element">
-				<Input placeHolder={t.login_accountPlaceHolder} bind:value={login} {status}>
+				<Input
+					placeHolder={t.login_accountPlaceHolder}
+					bind:value={login}
+					{status}
+					message={t.login_accountErrorMessage}
+				>
 					<AccountIcon slot="left" {status} />
 				</Input>
 			</div>
@@ -63,6 +68,7 @@
 					status={passwordStatus}
 					placeHolder={t.login_passwordPlaceHolder}
 					bind:value={password}
+					message={t.login_passwordErrorMessage}
 				/>
 			</div>
 
@@ -114,7 +120,9 @@
 		box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.1);
 		border-radius: 7px;
 		width: 460px;
-		height: 521px;
+		height: auto;
+		padding: 20px 0px;
+		overflow-y: visible;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -168,8 +176,7 @@
 		padding-top: 2px;
 	}
 
-	.goto-register-container,
-	.goto-register-container-mobile {
+	.goto-register-container {
 		width: 100%;
 		display: flex;
 		justify-content: center;
