@@ -1,4 +1,3 @@
-
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({ cookies }) {
   const userId = cookies.get('userId');
@@ -19,6 +18,6 @@ export async function load({ cookies }) {
 
   return {
     userId: userId,
-    t: JSON.stringify(langData),
+    t: JSON.stringify(langData)
   };
 }
