@@ -1,7 +1,9 @@
+export const ssr = false;
+export const prerender = false;
+
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({ cookies }) {
   const userId = cookies.get('userId');
-
 
   let currentLang = cookies.get('currentLand');
   if (!currentLang) {
