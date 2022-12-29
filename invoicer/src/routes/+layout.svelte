@@ -1,10 +1,12 @@
 <script>
-	export const ssr = false;
-	export const prerender = false;
-	export const csr = true;
+	import LanguageStore from '$lib/stores/Language';
+	import UserStore from '$lib/stores/User';
 
-	import { addLocalization } from '../translations/i18n.js';
-	addLocalization();
+	/** @type {import('./$types').PageData} */
+	export let data;
+
+	UserStore.set(data.userId || '');
+	LanguageStore.set(JSON.parse(data.t));
 </script>
 
 <slot />

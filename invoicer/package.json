@@ -28,8 +28,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@rollup/plugin-json": "^6.0.0",
-		"svelte-i18n": "^3.6.0",
-		"sveltekit-i18n": "^2.2.2"
+		"@rollup/plugin-json": "^6.0.0"
 	}
 }
