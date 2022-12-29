@@ -27,5 +27,11 @@
     "RESET PASS": "___________________RESET PASS _______________________",
     "resetPass_title": "Reset password",
     "resetPass_account": "Account",
-    "resetPass_resetButton": "Reset"
+    "resetPass_resetButton": "Reset",
+    "MENU": "______________MENU____________",
+    "menu_invoice": "Invoice",
+    "menu_order": "Order",
+    "menu_transaction": "Transaction",
+    "menu_payment": "Payment",
+    "kaka": "kaka"
 }

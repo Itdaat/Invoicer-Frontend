@@ -1,4 +1,4 @@
-import FirmStore from '../stores/Store';
+import FirmStore from '../stores/Firm';
 
 /**
  * 

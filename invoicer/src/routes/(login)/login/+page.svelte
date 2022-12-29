@@ -1,8 +1,7 @@
 <script>
-	import { matchers } from './../../../.svelte-kit/generated/client-matchers.js';
-	import RegisterOrLogin from './../../lib/components/register/RegisterOrLogin.svelte';
-	import GoogleIcon from './../../lib/assets/icons/GoogleIcon.svelte';
-	import ForgotPassword from '../../lib/components/register/ForgotPassword.svelte';
+	import RegisterOrLogin from '../../../lib/components/register/RegisterOrLogin.svelte';
+	import GoogleIcon from '../../../lib/assets/icons/GoogleIcon.svelte';
+	import ForgotPassword from '../../../lib/components/register/ForgotPassword.svelte';
 	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
 	import Input from '$lib/templates/Input.svelte';
 	import BigTitle from '$lib/components/register/BigTitle.svelte';
@@ -19,9 +18,10 @@
 	 */
 	let status = 'ordinary';
 
-	let loginButtonLink = '#',
+	let forgotPasswordLink = '/reset-password',
+		loginButtonLink = '#',
 		loginWithGoogleLink = '#loginTitle',
-		gotoRegisterLink = '/login';
+		gotoRegisterLink = '/register';
 	// ! login
 	let login = '';
 
@@ -46,81 +46,67 @@
 	} else {
 		passwordStatus = 'ordinary';
 	}
-
-	// ! password
-	let repeatPassword = '';
-	/**
-	 * @type {'ordinary' | 'success' | 'error'}
-	 */
-	let repeatPasswordStatus = 'ordinary';
-	$: if (repeatPassword.length == 1) {
-		repeatPasswordStatus = 'error';
-	} else if (repeatPassword.length >= 10) {
-		repeatPasswordStatus = 'success';
-	} else {
-		repeatPasswordStatus = 'ordinary';
-	}
 </script>
 
 <svelte:head>
-	<title>Register</title>
+	<title>Login</title>
 </svelte:head>
 
 <div class="container">
 	<div class="block">
-		<BigTitle>{t.register_title}</BigTitle>
+		<div class="title-container">
+			<BigTitle>{t.login_title}</BigTitle>
+		</div>
 		<div class="invisible-block">
 			<div class="element" id="login-input">
 				<Input
-					placeHolder={t.register_accountPlaceHolder}
+					placeHolder={t.login_accountPlaceHolder}
 					bind:value={login}
 					{status}
-					message={t.register_accountErrorMessage}
+					message={t.login_accountErrorMessage}
 				>
 					<AccountIcon slot="left" {status} />
 				</Input>
 			</div>
 
-			<div class="element" id="password-input">
+			<div class="element">
 				<InputPassword
 					status={passwordStatus}
-					placeHolder={t.register_passwordPlaceHolder}
+					placeHolder={t.login_passwordPlaceHolder}
 					bind:value={password}
-					message={t.register_passwordErrorMessage}
+					message={t.login_passwordErrorMessage}
 				/>
 			</div>
 
-			<div class="element" id="repeat-password">
-				<InputPassword
-					status={repeatPasswordStatus}
-					placeHolder={t.register_repeatPasswordPlaceHolder}
-					bind:value={repeatPassword}
-					message={t.register_repeatPasswordErrorMessage}
+			<div class="element">
+				<ForgotPassword
+					linkText={t.login_forgotPasswordLink}
+					link={forgotPasswordLink}
+					text={t.login_forgotPassword}
 				/>
 			</div>
 
 			<div class="button-container login">
-				<Button type="dark" link={loginButtonLink}>{t.register_registerButton}</Button>
+				<Button type="dark" link={loginButtonLink}>{t.login_loginButton}</Button>
 			</div>
 
-			<div class="text-container">{t.register_textOr}</div>
+			<div class="text-container">{t.login_textOr}</div>
 
 			<div class="button-container google">
 				<Button type="light" link={loginWithGoogleLink}>
 					<div class="google-button-container">
 						<div class="google-button-left"><GoogleIcon /></div>
-						<div class="google-button-right">{t.register_registerWithGoogle}</div>
+						<div class="google-button-right">{t.login_loginWithGoogle}</div>
 					</div>
 				</Button>
 			</div>
-
-			<div class="goto-register-container">
-				<RegisterOrLogin
-					link={gotoRegisterLink}
-					linkText={t.register_gotoLoginLink}
-					text={t.register_gotoLogin}
-				/>
-			</div>
+		</div>
+		<div class="goto-register-container">
+			<RegisterOrLogin
+				link={gotoRegisterLink}
+				linkText={t.login_gotoRegisterLink}
+				text={t.login_gotoRegister}
+			/>
 		</div>
 	</div>
 </div>
@@ -129,18 +115,14 @@
 	.container {
 		background: #fbfbfb;
 		height: 100%;
+		width: 100%;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
 
-	#login-input,
-	#password-input {
+	#login-input {
 		margin-bottom: 33px;
-	}
-
-	#repeat-password {
-		margin-bottom: 36px;
 	}
 
 	.block {
@@ -150,6 +132,7 @@
 		width: 460px;
 		height: auto;
 		padding: 20px 0px;
+		overflow-y: visible;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -219,12 +202,8 @@
 			box-shadow: none;
 		}
 
-		.element {
-			margin: 35px 0px;
-		}
-
 		.goto-register-container {
-			margin-top: 55%;
+			margin-top: 48%;
 			margin-bottom: 5%;
 		}
 	}
