@@ -1,4 +1,6 @@
 <script>
+	import { page } from '$app/stores';
+	import Transition from './../../../lib/templates/Transition.svelte';
 	import MobileHeader from '$lib/mobile/components/MobileHeader.svelte';
 
 	/** @type {import('./$types').PageData} */
@@ -6,7 +8,9 @@
 </script>
 
 <MobileHeader userId={data.userId} />
-<slot />
+<Transition url={$page.url}>
+	<slot />
+</Transition>
 
 <style>
 </style>
