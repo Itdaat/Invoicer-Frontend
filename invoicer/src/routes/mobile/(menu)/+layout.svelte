@@ -26,6 +26,11 @@
 	history={{
 		key: 'mobile'
 	}}
+	on:slideChange={(e) => {
+		SliderStore.update((last) => {
+			return { ...last, activeIndex: e.detail[0].activeIndex };
+		});
+	}}
 	modules={[Navigation, History, A11y]}
 >
 	<SwiperSlide data-history="invoices">
