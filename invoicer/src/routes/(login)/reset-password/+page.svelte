@@ -1,6 +1,6 @@
 <script>
 	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
-	import BigTitle from '$lib/components/register/BigTitle.svelte';
+	import BigTitle from '$lib/desktop/components/register/BigTitle.svelte';
 	import Button from '$lib/templates/Button.svelte';
 	import Input from '$lib/templates/Input.svelte';
 

@@ -1,16 +1,15 @@
 <script>
-	import MobileHeader from '$lib/mobile/components/MobileHeader.svelte';
-	import Invoices from './../../../lib/components/invoice/Invoices.svelte';
+	import SliderStore from '$lib/stores/Slides';
+	import 'swiper/css';
 
 	import { History, Navigation, A11y } from 'swiper';
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
+	import MobileHeader from '$lib/mobile/components/MobileHeader.svelte';
+	import Invoices from '$lib/mobile/pages/Invoices.svelte';
+	import Orders from '$lib/mobile/pages/Orders.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
-
-	import SliderStore from '$lib/stores/Slides';
-	import 'swiper/css';
-	$: swiper = $SliderStore;
 </script>
 
 <!-- on:swiper={(swiper) => sliders.slideTo(swiper)} -->
@@ -18,13 +17,15 @@
 <MobileHeader userId={data.userId} />
 <Swiper
 	class="swiper"
-	on:swiper={(e) =>
+	on:swiper={(e) => {
 		SliderStore.update((last) => {
 			return { ...last, slider: e.detail[0] };
-		})}
+		});
+	}}
 	slidesPerView={1}
 	history={{
 		key: 'mobile'
+		// root: 'mobile'
 	}}
 	on:slideChange={(e) => {
 		SliderStore.update((last) => {
@@ -37,9 +38,7 @@
 		<Invoices />
 	</SwiperSlide>
 	<SwiperSlide data-history="orders">
-		Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi, rem culpa rerum mollitia nisi,
-		amet, reiciendis quia earum eos animi velit quae minima quidem obcaecati reprehenderit iste non
-		autem ipsa?
+		<Orders />
 	</SwiperSlide>
 </Swiper>
 
