@@ -4,9 +4,16 @@
 	 */
 	export let type = 'dark';
 	export let link = '';
+	export let onClick = () => {};
 </script>
 
-<a class="container" href={link} class:light={type == 'light'} class:dark={type == 'dark'}>
+<a
+	class="container"
+	on:click={onClick}
+	href={link}
+	class:light={type == 'light'}
+	class:dark={type == 'dark'}
+>
 	<slot />
 </a>
 

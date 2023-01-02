@@ -1,5 +1,5 @@
 <script>
-	import { setDefaultFirm } from '$lib/api/firm';
+	import { setDefaultFirm } from '$lib/api/CRM/firm';
 	import FirmStore from '$lib/stores/Firm';
 	import OpenFilterButton from './../../assets/icons/OpenFilterButton.svelte';
 	import OpenMenuIcon from './../../assets/icons/OpenMenuIcon.svelte';
