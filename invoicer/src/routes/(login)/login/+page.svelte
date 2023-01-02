@@ -1,12 +1,15 @@
 <script>
-	import RegisterOrLogin from '../../../lib/components/register/RegisterOrLogin.svelte';
+	import RegisterOrLogin from '../../../lib/desktop/components/register/RegisterOrLogin.svelte';
 	import GoogleIcon from '../../../lib/assets/icons/GoogleIcon.svelte';
-	import ForgotPassword from '../../../lib/components/register/ForgotPassword.svelte';
+	import ForgotPassword from '../../../lib/desktop/components/register/ForgotPassword.svelte';
 	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
 	import Input from '$lib/templates/Input.svelte';
-	import BigTitle from '$lib/components/register/BigTitle.svelte';
-	import InputPassword from '$lib/components/register/InputPassword.svelte';
+	import BigTitle from '$lib/desktop/components/register/BigTitle.svelte';
+	import InputPassword from '$lib/desktop/components/register/InputPassword.svelte';
 	import Button from '$lib/templates/Button.svelte';
+	import { page } from '$app/stores';
+	import { loginUser } from '$lib/api/server/user';
+	import { redirect } from '@sveltejs/kit';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -19,9 +22,13 @@
 	let status = 'ordinary';
 
 	let forgotPasswordLink = '/reset-password',
-		loginButtonLink = '#',
 		loginWithGoogleLink = '#loginTitle',
 		gotoRegisterLink = '/register';
+
+	const onLoginClick = async () => {
+		redirect(301, '/register');
+		await loginUser();
+	};
 	// ! login
 	let login = '';
 
@@ -87,7 +94,7 @@
 			</div>
 
 			<div class="button-container login">
-				<Button type="dark" link={loginButtonLink}>{t.login_loginButton}</Button>
+				<Button type="dark" onClick={onLoginClick}>{t.login_loginButton}</Button>
 			</div>
 
 			<div class="text-container">{t.login_textOr}</div>

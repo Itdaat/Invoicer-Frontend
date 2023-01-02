@@ -1,16 +1,7 @@
 <script>
-	/**
-	 * @type {string} text
-	 */
-	export let text;
-	/**
-	 * @type {string}
-	 */
-	export let linkText;
-	/**
-	 * @type {string}
-	 */
-	export let link;
+	export let text = '';
+	export let linkText = '';
+	export let link = '';
 </script>
 
 <span class="text">{text}</span>

@@ -4,7 +4,7 @@ import { ServerApiUrl } from 'src/consts';
  * 
  * 
  * @export
- * @param {import('../../types/Request').Request} requestConf 
+ * @param {import('../../../types/Request').Request} requestConf 
  */
 export async function makeRequest(requestConf) {
     const paramsJson = JSON.stringify(requestConf.params), bodyJson = JSON.stringify(requestConf.data);

@@ -5,13 +5,14 @@ export async function handle({ event, resolve }) {
     const host = event.url.origin;
     const userId = event.cookies.get('userId');
     const mobileStartUrl = '/mobile/invoices';
+    const isLoginApi = event.url.pathname.startsWith('/api/reg');
     const isLoginPage = event.url.pathname.startsWith('/login'), isRegisterPage = event.url.pathname.startsWith('/register'), isResetPassPage = event.url.pathname.startsWith('/reset-password');
-    if (!userId && !(isLoginPage || isRegisterPage || isResetPassPage)) {
+    if (!userId && !(isLoginPage || isRegisterPage || isResetPassPage || isLoginApi)) {
         return Response.redirect(host + '/login');
     }
 
 
-    if (!(isLoginPage || isRegisterPage || isRegisterPage)) {
+    if (!(isLoginPage || isRegisterPage || isRegisterPage || isLoginApi)) {
         const toMatch = [
             /Android/i,
             /webOS/i,

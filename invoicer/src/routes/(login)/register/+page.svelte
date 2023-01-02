@@ -1,11 +1,11 @@
 <script>
 	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
-	import BigTitle from '$lib/components/register/BigTitle.svelte';
-	import InputPassword from '$lib/components/register/InputPassword.svelte';
+	import BigTitle from '$lib/desktop/components/register/BigTitle.svelte';
+	import InputPassword from '$lib/desktop/components/register/InputPassword.svelte';
 	import Button from '$lib/templates/Button.svelte';
 	import Input from '$lib/templates/Input.svelte';
 	import GoogleIcon from '../../../lib/assets/icons/GoogleIcon.svelte';
-	import RegisterOrLogin from '../../../lib/components/register/RegisterOrLogin.svelte';
+	import RegisterOrLogin from '../../../lib/desktop/components/register/RegisterOrLogin.svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
