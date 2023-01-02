@@ -25,7 +25,7 @@
 				SliderStore.update((last) => {
 					return { ...last, activeIndex: index };
 				});
-				swiper.slider.slideTo(index);
+				swiper.slider?.slideTo(index);
 			}}
 		>
 			<slot />
@@ -35,7 +35,7 @@
 		{/if}
 	</div>
 	{#if active}
-		<div class="icon-container" in:fly={{ y: -1, duration: 200 }} out:fly={{ y: 2 }}>
+		<div class="icon-container" in:fly={{ y: -1, duration: 200 }} out:fly={{ y: 1 }}>
 			<ActiveLinkIcon />
 		</div>
 	{/if}
