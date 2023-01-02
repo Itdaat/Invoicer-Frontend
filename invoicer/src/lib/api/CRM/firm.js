@@ -1,11 +1,11 @@
-import FirmStore from '../stores/Firm';
+import FirmStore from '../../stores/Firm';
 
 /**
  * 
  * 
  * @export
  * @param {string} userId 
- * @returns {Promise<import('../../types/Entities').Firm[]>}
+ * @returns {Promise<import('../../../types/Entities').Firm[]>}
  */
 export async function getFirms(userId) {
     console.log(userId);
@@ -21,7 +21,7 @@ export async function getFirms(userId) {
  * @export
  * @param {string} userId 
  * @param {string} firmId
- * @returns {Promise<import('../../types/Entities').Firm>}
+ * @returns {Promise<import('../../../types/Entities').Firm>}
  */
 export async function getFirm(userId, firmId = '') {
     console.log(userId || firmId);
