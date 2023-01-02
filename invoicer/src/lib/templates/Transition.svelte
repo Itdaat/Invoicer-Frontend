@@ -1,17 +1,12 @@
 <script>
-	import { fly } from 'svelte/transition';
+	import { fade, fly, slide } from 'svelte/transition';
 	/**
 	 * @type {URL}
 	 */
 	export let url;
-	export let pageTransitionDuration = 250;
 </script>
 
 {#key url}
-	<div
-		in:fly={{ x: -5, duration: pageTransitionDuration, delay: pageTransitionDuration - 50 }}
-		out:fly={{ x: 5, duration: pageTransitionDuration }}
-	>
-		<slot />
-	</div>
+	<main in:slide={{ delay: 250 }} out:slide={{ duration: 250 }} />
 {/key}
+<slot />

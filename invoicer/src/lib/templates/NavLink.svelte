@@ -1,16 +1,43 @@
 <script>
+	import { fly } from 'svelte/transition';
+	import ActiveLinkIcon from './../assets/icons/ActiveLinkIcon.svelte';
 	import SphereIcon from './../assets/icons/SphereIcon.svelte';
-	import { page } from '$app/stores';
+	import SliderStore from '$lib/stores/Slides';
+	import { flush } from 'svelte/internal';
 
-	export let href = '';
+	export let index = 0;
 	export let marked = false;
-	$: active = $page.url.href.includes(href);
+	export let active = false;
+	// alert(active);
+
+	$: swiper = $SliderStore;
+	// console.log(swiper.activeIndex);
 </script>
 
-<div class="container">
-	<a {href} class:active class="link"><slot /></a>
-	{#if marked}
-		<SphereIcon />
+<div class="global-container">
+	<div class="container">
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div
+			class:active
+			class="link"
+			on:click={() => {
+				swiper.activeIndex = index;
+				SliderStore.update((last) => {
+					return { ...last, activeIndex: index };
+				});
+				swiper.slider.slideTo(index);
+			}}
+		>
+			<slot />
+		</div>
+		{#if marked}
+			<SphereIcon />
+		{/if}
+	</div>
+	{#if active}
+		<div class="icon-container" in:fly={{ y: -1, duration: 200 }} out:fly={{ y: 2 }}>
+			<ActiveLinkIcon />
+		</div>
 	{/if}
 </div>
 
