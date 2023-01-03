@@ -1,4 +1,6 @@
 <script>
+	// @ts-nocheck
+
 	import SliderStore from '$lib/stores/Slides';
 	import 'swiper/css';
 
@@ -7,9 +9,17 @@
 	import MobileHeader from '$lib/mobile/components/MobileHeader.svelte';
 	import Invoices from '$lib/mobile/pages/Invoices.svelte';
 	import Orders from '$lib/mobile/pages/Orders.svelte';
+	import { onMount } from 'svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
+	$: swiper = $SliderStore;
+
+	onMount(async () => {
+		SliderStore.update((last) => {
+			return { ...last, activeIndex: 1 };
+		});
+	});
 </script>
 
 <!-- on:swiper={(swiper) => sliders.slideTo(swiper)} -->
@@ -25,7 +35,6 @@
 	slidesPerView={1}
 	history={{
 		key: 'mobile'
-		// root: 'mobile'
 	}}
 	on:slideChange={(e) => {
 		SliderStore.update((last) => {
@@ -35,10 +44,10 @@
 	modules={[Navigation, History, A11y]}
 >
 	<SwiperSlide data-history="invoices">
-		<Invoices />
+		<Orders />
 	</SwiperSlide>
 	<SwiperSlide data-history="orders">
-		<Orders />
+		<Invoices />
 	</SwiperSlide>
 	<SwiperSlide data-history="payments">
 		<Orders />

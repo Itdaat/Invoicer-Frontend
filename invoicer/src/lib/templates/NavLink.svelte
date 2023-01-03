@@ -9,6 +9,10 @@
 	export let active = false;
 
 	$: swiper = $SliderStore;
+
+	$: if (active) {
+		swiper.slider?.slideTo(index);
+	}
 </script>
 
 <div class="container">
@@ -17,11 +21,9 @@
 		class:active
 		class="link"
 		on:click={() => {
-			swiper.activeIndex = index;
 			SliderStore.update((last) => {
 				return { ...last, activeIndex: index };
 			});
-			swiper.slider?.slideTo(index);
 		}}
 	>
 		<slot />
@@ -46,6 +48,7 @@
 			'activeIcon icon';
 		grid-template-columns: auto auto;
 		align-items: flex-start;
+		margin-bottom: -10px;
 	}
 
 	.sphere-icon {
@@ -74,7 +77,7 @@
 	.icon-container {
 		grid-area: activeIcon;
 		margin-top: -5px;
-		margin-bottom: -4px;
+		margin-bottom: -7px;
 		/* max-width: 20px; */
 		height: 10px;
 	}
