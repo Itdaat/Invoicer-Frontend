@@ -35,13 +35,18 @@
 		{/if}
 	</div>
 	{#if active}
-		<div class="icon-container" in:fly={{ y: -1, duration: 200 }} out:fly={{ y: 1 }}>
+		<div class="icon-container" in:fly={{ duration: 200 }} out:fly={{ duration: 200, y: 2 }}>
 			<ActiveLinkIcon />
 		</div>
 	{/if}
 </div>
 
 <style>
+	.global-container {
+		/* height: 32px; */
+		/* margin-top: 18px; */
+	}
+
 	.container {
 		display: flex;
 		align-items: flex-start;
@@ -62,5 +67,10 @@
 	}
 
 	.active {
+	}
+
+	.icon-container {
+		margin-top: -5px;
+		margin-bottom: -4px;
 	}
 </style>
