@@ -34,7 +34,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-		margin-bottom: 10px;
+		margin-bottom: 1px;
 	}
 
 	.title {
