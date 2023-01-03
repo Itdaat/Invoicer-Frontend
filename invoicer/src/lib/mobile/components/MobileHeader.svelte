@@ -24,7 +24,9 @@
 
 <style>
 	.container {
-		padding: 20px;
+		padding: 15px 15px 0px 15px;
+		background: #ffffff;
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 	}
 
 	.top-panel {
@@ -32,6 +34,7 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+		margin-bottom: 15px;
 	}
 
 	.title {
