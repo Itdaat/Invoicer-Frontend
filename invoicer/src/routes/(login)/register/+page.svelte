@@ -147,7 +147,7 @@
 		border-radius: 7px;
 		width: 460px;
 		height: auto;
-		/* padding: 20px 0px; */
+		padding: 20px 0px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -215,6 +215,7 @@
 			width: 100%;
 			justify-content: flex-end;
 			box-shadow: none;
+			padding: 0px;
 		}
 
 		.element {

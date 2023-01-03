@@ -69,7 +69,7 @@
 		width: 460px;
 		height: auto;
 		margin-top: -10px;
-		/* padding: 35px 0px 50px 0px; */
+		padding: 35px 0px 50px 0px;
 		overflow-y: visible;
 		display: flex;
 		flex-direction: column;
@@ -96,6 +96,7 @@
 			height: 100%;
 			width: 100%;
 			box-shadow: none;
+			padding: 0px;
 		}
 	}
 </style>
