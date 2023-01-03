@@ -40,6 +40,12 @@
 	<SwiperSlide data-history="orders">
 		<Orders />
 	</SwiperSlide>
+	<SwiperSlide data-history="payments">
+		<Orders />
+	</SwiperSlide>
+	<SwiperSlide data-history="transactions">
+		<Orders />
+	</SwiperSlide>
 </Swiper>
 
 <style>
