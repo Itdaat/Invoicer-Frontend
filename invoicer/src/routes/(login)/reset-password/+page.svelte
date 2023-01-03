@@ -68,7 +68,8 @@
 		border-radius: 7px;
 		width: 460px;
 		height: auto;
-		padding: 35px 0px 50px 0px;
+		margin-top: -10px;
+		/* padding: 35px 0px 50px 0px; */
 		overflow-y: visible;
 		display: flex;
 		flex-direction: column;

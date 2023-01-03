@@ -147,7 +147,7 @@
 		border-radius: 7px;
 		width: 460px;
 		height: auto;
-		padding: 20px 0px;
+		/* padding: 20px 0px; */
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
