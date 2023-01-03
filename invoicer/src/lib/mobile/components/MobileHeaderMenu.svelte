@@ -23,5 +23,14 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 		gap: 20px;
+		height: 45px;
+		align-items: center;
+		overflow-x: scroll;
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none;
+	}
+
+	nav::-webkit-scrollbar {
+		display: none;
 	}
 </style>

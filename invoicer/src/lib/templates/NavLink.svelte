@@ -3,37 +3,34 @@
 	import ActiveLinkIcon from './../assets/icons/ActiveLinkIcon.svelte';
 	import SphereIcon from './../assets/icons/SphereIcon.svelte';
 	import SliderStore from '$lib/stores/Slides';
-	import { flush } from 'svelte/internal';
 
 	export let index = 0;
 	export let marked = false;
 	export let active = false;
-	// alert(active);
 
 	$: swiper = $SliderStore;
-	// console.log(swiper.activeIndex);
 </script>
 
-<div class="global-container">
-	<div class="container">
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div
-			class:active
-			class="link"
-			on:click={() => {
-				swiper.activeIndex = index;
-				SliderStore.update((last) => {
-					return { ...last, activeIndex: index };
-				});
-				swiper.slider?.slideTo(index);
-			}}
-		>
-			<slot />
-		</div>
-		{#if marked}
-			<SphereIcon />
-		{/if}
+<div class="container">
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div
+		class:active
+		class="link"
+		on:click={() => {
+			swiper.activeIndex = index;
+			SliderStore.update((last) => {
+				return { ...last, activeIndex: index };
+			});
+			swiper.slider?.slideTo(index);
+		}}
+	>
+		<slot />
 	</div>
+	{#if marked}
+		<div class="sphere-icon">
+			<SphereIcon />
+		</div>
+	{/if}
 	{#if active}
 		<div class="icon-container" in:fly={{ duration: 200 }} out:fly={{ duration: 200, y: 2 }}>
 			<ActiveLinkIcon />
@@ -42,17 +39,25 @@
 </div>
 
 <style>
-	.global-container {
-		/* height: 32px; */
-		/* margin-top: 18px; */
-	}
-
 	.container {
-		display: flex;
+		display: grid;
+		grid-template-areas:
+			'main icon'
+			'activeIcon icon';
+		grid-template-columns: auto auto;
 		align-items: flex-start;
 	}
 
+	.sphere-icon {
+		grid-area: icon;
+		display: flex;
+		align-items: flex-start;
+		margin-left: 3px;
+		margin-bottom: 5px;
+	}
+
 	.link {
+		grid-area: main;
 		text-decoration: none;
 		font-family: 'Roboto';
 		font-style: normal;
@@ -66,11 +71,11 @@
 		color: #284b63;
 	}
 
-	.active {
-	}
-
 	.icon-container {
+		grid-area: activeIcon;
 		margin-top: -5px;
 		margin-bottom: -4px;
+		/* max-width: 20px; */
+		height: 10px;
 	}
 </style>
