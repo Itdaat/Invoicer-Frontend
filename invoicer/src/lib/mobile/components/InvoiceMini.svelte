@@ -1,4 +1,6 @@
 <script>
+	import { goto } from '$app/navigation';
+
 	export let number = '';
 	export let price = NaN;
 	/**@type {Date} */
@@ -14,7 +16,11 @@
 	let dayStr = day < 10 ? '0' + day : day;
 </script>
 
-<main>
+<main
+	on:click={() => {
+		goto('/mobile/invoice');
+	}}
+>
 	<div class="left">
 		<div class="number">{number}</div>
 		<div class="license">

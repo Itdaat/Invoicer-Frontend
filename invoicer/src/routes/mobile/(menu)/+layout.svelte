@@ -34,25 +34,24 @@
 				return { ...last, activeIndex: e.detail[0].activeIndex };
 			});
 		}}
-		modules={[Navigation, History, A11y]}
 	>
-		<SwiperSlide data-history="messages">
+		<SwiperSlide>
 			<div class="slide">Messages</div>
 		</SwiperSlide>
-		<SwiperSlide data-history="invoices">
+		<SwiperSlide>
 			<div class="slide">
 				<Invoices />
 			</div>
 		</SwiperSlide>
-		<SwiperSlide data-history="orders">
+		<SwiperSlide>
 			<div class="slide">
 				<Orders />
 			</div>
 		</SwiperSlide>
-		<SwiperSlide data-history="payments">
+		<SwiperSlide>
 			<div class="slide">Payments</div>
 		</SwiperSlide>
-		<SwiperSlide data-history="transactions">
+		<SwiperSlide>
 			<div class="slide">hello</div>
 		</SwiperSlide>
 	</Swiper>

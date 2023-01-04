@@ -11,7 +11,7 @@
 	$: swiper = $SliderStore;
 
 	$: if (active) {
-		swiper.slider?.slideTo(index);
+		swiper.slider?.slideTo(index, 500);
 	}
 </script>
 
