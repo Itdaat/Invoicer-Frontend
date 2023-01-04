@@ -24,43 +24,62 @@
 
 <!-- on:swiper={(swiper) => sliders.slideTo(swiper)} -->
 
-<MobileHeader userId={data.userId} />
-<Swiper
-	class="swiper"
-	on:swiper={(e) => {
-		SliderStore.update((last) => {
-			return { ...last, slider: e.detail[0] };
-		});
-	}}
-	slidesPerView={1}
-	history={{
-		key: 'mobile'
-	}}
-	on:slideChange={(e) => {
-		SliderStore.update((last) => {
-			return { ...last, activeIndex: e.detail[0].activeIndex };
-		});
-	}}
-	modules={[Navigation, History, A11y]}
->
-	<SwiperSlide data-history="invoices">
-		<Orders />
-	</SwiperSlide>
-	<SwiperSlide data-history="orders">
-		<Invoices />
-	</SwiperSlide>
-	<SwiperSlide data-history="payments">
-		<Orders />
-	</SwiperSlide>
-	<SwiperSlide data-history="transactions">
-		<Orders />
-	</SwiperSlide>
-	<SwiperSlide data-history="transactions">
-		<Orders />
-	</SwiperSlide>
-</Swiper>
+<main>
+	<div class="header"><MobileHeader userId={data.userId} /></div>
+	<Swiper
+		class="swiper"
+		on:swiper={(e) => {
+			SliderStore.update((last) => {
+				return { ...last, slider: e.detail[0] };
+			});
+		}}
+		slidesPerView={1}
+		history={{
+			key: 'mobile'
+		}}
+		on:slideChange={(e) => {
+			SliderStore.update((last) => {
+				return { ...last, activeIndex: e.detail[0].activeIndex };
+			});
+		}}
+		modules={[Navigation, History, A11y]}
+	>
+		<SwiperSlide data-history="invoices">
+			<div class="slide">
+				<Orders />
+			</div>
+		</SwiperSlide>
+		<SwiperSlide data-history="orders">
+			<div class="slide">
+				<Invoices />
+			</div>
+		</SwiperSlide>
+		<SwiperSlide data-history="payments">
+			<div class="slide">
+				<Orders />
+			</div>
+		</SwiperSlide>
+		<SwiperSlide data-history="transactions">
+			<div class="slide">
+				<Orders />
+			</div>
+		</SwiperSlide>
+		<SwiperSlide data-history="transactions">
+			<div class="slide">
+				<Orders />
+			</div>
+		</SwiperSlide>
+	</Swiper>
+</main>
 
 <style>
+	main {
+		height: 100vh;
+		display: grid;
+		grid-template-rows: 106px 1fr;
+	}
+	.header-container {
+	}
 	#app {
 		height: 100%;
 	}
@@ -79,28 +98,20 @@
 		padding: 0;
 	}
 
-	.swiper {
+	:global(.swiper) {
 		width: 100%;
-		height: 100%;
+		height: 88vh;
 	}
 
-	.swiper-slide {
-		text-align: center;
-		font-size: 18px;
-		background: #fff;
+	:global(.swiper-slide) {
+		overflow-y: scroll;
+	}
 
-		/* Center slide text vertically */
-		display: -webkit-box;
-		display: -ms-flexbox;
-		display: -webkit-flex;
-		display: flex;
-		-webkit-box-pack: center;
-		-ms-flex-pack: center;
-		-webkit-justify-content: center;
-		justify-content: center;
-		-webkit-box-align: center;
-		-ms-flex-align: center;
-		-webkit-align-items: center;
-		align-items: center;
+	.pages-container {
+		overflow-y: scroll;
+	}
+
+	.slide {
+		max-height: 100%;
 	}
 </style>
