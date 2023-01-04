@@ -40,6 +40,15 @@ export class Invoice {
     status : 'created' | 'missed' | 'payed'  
 }
 
+export class InvoiceMini {
+    number: string;
+    price: number;
+    date: Date;
+    truckNumber: string;
+    trailerNumber: string;
+    sign?: string;
+    status : 'created' | 'missed' | 'payed'  
+}
 
 export class InvoiceCounts {
     all : number;
