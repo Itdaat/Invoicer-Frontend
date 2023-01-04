@@ -57,6 +57,7 @@
 	}
 
 	.value .cent {
+		/* font-weight: 400; */
 	}
 
 	.value .sign {
