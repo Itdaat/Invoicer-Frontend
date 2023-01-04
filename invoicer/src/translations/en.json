@@ -36,5 +36,9 @@
     "INVOICES": "__________INVOICES___________",
     "invoices_mini_in_progress": "In Progress",
     "invoices_mini_outdated": "Outdated",
-    "invoices_mini_future": "In future"
+    "invoices_mini_future": "In future",
+    "INVOICE": "_________________INVOICE_________________",
+    "invoice_share_title": "Share",
+    "invoice_print_title": "Print",
+    "invoice_delete_title": "Delete"
 }
