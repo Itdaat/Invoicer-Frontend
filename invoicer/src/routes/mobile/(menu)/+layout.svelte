@@ -4,7 +4,6 @@
 	import SliderStore from '$lib/stores/Slides';
 	import 'swiper/css';
 
-	import { History, Navigation, A11y } from 'swiper';
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 	import MobileHeader from '$lib/mobile/components/MobileHeader.svelte';
 	import Invoices from '$lib/mobile/pages/Invoices.svelte';
@@ -13,8 +12,6 @@
 	/** @type {import('./$types').PageData} */
 	export let data;
 </script>
-
-<!-- on:swiper={(swiper) => sliders.slideTo(swiper)} -->
 
 <main>
 	<div class="header"><MobileHeader userId={data.userId} /></div>
@@ -29,6 +26,7 @@
 		history={{
 			key: 'mobile'
 		}}
+		initialSlide={1}
 		on:slideChange={(e) => {
 			SliderStore.update((last) => {
 				return { ...last, activeIndex: e.detail[0].activeIndex };

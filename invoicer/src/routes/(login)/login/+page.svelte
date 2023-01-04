@@ -7,7 +7,6 @@
 	import BigTitle from '$lib/desktop/components/register/BigTitle.svelte';
 	import InputPassword from '$lib/desktop/components/register/InputPassword.svelte';
 	import Button from '$lib/templates/Button.svelte';
-	import { page } from '$app/stores';
 	import { loginUser } from '$lib/api/server/user';
 	import { redirect } from '@sveltejs/kit';
 
