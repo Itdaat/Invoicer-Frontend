@@ -16,6 +16,7 @@
 	let dayStr = day < 10 ? '0' + day : day;
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <main
 	on:click={() => {
 		goto('/mobile/invoice');
