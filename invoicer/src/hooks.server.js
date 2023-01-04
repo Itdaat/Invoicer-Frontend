@@ -4,7 +4,7 @@
 export async function handle({ event, resolve }) {
     const host = event.url.origin;
     const userId = event.cookies.get('userId');
-    const mobileStartUrl = '/mobile/invoices';
+    const mobileStartUrl = '/mobile';
     const isLoginApi = event.url.pathname.startsWith('/api/reg');
     const isLoginPage = event.url.pathname.startsWith('/login'), isRegisterPage = event.url.pathname.startsWith('/register'), isResetPassPage = event.url.pathname.startsWith('/reset-password');
     if (!userId && !(isLoginPage || isRegisterPage || isResetPassPage || isLoginApi)) {
