@@ -9,17 +9,9 @@
 	import MobileHeader from '$lib/mobile/components/MobileHeader.svelte';
 	import Invoices from '$lib/mobile/pages/Invoices.svelte';
 	import Orders from '$lib/mobile/pages/Orders.svelte';
-	import { onMount } from 'svelte';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
-	$: swiper = $SliderStore;
-
-	onMount(async () => {
-		SliderStore.update((last) => {
-			return { ...last, activeIndex: 1 };
-		});
-	});
 </script>
 
 <!-- on:swiper={(swiper) => sliders.slideTo(swiper)} -->
@@ -37,7 +29,6 @@
 		history={{
 			key: 'mobile'
 		}}
-		loop={true}
 		on:slideChange={(e) => {
 			SliderStore.update((last) => {
 				return { ...last, activeIndex: e.detail[0].activeIndex };
@@ -45,30 +36,24 @@
 		}}
 		modules={[Navigation, History, A11y]}
 	>
-		<SwiperSlide data-history="invoices">
-			<div class="slide">
-				<Orders />
-			</div>
+		<SwiperSlide data-history="messages">
+			<div class="slide">Messages</div>
 		</SwiperSlide>
-		<SwiperSlide data-history="orders">
+		<SwiperSlide data-history="invoices">
 			<div class="slide">
 				<Invoices />
 			</div>
 		</SwiperSlide>
+		<SwiperSlide data-history="orders">
+			<div class="slide">
+				<Orders />
+			</div>
+		</SwiperSlide>
 		<SwiperSlide data-history="payments">
-			<div class="slide">
-				<Orders />
-			</div>
+			<div class="slide">Payments</div>
 		</SwiperSlide>
 		<SwiperSlide data-history="transactions">
-			<div class="slide">
-				<Orders />
-			</div>
-		</SwiperSlide>
-		<SwiperSlide data-history="transactions">
-			<div class="slide">
-				<Orders />
-			</div>
+			<div class="slide">hello</div>
 		</SwiperSlide>
 	</Swiper>
 </main>
