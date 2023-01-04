@@ -9,10 +9,6 @@
 	export let active = false;
 
 	$: swiper = $SliderStore;
-
-	$: if (active) {
-		swiper.slider?.slideTo(index, 500);
-	}
 </script>
 
 <div class="container">
@@ -21,9 +17,7 @@
 		class:active
 		class="link"
 		on:click={() => {
-			SliderStore.update((last) => {
-				return { ...last, activeIndex: index };
-			});
+			swiper.slider?.slideTo(index);
 		}}
 	>
 		<slot />
