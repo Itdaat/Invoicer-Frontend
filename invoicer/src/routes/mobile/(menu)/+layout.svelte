@@ -37,6 +37,7 @@
 		history={{
 			key: 'mobile'
 		}}
+		loop={true}
 		on:slideChange={(e) => {
 			SliderStore.update((last) => {
 				return { ...last, activeIndex: e.detail[0].activeIndex };
