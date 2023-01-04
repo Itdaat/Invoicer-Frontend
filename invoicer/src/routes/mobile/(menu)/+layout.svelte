@@ -98,6 +98,6 @@
 	}
 
 	.slide {
-		max-height: 100%;
+		padding-bottom: 20px;
 	}
 </style>
