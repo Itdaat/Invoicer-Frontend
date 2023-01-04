@@ -33,5 +33,8 @@
     "menu_order": "Order",
     "menu_transaction": "Transaction",
     "menu_payment": "Payment",
-    "kaka": "kaka"
+    "INVOICES": "__________INVOICES___________",
+    "invoices_mini_in_progress": "In Progress",
+    "invoices_mini_outdated": "Outdated",
+    "invoices_mini_future": "In future"
 }

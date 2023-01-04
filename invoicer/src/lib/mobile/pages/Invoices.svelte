@@ -1,6 +1,10 @@
 <script>
+	import LanguageStore from '$lib/stores/Language';
 	import CounterBig from '../components/CounterBig.svelte';
 	import CounterSmall from '../components/CounterSmall.svelte';
+	import InvoiceMini from '../components/InvoiceMini.svelte';
+	import MiniCategory from '../components/MiniCategory.svelte';
+	$: t = $LanguageStore;
 
 	let data = {
 		sign: '$',
@@ -14,6 +18,34 @@
 		sign: '$',
 		title: 'В очікуванні'
 	};
+
+	/** @type {import('../../../types/Entities').InvoiceMini[]} */
+	let invoicesMini = [
+		{
+			trailerNumber: 'BO9999BO',
+			truckNumber: 'AO8888AO',
+			number: 'GPC-2314133',
+			date: new Date('2022-1-13'),
+			price: 11243,
+			status: 'missed'
+		},
+		{
+			trailerNumber: 'BO9999BO',
+			truckNumber: 'AO8888AO',
+			number: 'GPC-2314133',
+			date: new Date('2022-1-13'),
+			price: 11243,
+			status: 'missed'
+		},
+		{
+			trailerNumber: 'BO9999BO',
+			truckNumber: 'AO8888AO',
+			number: 'GPC-2314133',
+			date: new Date('2022-1-13'),
+			price: 11243,
+			status: 'missed'
+		}
+	];
 </script>
 
 <main>
@@ -25,6 +57,16 @@
 			<CounterSmall {...counterSmall} />
 		</div>
 	</div>
+	<MiniCategory title={t.invoices_mini_future}>
+		{#each invoicesMini as invoice}
+			<InvoiceMini {...invoice} />
+		{/each}
+	</MiniCategory>
+	<MiniCategory title={t.invoices_mini_future}>
+		{#each invoicesMini as invoice}
+			<InvoiceMini {...invoice} />
+		{/each}
+	</MiniCategory>
 </main>
 
 <style>
