@@ -40,5 +40,15 @@
     "INVOICE": "_________________INVOICE_________________",
     "invoice_share_title": "Share",
     "invoice_print_title": "Print",
-    "invoice_delete_title": "Delete"
+    "invoice_delete_title": "Delete",
+    "invoice_num": "Number",
+    "invoice_creation_date": "Creation Date",
+    "invoice_order_number": "Order Number",
+    "invoice_route": "Route",
+    "invoice_license_num": "License Num",
+    "invoice_cmr_number": "Cmr Number",
+    "invoice_sum": "Sum",
+    "invoice_currency": "Currency",
+    "invoice_status": "Status",
+    "invoice_payment_date": "Payment Date"
 }
