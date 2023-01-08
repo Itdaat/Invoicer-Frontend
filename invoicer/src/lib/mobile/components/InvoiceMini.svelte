@@ -21,6 +21,7 @@
 	on:click={() => {
 		goto('/mobile/invoice');
 	}}
+	class="ripple-light"
 >
 	<div class="left">
 		<div class="number">{number}</div>
@@ -111,5 +112,18 @@
 
 		color: rgba(61, 90, 128, 0.7);
 		margin-top: 1px;
+	}
+
+	:global(.ripple-light) {
+		background-position: center;
+		transition: background 0.8s;
+	}
+	:global(.ripple-light:hover) {
+		background: #ffffff radial-gradient(circle, transparent 1%, #ffffff 1%) center/40000%;
+	}
+	:global(.ripple-light:active) {
+		background-color: #c7c6c6;
+		background-size: 100%;
+		transition: background 0s;
 	}
 </style>

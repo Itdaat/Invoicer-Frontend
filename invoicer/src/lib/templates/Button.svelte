@@ -3,19 +3,18 @@
 	 * @type {'dark' | 'light'}
 	 */
 	export let type = 'dark';
-	export let link = '';
 	export let onClick = () => {};
 </script>
 
-<a
-	class="container"
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div
+	class="container {type == 'dark' ? 'ripple-dark' : 'ripple-light'}"
 	on:click={onClick}
-	href={link}
 	class:light={type == 'light'}
 	class:dark={type == 'dark'}
 >
 	<slot />
-</a>
+</div>
 
 <style>
 	.container {
@@ -27,6 +26,7 @@
 		justify-content: center;
 		align-items: center;
 		cursor: pointer;
+		user-select: none;
 	}
 
 	.dark {
@@ -56,5 +56,30 @@
 		letter-spacing: 1px;
 
 		color: #3d5a80;
+	}
+	:global(.ripple-light) {
+		background-position: center;
+		transition: background 0.8s;
+	}
+	:global(.ripple-light:hover) {
+		background: #ffffff radial-gradient(circle, transparent 1%, #ffffff 1%) center/15000%;
+	}
+	:global(.ripple-light:active) {
+		background-color: #c7c6c6;
+		background-size: 100%;
+		transition: background 0s;
+	}
+
+	:global(.ripple-dark) {
+		background-position: center;
+		transition: background 0.8s;
+	}
+	:global(.ripple-dark:hover) {
+		background: #3d5a80 radial-gradient(circle, transparent 1%, #3d5a80 1%) center/18000%;
+	}
+	:global(.ripple-dark:active) {
+		background-color: #6280a7;
+		background-size: 100%;
+		transition: background 0s;
 	}
 </style>

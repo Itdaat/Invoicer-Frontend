@@ -1,0 +1,25 @@
+.ripple-light {
+    background-position: center;
+    transition: background 0.8s;
+}
+.ripple-light:hover {
+    background: #ffffff radial-gradient(circle, transparent 1%, #ffffff 1%) center/15000%;
+}
+.ripple-light:active {
+    background-color: #8f8585;
+    background-size: 100%;
+    transition: background 0s;
+}
+
+.ripple-dark {
+    background-position: center;
+    transition: background 0.8s;
+}
+.ripple-dark:hover {
+    background: #3d5a80 radial-gradient(circle, transparent 1%, #3d5a80 1%) center/15000%;
+}
+.ripple-dark:active {
+    background-color: #547db3;
+    background-size: 100%;
+    transition: background 0s;
+}
