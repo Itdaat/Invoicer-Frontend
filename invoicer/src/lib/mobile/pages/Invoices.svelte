@@ -70,6 +70,9 @@
 </main>
 
 <style>
+	main {
+		user-select: none;
+	}
 	.counter {
 		margin: 20px 0px;
 	}
@@ -79,5 +82,6 @@
 		grid-template-columns: 1fr 1fr 1fr;
 		margin-top: 20px;
 		padding: 0px 10px;
+		user-select: none;
 	}
 </style>
