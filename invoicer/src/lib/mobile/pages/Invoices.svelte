@@ -22,6 +22,7 @@
 	/** @type {import('../../../types/Entities').InvoiceMini[]} */
 	let invoicesMini = [
 		{
+			id: 1,
 			trailerNumber: 'BO9999BO',
 			truckNumber: 'AO8888AO',
 			number: 'GPC-2314133',
@@ -30,6 +31,7 @@
 			status: 'missed'
 		},
 		{
+			id: 2,
 			trailerNumber: 'BO9999BO',
 			truckNumber: 'AO8888AO',
 			number: 'GPC-2314133',
@@ -38,6 +40,7 @@
 			status: 'missed'
 		},
 		{
+			id: 3,
 			trailerNumber: 'BO9999BO',
 			truckNumber: 'AO8888AO',
 			number: 'GPC-2314133',
