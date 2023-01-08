@@ -45,6 +45,7 @@
 		border-top: 0.2px solid rgba(41, 50, 65, 0.3);
 		/* box-shadow: 0px -1px 0px -0.9px #000000; */
 		width: 90%;
+		user-select: none;
 	}
 
 	.right {
