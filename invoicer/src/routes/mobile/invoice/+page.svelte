@@ -32,30 +32,30 @@
 		<div class="return" on:click={returnToPage}><ReturnIcon /></div>
 		<div class="title">{title}</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="actions" on:click={openActions}><MoreActionsIcon /></div>
-	</div>
-	{#if actionsActive}
-		<div
-			class="actions-popup"
-			in:slide
-			out:slide
-			use:clickOutside
-			on:click_outside={clickOutsideEvent}
-		>
-			<div class="action-item">
-				<ShareIcon />
-				<div class="actions-item-title">{t.invoice_share_title}</div>
+		<div class="actions" use:clickOutside on:click_outside={clickOutsideEvent}>
+			<div class="actions-container" on:click={openActions}>
+				<MoreActionsIcon />
 			</div>
-			<div class="action-item">
-				<PrintIcon />
-				<div class="actions-item-title">{t.invoice_print_title}</div>
-			</div>
-			<div class="action-item">
-				<DeleteIcon />
-				<div class="actions-item-title">{t.invoice_delete_title}</div>
-			</div>
+			{#if actionsActive}
+				<div class="actions-popup" in:slide out:slide on:click={() => {}}>
+					<div class="action-item">
+						<ShareIcon />
+						<div class="actions-item-title">
+							{t.invoice_share_title}
+						</div>
+					</div>
+					<div class="action-item">
+						<PrintIcon />
+						<div class="actions-item-title">{t.invoice_print_title}</div>
+					</div>
+					<div class="action-item">
+						<DeleteIcon />
+						<div class="actions-item-title">{t.invoice_delete_title}</div>
+					</div>
+				</div>
+			{/if}
 		</div>
-	{/if}
+	</div>
 
 	<div class="main">
 		<div class="container">
@@ -74,11 +74,11 @@
 				</div>
 				<div class="list-item">
 					<div class="left">{t.invoice_route}</div>
-					<div class="right">{invoice.order.downloadAddress} - {invoice.order.unloadAddress}</div>
+					<div class="right">{invoice.order.downloadAddress}-{invoice.order.unloadAddress}</div>
 				</div>
 				<div class="list-item">
 					<div class="left">{t.invoice_license_num}</div>
-					<div class="right">{invoice.order.truck?.number} / {invoice.order.trailer?.number}</div>
+					<div class="right">{invoice.order.truck?.number}/{invoice.order.trailer?.number}</div>
 				</div>
 				<div class="list-item">
 					<div class="left">{t.invoice_cmr_number}</div>
@@ -221,6 +221,7 @@
 		display: flex;
 		align-items: center;
 		text-align: right;
+		letter-spacing: 1.5px;
 
 		/* done */
 
@@ -265,5 +266,6 @@
 		text-align: right;
 
 		color: #092058;
+		letter-spacing: 1px;
 	}
 </style>
