@@ -42,6 +42,7 @@ export class Invoice {
 }
 
 export class InvoiceMini {
+    id : number;
     number: string;
     price: number;
     date: Date;
