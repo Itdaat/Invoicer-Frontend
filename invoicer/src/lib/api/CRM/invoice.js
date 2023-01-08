@@ -59,7 +59,7 @@ export async function getInvoice() {
             downloadAddress: 'Makaka',
             unloadAddress: 'Lupa',
             myNumber: 'super',
-            price: 123.12,
+            price: 12923.12,
             paymentTerms: formedDate,
             date: formedDate,
             number: '123',
