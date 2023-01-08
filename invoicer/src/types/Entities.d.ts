@@ -33,7 +33,8 @@ export class CMR {
 
 export class Invoice {
     number: string;
-    date: Date;
+    creationDate: Date;
+    paymentDate : Date;
     order : Order;
     cmr? : CMR;
     paymentTerms : Date;
