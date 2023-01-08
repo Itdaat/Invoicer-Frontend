@@ -1,11 +1,13 @@
 <script>
 	import LanguageStore from '$lib/stores/Language';
 	import ShareIcon from './../../../lib/assets/icons/ShareIcon.svelte';
-	import { slide } from 'svelte/transition';
+	import { slide, fly } from 'svelte/transition';
 	import ReturnIcon from '$lib/assets/icons/ReturnIcon.svelte';
 	import MoreActionsIcon from './../../../lib/assets/icons/MoreActionsIcon.svelte';
 	import PrintIcon from '$lib/assets/icons/PrintIcon.svelte';
 	import DeleteIcon from '$lib/assets/icons/DeleteIcon.svelte';
+	import { getInvoice } from '$lib/api/CRM/invoice';
+	import { clickOutside } from '$lib/templates/ClickOutside';
 	export let title = 'Інвойс №1231';
 	$: t = $LanguageStore;
 
@@ -18,6 +20,10 @@
 	const openActions = () => {
 		actionsActive = !actionsActive;
 	};
+
+	const clickOutsideEvent = () => {
+		actionsActive = false;
+	};
 </script>
 
 <main>
@@ -29,7 +35,13 @@
 		<div class="actions" on:click={openActions}><MoreActionsIcon /></div>
 	</div>
 	{#if actionsActive}
-		<div class="actions-popup" in:slide out:slide>
+		<div
+			class="actions-popup"
+			in:slide
+			out:slide
+			use:clickOutside
+			on:click_outside={clickOutsideEvent}
+		>
 			<div class="action-item">
 				<ShareIcon />
 				<div class="actions-item-title">{t.invoice_share_title}</div>
@@ -44,10 +56,60 @@
 			</div>
 		</div>
 	{/if}
+
+	<div class="main">
+		<div class="container">
+			{#await getInvoice() then invoice}
+				<div class="list-item">
+					<div class="left">{t.invoice_num}</div>
+					<div class="right">{invoice.number}</div>
+				</div>
+				<div class="list-item">
+					<div class="left">{t.invoice_creation_date}</div>
+					<div class="right">{invoice.creationDate}</div>
+				</div>
+				<div class="list-item">
+					<div class="left">{t.invoice_order_number}</div>
+					<div class="right">{invoice.order.number}</div>
+				</div>
+				<div class="list-item">
+					<div class="left">{t.invoice_route}</div>
+					<div class="right">{invoice.order.downloadAddress} - {invoice.order.unloadAddress}</div>
+				</div>
+				<div class="list-item">
+					<div class="left">{t.invoice_license_num}</div>
+					<div class="right">{invoice.order.truck?.number} / {invoice.order.trailer?.number}</div>
+				</div>
+				<div class="list-item">
+					<div class="left">{t.invoice_cmr_number}</div>
+					<div class="right">{invoice.cmr?.number}</div>
+				</div>
+				<div class="list-item">
+					<div class="left">{t.invoice_currency}</div>
+					<div class="right">{invoice.order.currency}</div>
+				</div>
+				<div class="list-item">
+					<div class="left">{t.invoice_payment_date}</div>
+					<div class="right">{invoice.order.date}</div>
+				</div>
+				<div class="list-item">
+					<div class="left">{t.invoice_status}</div>
+					<div class="right">{invoice.status}</div>
+				</div>
+				<div class="conclusion-list-item">
+					<div class="left">{t.invoice_sum}</div>
+					<div class="right">{invoice.order.price}</div>
+				</div>
+			{/await}
+		</div>
+	</div>
 </main>
 
 <style>
 	main {
+		height: 100vh;
+		display: grid;
+		grid-template-rows: 106px 1fr;
 	}
 	.header {
 		height: 70px;
@@ -114,5 +176,94 @@
 		width: 90%;
 		margin-left: 20px;
 		margin-top: 3px;
+	}
+
+	.container {
+		width: 85%;
+		padding: 5px 16px;
+		/* height: 360px; */
+
+		background: #ffffff;
+		border-radius: 10px;
+		box-shadow: 0px 4px 20px rgba(37, 38, 94, 0.1);
+	}
+
+	.main {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: center;
+	}
+
+	.conclusion-list-item .left {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 600;
+		font-size: 15px;
+		line-height: 22px;
+		/* identical to box height */
+
+		display: flex;
+		align-items: center;
+
+		color: #4f6c8d;
+	}
+
+	.conclusion-list-item .right {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 600;
+		font-size: 15px;
+		line-height: 22px;
+		/* identical to box height */
+
+		display: flex;
+		align-items: center;
+		text-align: right;
+
+		/* done */
+
+		color: #24a731;
+	}
+
+	.conclusion-list-item,
+	.list-item {
+		display: flex;
+		justify-content: space-between;
+		margin: 10px 0px;
+	}
+
+	.conclusion-list-item {
+		margin: 15px 0px;
+	}
+
+	.left {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 15px;
+		line-height: 22px;
+		/* identical to box height */
+
+		display: flex;
+		align-items: center;
+
+		color: #4f6c8d;
+	}
+
+	.right {
+		font-family: 'Exo 2';
+		font-style: normal;
+		font-weight: 500;
+		font-size: 15px;
+		line-height: 22px;
+		/* identical to box height */
+
+		display: flex;
+		align-items: center;
+		text-align: right;
+
+		color: #092058;
 	}
 </style>
