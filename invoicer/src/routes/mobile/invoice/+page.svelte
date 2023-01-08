@@ -8,6 +8,7 @@
 	import DeleteIcon from '$lib/assets/icons/DeleteIcon.svelte';
 	import { getInvoice } from '$lib/api/CRM/invoice';
 	import { clickOutside } from '$lib/templates/ClickOutside';
+	import Button from '$lib/templates/Button.svelte';
 	export let title = 'Інвойс №1231';
 	$: t = $LanguageStore;
 
@@ -24,6 +25,8 @@
 	const clickOutsideEvent = () => {
 		actionsActive = false;
 	};
+
+	const sign = () => {};
 </script>
 
 <main>
@@ -102,6 +105,14 @@
 				</div>
 			{/await}
 		</div>
+		<div class="buttons-container">
+			<div class="left-button-container">
+				<Button type="light" onClick={sign}>{t.invoice_sign}</Button>
+			</div>
+			<div class="right-button-container">
+				<Button type="dark" onClick={sign}>{t.invoice_reject}</Button>
+			</div>
+		</div>
 	</div>
 </main>
 
@@ -119,6 +130,7 @@
 		background: #ffffff;
 		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 		padding: 0px 20px;
+		user-select: none;
 	}
 
 	.title {
@@ -153,6 +165,7 @@
 		flex-direction: column;
 		align-items: center;
 		padding-top: 2px;
+		user-select: none;
 	}
 
 	.actions-item-title {
@@ -267,5 +280,18 @@
 
 		color: #092058;
 		letter-spacing: 1px;
+	}
+
+	.buttons-container {
+		margin-top: 36px;
+		display: flex;
+		justify-content: space-between;
+		width: 80%;
+	}
+
+	.left-button-container,
+	.right-button-container {
+		width: 150px;
+		height: 50px;
 	}
 </style>

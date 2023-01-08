@@ -60,6 +60,7 @@
 		height: 100vh;
 		display: grid;
 		grid-template-rows: 106px 1fr;
+		user-select: none;
 	}
 	.header-container {
 	}
