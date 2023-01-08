@@ -50,5 +50,7 @@
     "invoice_sum": "Sum",
     "invoice_currency": "Currency",
     "invoice_status": "Status",
-    "invoice_payment_date": "Payment Date"
+    "invoice_payment_date": "Payment Date",
+    "invoice_sign": "Sign",
+    "invoice_reject": "Reject"
 }
