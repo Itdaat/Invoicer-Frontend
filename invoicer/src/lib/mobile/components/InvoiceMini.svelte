@@ -8,6 +8,10 @@
 	export let truckNumber = '';
 	export let trailerNumber = '';
 	export let sign = '$';
+	/**
+	 * @type {number}
+	 */
+	export let id;
 
 	const year = date.getFullYear();
 	const month = date.getMonth() + 1;
@@ -19,7 +23,7 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <main
 	on:click={() => {
-		goto('/mobile/invoice');
+		goto(`/mobile/${id}/invoice`);
 	}}
 	class="ripple-light"
 >
