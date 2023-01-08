@@ -1,66 +1,35 @@
 <script>
 	import LanguageStore from '$lib/stores/Language';
-	import ShareIcon from './../../../lib/assets/icons/ShareIcon.svelte';
-	import { slide, fly } from 'svelte/transition';
-	import ReturnIcon from '$lib/assets/icons/ReturnIcon.svelte';
-	import MoreActionsIcon from './../../../lib/assets/icons/MoreActionsIcon.svelte';
+	import ShareIcon from '$lib/assets/icons/ShareIcon.svelte';
 	import PrintIcon from '$lib/assets/icons/PrintIcon.svelte';
 	import DeleteIcon from '$lib/assets/icons/DeleteIcon.svelte';
 	import { getInvoice } from '$lib/api/CRM/invoice';
-	import { clickOutside } from '$lib/templates/ClickOutside';
 	import Button from '$lib/templates/Button.svelte';
+	import MiniMenu from '$lib/mobile/templates/MiniMenu.svelte';
 	export let title = 'Інвойс №1231';
 	$: t = $LanguageStore;
-
-	const returnToPage = () => {
-		history.back();
-	};
-
-	let actionsActive = false;
-
-	const openActions = () => {
-		actionsActive = !actionsActive;
-	};
-
-	const clickOutsideEvent = () => {
-		actionsActive = false;
-	};
 
 	const sign = () => {};
 </script>
 
-<main>
-	<div class="header">
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="return" on:click={returnToPage}><ReturnIcon /></div>
-		<div class="title">{title}</div>
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="actions" use:clickOutside on:click_outside={clickOutsideEvent}>
-			<div class="actions-container" on:click={openActions}>
-				<MoreActionsIcon />
+<MiniMenu {title}>
+	<div class="actions" slot="actions">
+		<div class="action-item">
+			<ShareIcon />
+			<div class="actions-item-title">
+				{t.invoice_share_title}
 			</div>
-			{#if actionsActive}
-				<div class="actions-popup" in:slide out:slide on:click={() => {}}>
-					<div class="action-item">
-						<ShareIcon />
-						<div class="actions-item-title">
-							{t.invoice_share_title}
-						</div>
-					</div>
-					<div class="action-item">
-						<PrintIcon />
-						<div class="actions-item-title">{t.invoice_print_title}</div>
-					</div>
-					<div class="action-item">
-						<DeleteIcon />
-						<div class="actions-item-title">{t.invoice_delete_title}</div>
-					</div>
-				</div>
-			{/if}
+		</div>
+		<div class="action-item">
+			<PrintIcon />
+			<div class="actions-item-title">{t.invoice_print_title}</div>
+		</div>
+		<div class="action-item">
+			<DeleteIcon />
+			<div class="actions-item-title">{t.invoice_delete_title}</div>
 		</div>
 	</div>
-
-	<div class="main">
+	<div class="main" slot="main">
 		<div class="container">
 			{#await getInvoice() then invoice}
 				<div class="list-item">
@@ -114,60 +83,9 @@
 			</div>
 		</div>
 	</div>
-</main>
+</MiniMenu>
 
 <style>
-	main {
-		height: 100vh;
-		display: grid;
-		grid-template-rows: 106px 1fr;
-	}
-	.header {
-		height: 70px;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		background: #ffffff;
-		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-		padding: 0px 20px;
-		user-select: none;
-	}
-
-	.title {
-		font-family: 'Exo 2';
-		font-style: normal;
-		font-weight: 500;
-		font-size: 25px;
-		line-height: 38px;
-		/* identical to box height */
-
-		letter-spacing: 1px;
-
-		color: #3d5a80;
-	}
-
-	.return,
-	.actions {
-		margin-top: 5px;
-	}
-
-	.actions-popup {
-		position: absolute;
-		top: 78px;
-		right: 8px;
-		background: linear-gradient(0deg, #ffffff, #ffffff), #ffffff;
-		box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-		border-radius: 10px;
-		width: 170px;
-		height: 137px;
-
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		padding-top: 2px;
-		user-select: none;
-	}
-
 	.actions-item-title {
 		font-family: 'Exo 2';
 		font-style: normal;
@@ -203,10 +121,15 @@
 
 	.main {
 		height: 100%;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: center;
+	}
+
+	.actions {
+		width: 100%;
 	}
 
 	.conclusion-list-item .left {

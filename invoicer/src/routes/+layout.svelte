@@ -1,7 +1,6 @@
 <script>
 	import LanguageStore from '$lib/stores/Language';
 	import UserStore from '$lib/stores/User';
-	import { fly } from 'svelte/transition';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
