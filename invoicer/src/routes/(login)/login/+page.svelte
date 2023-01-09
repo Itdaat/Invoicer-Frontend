@@ -7,8 +7,11 @@
 	import BigTitle from '$lib/desktop/components/register/BigTitle.svelte';
 	import InputPassword from '$lib/desktop/components/register/InputPassword.svelte';
 	import Button from '$lib/templates/Button.svelte';
-	import { loginUser } from '$lib/api/server/user';
+	import { checkUserLogin, loginUser } from '$lib/api/server/user';
 	import { redirect } from '@sveltejs/kit';
+	import { needRealLogin, notValidPassword, userExists, userNotFound } from '../../../consts';
+	import { goto } from '$app/navigation';
+	import { setCookie } from '$lib/helpers/cookies';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -18,25 +21,51 @@
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
-	let status = 'ordinary';
+	let loginStatus = 'ordinary';
 
 	let forgotPasswordLink = '/reset-password',
-		loginWithGoogleLink = '#loginTitle',
 		gotoRegisterLink = '/register';
 
 	const onLoginClick = async () => {
-		redirect(301, '/register');
-		await loginUser();
+		// loginStatus = passwordStatus = 'ordinary';
+		const result = await loginUser(login, password);
+		if (result.error) {
+			if (result.error.code == userNotFound.code) {
+				loginStatus = 'error';
+			}
+			if (result.error.code == notValidPassword.code) {
+				passwordStatus = 'error';
+			}
+			if (result.error.code == needRealLogin.code) {
+				// @ts-ignore
+				setCookie('token', result.resultJSON.token);
+				window.location.href = window.location.host;
+			}
+		} else {
+			// @ts-ignore
+			setCookie('token', result.resultJSON.token);
+			// goto('/');
+			window.location.href = window.location.host;
+		}
 	};
 	// ! login
 	let login = '';
 
-	$: if (login.length == 1) {
-		status = 'error';
-	} else if (login.length >= 10) {
-		status = 'success';
-	} else {
-		status = 'ordinary';
+	/**
+	 *
+	 * @param {string} login
+	 */
+	async function checkLogin(login) {
+		const userLoginResponse = await checkUserLogin(login);
+		if (userLoginResponse.error?.code == userNotFound.code) {
+			loginStatus = 'error';
+		} else {
+			loginStatus = 'success';
+		}
+	}
+
+	function loginFocus() {
+		loginStatus = 'ordinary';
 	}
 
 	// ! password
@@ -45,13 +74,6 @@
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
 	let passwordStatus = 'ordinary';
-	$: if (password.length == 1) {
-		passwordStatus = 'error';
-	} else if (password.length >= 10) {
-		passwordStatus = 'success';
-	} else {
-		passwordStatus = 'ordinary';
-	}
 </script>
 
 <svelte:head>
@@ -68,10 +90,16 @@
 				<Input
 					placeHolder={t.login_accountPlaceHolder}
 					bind:value={login}
-					{status}
+					status={loginStatus}
 					message={t.login_accountErrorMessage}
+					onBlurFunc={() => {
+						checkLogin(login);
+					}}
+					onFocusFunc={() => {
+						loginFocus();
+					}}
 				>
-					<AccountIcon slot="left" {status} />
+					<AccountIcon slot="left" status={loginStatus} />
 				</Input>
 			</div>
 
@@ -96,16 +124,16 @@
 				<Button type="dark" onClick={onLoginClick}>{t.login_loginButton}</Button>
 			</div>
 
-			<div class="text-container">{t.login_textOr}</div>
+			<!-- <div class="text-container">{t.login_textOr}</div> -->
 
-			<div class="button-container google">
-				<Button type="light" link={loginWithGoogleLink}>
+			<!-- <div class="button-container google">
+				<Button type="light">
 					<div class="google-button-container">
 						<div class="google-button-left"><GoogleIcon /></div>
 						<div class="google-button-right">{t.login_loginWithGoogle}</div>
 					</div>
 				</Button>
-			</div>
+			</div> -->
 		</div>
 		<div class="goto-register-container">
 			<RegisterOrLogin
