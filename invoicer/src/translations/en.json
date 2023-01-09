@@ -1,7 +1,7 @@
 {
     "login_title": "Login",
     "login_accountPlaceHolder": "Login",
-    "login_accountErrorMessage": "Incorrect account",
+    "login_loginErrorMessage": "Incorrect Login",
     "login_passwordPlaceHolder": "Password",
     "login_passwordErrorMessage": "Incorrect password",
     "login_forgotPassword": "Forgot Password?",
@@ -15,6 +15,7 @@
     "register_title": "Register",
     "register_accountPlaceHolder": "Login",
     "register_accountErrorMessage": "Incorrect account",
+    "register_accountAlreadyExists": "Account already exists",
     "register_passwordPlaceHolder": "Password",
     "register_passwordErrorMessage": "Incorrect password",
     "register_repeatPasswordPlaceHolder": "Repeat Password",
