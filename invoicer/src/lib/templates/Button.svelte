@@ -6,9 +6,9 @@
 	export let onClick = () => {};
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
 	class="container {type == 'dark' ? 'ripple-dark' : 'ripple-light'}"
+	on:keypress={(e) => {}}
 	on:click={onClick}
 	class:light={type == 'light'}
 	class:dark={type == 'dark'}
