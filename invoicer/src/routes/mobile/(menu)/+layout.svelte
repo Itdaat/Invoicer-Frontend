@@ -62,16 +62,6 @@
 		grid-template-rows: 106px 1fr;
 		user-select: none;
 	}
-	.header-container {
-	}
-	#app {
-		height: 100%;
-	}
-	html,
-	body {
-		position: relative;
-		height: 100%;
-	}
 
 	body {
 		background: #eee;

@@ -11,7 +11,7 @@
 
 <slot />
 
-<style>
+<!-- <style>
 	:global(.ripple-light) {
 		background-position: center;
 		transition: background 0.8s;
@@ -37,4 +37,4 @@
 		background-size: 100%;
 		transition: background 0s;
 	}
-</style>
+</style> -->
