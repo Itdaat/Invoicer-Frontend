@@ -1,4 +1,5 @@
 <script>
+	import { fade } from 'svelte/transition';
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
@@ -7,6 +8,8 @@
 	export let disabled = false;
 	export let placeHolder = '';
 	export let message = '';
+	export let onBlurFunc = () => {};
+	export let onFocusFunc = () => {};
 	let success = false,
 		error = false;
 	$: success = status == 'success';
@@ -25,10 +28,12 @@
 		{disabled}
 		type="text"
 		bind:value
+		on:blur={onBlurFunc}
+		on:focus={onFocusFunc}
 	/>
 </div>
 {#if status == 'error' && message != ''}
-	<div class="message-container">{message}</div>
+	<div class="message-container" transition:fade={{ duration: 150 }}>{message}</div>
 {/if}
 
 <style>

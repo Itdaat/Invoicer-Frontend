@@ -1,4 +1,5 @@
 <script>
+	import { slide, fade } from 'svelte/transition';
 	import ClosedEyeIcon from '../../../assets/icons/ClosedEyeIcon.svelte';
 	import EyeIcon from '$lib/assets/icons/EyeIcon.svelte';
 	import PasswordIcon from '$lib/assets/icons/PasswordIcon.svelte';
@@ -11,6 +12,8 @@
 	export let disabled = false;
 	export let placeHolder = '';
 	export let message = '';
+	export let onBlurFunc = () => {};
+	export let onFocusFunc = () => {};
 	let success = false,
 		error = false;
 	$: success = status == 'success';
@@ -39,6 +42,8 @@
 		placeholder={placeHolder}
 		{disabled}
 		bind:value
+		on:blur={onBlurFunc}
+		on:focus={onFocusFunc}
 	/>
 	{#if isFocused}
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -61,7 +66,7 @@
 	{/if}
 </div>
 {#if status == 'error' && message != ''}
-	<div class="message-container">{message}</div>
+	<div class="message-container" transition:slide>{message}</div>
 {/if}
 
 <style>
