@@ -18,6 +18,7 @@ export const entityAlreadyExists = { code: 5, message: 'This entity already exis
 export const dataDuplication = { code: 6, message: 'Entity data duplication' };
 export const entityIsUsed = { code: 7, message: 'Entity is used' }
 export const notLatinSymbol = { code: 8, message: 'Some entity uses not latin symbols' };
+export const notValidLogin = { code: 9, message: 'This login is not valid' };
 
 export const responseErrors = [
     userExists, notValidPassword, needRealLogin, userNotFound, entityAlreadyExists, dataDuplication, entityIsUsed, notLatinSymbol
