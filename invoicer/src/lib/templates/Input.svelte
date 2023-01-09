@@ -1,5 +1,5 @@
 <script>
-	import { fade } from 'svelte/transition';
+	import { fade, slide } from 'svelte/transition';
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
@@ -33,13 +33,13 @@
 	/>
 </div>
 {#if status == 'error' && message != ''}
-	<div class="message-container" transition:fade={{ duration: 150 }}>{message}</div>
+	<div class="message-container" transition:slide={{ duration: 200 }}>{message}</div>
 {/if}
 
 <style>
 	.container {
 		display: flex;
-		margin: 16px 0px;
+		/* margin: 16px 0px; */
 		justify-content: center;
 	}
 
@@ -110,8 +110,8 @@
 
 		width: 100%;
 		text-align: center;
-		margin-top: -7px;
-		margin-bottom: -10px;
+		margin-top: 9px;
+		/* margin-bottom: -10px; */
 	}
 
 	@media only screen and (max-width: 350px) {

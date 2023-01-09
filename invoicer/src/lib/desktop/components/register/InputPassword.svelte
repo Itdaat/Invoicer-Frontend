@@ -19,9 +19,10 @@
 	$: success = status == 'success';
 	$: error = status == 'error';
 
-	let showPassword = false;
+	export let showPassword = false;
 	let isFocused = false;
-	let type = 'password';
+	// let type = 'password';
+	$: type = !showPassword ? 'password' : 'text';
 </script>
 
 <div class="container">
@@ -51,7 +52,6 @@
 			class="eye-container"
 			on:click={() => {
 				showPassword = !showPassword;
-				type = !showPassword ? 'password' : 'text';
 			}}
 			on:mousedown={(e) => {
 				e.preventDefault();
@@ -66,7 +66,7 @@
 	{/if}
 </div>
 {#if status == 'error' && message != ''}
-	<div class="message-container" transition:slide>{message}</div>
+	<div class="message-container" transition:slide={{ duration: 200 }}>{message}</div>
 {/if}
 
 <style>
