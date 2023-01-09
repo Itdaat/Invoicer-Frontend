@@ -1,10 +1,13 @@
 <script>
+	import { checkUserLogin, registerUser } from '$lib/api/server/user';
 	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
 	import BigTitle from '$lib/desktop/components/register/BigTitle.svelte';
 	import InputPassword from '$lib/desktop/components/register/InputPassword.svelte';
+	import { setCookie } from '$lib/helpers/cookies';
+	import { validateEmail } from '$lib/helpers/email';
 	import Button from '$lib/templates/Button.svelte';
 	import Input from '$lib/templates/Input.svelte';
-	import GoogleIcon from '../../../lib/assets/icons/GoogleIcon.svelte';
+	import { notValidLogin, notValidPassword, userExists, userNotFound } from '../../../consts';
 	import RegisterOrLogin from '../../../lib/desktop/components/register/RegisterOrLogin.svelte';
 
 	/** @type {import('./$types').PageData} */
@@ -13,23 +16,37 @@
 	let t = JSON.parse(data.t);
 
 	/**
+	 *
+	 * @param {string} login
+	 */
+	async function checkLogin(login) {
+		const userLoginResponse = await checkUserLogin(login);
+		if (userLoginResponse.error?.code != userNotFound.code) {
+			loginErrorMessage = t.register_accountAlreadyExists;
+			loginStatus = 'error';
+		} else {
+			loginStatus = 'ordinary';
+			loginErrorMessage = t.register_accountErrorMessage;
+		}
+	}
+
+	const checkLoginBlur = () => {
+		loginErrorMessage = t.register_accountErrorMessage;
+		const isLoginValid = validateEmail(login);
+		loginStatus = isLoginValid ? 'ordinary' : 'error';
+	};
+
+	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
-	let status = 'ordinary';
+	let loginStatus = 'ordinary';
+	let loginErrorMessage = t.register_accountErrorMessage;
 
 	let loginButtonLink = '#',
-		loginWithGoogleLink = '#loginTitle',
 		gotoRegisterLink = '/login';
 	// ! login
 	let login = '';
-
-	$: if (login.length == 1) {
-		status = 'error';
-	} else if (login.length >= 10) {
-		status = 'success';
-	} else {
-		status = 'ordinary';
-	}
+	$: checkLogin(login);
 
 	// ! password
 	let password = '';
@@ -37,13 +54,6 @@
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
 	let passwordStatus = 'ordinary';
-	$: if (password.length == 1) {
-		passwordStatus = 'error';
-	} else if (password.length >= 10) {
-		passwordStatus = 'success';
-	} else {
-		passwordStatus = 'ordinary';
-	}
 
 	// ! password
 	let repeatPassword = '';
@@ -51,12 +61,51 @@
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
 	let repeatPasswordStatus = 'ordinary';
-	$: if (repeatPassword.length == 1) {
-		repeatPasswordStatus = 'error';
-	} else if (repeatPassword.length >= 10) {
-		repeatPasswordStatus = 'success';
-	} else {
+
+	const checkRepeatPassword = () => {
+		if (repeatPassword != password) {
+			repeatPasswordStatus = 'error';
+		} else {
+			repeatPasswordStatus = 'ordinary';
+		}
+	};
+
+	$: if (repeatPassword == password) {
 		repeatPasswordStatus = 'ordinary';
+	}
+
+	let showPassword = false;
+
+	const onRegisterClick = async () => {
+		checkLoginBlur();
+		checkRepeatPassword();
+		if (repeatPasswordStatus == 'error' || loginStatus == 'error' || passwordStatus == 'error') {
+			return;
+		}
+		const result = await registerUser(login, password);
+		console.log(result);
+		if (result.error) {
+			if (result.error?.code == userExists.code) {
+				loginStatus = 'error';
+				loginErrorMessage = t.register_accountAlreadyExists;
+			} else if (result.error?.code == notValidPassword.code) {
+				passwordStatus = 'error';
+			} else if (result.error.code == notValidLogin.code) {
+				loginStatus = 'error';
+			}
+		} else {
+			// @ts-ignore
+			setCookie('token', result.resultJSON.token);
+			// goto('/');
+			// window.location.href = window.location.host;
+			window.location.href = '/';
+		}
+	};
+
+	function checkPassword() {
+		if (password.length < 3) {
+			passwordStatus = 'error';
+		}
 	}
 </script>
 
@@ -72,10 +121,11 @@
 				<Input
 					placeHolder={t.register_accountPlaceHolder}
 					bind:value={login}
-					{status}
-					message={t.register_accountErrorMessage}
+					status={loginStatus}
+					message={loginErrorMessage}
+					onBlurFunc={checkLoginBlur}
 				>
-					<AccountIcon slot="left" {status} />
+					<AccountIcon slot="left" status={loginStatus} />
 				</Input>
 			</div>
 
@@ -85,6 +135,14 @@
 					placeHolder={t.register_passwordPlaceHolder}
 					bind:value={password}
 					message={t.register_passwordErrorMessage}
+					bind:showPassword
+					onFocusFunc={() => {
+						passwordStatus = 'ordinary';
+					}}
+					onBlurFunc={() => {
+						checkRepeatPassword();
+						checkPassword();
+					}}
 				/>
 			</div>
 
@@ -94,14 +152,16 @@
 					placeHolder={t.register_repeatPasswordPlaceHolder}
 					bind:value={repeatPassword}
 					message={t.register_repeatPasswordErrorMessage}
+					bind:showPassword
+					onBlurFunc={checkRepeatPassword}
 				/>
 			</div>
 
 			<div class="button-container login">
-				<Button type="dark" link={loginButtonLink}>{t.register_registerButton}</Button>
+				<Button type="dark" onClick={onRegisterClick}>{t.register_registerButton}</Button>
 			</div>
 
-			<div class="text-container">{t.register_textOr}</div>
+			<!-- <div class="text-container">{t.register_textOr}</div>
 
 			<div class="button-container google">
 				<Button type="light" link={loginWithGoogleLink}>
@@ -110,7 +170,7 @@
 						<div class="google-button-right">{t.register_registerWithGoogle}</div>
 					</div>
 				</Button>
-			</div>
+			</div> -->
 
 			<div class="goto-register-container">
 				<RegisterOrLogin

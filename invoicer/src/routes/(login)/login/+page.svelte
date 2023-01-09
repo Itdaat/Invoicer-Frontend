@@ -29,6 +29,7 @@
 	const onLoginClick = async () => {
 		// loginStatus = passwordStatus = 'ordinary';
 		const result = await loginUser(login, password);
+		console.log(result);
 		if (result.error) {
 			if (result.error.code == userNotFound.code) {
 				loginStatus = 'error';
@@ -39,13 +40,14 @@
 			if (result.error.code == needRealLogin.code) {
 				// @ts-ignore
 				setCookie('token', result.resultJSON.token);
-				window.location.href = window.location.host;
+				window.location.href = '/';
 			}
 		} else {
 			// @ts-ignore
 			setCookie('token', result.resultJSON.token);
 			// goto('/');
-			window.location.href = window.location.host;
+			// window.location.href = window.location.host;
+			window.location.href = '/';
 		}
 	};
 	// ! login
@@ -91,7 +93,7 @@
 					placeHolder={t.login_accountPlaceHolder}
 					bind:value={login}
 					status={loginStatus}
-					message={t.login_accountErrorMessage}
+					message={t.login_loginErrorMessage}
 					onBlurFunc={() => {
 						checkLogin(login);
 					}}
