@@ -29,3 +29,15 @@ export async function checkUserLogin(userLogin) {
     })
     return result;
 }
+
+/**
+ * 
+ * 
+ * @export
+ * @param {string} login 
+ * @param {string} password 
+ * @returns 
+ */
+export async function registerUser(login, password) {
+    return await postRequestJson('user/register', { login, password });
+}
