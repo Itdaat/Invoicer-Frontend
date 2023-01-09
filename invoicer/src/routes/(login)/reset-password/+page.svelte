@@ -34,7 +34,7 @@
 					placeHolder={t.resetPass_account}
 					bind:value={login}
 					{status}
-					message={t.login_accountErrorMessage}
+					message={t.login_loginErrorMessage}
 				>
 					<AccountIcon slot="left" {status} />
 				</Input>
