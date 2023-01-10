@@ -53,5 +53,13 @@
     "invoice_status": "Status",
     "invoice_payment_date": "Payment Date",
     "invoice_sign": "Sign",
-    "invoice_reject": "Reject"
+    "invoice_reject": "Reject",
+    "ENTITIES": "______________________ENTITIES________________________",
+    "entity_invoice": "Invoice",
+    "entity_transaction": "Transaction",
+    "entity_truck": "Truck",
+    "entity_trailer": "Trailer",
+    "entity_payment": "Payment",
+    "entity_person": "Person",
+    "entity_cmr": "CMR"
 }
