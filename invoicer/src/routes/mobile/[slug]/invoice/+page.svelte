@@ -3,13 +3,17 @@
 	import ShareIcon from '$lib/assets/icons/ShareIcon.svelte';
 	import PrintIcon from '$lib/assets/icons/PrintIcon.svelte';
 	import DeleteIcon from '$lib/assets/icons/DeleteIcon.svelte';
-	import { getInvoice } from '$lib/api/CRM/invoice';
 	import Button from '$lib/templates/Button.svelte';
 	import MiniMenu from '$lib/mobile/templates/MiniMenu.svelte';
+	import { getInvoice } from '$lib/api/server/invoice';
 	export let title = 'Інвойс №1231';
 	$: t = $LanguageStore;
 
 	const sign = () => {};
+
+	const getInvoiceFormatted = async () => {
+		return (await getInvoice()).result;
+	};
 </script>
 
 <MiniMenu {title}>
@@ -31,7 +35,7 @@
 	</div>
 	<div class="main" slot="main">
 		<div class="container">
-			{#await getInvoice() then invoice}
+			{#await getInvoiceFormatted() then invoice}
 				<div class="list-item">
 					<div class="left">{t.invoice_num}</div>
 					<div class="right">{invoice.number}</div>
