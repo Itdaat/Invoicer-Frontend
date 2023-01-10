@@ -1,5 +1,6 @@
 <script>
-	import { getFirms } from '$lib/api/server/firm';
+	import LanguageStore from '$lib/stores/Language';
+	import { changeFirm, getFirms } from '$lib/api/server/firm';
 	import ArrowButton from '$lib/assets/icons/ArrowButton.svelte';
 	import { clickOutside } from '$lib/helpers/ClickOutside';
 	import { slide, fade, fly } from 'svelte/transition';
@@ -11,11 +12,18 @@
 	let showFirms = false;
 
 	$: rotate = showFirms;
+	$: t = $LanguageStore;
 
 	$: if (!showMenu) showFirms = showMenu;
 
 	const hideSelf = () => {
 		showMenu = false;
+	};
+
+	const changeFirmClick = (/** @type {string} */ firmId) => {
+		changeFirm(firmId);
+		// alert(firmId);
+		window.location.reload();
 	};
 
 	const showFirmsFunc = () => {
@@ -41,15 +49,21 @@
 				{#if showFirms}
 					{#await getFirms() then firms}
 						{#if firms.result}
-							<div class="firms-list">
+							<div class="firms-list" in:slide={{ duration: 500 }} out:slide={{ duration: 500 }}>
 								{#each firms.result as firm}
-									<div class="firm" in:slide={{ duration: 200 }} out:slide={{ duration: 200 }}>
-										<div class="name">{firm.name}</div>
+									<div
+										class="firm"
+										on:click={() => {
+											changeFirmClick(firm.id);
+										}}
+									>
+										<div class="firm-name">{firm.name}</div>
 										{#if firm.messageCount != null && firm.messageCount > 0}
-											<div class="counter">{firm.messageCount}</div>
+											<div class="firm-counter">{firm.messageCount}</div>
 										{/if}
 									</div>
 								{/each}
+								<div class="add-firm-button">{t.menu_add_firm}</div>
 							</div>
 						{/if}
 					{/await}
@@ -115,7 +129,7 @@
 	}
 
 	.rotate {
-		margin-top: 5px;
+		margin-bottom: -5px;
 		transform: rotateZ(180deg);
 	}
 
@@ -126,6 +140,7 @@
 	.firm {
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		padding: 5px 27px;
 
 		font-family: 'Poppins';
@@ -134,6 +149,46 @@
 		font-size: 19px;
 		line-height: 40px;
 		/* or 211% */
+
+		text-align: center;
+		letter-spacing: 1px;
+
+		color: #3d5a80;
+	}
+
+	.firm-counter {
+		background: #98c1d9;
+		border-radius: 20px;
+		width: 42.99px;
+		height: 19.2px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 5px;
+
+		font-family: 'Roboto';
+		font-style: normal;
+		font-weight: 500;
+		font-size: 13px;
+		line-height: 11px;
+		/* or 85% */
+
+		text-align: center;
+
+		color: #edf5ff;
+	}
+
+	.add-firm-button {
+		display: flex;
+		justify-content: center;
+		border-bottom: 0.2px solid rgba(41, 50, 65, 0.3);
+
+		font-family: 'Exo 2';
+		font-style: normal;
+		font-weight: 500;
+		font-size: 17px;
+		line-height: 40px;
+		/* or 235% */
 
 		text-align: center;
 		letter-spacing: 1px;

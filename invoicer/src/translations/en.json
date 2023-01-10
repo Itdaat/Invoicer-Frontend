@@ -30,6 +30,7 @@
     "resetPass_account": "Account",
     "resetPass_resetButton": "Reset",
     "MENU": "______________MENU____________",
+    "menu_add_firm": "+ Add firm",
     "menu_invoice": "Invoice",
     "menu_order": "Order",
     "menu_transaction": "Transaction",
