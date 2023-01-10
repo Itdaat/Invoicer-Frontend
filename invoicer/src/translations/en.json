@@ -31,6 +31,8 @@
     "resetPass_resetButton": "Reset",
     "MENU": "______________MENU____________",
     "menu_add_firm": "+ Add firm",
+    "menu_logout_link": "Logout",
+    "menu_settings": "Settings",
     "menu_pocket": "Pocket",
     "menu_messages": "Messages",
     "menu_invoice": "Invoice",
