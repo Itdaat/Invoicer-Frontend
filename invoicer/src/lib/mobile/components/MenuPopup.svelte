@@ -16,6 +16,14 @@
 
 	const pocketCount = 20;
 	const messagesCount = 0;
+	const invoiceCount = 2;
+	const orderCount = 33;
+	const transactionsCount = 0;
+	const paymentCount = 0;
+	const trucksCount = 0;
+	const trailerCount = 0;
+	const cmrCount = 0;
+	const driverCount = 0;
 
 	$: if (!showMenu) showFirms = showMenu;
 
@@ -83,6 +91,56 @@
 					<div class="messages-main">{t.menu_messages}</div>
 					{#if messagesCount}
 						<div class="counter">{messagesCount}</div>
+					{/if}
+				</div>
+			</div>
+			<div class="menu-container">
+				<div class="menu-item invoice">
+					<div class="invoice-main">{t.entity_invoice}</div>
+					{#if invoiceCount}
+						<div class="counter">{invoiceCount}</div>
+					{/if}
+				</div>
+				<div class="menu-item order">
+					<div class="order-main">{t.entity_order}</div>
+					{#if orderCount}
+						<div class="counter">{orderCount}</div>
+					{/if}
+				</div>
+				<div class="menu-item transaction">
+					<div class="transaction-main">{t.entity_transaction}</div>
+					{#if transactionsCount}
+						<div class="counter">{transactionsCount}</div>
+					{/if}
+				</div>
+				<div class="menu-item payment">
+					<div class="payment-main">{t.entity_payment}</div>
+					{#if paymentCount}
+						<div class="counter">{paymentCount}</div>
+					{/if}
+				</div>
+				<div class="menu-item truck">
+					<div class="truck-main">{t.entity_truck}</div>
+					{#if trucksCount}
+						<div class="counter">{trucksCount}</div>
+					{/if}
+				</div>
+				<div class="menu-item trailer">
+					<div class="trailer-main">{t.entity_trailer}</div>
+					{#if trailerCount}
+						<div class="counter">{trailerCount}</div>
+					{/if}
+				</div>
+				<div class="menu-item cmr">
+					<div class="trailer-main">{t.entity_cmr}</div>
+					{#if cmrCount}
+						<div class="counter">{cmrCount}</div>
+					{/if}
+				</div>
+				<div class="menu-item driver">
+					<div class="driver-main">{t.entity_driver}</div>
+					{#if driverCount}
+						<div class="counter">{driverCount}</div>
 					{/if}
 				</div>
 			</div>
@@ -241,5 +299,9 @@
 
 	.messages {
 		margin-top: 5px;
+	}
+
+	.menu-container {
+		padding: 10px 25px 15px 25px;
 	}
 </style>

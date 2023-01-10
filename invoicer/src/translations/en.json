@@ -64,5 +64,7 @@
     "entity_trailer": "Trailer",
     "entity_payment": "Payment",
     "entity_person": "Person",
-    "entity_cmr": "CMR"
+    "entity_cmr": "CMR",
+    "entity_order": "Order",
+    "entity_driver": "Driver"
 }
