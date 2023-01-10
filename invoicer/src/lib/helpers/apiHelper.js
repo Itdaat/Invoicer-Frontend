@@ -11,17 +11,21 @@ export function getError(responseError) {
     const error = responseErrors.filter(error => error.code == responseError.code);
     return error.length == 0 ? null : error[0];
 }
+
+
+
 /**
  * 
  * 
  * @export
  * @param {string} path 
  * @param {{}} body 
- * @returns {Promise<{error: import("src/consts").responseError | null, resultJSON : {}}>}
+ * @returns {Promise<import('../../types/Entities').Response<T | {}>>}
+ * @template T
  */
 export async function postRequestJson(path, body) {
     try {
-        const result = await fetch(HostApiUrl + path, {
+        const resultJSON = await fetch(HostApiUrl + path, {
             method: "post",
             headers: {
                 'Content-Type': 'application/json',
@@ -30,11 +34,11 @@ export async function postRequestJson(path, body) {
 
             body: JSON.stringify(body)
         });
-        const resultJSON = await result.json();
-        const resultErr = getError(resultJSON);
-        if (!resultJSON || resultErr) {
-            return { error: resultErr, resultJSON: resultJSON || {} };
+        const result = await resultJSON.json();
+        const resultErr = getError(result);
+        if (!result || resultErr) {
+            return { error: resultErr, result: result || {} };
         }
-        return { error: null, resultJSON: resultJSON };
-    } catch (e) { return { error: unreachableError, resultJSON: {} } }
+        return { error: null, result: result };
+    } catch (e) { return { error: unreachableError, result: {} } }
 }
