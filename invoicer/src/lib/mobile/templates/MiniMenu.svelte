@@ -2,7 +2,7 @@
 	import { slide } from 'svelte/transition';
 	import ReturnIcon from '$lib/assets/icons/ReturnIcon.svelte';
 	import MoreActionsIcon from './../../../lib/assets/icons/MoreActionsIcon.svelte';
-	import { clickOutside } from '$lib/templates/ClickOutside';
+	import { clickOutside } from '$lib/helpers/ClickOutside';
 	export let title = '';
 
 	const returnToPage = () => {
