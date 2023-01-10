@@ -69,6 +69,10 @@
 					{/await}
 				{/if}
 			</div>
+			<div class="second-container">
+				<div class="pocket">{t.menu_pocket}</div>
+				<div class="messages">{t.menu_messages}</div>
+			</div>
 		</div>
 		<div class="close">s</div>
 	</main>
@@ -106,6 +110,17 @@
 		position: absolute;
 		left: 0px;
 		z-index: 11;
+
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 40px;
+		/* or 250% */
+
+		letter-spacing: 1px;
+
+		color: #3d5a80;
 	}
 
 	.firms-container {
@@ -195,5 +210,17 @@
 		letter-spacing: 1px;
 
 		color: #3d5a80;
+	}
+
+	.second-container {
+		padding: 10px 25px 15px 25px;
+		border-bottom: 0.2px solid rgba(41, 50, 65, 0.3);
+	}
+
+	.pocket {
+	}
+
+	.messages {
+		margin-top: 5px;
 	}
 </style>
