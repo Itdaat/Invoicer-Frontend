@@ -1,3 +1,5 @@
+import type { responseError } from "src/consts";
+
 export class Transport {
     number : string;
     type : 'truck' | 'trailer'
@@ -13,7 +15,7 @@ export class Person {
 export class Order {
     myNumber : string;
     number? : string;
-    date? : Date;
+    date? : string;
     truck? : Transport;
     trailer? : Transport;
     person? : Person;
@@ -21,7 +23,7 @@ export class Order {
     unloadAddress : string;
     price: number;
     currency : 'EUR' | 'USD';
-    paymentTerms: Date;
+    paymentTerms: string;
 }
 
 export class CMR {
@@ -33,11 +35,11 @@ export class CMR {
 
 export class Invoice {
     number: string;
-    creationDate: Date;
-    paymentDate : Date;
+    creationDate: string;
+    paymentDate : string;
     order : Order;
     cmr? : CMR;
-    paymentTerms : Date;
+    paymentTerms : string;
     status : 'created' | 'missed' | 'payed'  
 }
 
@@ -45,7 +47,7 @@ export class InvoiceMini {
     id : number;
     number: string;
     price: number;
-    date: Date;
+    date: string;
     truckNumber: string;
     trailerNumber: string;
     sign?: string;
@@ -76,4 +78,10 @@ export class PaymentCounts {
 export class Firm {
     id : string;
     name : string;
+    messageCount? : number
+}
+
+export class Response<T> {
+    error : responseError | null;
+    result : T
 }
