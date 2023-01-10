@@ -182,6 +182,7 @@
 		display: flex;
 		justify-content: center;
 		border-bottom: 0.2px solid rgba(41, 50, 65, 0.3);
+		padding-bottom: 10px;
 
 		font-family: 'Exo 2';
 		font-style: normal;
