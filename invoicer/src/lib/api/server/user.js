@@ -1,4 +1,5 @@
 import { postRequestJson } from "$lib/helpers/apiHelper";
+import { getCookie, setCookie } from "$lib/helpers/cookies";
 
 /**
  * 
@@ -40,4 +41,23 @@ export async function checkUserLogin(userLogin) {
  */
 export async function registerUser(login, password) {
     return await postRequestJson('user/register', { login, password });
+}
+
+/**
+ * 
+ * 
+ * @export
+ */
+export function getToken() {
+    return getCookie('token');
+}
+
+/**
+ * 
+ * @export
+ * @param {string} token 
+ * @returns 
+ */
+export function setToken(token) {
+    return setCookie('token', token);
 }
