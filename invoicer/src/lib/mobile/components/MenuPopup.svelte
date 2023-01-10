@@ -14,6 +14,9 @@
 	$: rotate = showFirms;
 	$: t = $LanguageStore;
 
+	const pocketCount = 20;
+	const messagesCount = 0;
+
 	$: if (!showMenu) showFirms = showMenu;
 
 	const hideSelf = () => {
@@ -59,7 +62,7 @@
 									>
 										<div class="firm-name">{firm.name}</div>
 										{#if firm.messageCount != null && firm.messageCount > 0}
-											<div class="firm-counter">{firm.messageCount}</div>
+											<div class="counter">{firm.messageCount}</div>
 										{/if}
 									</div>
 								{/each}
@@ -70,8 +73,18 @@
 				{/if}
 			</div>
 			<div class="second-container">
-				<div class="pocket">{t.menu_pocket}</div>
-				<div class="messages">{t.menu_messages}</div>
+				<div class="pocket menu-item">
+					<div class="pocket-main">{t.menu_pocket}</div>
+					{#if pocketCount > 0}
+						<div class="counter">{pocketCount}</div>
+					{/if}
+				</div>
+				<div class="messages menu-item">
+					<div class="messages-main">{t.menu_messages}</div>
+					{#if messagesCount}
+						<div class="counter">{messagesCount}</div>
+					{/if}
+				</div>
 			</div>
 		</div>
 		<div class="close">s</div>
@@ -171,7 +184,7 @@
 		color: #3d5a80;
 	}
 
-	.firm-counter {
+	.counter {
 		background: #98c1d9;
 		border-radius: 20px;
 		width: 42.99px;
@@ -215,6 +228,12 @@
 	.second-container {
 		padding: 10px 25px 15px 25px;
 		border-bottom: 0.2px solid rgba(41, 50, 65, 0.3);
+	}
+
+	.menu-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 
 	.pocket {
