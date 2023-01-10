@@ -57,7 +57,7 @@
 			{/if}
 		</FilterPopup>
 	{/if}
-	<MenuPopup show={showMenu} />
+	<MenuPopup bind:showMenu />
 </div>
 
 <style>
@@ -65,6 +65,10 @@
 		padding: 15px 15px 0px 15px;
 		background: #ffffff;
 		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+	}
+
+	.menu {
+		width: 40px;
 	}
 
 	.top-panel {
