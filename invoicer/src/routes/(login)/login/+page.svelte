@@ -7,7 +7,7 @@
 	import BigTitle from '$lib/desktop/components/register/BigTitle.svelte';
 	import InputPassword from '$lib/desktop/components/register/InputPassword.svelte';
 	import Button from '$lib/templates/Button.svelte';
-	import { checkUserLogin, loginUser } from '$lib/api/server/user';
+	import { checkUserLogin, loginUser, setToken } from '$lib/api/server/user';
 	import { redirect } from '@sveltejs/kit';
 	import { needRealLogin, notValidPassword, userExists, userNotFound } from '../../../consts';
 	import { goto } from '$app/navigation';
@@ -39,14 +39,13 @@
 			}
 			if (result.error.code == needRealLogin.code) {
 				// @ts-ignore
-				setCookie('token', result.resultJSON.token);
+				setToken(result.result.token);
+				// setCookie('token', result.result.token);
 				window.location.href = '/';
 			}
 		} else {
 			// @ts-ignore
-			setCookie('token', result.resultJSON.token);
-			// goto('/');
-			// window.location.href = window.location.host;
+			setToken(result.result.token);
 			window.location.href = '/';
 		}
 	};
