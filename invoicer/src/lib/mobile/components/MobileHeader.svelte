@@ -2,8 +2,6 @@
 	import TransactionFilter from './filters/TransactionFilter.svelte';
 	import MessagesFilter from './filters/MessagesFilter.svelte';
 	import FilterPopup from './FilterPopup.svelte';
-	import { setDefaultFirm } from '$lib/api/CRM/firm';
-	import FirmStore from '$lib/stores/Firm';
 	import OpenFilterButton from './../../assets/icons/OpenFilterButton.svelte';
 	import OpenMenuIcon from './../../assets/icons/OpenMenuIcon.svelte';
 	import MobileHeaderMenu from './MobileHeaderMenu.svelte';
@@ -11,13 +9,20 @@
 	import InvoiceFilter from './filters/InvoiceFilter.svelte';
 	import OrderFilter from './filters/OrderFilter.svelte';
 	import PaymentFilter from './filters/PaymentFilter.svelte';
+	import MenuPopup from './MenuPopup.svelte';
+	import { getCurrentFirm, getFirm } from '$lib/api/server/firm';
 
-	export let userId = '';
-
-	setDefaultFirm(userId);
-	$: firm = $FirmStore;
+	/**
+	 * @type {import('../../../types/Entities').Firm }
+	 */
+	const firm = JSON.parse(localStorage.getItem('firm') || '');
 
 	let showFilter = false;
+	let showMenu = false;
+
+	const showMenuFun = () => {
+		showMenu = !showMenu;
+	};
 
 	const showFilterFun = () => {
 		showFilter = !showFilter;
@@ -28,7 +33,8 @@
 
 <div class="container">
 	<div class="top-panel">
-		<div class="menu"><OpenMenuIcon /></div>
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="menu" on:click={showMenuFun}><OpenMenuIcon /></div>
 		<div class="title">{firm?.name}</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="filter" on:click={showFilterFun}><OpenFilterButton /></div>
@@ -51,6 +57,7 @@
 			{/if}
 		</FilterPopup>
 	{/if}
+	<MenuPopup show={showMenu} />
 </div>
 
 <style>
