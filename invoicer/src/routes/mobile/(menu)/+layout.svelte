@@ -1,5 +1,5 @@
 <script>
-	// @ts-nocheck
+	import CreateEntity from './../../../lib/mobile/components/CreateEntity.svelte';
 
 	import SliderStore from '$lib/stores/Slides';
 	import 'swiper/css';
@@ -8,19 +8,19 @@
 	import MobileHeader from '$lib/mobile/components/MobileHeader.svelte';
 	import Invoices from '$lib/mobile/pages/Invoices.svelte';
 	import Orders from '$lib/mobile/pages/Orders.svelte';
-
-	/** @type {import('./$types').PageData} */
-	export let data;
 </script>
 
 <main>
-	<div class="header"><MobileHeader userId={data.userId} /></div>
+	<div class="header"><MobileHeader /></div>
 	<Swiper
 		class="swiper"
 		on:swiper={(e) => {
-			SliderStore.update((last) => {
-				return { ...last, slider: e.detail[0] };
-			});
+			const detail = e.detail;
+			if (typeof detail != 'undefined') {
+				SliderStore.update((last) => {
+					return { ...last, slider: detail[0] };
+				});
+			}
 		}}
 		slidesPerView={1}
 		history={{
@@ -54,6 +54,8 @@
 		</SwiperSlide>
 	</Swiper>
 </main>
+
+<CreateEntity />
 
 <style>
 	main {
