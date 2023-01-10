@@ -27,6 +27,18 @@
 		align-items: center;
 		cursor: pointer;
 		user-select: none;
+
+		-webkit-tap-highlight-color: transparent;
+		-webkit-touch-callout: none;
+		-webkit-user-select: none;
+		-khtml-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	.container:focus {
+		outline: none !important;
 	}
 
 	.dark {
@@ -75,7 +87,7 @@
 		transition: background 0.8s;
 	}
 	:global(.ripple-dark:hover) {
-		background: #3d5a80 radial-gradient(circle, transparent 1%, #3d5a80 1%) center/18000%;
+		background: #3d5a80 radial-gradient(circle, transparent 1%, #3d5a80 1%) center/15000%;
 	}
 	:global(.ripple-dark:active) {
 		background-color: #6280a7;
