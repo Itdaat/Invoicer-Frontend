@@ -23,7 +23,7 @@
 		<PlusIcon />
 	</div>
 	{#if showEntitiesList}
-		<div class="entities-list" in:slide out:slide>
+		<div class="entities-list" in:slide|local out:slide|local>
 			<a class="entity-item" href="/mobile/create/invoice">{t.entity_invoice}</a>
 			<a class="entity-item" href="/mobile/create/transaction">{t.entity_transaction}</a>
 			<a class="entity-item" href="/mobile/create/truck">{t.entity_truck}</a>
