@@ -1,5 +1,5 @@
 <script>
-	import { checkUserLogin, registerUser } from '$lib/api/server/user';
+	import { checkUserLogin, registerUser, setToken } from '$lib/api/server/user';
 	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
 	import BigTitle from '$lib/desktop/components/register/BigTitle.svelte';
 	import InputPassword from '$lib/desktop/components/register/InputPassword.svelte';
@@ -95,7 +95,8 @@
 			}
 		} else {
 			// @ts-ignore
-			setCookie('token', result.resultJSON.token);
+			setToken(result.result.token);
+			// setCookie('token', result.result.token);
 			// goto('/');
 			// window.location.href = window.location.host;
 			window.location.href = '/';
