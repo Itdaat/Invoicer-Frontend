@@ -1,4 +1,6 @@
 <script>
+	import LogoutIcon from './../../assets/icons/LogoutIcon.svelte';
+	import SettingsIcon from './../../assets/icons/SettingsIcon.svelte';
 	import LanguageStore from '$lib/stores/Language';
 	import { changeFirm, getFirms } from '$lib/api/server/firm';
 	import ArrowButton from '$lib/assets/icons/ArrowButton.svelte';
@@ -144,6 +146,16 @@
 					{/if}
 				</div>
 			</div>
+			<div class="bottom-menu">
+				<div class="settings-link">
+					<div class="icon settings-link-icon"><SettingsIcon /></div>
+					<div class="text">{t.menu_settings}</div>
+				</div>
+				<div class="logout-link">
+					<div class="icon"><LogoutIcon /></div>
+					<div class="text">{t.menu_logout_link}</div>
+				</div>
+			</div>
 		</div>
 		<div class="close">s</div>
 	</main>
@@ -175,6 +187,8 @@
 	}
 
 	.menu {
+		display: flex;
+		flex-direction: column;
 		background-color: white;
 		height: 100%;
 		width: 276px;
@@ -303,5 +317,46 @@
 
 	.menu-container {
 		padding: 10px 25px 15px 25px;
+	}
+
+	.bottom-menu {
+		padding: 10px 25px 25px 25px;
+		margin-top: auto;
+
+		font-family: 'Exo 2';
+		font-style: normal;
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 40px;
+		/* or 250% */
+
+		letter-spacing: 1px;
+
+		color: #3d5a80;
+	}
+
+	.settings-link {
+		display: flex;
+		align-items: center;
+	}
+
+	.logout-link {
+		display: flex;
+		align-items: center;
+		padding: 5px 0px;
+	}
+
+	.icon {
+		margin-right: 10px;
+		display: flex;
+		align-items: center;
+	}
+
+	.settings-link-icon {
+		margin-right: 15px;
+	}
+
+	.text {
+		margin-top: -2px;
 	}
 </style>
