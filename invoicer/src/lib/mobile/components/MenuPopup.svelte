@@ -1,4 +1,5 @@
 <script>
+	import CloseMenuIcon from './../../assets/icons/CloseMenuIcon.svelte';
 	import LogoutIcon from './../../assets/icons/LogoutIcon.svelte';
 	import SettingsIcon from './../../assets/icons/SettingsIcon.svelte';
 	import LanguageStore from '$lib/stores/Language';
@@ -157,7 +158,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="close">s</div>
+		<div class="close" on:click={hideSelf}><CloseMenuIcon /></div>
 	</main>
 {/if}
 
@@ -182,8 +183,15 @@
 	.close {
 		z-index: 12;
 		position: absolute;
-		right: 50px;
-		top: 50px;
+		right: 65px;
+		top: 15px;
+		width: 45px;
+		height: 45px;
+		background-color: white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 100%;
 	}
 
 	.menu {
