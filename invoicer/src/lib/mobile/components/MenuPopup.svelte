@@ -158,7 +158,9 @@
 				</div>
 			</div>
 		</div>
-		<div class="close" on:click={hideSelf}><CloseMenuIcon /></div>
+		<div class="close" on:click={hideSelf} transition:fade={{ duration: 600, delay: 200 }}>
+			<CloseMenuIcon />
+		</div>
 	</main>
 {/if}
 
