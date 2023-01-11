@@ -8,6 +8,15 @@
 	import MobileHeader from '$lib/mobile/components/MobileHeader.svelte';
 	import Invoices from '$lib/mobile/pages/Invoices.svelte';
 	import Orders from '$lib/mobile/pages/Orders.svelte';
+	import { page } from '$app/stores';
+	// onMount(() => {
+	// });
+	// $: slider.slider?.slideTo(slider.activeIndex || 1, 1500);
+
+	const getInitialSlide = () => {
+		const fromSearch = Number($page.url.searchParams.get('index'));
+		return fromSearch ? fromSearch - 1 : 0;
+	};
 </script>
 
 <main>
@@ -26,16 +35,14 @@
 		history={{
 			key: 'mobile'
 		}}
-		initialSlide={1}
+		initialSlide={getInitialSlide()}
+		loop={true}
 		on:slideChange={(e) => {
 			SliderStore.update((last) => {
 				return { ...last, activeIndex: e.detail[0].activeIndex };
 			});
 		}}
 	>
-		<SwiperSlide>
-			<div class="slide">Messages</div>
-		</SwiperSlide>
 		<SwiperSlide>
 			<div class="slide">
 				<Invoices />
@@ -51,6 +58,9 @@
 		</SwiperSlide>
 		<SwiperSlide>
 			<div class="slide">hello</div>
+		</SwiperSlide>
+		<SwiperSlide>
+			<div class="slide">Messages</div>
 		</SwiperSlide>
 	</Swiper>
 </main>

@@ -10,6 +10,7 @@
 	import { slide, fade, fly } from 'svelte/transition';
 	import { deleteToken } from '$lib/api/server/user';
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	export let showMenu = false;
 
 	/** @type {import('../../../types/Entities').Firm}*/
@@ -20,6 +21,12 @@
 	$: rotate = showFirms;
 	$: t = $LanguageStore;
 	$: slider = $SliderStore;
+
+	const pocketPath = '/mobile/pocket';
+	const cmrPath = '/mobile/cmrs';
+	const driversPath = '/mobile/persons';
+	const trucksPath = '/mobile/trucks';
+	const trailerPath = '/mobile/trailers';
 
 	const pocketCount = 20;
 	const messagesCount = 0;
@@ -33,8 +40,12 @@
 	const driverCount = 0;
 
 	const gotoSlide = (/** @type {number} */ index) => {
-		slider.slider?.slideTo(index);
 		hideSelf();
+		if ($page.url.pathname != '/mobile') {
+			goto(`/mobile?index=${index}`);
+		} else {
+			slider.slider?.slideTo(index);
+		}
 	};
 
 	$: if (!showMenu) showFirms = showMenu;
@@ -42,6 +53,8 @@
 	const hideSelf = () => {
 		showMenu = false;
 	};
+
+	$: path = $page.url.pathname;
 
 	const changeFirmClick = (/** @type {string} */ firmId) => {
 		changeFirm(firmId);
@@ -54,7 +67,28 @@
 	};
 
 	const gotoPocket = () => {
+		hideSelf();
 		goto('/mobile/pocket');
+	};
+
+	const gotoCMR = () => {
+		hideSelf();
+		goto('/mobile/cmrs');
+	};
+
+	const gotoDrivers = () => {
+		hideSelf();
+		goto('/mobile/persons');
+	};
+
+	const gotoTruck = () => {
+		hideSelf();
+		goto('/mobile/trucks');
+	};
+
+	const gotoTrailer = () => {
+		hideSelf();
+		goto('/mobile/trailers');
 	};
 
 	const logout = () => {
@@ -102,14 +136,14 @@
 				{/if}
 			</div>
 			<div class="second-container">
-				<div class="pocket menu-item" on:click={gotoPocket}>
+				<div class="pocket menu-item {path == pocketPath ? 'active' : ''}" on:click={gotoPocket}>
 					<div class="pocket-main">{t.menu_pocket}</div>
 					{#if pocketCount > 0}
 						<div class="counter">{pocketCount}</div>
 					{/if}
 				</div>
 				<div
-					class="messages menu-item"
+					class="messages menu-item {slider.slider?.activeIndex == -1 ? 'active' : ''}"
 					on:click={() => {
 						gotoSlide(0);
 					}}
@@ -169,25 +203,45 @@
 						<div class="counter">{transactionsCount}</div>
 					{/if}
 				</div>
-				<div class="menu-item truck">
+				<div
+					class="menu-item truck {path == trucksPath ? 'active' : ''}"
+					on:click={() => {
+						gotoTruck();
+					}}
+				>
 					<div class="truck-main">{t.entity_truck}</div>
 					{#if trucksCount}
 						<div class="counter">{trucksCount}</div>
 					{/if}
 				</div>
-				<div class="menu-item trailer">
+				<div
+					class="menu-item trailer {path == trailerPath ? 'active' : ''}"
+					on:click={() => {
+						gotoTrailer();
+					}}
+				>
 					<div class="trailer-main">{t.entity_trailer}</div>
 					{#if trailerCount}
 						<div class="counter">{trailerCount}</div>
 					{/if}
 				</div>
-				<div class="menu-item cmr">
+				<div
+					class="menu-item cmr {path == cmrPath ? 'active' : ''}"
+					on:click={() => {
+						gotoCMR();
+					}}
+				>
 					<div class="trailer-main">{t.entity_cmr}</div>
 					{#if cmrCount}
 						<div class="counter">{cmrCount}</div>
 					{/if}
 				</div>
-				<div class="menu-item driver">
+				<div
+					class="menu-item driver {path == driversPath ? 'active' : ''}"
+					on:click={() => {
+						gotoDrivers();
+					}}
+				>
 					<div class="driver-main">{t.entity_driver}</div>
 					{#if driverCount}
 						<div class="counter">{driverCount}</div>
