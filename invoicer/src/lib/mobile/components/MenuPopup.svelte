@@ -1,4 +1,5 @@
 <script>
+	import SliderStore from '$lib/stores/Slides';
 	import CloseMenuIcon from './../../assets/icons/CloseMenuIcon.svelte';
 	import LogoutIcon from './../../assets/icons/LogoutIcon.svelte';
 	import SettingsIcon from './../../assets/icons/SettingsIcon.svelte';
@@ -16,6 +17,7 @@
 
 	$: rotate = showFirms;
 	$: t = $LanguageStore;
+	$: slider = $SliderStore;
 
 	const pocketCount = 20;
 	const messagesCount = 0;
@@ -27,6 +29,11 @@
 	const trailerCount = 0;
 	const cmrCount = 0;
 	const driverCount = 0;
+
+	const gotoSlide = (/** @type {number} */ index) => {
+		slider.slider?.slideTo(index);
+		hideSelf();
+	};
 
 	$: if (!showMenu) showFirms = showMenu;
 
@@ -91,35 +98,64 @@
 					{/if}
 				</div>
 				<div class="messages menu-item">
-					<div class="messages-main">{t.menu_messages}</div>
+					<div
+						class="messages-main {slider.slider?.activeIndex == 0 ? 'active' : ''}"
+						on:click={() => {
+							gotoSlide(0);
+						}}
+					>
+						{t.menu_messages}
+					</div>
 					{#if messagesCount}
 						<div class="counter">{messagesCount}</div>
 					{/if}
 				</div>
 			</div>
 			<div class="menu-container">
-				<div class="menu-item invoice">
+				<div
+					class="menu-item invoice {slider.slider?.activeIndex == 1 ? 'active' : ''}"
+					on:click={() => {
+						gotoSlide(1);
+					}}
+				>
 					<div class="invoice-main">{t.entity_invoice}</div>
 					{#if invoiceCount}
 						<div class="counter">{invoiceCount}</div>
 					{/if}
 				</div>
 				<div class="menu-item order">
-					<div class="order-main">{t.entity_order}</div>
+					<div
+						class="order-main {slider.slider?.activeIndex == 2 ? 'active' : ''}"
+						on:click={() => {
+							gotoSlide(2);
+						}}
+					>
+						{t.entity_order}
+					</div>
 					{#if orderCount}
 						<div class="counter">{orderCount}</div>
 					{/if}
 				</div>
-				<div class="menu-item transaction">
-					<div class="transaction-main">{t.entity_transaction}</div>
-					{#if transactionsCount}
-						<div class="counter">{transactionsCount}</div>
-					{/if}
-				</div>
-				<div class="menu-item payment">
+				<div
+					class="menu-item payment {slider.slider?.activeIndex == 3 ? 'active' : ''}"
+					on:click={() => {
+						gotoSlide(3);
+					}}
+				>
 					<div class="payment-main">{t.entity_payment}</div>
 					{#if paymentCount}
 						<div class="counter">{paymentCount}</div>
+					{/if}
+				</div>
+				<div
+					class="menu-item transaction {slider.slider?.activeIndex == 4 ? 'active' : ''}"
+					on:click={() => {
+						gotoSlide(4);
+					}}
+				>
+					<div class="transaction-main">{t.entity_transaction}</div>
+					{#if transactionsCount}
+						<div class="counter">{transactionsCount}</div>
 					{/if}
 				</div>
 				<div class="menu-item truck">
@@ -368,5 +404,18 @@
 
 	.text {
 		margin-top: -2px;
+	}
+
+	.active {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 40px;
+		/* or 250% */
+
+		letter-spacing: 1px;
+
+		color: #718196;
 	}
 </style>
