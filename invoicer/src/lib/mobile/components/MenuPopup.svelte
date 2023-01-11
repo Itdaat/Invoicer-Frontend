@@ -8,6 +8,8 @@
 	import ArrowButton from '$lib/assets/icons/ArrowButton.svelte';
 	import { clickOutside } from '$lib/helpers/ClickOutside';
 	import { slide, fade, fly } from 'svelte/transition';
+	import { deleteToken } from '$lib/api/server/user';
+	import { goto } from '$app/navigation';
 	export let showMenu = false;
 
 	/** @type {import('../../../types/Entities').Firm}*/
@@ -50,6 +52,15 @@
 	const showFirmsFunc = () => {
 		showFirms = !showFirms;
 	};
+
+	const gotoPocket = () => {
+		goto('/mobile/pocket');
+	};
+
+	const logout = () => {
+		deleteToken();
+		window.location.reload();
+	};
 </script>
 
 {#if showMenu}
@@ -84,14 +95,14 @@
 										{/if}
 									</div>
 								{/each}
-								<div class="add-firm-button">{t.menu_add_firm}</div>
+								<a class="add-firm-button" href="/mobile/create/firm">{t.menu_add_firm}</a>
 							</div>
 						{/if}
 					{/await}
 				{/if}
 			</div>
 			<div class="second-container">
-				<div class="pocket menu-item">
+				<div class="pocket menu-item" on:click={gotoPocket}>
 					<div class="pocket-main">{t.menu_pocket}</div>
 					{#if pocketCount > 0}
 						<div class="counter">{pocketCount}</div>
@@ -188,7 +199,7 @@
 					<div class="icon settings-link-icon"><SettingsIcon /></div>
 					<div class="text">{t.menu_settings}</div>
 				</div>
-				<div class="logout-link">
+				<div class="logout-link" on:click={logout}>
 					<div class="icon"><LogoutIcon /></div>
 					<div class="text">{t.menu_logout_link}</div>
 				</div>
