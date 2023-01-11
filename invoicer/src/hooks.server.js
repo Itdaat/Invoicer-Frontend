@@ -11,6 +11,9 @@ export async function handle({ event, resolve }) {
         return Response.redirect(host + '/login');
     }
 
+    if (userId && (isLoginPage || isRegisterPage || isResetPassPage || isLoginApi)) {
+        return Response.redirect(host + '/');
+    }
 
     if (!(isLoginPage || isRegisterPage || isRegisterPage || isLoginApi)) {
         const toMatch = [

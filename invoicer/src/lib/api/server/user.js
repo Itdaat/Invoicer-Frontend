@@ -61,3 +61,7 @@ export function getToken() {
 export function setToken(token) {
     return setCookie('token', token);
 }
+
+export function deleteToken() {
+    return setCookie('token', '');
+}
