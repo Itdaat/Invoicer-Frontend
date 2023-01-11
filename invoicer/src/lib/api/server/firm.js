@@ -30,11 +30,9 @@ export async function getFirms() {
 export async function getFirm(firmId) {
     const firms = await getFirms();
     const firm = firms.result.filter(el => el.id == firmId);
-    console.log(firms.result);
     return {
         error: null,
         result: firm[0]
-
     }
 }
 
@@ -48,7 +46,7 @@ export async function setCurrentFirm() {
         return currentFirm;
     }
     const firms = await getFirms();
-    setCookie('firmId', JSON.stringify(firms.result[0]));
+    setCookie('firmId', firms.result[0].id);
     return firms.result[0]
 }
 
@@ -64,7 +62,6 @@ export async function changeFirm(firmId) {
     if (!firm.result || firm.error) {
         return false;
     }
-    console.log(firm.result.id);
     setCookie('firmId', firm.result.id.toString());
     // setCookie('firmId', "2");
     localStorage.setItem('firm', JSON.stringify(firm.result));

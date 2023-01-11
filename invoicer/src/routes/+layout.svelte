@@ -6,6 +6,7 @@
 	export let data;
 
 	localStorage.setItem('firm', JSON.stringify(data.firm));
+	setCurrentFirm();
 	LanguageStore.set(JSON.parse(data.t));
 </script>
 

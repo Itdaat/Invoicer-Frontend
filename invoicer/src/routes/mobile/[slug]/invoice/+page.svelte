@@ -219,6 +219,7 @@
 	.left-button-container,
 	.right-button-container {
 		width: 150px;
+		max-width: 45%;
 		height: 50px;
 	}
 </style>

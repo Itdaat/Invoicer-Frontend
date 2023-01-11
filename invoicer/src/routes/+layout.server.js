@@ -28,9 +28,7 @@ export async function load({ cookies }) {
   if (!firmId) {
     const firms = await getFirms();
     firm = firms.result[0];
-    cookies.set('firmId', firm.id);
   }
-  // throw redirect(300, '/mobile');
 
   return {
     userId: userId,

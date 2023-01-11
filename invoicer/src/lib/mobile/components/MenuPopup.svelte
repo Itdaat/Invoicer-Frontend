@@ -43,7 +43,7 @@
 
 	const changeFirmClick = (/** @type {string} */ firmId) => {
 		changeFirm(firmId);
-		// alert(firmId);
+		// alert(getCookie('firmId'));
 		window.location.reload();
 	};
 
@@ -97,13 +97,13 @@
 						<div class="counter">{pocketCount}</div>
 					{/if}
 				</div>
-				<div class="messages menu-item">
-					<div
-						class="messages-main {slider.slider?.activeIndex == 0 ? 'active' : ''}"
-						on:click={() => {
-							gotoSlide(0);
-						}}
-					>
+				<div
+					class="messages menu-item"
+					on:click={() => {
+						gotoSlide(0);
+					}}
+				>
+					<div class="messages-main {slider.slider?.activeIndex == 0 ? 'active' : ''}">
 						{t.menu_messages}
 					</div>
 					{#if messagesCount}
@@ -123,13 +123,13 @@
 						<div class="counter">{invoiceCount}</div>
 					{/if}
 				</div>
-				<div class="menu-item order">
-					<div
-						class="order-main {slider.slider?.activeIndex == 2 ? 'active' : ''}"
-						on:click={() => {
-							gotoSlide(2);
-						}}
-					>
+				<div
+					class="menu-item order"
+					on:click={() => {
+						gotoSlide(2);
+					}}
+				>
+					<div class="order-main {slider.slider?.activeIndex == 2 ? 'active' : ''}">
 						{t.entity_order}
 					</div>
 					{#if orderCount}

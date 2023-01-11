@@ -154,6 +154,7 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		/* margin-bottom: 0 !important; */
 	}
 
 	#login-input {
@@ -233,13 +234,17 @@
 		.block {
 			height: 100%;
 			width: 100%;
-			justify-content: flex-end;
+			/* justify-content: flex-start; */
 			box-shadow: none;
 			padding: 0px;
 		}
 
+		.title-container {
+			margin-top: auto;
+		}
+
 		.goto-register-container {
-			margin-top: 48%;
+			margin-top: auto;
 			margin-bottom: 5%;
 		}
 	}

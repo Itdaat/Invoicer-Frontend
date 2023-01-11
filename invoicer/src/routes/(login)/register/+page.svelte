@@ -36,6 +36,10 @@
 		loginStatus = isLoginValid ? 'ordinary' : 'error';
 	};
 
+	// $: if (loginStatus == 'error' && login) {
+	// 	checkLoginBlur();
+	// }
+
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
@@ -46,6 +50,7 @@
 		gotoRegisterLink = '/login';
 	// ! login
 	let login = '';
+	let lastLogin = login;
 	$: checkLogin(login);
 
 	// ! password
@@ -116,7 +121,9 @@
 
 <div class="container">
 	<div class="block">
-		<BigTitle>{t.register_title}</BigTitle>
+		<div class="title-container">
+			<BigTitle>{t.register_title}</BigTitle>
+		</div>
 		<div class="invisible-block">
 			<div class="element" id="login-input">
 				<Input
@@ -172,14 +179,13 @@
 					</div>
 				</Button>
 			</div> -->
-
-			<div class="goto-register-container">
-				<RegisterOrLogin
-					link={gotoRegisterLink}
-					linkText={t.register_gotoLoginLink}
-					text={t.register_gotoLogin}
-				/>
-			</div>
+		</div>
+		<div class="goto-register-container">
+			<RegisterOrLogin
+				link={gotoRegisterLink}
+				linkText={t.register_gotoLoginLink}
+				text={t.register_gotoLogin}
+			/>
 		</div>
 	</div>
 </div>
@@ -274,7 +280,7 @@
 		.block {
 			height: 100%;
 			width: 100%;
-			justify-content: flex-end;
+			/* justify-content: flex-end; */
 			box-shadow: none;
 			padding: 0px;
 		}
@@ -283,8 +289,12 @@
 			margin: 35px 0px;
 		}
 
+		.title-container {
+			margin-top: auto;
+		}
+
 		.goto-register-container {
-			margin-top: 55%;
+			margin-top: auto;
 			margin-bottom: 5%;
 		}
 	}
