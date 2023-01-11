@@ -40,9 +40,11 @@
 		grid-template-areas:
 			'main icon'
 			'activeIcon icon';
-		grid-template-columns: auto auto;
+		grid-template-columns: minmax(auto, min-content) auto;
+		/* grid-template-columns: auto auto; */
 		align-items: flex-start;
 		margin-bottom: -10px;
+		/* max-width: 0px; */
 	}
 
 	.sphere-icon {
@@ -59,7 +61,7 @@
 		font-family: 'Roboto';
 		font-style: normal;
 		font-weight: 400;
-		font-size: 16px;
+		font-size: 15px;
 		line-height: 19px;
 		/* identical to box height */
 
