@@ -143,12 +143,12 @@
 					{/if}
 				</div>
 				<div
-					class="messages menu-item {slider.slider?.activeIndex == -1 ? 'active' : ''}"
+					class="messages menu-item {slider.slider?.activeIndex == 0 ? 'active' : ''}"
 					on:click={() => {
 						gotoSlide(0);
 					}}
 				>
-					<div class="messages-main {slider.slider?.activeIndex == 0 ? 'active' : ''}">
+					<div class="messages-main">
 						{t.menu_messages}
 					</div>
 					{#if messagesCount}
