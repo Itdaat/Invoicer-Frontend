@@ -10,7 +10,7 @@
 	// $: alert($page.url.pathname);
 </script>
 
-<div class="main">
+<div class="main" in:fade out:fade>
 	<div class="header"><MobileHeader {showHorizontalMenu} /></div>
 	<slot />
 </div>

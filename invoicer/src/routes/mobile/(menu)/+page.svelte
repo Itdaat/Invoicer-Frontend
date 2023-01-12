@@ -6,10 +6,18 @@
 	import Invoices from '$lib/mobile/pages/Invoices.svelte';
 	import Orders from '$lib/mobile/pages/Orders.svelte';
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
+	import { removeURLParameter } from '$lib/helpers/url';
+
+	$: slider = $SliderStore;
 
 	const getInitialSlide = () => {
-		const fromSearch = Number($page.url.searchParams.get('index'));
-		return fromSearch !== null ? fromSearch : 1;
+		// const fromSearch = $page.url.searchParams.get('index');
+		// if (fromSearch !== null) {
+		// 	const index = fromSearch !== null ? Number(fromSearch) : 1;
+		// 	slider.activeIndex = index;
+		// 	return index;
+		// }
+		return slider.activeIndex || 1;
 	};
 </script>
 
@@ -25,9 +33,6 @@
 			}
 		}}
 		slidesPerView={1}
-		history={{
-			key: 'mobile'
-		}}
 		initialSlide={getInitialSlide()}
 		on:slideChange={(e) => {
 			SliderStore.update((last) => {
