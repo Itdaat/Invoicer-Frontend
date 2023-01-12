@@ -42,7 +42,8 @@
 	const gotoSlide = (/** @type {number} */ index) => {
 		hideSelf();
 		if ($page.url.pathname != '/mobile') {
-			goto(`/mobile?index=${index}`);
+			slider.activeIndex = index;
+			goto('/mobile');
 		} else {
 			slider.slider?.slideTo(index);
 		}
