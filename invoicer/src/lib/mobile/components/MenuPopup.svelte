@@ -92,6 +92,11 @@
 		goto('/mobile/trailers');
 	};
 
+	const gotoSettings = () => {
+		hideSelf();
+		goto('/mobile/settings');
+	};
+
 	const logout = () => {
 		deleteToken();
 		window.location.reload();
@@ -250,7 +255,7 @@
 				</div>
 			</div>
 			<div class="bottom-menu">
-				<div class="settings-link">
+				<div class="settings-link" on:click={gotoSettings}>
 					<div class="icon settings-link-icon"><SettingsIcon /></div>
 					<div class="text">{t.menu_settings}</div>
 				</div>
