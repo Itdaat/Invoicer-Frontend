@@ -6,6 +6,6 @@ import { writable } from "svelte/store";
  *      activeIndex? : number
  * }>}
  */
-const SliderStore = writable({ activeIndex: 0 });
+const SliderStore = writable({ activeIndex: 1 });
 
 export default SliderStore;

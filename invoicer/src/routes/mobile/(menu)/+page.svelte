@@ -11,13 +11,7 @@
 	$: slider = $SliderStore;
 
 	const getInitialSlide = () => {
-		// const fromSearch = $page.url.searchParams.get('index');
-		// if (fromSearch !== null) {
-		// 	const index = fromSearch !== null ? Number(fromSearch) : 1;
-		// 	slider.activeIndex = index;
-		// 	return index;
-		// }
-		return slider.activeIndex || 1;
+		return slider.activeIndex;
 	};
 </script>
 
