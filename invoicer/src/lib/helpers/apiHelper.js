@@ -1,3 +1,4 @@
+import { getToken } from "$lib/api/server/user";
 import { HostApiUrl, responseErrors, unreachableError } from "../../consts";
 
 /**
@@ -30,6 +31,37 @@ export async function postRequestJson(path, body) {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
+            },
+
+            body: JSON.stringify(body)
+        });
+        const result = await resultJSON.json();
+        const resultErr = getError(result);
+        if (!result || resultErr) {
+            return { error: resultErr, result: result || {} };
+        }
+        return { error: null, result: result };
+    } catch (e) { return { error: unreachableError, result: {} } }
+}
+
+
+/**
+ * 
+ * 
+ * @export
+ * @param {string} path 
+ * @param {{}} body 
+ * @returns {Promise<import('../../types/Entities').Response<T | {}>>}
+ * @template T
+ */
+export async function postAuthRequestJson(path, body) {
+    try {
+        const resultJSON = await fetch(HostApiUrl + path, {
+            method: "post",
+            headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'token': getToken()
             },
 
             body: JSON.stringify(body)
