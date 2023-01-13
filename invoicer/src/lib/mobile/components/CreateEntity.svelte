@@ -3,6 +3,7 @@
 	import LanguageStore from './../../stores/Language.js';
 	import PlusIcon from './../../assets/icons/PlusIcon.svelte';
 	import { clickOutside } from '$lib/helpers/ClickOutside.js';
+	import { goto } from '$app/navigation';
 
 	$: t = $LanguageStore;
 
@@ -15,6 +16,41 @@
 	const openPopup = () => {
 		showEntitiesList = !showEntitiesList;
 	};
+
+	const gotoInvoice = () => {
+		localStorage.setItem('create_title', t.title_invoice);
+		goto('/mobile/create/invoice');
+	};
+
+	const gotoTransaction = () => {
+		localStorage.setItem('create_title', t.title_transaction);
+		goto('/mobile/create/transaction');
+	};
+
+	const gotoTruck = () => {
+		localStorage.setItem('create_title', t.title_truck);
+		goto('/mobile/create/truck');
+	};
+
+	const gotoTrailer = () => {
+		localStorage.setItem('create_title', t.title_trailer);
+		goto('/mobile/create/trailer');
+	};
+
+	const gotoPayment = () => {
+		localStorage.setItem('create_title', t.title_payment);
+		goto('/mobile/create/payment');
+	};
+
+	const gotoPerson = () => {
+		localStorage.setItem('create_title', t.title_person);
+		goto('/mobile/create/person');
+	};
+
+	const gotoCmr = () => {
+		localStorage.setItem('create_title', t.title_cmr);
+		goto('/mobile/create/cmr');
+	};
 </script>
 
 <main use:clickOutside on:click_outside={clickOutsideEvent}>
@@ -24,13 +60,23 @@
 	</div>
 	{#if showEntitiesList}
 		<div class="entities-list" in:slide|local out:slide|local>
-			<a class="entity-item" href="/mobile/create/invoice">{t.entity_invoice}</a>
-			<a class="entity-item" href="/mobile/create/transaction">{t.entity_transaction}</a>
-			<a class="entity-item" href="/mobile/create/truck">{t.entity_truck}</a>
-			<a class="entity-item" href="/mobile/create/trailer">{t.entity_trailer}</a>
-			<a class="entity-item" href="/mobile/create/payment">{t.entity_payment}</a>
-			<a class="entity-item" href="/mobile/create/person">{t.entity_person}</a>
-			<a class="entity-item" href="/mobile/create/cmr">{t.entity_cmr}</a>
+			<a class="entity-item" href="/mobile/create/invoice" on:click={gotoInvoice}>
+				{t.entity_invoice}
+			</a>
+			<a class="entity-item" href="/mobile/create/transaction" on:click={gotoTransaction}>
+				{t.entity_transaction}
+			</a>
+			<a class="entity-item" href="/mobile/create/truck" on:click={gotoTruck}>{t.entity_truck}</a>
+			<a class="entity-item" href="/mobile/create/trailer" on:click={gotoTrailer}>
+				{t.entity_trailer}
+			</a>
+			<a class="entity-item" href="/mobile/create/payment" on:click={gotoPayment}>
+				{t.entity_payment}
+			</a>
+			<a class="entity-item" href="/mobile/create/person" on:click={gotoPerson}>
+				{t.entity_person}
+			</a>
+			<a class="entity-item" href="/mobile/create/cmr" on:click={gotoCmr}>{t.entity_cmr}</a>
 		</div>
 	{/if}
 </main>
