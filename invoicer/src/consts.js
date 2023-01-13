@@ -6,6 +6,10 @@ export const INTERNAL_SERVER_ERR = 500;
 export const FORBIDDEN_ERR = 403;
 export const OK_RES = 200;
 
+// ! transport type 
+export const TRANSPORT_TRUCK = 1;
+export const TRANSPORT_TRAILER = 2;
+
 /** @typedef {{code : number , message : string}} responseError */
 
 // ! responses
