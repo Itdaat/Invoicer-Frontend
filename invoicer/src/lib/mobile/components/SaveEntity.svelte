@@ -1,5 +1,5 @@
 <script>
-	import CheckGreenIcon from './../../assets/icons/CheckGreenIcon.svelte';
+	import CheckGreenIcon from '../../assets/icons/CheckIcon.svelte';
 	import { slide } from 'svelte/transition';
 	import LanguageStore from './../../stores/Language.js';
 	import PlusIcon from './../../assets/icons/PlusIcon.svelte';

@@ -79,6 +79,8 @@
     "title_transaction": "New Transaction",
     "title_truck": "New Truck",
     "Transport": "__________TRANSPORT_________",
+    "transport_create_category": "Transport data",
+    "transport_create_empty": "Empty field",
     "transport_create_name": "Name",
     "transport_create_license": "License number",
     "transport_create_brand": "Brand",

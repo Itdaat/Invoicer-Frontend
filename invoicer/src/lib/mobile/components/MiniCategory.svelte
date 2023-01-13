@@ -22,7 +22,7 @@
 
 		/* icons */
 
-		color: #51516c;
+		color: #3d5a80;
 
 		padding: 0px 20px;
 	}
@@ -31,5 +31,6 @@
 		align-items: center;
 		flex-direction: column;
 		margin-top: 14px;
+		padding: 0px 5px 0px 12px;
 	}
 </style>

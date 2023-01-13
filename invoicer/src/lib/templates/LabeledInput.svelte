@@ -42,10 +42,13 @@
 <style>
 	.container {
 		display: grid;
-		grid-template-columns: 40% 60%;
-		margin: 20px 0px;
+		grid-template-columns: 45% 55%;
+		margin: 14px 0px;
 		justify-content: center;
-		padding: 0px 30px;
+		align-items: flex-start;
+		/* padding: 0px 30px; */
+		max-width: 90%;
+		width: 90%;
 	}
 
 	.left {
