@@ -68,5 +68,21 @@
     "entity_person": "Person",
     "entity_cmr": "CMR",
     "entity_order": "Order",
-    "entity_driver": "Driver"
+    "entity_driver": "Driver",
+    "TITLE": "____________TITLE_____________",
+    "title_cmr": "New CMR",
+    "title_firm": "New Firm",
+    "title_invoice": "New Invoice",
+    "title_payment": "New Payment",
+    "title_person": "New Person",
+    "title_trailer": "New Trailer",
+    "title_transaction": "New Transaction",
+    "title_truck": "New Truck",
+    "Transport": "__________TRANSPORT_________",
+    "transport_create_name": "Name",
+    "transport_create_license": "License number",
+    "transport_create_brand": "Brand",
+    "transport_create_type": "Type",
+    "transport_create_license_latin_error": "Please use only latin symbols",
+    "transport_create_license_exists_error": "Such license number already exists"
 }
