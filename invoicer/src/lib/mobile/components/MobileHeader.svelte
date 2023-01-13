@@ -33,11 +33,7 @@
 	$: slider = $SliderStore;
 </script>
 
-<div
-	class="container {!showHorizontalMenu ? 'container-mini' : ''}"
-	in:slide={{ duration: 500 }}
-	out:slide={{ duration: 500 }}
->
+<div class="container {!showHorizontalMenu ? 'container-mini' : ''}">
 	<div class="top-panel">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="menu" on:click={showMenuFun}><OpenMenuIcon /></div>
