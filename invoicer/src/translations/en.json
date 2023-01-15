@@ -86,5 +86,8 @@
     "transport_create_brand": "Brand",
     "transport_create_type": "Type",
     "transport_create_license_latin_error": "Please use only latin symbols",
-    "transport_create_license_exists_error": "Such license number already exists"
+    "transport_create_license_exists_error": "Such license number already exists",
+    "MESSAGE": "______________________MESSAGE_______________________",
+    "message_unreachable_error": "Server is not reachable",
+    "message_unreachable_error_button": "Ok"
 }

@@ -4,7 +4,10 @@
 	import { slide, fade } from 'svelte/transition';
 	import { page } from '$app/stores';
 	import LanguageStore from '$lib/stores/Language';
+	import GlobalMessageStore from '$lib/stores/GlobalMessage';
+	import GlobalMessage from '$lib/mobile/components/GlobalMessage.svelte';
 	$: t = LanguageStore;
+	$: globalMessage = $GlobalMessageStore;
 
 	// let title = '';
 
@@ -17,6 +20,7 @@
 			<slot />
 		</div>
 	</MobileHeaderMini>
+	<GlobalMessage {...globalMessage} />
 </div>
 
 <style>

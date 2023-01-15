@@ -1,12 +1,17 @@
 <script>
 	import { createTruck } from '$lib/api/server/transport';
+	import GlobalMessage from '$lib/mobile/components/GlobalMessage.svelte';
 	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
-	import MobileHeaderMini from '$lib/mobile/components/MobileHeaderMini.svelte';
 	import SaveEntity from '$lib/mobile/components/SaveEntity.svelte';
+	import GlobalMessageStore from '$lib/stores/GlobalMessage';
 	import LanguageStore from '$lib/stores/Language';
-	import Input from '$lib/templates/Input.svelte';
 	import LabeledInput from '$lib/templates/LabeledInput.svelte';
-	import { entityAlreadyExists, notLatinSymbol, TRANSPORT_TRUCK } from '../../../../../consts';
+	import {
+		entityAlreadyExists,
+		notLatinSymbol,
+		TRANSPORT_TRUCK,
+		unreachableError
+	} from '../../../../../consts';
 
 	$: t = $LanguageStore;
 
@@ -56,7 +61,22 @@
 		} else if (result.error?.code == entityAlreadyExists.code) {
 			licenseText = t.transport_create_license_exists_error;
 			licenseStatus = 'error';
+		} else if (result.error?.code == unreachableError.code) {
+			// messageStatus = 'error';
+			GlobalMessageStore.set({
+				buttonText: 'asdf',
+				status: 'error',
+				message: 'gavno'
+			});
 		}
+	};
+
+	/**
+	 * @type {'ordinary' | 'success' | 'error'}
+	 */
+	let messageStatus = 'error';
+	const message = () => {
+		messageStatus = messageStatus == 'ordinary' ? 'error' : 'ordinary';
 	};
 </script>
 
@@ -85,6 +105,12 @@
 		/>
 	</MiniCategory>
 	<SaveEntity {save} />
+	<!-- <GlobalMessage
+		buttonAction={message}
+		buttonText={'super'}
+		message="asdf"
+		status={messageStatus}
+	/> -->
 </div>
 
 <style>

@@ -1,4 +1,5 @@
 <script>
+	import GlobalMessage from './../../../lib/mobile/components/GlobalMessage.svelte';
 	import RegisterOrLogin from '../../../lib/desktop/components/register/RegisterOrLogin.svelte';
 	import GoogleIcon from '../../../lib/assets/icons/GoogleIcon.svelte';
 	import ForgotPassword from '../../../lib/desktop/components/register/ForgotPassword.svelte';

@@ -4,7 +4,8 @@
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
 	export let status = 'ordinary';
-	export let value = '';
+	/** @type {string | null }*/
+	export let value;
 	export let disabled = false;
 	export let placeHolder = '';
 	export let message = '';

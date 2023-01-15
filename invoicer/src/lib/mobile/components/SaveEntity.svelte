@@ -1,10 +1,5 @@
 <script>
 	import CheckGreenIcon from '../../assets/icons/CheckIcon.svelte';
-	import { slide } from 'svelte/transition';
-	import LanguageStore from './../../stores/Language.js';
-	import PlusIcon from './../../assets/icons/PlusIcon.svelte';
-	import { clickOutside } from '$lib/helpers/ClickOutside.js';
-	import { goto } from '$app/navigation';
 
 	export let save = () => {};
 </script>

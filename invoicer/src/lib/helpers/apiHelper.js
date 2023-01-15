@@ -58,6 +58,7 @@ export async function postAuthRequestJson(path, body) {
     try {
         const resultJSON = await fetch(HostApiUrl + path, {
             method: "post",
+            // @ts-ignore
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
