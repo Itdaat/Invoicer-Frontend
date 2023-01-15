@@ -7,7 +7,7 @@
 	import GlobalMessageStore from '$lib/stores/GlobalMessage';
 	import GlobalMessage from '$lib/mobile/components/GlobalMessage.svelte';
 	$: t = LanguageStore;
-	$: globalMessage = $GlobalMessageStore;
+	$: globalMessages = $GlobalMessageStore;
 
 	// let title = '';
 
@@ -20,12 +20,15 @@
 			<slot />
 		</div>
 	</MobileHeaderMini>
-	<GlobalMessage {...globalMessage} />
+	{#each globalMessages.arr as globalMessage}
+		<GlobalMessage {...globalMessage} buttonAction={globalMessage.func} />
+	{/each}
 </div>
 
 <style>
 	.container {
 		height: 100%;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;

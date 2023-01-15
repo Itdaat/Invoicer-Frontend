@@ -1,10 +1,13 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { createTruck } from '$lib/api/server/transport';
+	import { openErrorMessage, openSuccessMessage } from '$lib/helpers/message';
 	import GlobalMessage from '$lib/mobile/components/GlobalMessage.svelte';
 	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
 	import SaveEntity from '$lib/mobile/components/SaveEntity.svelte';
 	import GlobalMessageStore from '$lib/stores/GlobalMessage';
 	import LanguageStore from '$lib/stores/Language';
+	import SliderStore from '$lib/stores/Slides';
 	import LabeledInput from '$lib/templates/LabeledInput.svelte';
 	import {
 		entityAlreadyExists,
@@ -62,21 +65,11 @@
 			licenseText = t.transport_create_license_exists_error;
 			licenseStatus = 'error';
 		} else if (result.error?.code == unreachableError.code) {
-			// messageStatus = 'error';
-			GlobalMessageStore.set({
-				buttonText: 'asdf',
-				status: 'error',
-				message: 'gavno'
-			});
+			openErrorMessage(t.message_unreachable_error, '');
+		} else {
+			goto('/mobile/trucks');
+			openSuccessMessage(t.transport_create_success, t.message_ok_button);
 		}
-	};
-
-	/**
-	 * @type {'ordinary' | 'success' | 'error'}
-	 */
-	let messageStatus = 'error';
-	const message = () => {
-		messageStatus = messageStatus == 'ordinary' ? 'error' : 'ordinary';
 	};
 </script>
 

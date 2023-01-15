@@ -10,9 +10,16 @@
 	import Button from '$lib/templates/Button.svelte';
 	import { checkUserLogin, loginUser, setToken } from '$lib/api/server/user';
 	import { redirect } from '@sveltejs/kit';
-	import { needRealLogin, notValidPassword, userExists, userNotFound } from '../../../consts';
+	import {
+		needRealLogin,
+		notValidPassword,
+		unreachableError,
+		userExists,
+		userNotFound
+	} from '../../../consts';
 	import { goto } from '$app/navigation';
 	import { setCookie } from '$lib/helpers/cookies';
+	import { openErrorMessage } from '$lib/helpers/message';
 
 	/** @type {import('./$types').PageData} */
 	export let data;
@@ -32,6 +39,10 @@
 		const result = await loginUser(login, password);
 		console.log(result);
 		if (result.error) {
+			if (result.error?.code == unreachableError.code) {
+				openErrorMessage(t.message_unreachable_error, '');
+				return;
+			}
 			if (result.error.code == userNotFound.code) {
 				loginStatus = 'error';
 			}
@@ -59,6 +70,10 @@
 	 */
 	async function checkLogin(login) {
 		const userLoginResponse = await checkUserLogin(login);
+		if (userLoginResponse.error?.code == unreachableError.code) {
+			openErrorMessage(t.message_unreachable_error, '');
+			return;
+		}
 		if (userLoginResponse.error?.code == userNotFound.code) {
 			loginStatus = 'error';
 		} else {
