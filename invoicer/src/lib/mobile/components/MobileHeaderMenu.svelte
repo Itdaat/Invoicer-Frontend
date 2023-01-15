@@ -23,7 +23,7 @@
 		display: grid;
 		/* grid-template-columns: 0.3fr 1fr 1fr 1fr 1fr; */
 		grid-template-columns: auto auto auto auto auto;
-		gap: 20px;
+		gap: 17px;
 		height: 45px;
 		align-items: center;
 		overflow-x: scroll;
