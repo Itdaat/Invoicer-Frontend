@@ -24,6 +24,15 @@ export const entityIsUsed = { code: 7, message: 'Entity is used' }
 export const notLatinSymbol = { code: 8, message: 'Some entity uses not latin symbols' };
 export const notValidLogin = { code: 9, message: 'This login is not valid' };
 
+// ! sliders
+export const messagesSlide = 0;
+export const invoiceSlide = 1;
+export const orderSlide = 2;
+export const paymentSlide = 3;
+export const transactionSlide = 4;
+
+export const maxMessagesCount = 1;
+
 export const responseErrors = [
     userExists, notValidPassword, needRealLogin, userNotFound, entityAlreadyExists, dataDuplication, entityIsUsed, notLatinSymbol
 ]
