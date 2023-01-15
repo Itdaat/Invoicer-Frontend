@@ -1,35 +1,61 @@
 <script>
+	import CloseIcon from '$lib/assets/icons/CloseIcon.svelte';
 	import { closeMessage } from '$lib/helpers/message';
+	import { standardSwipe, swipe } from '$lib/helpers/swipe';
+	import { fly } from 'svelte/transition';
 
 	export let message = '';
 	export let buttonText = '';
+	export let id = 0;
 	/** @type {Function}*/
-	export let buttonAction = closeMessage;
+	export let buttonAction = () => {};
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
 	export let status = 'ordinary';
+
+	// @ts-ignore
+	const close = () => {
+		closeMessage(id);
+	};
 </script>
 
 <!-- {#if status == 'error' || status == 'success'} -->
-<div class="main" class:hide={status == 'ordinary'}>
+<div
+	class="main"
+	class:hide={status == 'ordinary'}
+	in:fly={{ x: -100 }}
+	out:fly={{ x: 100 }}
+	id={id.toString()}
+>
 	<div class="message" class:error={status == 'error'} class:success={status == 'success'}>
 		{message}
 	</div>
 	<div class="button-container">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="button" on:click={buttonAction}>{buttonText}</div>
+		<div
+			class="button"
+			on:click={() => {
+				buttonAction();
+			}}
+		>
+			{buttonText}
+		</div>
+	</div>
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div class="close" on:click={close}>
+		<CloseIcon />
 	</div>
 </div>
 
 <!-- {/if} -->
 <style>
 	.main {
-		position: fixed;
+		position: absolute;
 		z-index: 100;
 		background-color: white;
 		padding: 6px 14px;
-		bottom: 20px;
+		bottom: 30px;
 		width: 80%;
 		display: flex;
 		justify-content: space-between;
@@ -38,7 +64,23 @@
 		margin-left: auto;
 		margin-right: auto;
 		border-radius: 10px;
-		filter: drop-shadow(0px 0px 5px rgba(37, 38, 94, 0.123));
+		box-shadow: 0px 0px 5px rgba(37, 38, 94, 0.123);
+		transform: translate3d();
+		user-select: none;
+	}
+
+	.close {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 22.93px;
+		height: 23.53px;
+		position: absolute;
+		right: -10px;
+		top: -10px;
+		box-shadow: 0px 0px 5px rgba(37, 38, 94, 0.123);
+		background-color: white;
+		border-radius: 100%;
 	}
 
 	.hide {

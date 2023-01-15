@@ -6,10 +6,38 @@ import GlobalMessageStore from '../stores/GlobalMessage';
  * @export
  * @param {string} buttonText 
  * @param {string} message 
+ * @param {number} timeout 
  * @param {Function} [func=closeMessage] 
  */
-export function openErrorMessage(buttonText, message, func = closeMessage) {
-    GlobalMessageStore.set({ status: 'error', buttonText, message, func })
+export function openErrorMessage(message, buttonText, timeout = 5000, func = closeMessage) {
+
+    /**
+     * @type {number}
+     */
+    let id;
+    // @ts-ignore
+    GlobalMessageStore.update(old => {
+        const lastId = old.lastId + 1;
+        id = lastId;
+        return {
+            lastId: lastId,
+            arr: [
+                ...old.arr,
+                {
+                    id: lastId,
+                    buttonText,
+                    message,
+                    func,
+                    timeout,
+                    status: 'error',
+                }
+            ]
+        }
+    })
+
+    setTimeout(() => {
+        closeMessage(id);
+    }, timeout);
 }
 
 
@@ -17,13 +45,67 @@ export function openErrorMessage(buttonText, message, func = closeMessage) {
  * @export
  * @param {string} buttonText 
  * @param {string} message 
+ * @param {number} timeout 
  * @param {Function} [func=closeMessage] 
  */
-export function openSuccessMessage(buttonText, message, func = closeMessage) {
-    GlobalMessageStore.set({ status: 'success', buttonText, message, func })
+export function openSuccessMessage(message, buttonText, timeout = 5000, func = closeMessage) {
+
+    /**
+     * @type {number}
+     */
+    let id;
+    // @ts-ignore
+    GlobalMessageStore.update(old => {
+        id = old.lastId + 1;
+        return {
+            lastId: old.lastId + 1,
+            arr: [
+                ...old.arr,
+                {
+                    id: old.lastId + 1,
+                    buttonText,
+                    message,
+                    func,
+                    timeout,
+                    status: 'success',
+                }
+            ]
+        }
+    })
+
+    setTimeout(() => {
+        closeMessage(id);
+    }, timeout);
 }
 
-export function closeMessage() {
-    GlobalMessageStore.set({ status: 'ordinary', buttonText: '', message: '' })
+/**
+ * 
+ * 
+ * @export
+ * @param {number} id 
+ */
+export function closeMessage(id) {
+    // @ts-ignore
+    GlobalMessageStore.update(old => {
+        const arr = old.arr.filter(message => message.id != id);
+        return {
+            arr,
+            lastId: old.lastId
+        }
+    })
 }
 
+export function closeMessages() {
+    // @ts-ignore
+    GlobalMessageStore.update(old => {
+        return {
+            arr: [],
+            lastId: old.lastId
+        }
+        // old.arr.forEach((value) => {
+        //     if (value.id == id) {
+        //         delete old.arr[id];
+        //     }
+        // })
+    })
+}
