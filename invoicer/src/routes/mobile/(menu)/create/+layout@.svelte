@@ -14,7 +14,7 @@
 	let title = localStorage.getItem('create_title') || '';
 </script>
 
-<div class="main" in:fade={{ delay: 400, duration: 300 }} out:fade={{ duration: 300 }}>
+<div class="main" in:fade={{ duration: 300 }} out:fade={{ duration: 300 }}>
 	<MobileHeaderMini {title}>
 		<div class="container">
 			<slot />
@@ -26,6 +26,12 @@
 </div>
 
 <style>
+	.main {
+		height: 100%;
+		display: grid;
+		/* grid-template-rows: auto 1fr; */
+		user-select: none;
+	}
 	.container {
 		height: 100%;
 		width: 100%;

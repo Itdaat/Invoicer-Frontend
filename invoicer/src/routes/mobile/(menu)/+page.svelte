@@ -58,6 +58,7 @@
 
 <style>
 	.main {
+		/* display: gird; */
 		overflow-y: scroll;
 		user-select: none;
 	}
