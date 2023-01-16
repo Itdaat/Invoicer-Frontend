@@ -9,7 +9,9 @@
 
 <div class="main">
 	<MiniCategoryLite title="Trucks">
-		{#await getTrucksFormatted() then trucks}
+		{#await getTrucksFormatted()}
+			Loading
+		{:then trucks}
 			{#each trucks as truck}
 				<div class="truck">
 					<div class="license">{truck.licenseNumber}</div>
