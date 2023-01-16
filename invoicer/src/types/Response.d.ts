@@ -4,3 +4,4 @@ export class AppResponse {
     token? : string;
 }
 
+export type ResponseStatus = 'done' | 'inProcess' | 'none';
