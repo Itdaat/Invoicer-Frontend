@@ -21,9 +21,8 @@
 <style>
 	.main {
 		height: 100%;
-		width: 100%;
 		display: grid;
-		grid-template-rows: auto 1fr;
+		/* grid-template-rows: auto 1fr; */
 		user-select: none;
 	}
 </style>

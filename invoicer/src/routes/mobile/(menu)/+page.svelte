@@ -58,9 +58,6 @@
 
 <style>
 	.main {
-		height: 100%;
-		display: grid;
-		grid-template-rows: 1fr;
 		overflow-y: scroll;
 		user-select: none;
 	}
@@ -77,7 +74,6 @@
 	:global(.swiper) {
 		width: 100%;
 		height: 100%;
-		/* height: 70vh; */
 	}
 
 	:global(.swiper-slide) {

@@ -23,9 +23,9 @@
 
 <style>
 	.main {
-		height: 100vh;
-		/* display: grid; */
-		grid-template-rows: auto 1fr;
+		height: 100%;
+		display: grid;
+		/* grid-template-rows: auto 1fr; */
 		user-select: none;
 	}
 </style>
