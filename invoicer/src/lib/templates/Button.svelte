@@ -1,8 +1,12 @@
 <script>
+	import Loader from '$lib/mobile/components/Loader.svelte';
+
 	/**
 	 * @type {'dark' | 'light'}
 	 */
 	export let type = 'dark';
+	/** @type {import("src/types/Response").ResponseStatus}*/
+	export let status = 'none';
 	export let onClick = () => {};
 </script>
 
@@ -13,7 +17,11 @@
 	class:light={type == 'light'}
 	class:dark={type == 'dark'}
 >
-	<slot />
+	{#if status == 'inProcess'}
+		<Loader {status} size="60" colorTheme={type == 'dark' ? 'light' : 'dark'} />
+	{:else}
+		<slot />
+	{/if}
 </div>
 
 <style>
