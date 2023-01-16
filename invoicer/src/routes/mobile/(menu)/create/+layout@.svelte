@@ -14,7 +14,7 @@
 	let title = localStorage.getItem('create_title') || '';
 </script>
 
-<div class="main" in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 300 }}>
+<div class="main" in:fade={{ duration: 300, delay: 300 }} out:fade={{ duration: 300 }}>
 	<MobileHeaderMini {title}>
 		<div class="container">
 			<slot />
