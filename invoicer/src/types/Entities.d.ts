@@ -1,6 +1,12 @@
 import type { responseError } from "src/consts";
 
 export class Transport {
+    id : number;
+    licenseNumber : string;
+    name : string;
+    transportBrandId : number;
+    transportTypeId : number;
+    brandName : string;
     number : string;
     type : 'truck' | 'trailer'
 }
