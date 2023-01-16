@@ -1,13 +1,20 @@
 <script>
 	import CheckGreenIcon from '../../assets/icons/CheckIcon.svelte';
+	import Loader from './Loader.svelte';
 
 	export let save = () => {};
+	/** @type {import('src/types/Response').ResponseStatus}*/
+	export let status = 'none';
 </script>
 
 <main>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div class="icon-container" on:click={save}>
-		<CheckGreenIcon />
+		{#if status == 'inProcess'}
+			<Loader {status} />
+		{:else}
+			<CheckGreenIcon />
+		{/if}
 	</div>
 </main>
 
