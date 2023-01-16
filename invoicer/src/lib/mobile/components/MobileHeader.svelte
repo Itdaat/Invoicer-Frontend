@@ -33,7 +33,11 @@
 	$: slider = $SliderStore;
 </script>
 
-<div class="container {!showHorizontalMenu ? 'container-mini' : ''}">
+<div
+	class="container {!showHorizontalMenu ? 'container-mini' : ''}"
+	in:slide|local={{ duration: 400 }}
+	out:slide|local={{ duration: 400 }}
+>
 	<div class="top-panel">
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="menu" on:click={showMenuFun}><OpenMenuIcon /></div>
@@ -44,8 +48,8 @@
 	{#if showHorizontalMenu}
 		<div
 			class="pages-menu-horizontal"
-			in:slide|local={{ duration: 500 }}
-			out:slide|local={{ duration: 500 }}
+			in:slide|local={{ duration: 400 }}
+			out:slide|local={{ duration: 400 }}
 		>
 			<MobileHeaderMenu />
 		</div>

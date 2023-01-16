@@ -1,6 +1,6 @@
 <script>
-	import MiniMenu from './../../../../lib/mobile/templates/MiniMenu.svelte';
-	import MobileHeaderMini from './../../../../lib/mobile/components/MobileHeaderMini.svelte';
+	import MiniMenu from '../../../../lib/mobile/templates/MiniMenu.svelte';
+	import MobileHeaderMini from '../../../../lib/mobile/components/MobileHeaderMini.svelte';
 	import { slide, fade } from 'svelte/transition';
 	import { page } from '$app/stores';
 	import LanguageStore from '$lib/stores/Language';
@@ -14,7 +14,7 @@
 	let title = localStorage.getItem('create_title') || '';
 </script>
 
-<div class="main" in:fade={{ duration: 300 }} out:fade={{ duration: 300 }}>
+<div class="main" in:fade={{ duration: 200, delay: 200 }} out:fade={{ duration: 300 }}>
 	<MobileHeaderMini {title}>
 		<div class="container">
 			<slot />
@@ -29,7 +29,7 @@
 	.main {
 		height: 100%;
 		display: grid;
-		/* grid-template-rows: auto 1fr; */
+		grid-template-rows: auto 1fr;
 		user-select: none;
 	}
 	.container {
