@@ -18,7 +18,7 @@
 			</div>
 		{:then trucks}
 			{#each trucks as truck}
-				<div class="truck" transition:slide={{ duration: 700 }}>
+				<div class="truck" in:slide={{ duration: 700 }}>
 					<div class="license">{truck.licenseNumber}</div>
 					<div class="brand">{truck.brandName}</div>
 				</div>
