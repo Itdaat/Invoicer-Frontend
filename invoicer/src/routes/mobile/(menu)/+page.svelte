@@ -58,9 +58,10 @@
 
 <style>
 	.main {
-		height: 100vh;
+		height: 100%;
 		display: grid;
-		grid-template-rows: 106px 1fr;
+		grid-template-rows: 1fr;
+		overflow-y: scroll;
 		user-select: none;
 	}
 
@@ -75,10 +76,12 @@
 
 	:global(.swiper) {
 		width: 100%;
-		height: 88vh;
+		height: 100%;
+		/* height: 70vh; */
 	}
 
 	:global(.swiper-slide) {
+		height: 100%;
 		overflow-y: scroll;
 	}
 
