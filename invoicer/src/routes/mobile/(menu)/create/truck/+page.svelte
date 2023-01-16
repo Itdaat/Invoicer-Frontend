@@ -17,6 +17,8 @@
 	} from '../../../../../consts';
 
 	$: t = $LanguageStore;
+	/** @type {import('src/types/Response').ResponseStatus}*/
+	let responseStatus = 'none';
 
 	/** @type {string | null}*/
 	let license = null;
@@ -55,8 +57,12 @@
 		if (!name || !license || !brand) {
 			return;
 		}
+		responseStatus = 'inProcess';
+		const result = await createTruck(name, license, brand, TRANSPORT_TRUCK).then((res) => {
+			responseStatus = 'done';
+			return res;
+		});
 
-		const result = await createTruck(name, license, brand, TRANSPORT_TRUCK);
 		licenseStatus = 'ordinary';
 		if (result.error?.code == notLatinSymbol.code) {
 			licenseText = t.transport_create_license_latin_error;
@@ -97,7 +103,7 @@
 			message={t.transport_create_empty}
 		/>
 	</MiniCategory>
-	<SaveEntity {save} />
+	<SaveEntity {save} status={responseStatus} />
 	<!-- <GlobalMessage
 		buttonAction={message}
 		buttonText={'super'}

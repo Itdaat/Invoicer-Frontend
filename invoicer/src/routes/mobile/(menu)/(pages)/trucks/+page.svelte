@@ -1,6 +1,9 @@
 <script>
 	import { getTrucks } from '$lib/api/server/transport';
+	import Loader from '$lib/mobile/components/Loader.svelte';
 	import MiniCategoryLite from '$lib/mobile/components/MiniCategoryLite.svelte';
+	import { Jumper } from 'svelte-loading-spinners';
+	import { slide } from 'svelte/transition';
 
 	const getTrucksFormatted = async () => {
 		return (await getTrucks()).result;
@@ -10,10 +13,12 @@
 <div class="main">
 	<MiniCategoryLite title="Trucks">
 		{#await getTrucksFormatted()}
-			Loading
+			<div class="loader-container">
+				<Loader status="inProcess" size="60" />
+			</div>
 		{:then trucks}
 			{#each trucks as truck}
-				<div class="truck">
+				<div class="truck" transition:slide={{ duration: 700 }}>
 					<div class="license">{truck.licenseNumber}</div>
 					<div class="brand">{truck.brandName}</div>
 				</div>
@@ -41,6 +46,10 @@
 		width: 80%;
 		border-bottom: 0.2px solid rgba(54, 56, 59, 0.233);
 		padding: 18px 10px;
+	}
+
+	.loader-container {
+		margin-top: 20px;
 	}
 
 	.license {

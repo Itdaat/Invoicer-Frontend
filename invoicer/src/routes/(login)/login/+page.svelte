@@ -1,30 +1,20 @@
 <script>
-	import GlobalMessage from './../../../lib/mobile/components/GlobalMessage.svelte';
-	import RegisterOrLogin from '../../../lib/desktop/components/register/RegisterOrLogin.svelte';
-	import GoogleIcon from '../../../lib/assets/icons/GoogleIcon.svelte';
-	import ForgotPassword from '../../../lib/desktop/components/register/ForgotPassword.svelte';
+	import { checkUserLogin, loginUser, setToken } from '$lib/api/server/user';
 	import AccountIcon from '$lib/assets/icons/AccountIcon.svelte';
-	import Input from '$lib/templates/Input.svelte';
 	import BigTitle from '$lib/desktop/components/register/BigTitle.svelte';
 	import InputPassword from '$lib/desktop/components/register/InputPassword.svelte';
-	import Button from '$lib/templates/Button.svelte';
-	import { checkUserLogin, loginUser, setToken } from '$lib/api/server/user';
-	import { redirect } from '@sveltejs/kit';
-	import {
-		needRealLogin,
-		notValidPassword,
-		unreachableError,
-		userExists,
-		userNotFound
-	} from '../../../consts';
-	import { goto } from '$app/navigation';
-	import { setCookie } from '$lib/helpers/cookies';
 	import { openErrorMessage } from '$lib/helpers/message';
-
+	import Button from '$lib/templates/Button.svelte';
+	import Input from '$lib/templates/Input.svelte';
+	import { needRealLogin, notValidPassword, unreachableError, userNotFound } from '../../../consts';
+	import ForgotPassword from '../../../lib/desktop/components/register/ForgotPassword.svelte';
+	import RegisterOrLogin from '../../../lib/desktop/components/register/RegisterOrLogin.svelte';
 	/** @type {import('./$types').PageData} */
 	export let data;
+	const t = JSON.parse(data.t);
 
-	let t = JSON.parse(data.t);
+	/** @type {import('src/types/Response').ResponseStatus}*/
+	let responseStatus = 'none';
 
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
@@ -35,8 +25,12 @@
 		gotoRegisterLink = '/register';
 
 	const onLoginClick = async () => {
+		responseStatus = 'inProcess';
 		// loginStatus = passwordStatus = 'ordinary';
-		const result = await loginUser(login, password);
+		const result = await loginUser(login, password).then((res) => {
+			responseStatus = 'done';
+			return res;
+		});
 		console.log(result);
 		if (result.error) {
 			if (result.error?.code == unreachableError.code) {
@@ -138,7 +132,9 @@
 			</div>
 
 			<div class="button-container login">
-				<Button type="dark" onClick={onLoginClick}>{t.login_loginButton}</Button>
+				<Button type="dark" status={responseStatus} onClick={onLoginClick}
+					>{t.login_loginButton}</Button
+				>
 			</div>
 
 			<!-- <div class="text-container">{t.login_textOr}</div> -->

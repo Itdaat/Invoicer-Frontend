@@ -12,8 +12,10 @@
 
 	/** @type {import('./$types').PageData} */
 	export let data;
-
 	let t = JSON.parse(data.t);
+
+	/** @type {import('src/types/Response').ResponseStatus}*/
+	let responseStatus = 'none';
 
 	/**
 	 *
@@ -82,12 +84,16 @@
 	let showPassword = false;
 
 	const onRegisterClick = async () => {
+		responseStatus = 'inProcess';
 		checkLoginBlur();
 		checkRepeatPassword();
 		if (repeatPasswordStatus == 'error' || loginStatus == 'error' || passwordStatus == 'error') {
 			return;
 		}
-		const result = await registerUser(login, password);
+		const result = await registerUser(login, password).then((res) => {
+			responseStatus = 'inProcess';
+			return res;
+		});
 		console.log(result);
 		if (result.error) {
 			if (result.error?.code == userExists.code) {
@@ -166,7 +172,9 @@
 			</div>
 
 			<div class="button-container login">
-				<Button type="dark" onClick={onRegisterClick}>{t.register_registerButton}</Button>
+				<Button type="dark" status={responseStatus} onClick={onRegisterClick}
+					>{t.register_registerButton}</Button
+				>
 			</div>
 
 			<!-- <div class="text-container">{t.register_textOr}</div>
