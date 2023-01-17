@@ -115,6 +115,5 @@
 <style>
 	.main {
 		width: 100%;
-		padding-top: 20px;
 	}
 </style>
