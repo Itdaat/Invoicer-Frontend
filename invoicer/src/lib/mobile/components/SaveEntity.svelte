@@ -11,7 +11,7 @@
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div class="icon-container" on:click={save}>
 		{#if status == 'inProcess'}
-			<Loader {status} />
+			<Loader {status} type="shadow" />
 		{:else}
 			<CheckGreenIcon />
 		{/if}
