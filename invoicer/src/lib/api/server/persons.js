@@ -7,7 +7,7 @@ import { postAuthRequestJson } from "$lib/helpers/apiHelper";
  * @param {string} firstName 
  * @param {string} lastName 
  * @param {string} nickname 
- * @param {[{typeId : number, value : string}] | null} contactData 
+ * @param {{typeId : number, value : string}[] | null} contactData 
  * @param {[string] | null} personTags  
  * @returns 
  */
@@ -103,7 +103,6 @@ export async function getPersonIds(firstName = null, lastName = null, nickname =
     //         }
     //     }
     // }
-    console.log(personIds);
     return personIds || [];
 }
 
