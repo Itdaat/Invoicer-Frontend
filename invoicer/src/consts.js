@@ -24,6 +24,14 @@ export const entityIsUsed = { code: 7, message: 'Entity is used' }
 export const notLatinSymbol = { code: 8, message: 'Some entity uses not latin symbols' };
 export const notValidLogin = { code: 9, message: 'This login is not valid' };
 
+// ! tags
+export const driverTag = 'driver';
+export const casherTag = 'casher';
+
+// ! contact data type
+export const emailDataType = 1;
+export const phoneDataType = 2;
+
 // ! sliders
 export const messagesSlide = 0;
 export const invoiceSlide = 1;
