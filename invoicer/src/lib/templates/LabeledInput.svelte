@@ -7,6 +7,7 @@
 	/** @type {string | null }*/
 	export let value;
 	export let disabled = false;
+	export let type = 'text';
 	export let placeHolder = '';
 	export let message = '';
 	export let onBlurFunc = () => {};
@@ -30,7 +31,7 @@
 		class:error
 		placeholder={placeHolder}
 		{disabled}
-		type="text"
+		{...{ type }}
 		bind:value
 		on:blur={onBlurFunc}
 		on:focus={onFocusFunc}
@@ -75,7 +76,7 @@
 		height: 80%;
 		border-bottom: 0.1px solid rgba(72, 97, 129, 0.631);
 		margin-left: 13px;
-		padding: 2px 30px 2px 13px;
+		padding: 2px 14px;
 		/* width: 45%; */
 
 		font-family: 'Istok Web';
