@@ -33,7 +33,7 @@ export class Order {
 }
 
 export class CMR {
-    number : string;
+    externalNumber : string;
     transport: Transport;
     image: string;
     order? : Order
