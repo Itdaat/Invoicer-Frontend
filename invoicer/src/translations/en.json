@@ -65,7 +65,7 @@
     "entity_truck": "Truck",
     "entity_trailer": "Trailer",
     "entity_payment": "Payment",
-    "entity_person": "Person",
+    "entity_person": "Driver",
     "entity_cmr": "CMR",
     "entity_order": "Order",
     "entity_driver": "Driver",

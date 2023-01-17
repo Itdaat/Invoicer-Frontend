@@ -25,6 +25,7 @@
 		color: #3d5a80;
 
 		padding: 0px 20px;
+		margin-top: 20px;
 	}
 	.category-container {
 		display: flex;

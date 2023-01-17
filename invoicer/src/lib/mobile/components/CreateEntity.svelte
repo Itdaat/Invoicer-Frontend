@@ -44,7 +44,7 @@
 
 	const gotoPerson = () => {
 		localStorage.setItem('create_title', t.title_person);
-		goto('/mobile/create/person');
+		goto('/mobile/create/driver');
 	};
 
 	const gotoCmr = () => {
@@ -73,7 +73,7 @@
 			<a class="entity-item" href="/mobile/create/payment" on:click={gotoPayment}>
 				{t.entity_payment}
 			</a>
-			<a class="entity-item" href="/mobile/create/person" on:click={gotoPerson}>
+			<a class="entity-item" href="/mobile/create/driver" on:click={gotoPerson}>
 				{t.entity_person}
 			</a>
 			<a class="entity-item" href="/mobile/create/cmr" on:click={gotoCmr}>{t.entity_cmr}</a>
