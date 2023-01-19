@@ -7,16 +7,19 @@
 	import MiniMenu from '$lib/mobile/templates/MiniMenu.svelte';
 	import { getInvoice } from '$lib/api/server/invoice';
 	import ChangeEntity from '$lib/mobile/components/ChangeEntity.svelte';
-	import { getFullPerson, getPerson } from '$lib/api/server/persons';
+	import { deletePerson, getFullPerson, getPerson } from '$lib/api/server/persons';
 	import { page } from '$app/stores';
 	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
 	import { copy } from 'svelte-copy';
-	import { openSuccessMessage } from '$lib/helpers/message';
+	import { openErrorMessage, openSuccessMessage } from '$lib/helpers/message';
 	import GlobalMessages from '$lib/mobile/components/GlobalMessages.svelte';
 	import ListItem from '$lib/mobile/components/ListItem.svelte';
+	import { entityIsUsed, unreachableError } from '../../../../../consts';
+	import { goto } from '$app/navigation';
 
 	export let title = '';
 	$: t = $LanguageStore;
+	const id = $page.params.id;
 
 	const sign = () => {};
 
@@ -32,11 +35,27 @@
 		title = person.nickname;
 		return person;
 	};
+
+	const deletePersonClick = async () => {
+		const result = await deletePerson(id);
+		console.log(result);
+		if (result.error?.code == entityIsUsed.code) {
+			openErrorMessage(t.person_is_used);
+			return;
+		}
+		if (result.error?.code == unreachableError.code) {
+			openErrorMessage(t.message_unreachable_error);
+			return;
+		}
+		goto('/mobile/drivers');
+		openSuccessMessage(t.person_deleted_successfully);
+	};
 </script>
 
 <MiniMenu {title}>
 	<div class="actions" slot="actions">
-		<div class="action-item">
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<div class="action-item" on:click={deletePersonClick}>
 			<DeleteIcon />
 			<div class="actions-item-title">{t.invoice_delete_title}</div>
 		</div>
@@ -52,7 +71,7 @@
 				<ListItem
 					name={t.person_create_last_name}
 					value={person?.lastName}
-					messageText={t.person_create_last_name}
+					messageText={t.person_copied_last_name}
 				/>
 			</MiniCategory>
 			<MiniCategory title={t.person_create_contact_data}>

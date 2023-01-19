@@ -120,5 +120,7 @@
     "person_copied_email": "Copied email",
     "person_no_data_email": "No email",
     "person_no_data_phone": "No phone",
-    "person_main": "Driver"
+    "person_main": "Driver",
+    "person_is_used": "Can't change driver, he is already used.",
+    "person_deleted_successfully": "Driver was deleted successfully"
 }

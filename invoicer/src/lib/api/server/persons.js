@@ -126,7 +126,7 @@ export async function getPerson(personId = null) {
  * 
  * 
  * @export
- * @param {number} personId 
+ * @param {string} personId 
  * @returns 
  */
 export async function deletePerson(personId) {
