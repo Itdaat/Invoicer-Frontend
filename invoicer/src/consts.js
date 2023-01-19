@@ -39,6 +39,28 @@ export const orderSlide = 2;
 export const paymentSlide = 3;
 export const transactionSlide = 4;
 
+// ! path
+export const mobile = '/mobile';
+export const drivers = '/drivers';
+export const cmrs = '/cmrs';
+export const trucks = '/trucks';
+export const trailers = '/trailers';
+export const pocket = '/pocket';
+export const cmr = '/cmr';
+export const truck = '/truck';
+export const trailer = '/trailer';
+export const driver = '/driver';
+export const invoice = '/invoice';
+export const order = '/order';
+export const payment = '/payment';
+export const transaction = '/transaction';
+
+export const mobileDrivers = mobile + drivers;
+export const mobileCmrs = mobile + cmrs;
+export const mobileTrucks = mobile + trucks;
+export const mobileTrailers = mobile + trailers;
+export const mobilePocket = mobile + pocket;
+
 export const maxMessagesCount = 1;
 
 export const responseErrors = [
