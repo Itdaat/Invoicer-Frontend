@@ -1,4 +1,5 @@
 import { postAuthRequestJson } from "$lib/helpers/apiHelper";
+import { emailDataType, phoneDataType } from "../../../consts";
 
 /**
  * 
@@ -110,6 +111,21 @@ export async function getPersonIds(firstName = null, lastName = null, nickname =
  * 
  * 
  * @export
+ * @param {any} [personId=null] 
+ * @returns {Promise<import('../../../types/Entities').Response<import('../../../types/Entities').Person[]>>}
+ */
+export async function getPerson(personId = null) {
+    const reqBody = {
+        personId
+    };
+    const person = await postAuthRequestJson('person/get', reqBody);
+    return person;
+}
+
+/**
+ * 
+ * 
+ * @export
  * @param {number} personId 
  * @returns 
  */
@@ -125,27 +141,56 @@ export async function deletePerson(personId) {
  * 
  * 
  * @export
- * @param {number} personId 
- * @returns 
+ * @param {any} personId 
+ * @returns {Promise<{
+ *   error : null | {};
+ *   result : null | import('../../../types/Entities').Person
+ *  }>}
  */
 export async function getFullPerson(personId) {
     const reqBody = {
         personId
     };
     const person = await postAuthRequestJson('person/get', reqBody);
+    if (person.error) {
+        return {
+            error: person.error,
+            result: null
+        }
+    }
     const personContactDataBody = {
         personId,
     }
     const personContactData = await postAuthRequestJson('person/contact-data/get', personContactDataBody);
+    if (personContactData.error) {
+        return {
+            error: person.error,
+            result: null
+        }
+    }
     const personTagBody = {
         personId,
     }
     const personTagsData = await postAuthRequestJson('person/tag/get', personTagBody);
+    if (personTagsData.error) {
+        return {
+            error: person.error,
+            result: null
+        }
+    }
+
+    /** @type {Array<import('../../../types/Entities').ContactData>} */
+    const contactDatum = personContactData.result;
+
 
     return {
-        ...person,
-        ...personContactData,
-        ...personTagsData
+        error: null,
+        result: {
+            ...person.result[0],
+            phone: contactDatum.find(el => el.contactDataTypeId == phoneDataType),
+            email: contactDatum.find(el => el.contactDataTypeId == emailDataType),
+            tags: personTagsData.result
+        }
     }
 }
 
