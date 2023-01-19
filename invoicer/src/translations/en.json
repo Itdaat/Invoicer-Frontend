@@ -122,5 +122,7 @@
     "person_no_data_phone": "No phone",
     "person_main": "Driver",
     "person_is_used": "Can't change driver, he is already used.",
-    "person_deleted_successfully": "Driver was deleted successfully"
+    "person_deleted_successfully": "Driver was deleted successfully",
+    "FILTER": "______________FILTER______________",
+    "filter_title": "Filters"
 }
