@@ -1,21 +1,16 @@
 <script>
-	import LanguageStore from '$lib/stores/Language';
-	import ShareIcon from '$lib/assets/icons/ShareIcon.svelte';
-	import PrintIcon from '$lib/assets/icons/PrintIcon.svelte';
-	import DeleteIcon from '$lib/assets/icons/DeleteIcon.svelte';
-	import Button from '$lib/templates/Button.svelte';
-	import MiniMenu from '$lib/mobile/templates/MiniMenu.svelte';
-	import { getInvoice } from '$lib/api/server/invoice';
-	import ChangeEntity from '$lib/mobile/components/ChangeEntity.svelte';
-	import { deletePerson, getFullPerson, getPerson } from '$lib/api/server/persons';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
-	import { copy } from 'svelte-copy';
+	import { deletePerson, getFullPerson } from '$lib/api/server/persons';
+	import DeleteIcon from '$lib/assets/icons/DeleteIcon.svelte';
 	import { openErrorMessage, openSuccessMessage } from '$lib/helpers/message';
+	import ChangeEntity from '$lib/mobile/components/ChangeEntity.svelte';
 	import GlobalMessages from '$lib/mobile/components/GlobalMessages.svelte';
 	import ListItem from '$lib/mobile/components/ListItem.svelte';
+	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
+	import MiniMenu from '$lib/mobile/templates/MiniMenu.svelte';
+	import LanguageStore from '$lib/stores/Language';
 	import { entityIsUsed, unreachableError } from '../../../../../consts';
-	import { goto } from '$app/navigation';
 
 	export let title = '';
 	$: t = $LanguageStore;

@@ -29,6 +29,17 @@
 		touchendY = e.changedTouches[0].screenY;
 		checkDirection();
 	});
+
+	let test = 10;
 </script>
 
-style="transition-duration: 0ms; transform: translate3d(-1700px, 0px, 0px);"
+<!-- style="transition-duration: 0ms; transform: translate3d(-1700px, 0px, 0px);" -->
+{test}
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div
+	on:click={() => {
+		test++;
+	}}
+>
+	click me
+</div>

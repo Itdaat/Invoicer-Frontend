@@ -74,7 +74,7 @@
 			openErrorMessage(t.message_unreachable_error, '');
 		} else {
 			goto('/mobile/trucks');
-			openSuccessMessage(t.transport_create_success, t.message_ok_button);
+			openSuccessMessage(t.transport_create_success);
 		}
 	};
 </script>
