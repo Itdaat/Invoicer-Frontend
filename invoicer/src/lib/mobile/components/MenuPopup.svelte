@@ -24,7 +24,7 @@
 
 	const pocketPath = '/mobile/pocket';
 	const cmrPath = '/mobile/cmrs';
-	const driversPath = '/mobile/persons';
+	const driversPath = '/mobile/drivers';
 	const trucksPath = '/mobile/trucks';
 	const trailerPath = '/mobile/trailers';
 
@@ -79,7 +79,7 @@
 
 	const gotoDrivers = () => {
 		hideSelf();
-		goto('/mobile/persons');
+		goto('/mobile/drivers');
 	};
 
 	const gotoTruck = () => {
