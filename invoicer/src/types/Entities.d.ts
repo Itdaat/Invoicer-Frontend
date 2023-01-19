@@ -12,10 +12,26 @@ export class Transport {
 }
 
 export class Person {
+    id : number;
     firstName : string; 
     lastName: string;
     telNumber: string;
-    nick : string;
+    nickname : string;
+    isUsed : boolean;
+    phone : ContactData;
+    email : ContactData;
+    tags : Tag[];
+}
+
+export class ContactData {
+    id : number;
+    contactDataTypeId : number;
+    value : string;
+}
+
+export class Tag {
+    id : number;
+    name : string;
 }
 
 export class Order {
