@@ -112,5 +112,13 @@
     "person_create_nickname": "Nickname",
     "person_create_nickname_placeholder": "Nickname",
     "person_create_nickname_exists_error": "Nickname already exists",
-    "person_create_success": "Created new Person"
+    "person_create_success": "Created new Person",
+    "person_copied_first_name": "Copied first name",
+    "person_copied_last_name": "Copied last name",
+    "person_copied_nick_name": "Copied nickname",
+    "person_copied_phone": "Copied phone number",
+    "person_copied_email": "Copied email",
+    "person_no_data_email": "No email",
+    "person_no_data_phone": "No phone",
+    "person_main": "Driver"
 }
