@@ -9,7 +9,7 @@ import GlobalMessageStore from '../stores/GlobalMessage';
  * @param {number} timeout 
  * @param {Function} [func=closeMessage] 
  */
-export async function openErrorMessage(message, buttonText, timeout = 5000, func = closeMessage) {
+export async function openErrorMessage(message, buttonText = '', timeout = 5000, func = closeMessage) {
     await setTimeout(() => { }, 700)
     /**
      * @type {number}
@@ -48,7 +48,7 @@ export async function openErrorMessage(message, buttonText, timeout = 5000, func
  * @param {number} timeout 
  * @param {Function} [func=closeMessage] 
  */
-export async function openSuccessMessage(message, buttonText, timeout = 5000, func = closeMessage) {
+export async function openSuccessMessage(message, buttonText = '', timeout = 5000, func = closeMessage) {
     await setTimeout(() => { }, 700)
     /**
      * @type {number}
