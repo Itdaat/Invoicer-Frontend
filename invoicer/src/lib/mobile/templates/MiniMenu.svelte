@@ -47,7 +47,7 @@
 	main {
 		height: 100vh;
 		display: grid;
-		grid-template-rows: 106px 1fr;
+		grid-template-rows: auto 1fr;
 	}
 	.header {
 		height: 70px;
@@ -71,6 +71,8 @@
 		letter-spacing: 1px;
 
 		color: #3d5a80;
+
+		text-transform: capitalize;
 	}
 
 	.return,
@@ -86,12 +88,13 @@
 		box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
 		border-radius: 10px;
 		width: 170px;
-		height: 137px;
+		/* height: 137px; */
 
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		padding-top: 2px;
+		padding-bottom: 7px;
 		user-select: none;
 	}
 
@@ -123,6 +126,6 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
-		align-items: center;
+		/* align-items: center; */
 	}
 </style>
