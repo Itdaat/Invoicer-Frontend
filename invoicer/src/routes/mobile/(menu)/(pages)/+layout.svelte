@@ -25,6 +25,7 @@
 	.main {
 		height: 100%;
 		display: grid;
+		grid-template-columns: 100%;
 		grid-template-rows: auto 1fr;
 		user-select: none;
 		/* overflow-y: scroll; */
