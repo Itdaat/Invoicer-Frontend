@@ -71,7 +71,7 @@
 
 		const result = await createPerson(firstName, lastName, nickname, contactData, [driverTag]);
 		if (result.ok) {
-			goto('/mobile/persons');
+			goto('/mobile/drivers');
 			openSuccessMessage(t.person_create_success, t.message_ok_button);
 		}
 	};
