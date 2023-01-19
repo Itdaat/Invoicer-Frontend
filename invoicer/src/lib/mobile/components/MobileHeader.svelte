@@ -11,6 +11,24 @@
 	import TransactionFilter from './filters/TransactionFilter.svelte';
 	import MenuPopup from './MenuPopup.svelte';
 	import MobileHeaderMenu from './MobileHeaderMenu.svelte';
+	import {
+		invoiceSlide,
+		messagesSlide,
+		mobileCmrs,
+		mobileDrivers,
+		mobilePocket,
+		mobileTrailers,
+		mobileTrucks,
+		orderSlide,
+		paymentSlide,
+		transactionSlide
+	} from '../../../consts';
+	import { page } from '$app/stores';
+	import PersonFilter from './filters/PersonFilter.svelte';
+	import CmrFilter from './filters/CmrFilter.svelte';
+	import TrailerFilter from './filters/TrailerFilter.svelte';
+	import TruckFilter from './filters/TruckFilter.svelte';
+	import PocketFilter from './filters/PocketFilter.svelte';
 
 	/**
 	 * @type {import('../../../types/Entities').Firm }
@@ -31,6 +49,7 @@
 	};
 
 	$: slider = $SliderStore;
+	$: path = $page.url.pathname;
 </script>
 
 <div class="container {!showHorizontalMenu ? 'container-mini' : ''}">
@@ -52,17 +71,29 @@
 	{/if}
 	{#if showFilter}
 		<FilterPopup bind:showFilter>
-			{#if slider.activeIndex == 0}
+			{#if path == mobileDrivers}
+				<PersonFilter />
+			{:else if path == mobileCmrs}
+				<CmrFilter />
+			{:else if path == mobileTrailers}
+				<TrailerFilter />
+			{:else if path == mobileTrucks}
+				<TruckFilter />
+			{:else if path == mobilePocket}
+				<PocketFilter />
+			{:else if slider.activeIndex == messagesSlide}
 				<MessagesFilter />
-			{:else if slider.activeIndex == 1}
+			{:else if slider.activeIndex == invoiceSlide}
 				<InvoiceFilter />
-			{:else if slider.activeIndex == 2}
+			{:else if slider.activeIndex == orderSlide}
 				<OrderFilter />
-			{:else if slider.activeIndex == 3}
+			{:else if slider.activeIndex == paymentSlide}
 				<PaymentFilter />
-			{:else if slider.activeIndex == 4}
+			{:else if slider.activeIndex == transactionSlide}
 				<TransactionFilter />
 			{/if}
+			<!-- {:else if  } -->
+			<!-- {/if} -->
 		</FilterPopup>
 	{/if}
 	<MenuPopup bind:showMenu />
