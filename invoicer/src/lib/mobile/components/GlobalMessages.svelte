@@ -5,11 +5,13 @@
 	$: globalMessages = $GlobalMessageStore;
 </script>
 
-<div class="main">
-	{#each globalMessages.arr as globalMessage}
-		<GlobalMessage {...globalMessage} buttonAction={globalMessage.func} />
-	{/each}
-</div>
+{#if globalMessages.arr.length > 0}
+	<div class="main">
+		{#each globalMessages.arr as globalMessage}
+			<GlobalMessage {...globalMessage} buttonAction={globalMessage.func} />
+		{/each}
+	</div>
+{/if}
 
 <style>
 	.main {

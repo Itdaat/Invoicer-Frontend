@@ -57,6 +57,7 @@
 		padding: 6px 14px;
 		bottom: 30px;
 		width: 80%;
+		max-width: 500px;
 		display: flex;
 		justify-content: space-between;
 		left: 0;
