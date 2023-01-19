@@ -55,7 +55,7 @@
 		z-index: 100;
 		background-color: white;
 		padding: 6px 14px;
-		bottom: 30px;
+		bottom: 15px;
 		width: 80%;
 		max-width: 500px;
 		display: flex;
@@ -93,10 +93,12 @@
 		font-style: normal;
 		font-weight: 400;
 		font-size: 18px;
-		line-height: 40px;
+		/* font-size: 3vw; */
+		padding: 5px 0px;
+		line-height: 22px;
 		/* or 222% */
 
-		text-align: center;
+		text-align: left;
 		letter-spacing: 2px;
 
 		color: #3d5a80;

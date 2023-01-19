@@ -16,9 +16,11 @@
 <style>
 	.main {
 		position: absolute;
+		display: flex;
+		align-items: center;
 		bottom: 30px;
 		overflow: hidden;
 		width: 100%;
-		height: 100px;
+		min-height: 100px;
 	}
 </style>
