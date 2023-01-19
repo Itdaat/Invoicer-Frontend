@@ -9,7 +9,7 @@
 	/** @type {string}*/
 	export let messageText;
 	/** @type {string}*/
-	export let noDataText;
+	export let noDataText = '';
 	const messageDuration = 1500;
 
 	const showMessage = () => {
