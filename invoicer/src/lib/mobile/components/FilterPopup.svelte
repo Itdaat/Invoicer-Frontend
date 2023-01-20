@@ -16,11 +16,8 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="main" transition:fade={{ duration: 300 }}>
 	<div class="container" use:clickOutside on:click_outside={hideFilter}>
-		<div class="close-button icon-button">
+		<div class="close-button icon-button" on:click={hideFilter}>
 			<CloseMenuIcon />
-		</div>
-		<div class="filter-button icon-button">
-			<CheckIcon />
 		</div>
 		<div class="title">{t.filter_title}</div>
 		<slot />
@@ -34,7 +31,7 @@
 		width: 100%;
 		height: 100%;
 		position: absolute;
-		z-index: 10;
+		z-index: 9999;
 		top: 0;
 		bottom: 0;
 		right: 0;
@@ -93,7 +90,7 @@
 		width: 57px;
 		height: 57px;
 		position: absolute;
-		bottom: -35%;
+		bottom: -20%;
 		right: -10px;
 	}
 </style>
