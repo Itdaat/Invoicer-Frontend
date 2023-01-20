@@ -109,6 +109,7 @@
     "person_create_email": "Email",
     "person_create_email_placeholder": "Email",
     "person_create_email_not_valid": "Email is not valid",
+    "person_create_phone_not_valid": "Phone number is not valid",
     "person_create_nickname": "Nickname",
     "person_create_nickname_placeholder": "Nickname",
     "person_create_nickname_exists_error": "Nickname already exists",
@@ -123,6 +124,9 @@
     "person_main": "Driver",
     "person_is_used": "Can't change driver, he is already used.",
     "person_deleted_successfully": "Driver was deleted successfully",
+    "person_wrong_person": "Wrong person",
+    "person_update_success": "Driver updated",
+    "person_title_update": "Update Driver",
     "FILTER": "______________FILTER______________",
     "filter_title": "Filters"
 }

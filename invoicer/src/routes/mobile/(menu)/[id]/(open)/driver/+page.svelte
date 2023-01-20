@@ -1,22 +1,27 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { deletePerson, getFullPerson } from '$lib/api/server/persons';
+	import { deletePerson, getFullPerson, updateFullPerson } from '$lib/api/server/persons';
 	import DeleteIcon from '$lib/assets/icons/DeleteIcon.svelte';
 	import { openErrorMessage, openSuccessMessage } from '$lib/helpers/message';
 	import ChangeEntity from '$lib/mobile/components/ChangeEntity.svelte';
 	import GlobalMessages from '$lib/mobile/components/GlobalMessages.svelte';
 	import ListItem from '$lib/mobile/components/ListItem.svelte';
+	import Loader from '$lib/mobile/components/Loader.svelte';
 	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
 	import MiniMenu from '$lib/mobile/templates/MiniMenu.svelte';
 	import LanguageStore from '$lib/stores/Language';
-	import { entityIsUsed, unreachableError } from '../../../../../consts';
+	import {
+		driver,
+		entityIsUsed,
+		mobile,
+		mobileDrivers,
+		unreachableError
+	} from '../../../../../../consts';
 
 	export let title = '';
 	$: t = $LanguageStore;
 	const id = $page.params.id;
-
-	const sign = () => {};
 
 	const getPersonFormatted = async () => {
 		const personRes = await getFullPerson($page.params.id);
@@ -25,6 +30,8 @@
 		}
 		const person = personRes.result;
 		if (!person) {
+			goto(mobileDrivers);
+			openErrorMessage(t.person_wrong_person);
 			return;
 		}
 		title = person.nickname;
@@ -33,7 +40,6 @@
 
 	const deletePersonClick = async () => {
 		const result = await deletePerson(id);
-		console.log(result);
 		if (result.error?.code == entityIsUsed.code) {
 			openErrorMessage(t.person_is_used);
 			return;
@@ -44,6 +50,20 @@
 		}
 		goto('/mobile/drivers');
 		openSuccessMessage(t.person_deleted_successfully);
+	};
+
+	const goToUpdatePerson = async () => {
+		const result = await updateFullPerson(id);
+		if (result.error?.code == entityIsUsed.code) {
+			openErrorMessage(t.person_is_used);
+			return;
+		}
+		if (result.error?.code == unreachableError.code) {
+			openErrorMessage(t.message_unreachable_error);
+			return;
+		}
+		localStorage.setItem('create_title', t.person_title_update);
+		goto(mobile + '/' + id + '/update' + driver);
 	};
 </script>
 
@@ -56,7 +76,11 @@
 		</div>
 	</div>
 	<div class="main" slot="main">
-		{#await getPersonFormatted() then person}
+		{#await getPersonFormatted()}
+			<div class="loader-container">
+				<Loader type="circle" colorTheme="dark" status="inProcess" size="70" />
+			</div>
+		{:then person}
 			<MiniCategory title={t.person_main}>
 				<ListItem
 					name={t.person_create_first_name}
@@ -86,7 +110,7 @@
 		{/await}
 	</div>
 </MiniMenu>
-<ChangeEntity />
+<ChangeEntity onClick={goToUpdatePerson} />
 <GlobalMessages />
 
 <style>
@@ -105,6 +129,13 @@
 		margin-left: 20px;
 	}
 
+	.loader-container {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		margin-top: 50px;
+	}
+
 	.action-item {
 		display: flex;
 		align-items: center;
@@ -115,5 +146,9 @@
 
 	.actions {
 		width: 100%;
+	}
+
+	.main {
+		user-select: none;
 	}
 </style>

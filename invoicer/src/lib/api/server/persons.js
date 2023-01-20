@@ -198,15 +198,13 @@ export async function getFullPerson(personId) {
  * 
  * 
  * @export
- * @param {number} personId 
+ * @param {string} personId 
  * @param {string | null} firstName 
  * @param {string | null} lastName 
  * @param {string | null} nickname 
- * @param {[{typeId : number, value : string}]} contactData 
- * @param {[{tagName : string}]} personTags 
+ * @param {[{id: string, typeId : number, value : string}] | []} contactData 
  */
-export async function updateFullPerson(personId, firstName, lastName, nickname, contactData, personTags) {
-    let error = {};
+export async function updateFullPerson(personId, firstName = null, lastName = null, nickname = null, contactData = []) {
     const reqBody = {
         personId,
         firstName,
@@ -215,28 +213,19 @@ export async function updateFullPerson(personId, firstName, lastName, nickname, 
     };
     const personResult = await postAuthRequestJson('person/update', reqBody);
     if (personResult.error) {
-        error = personResult.error;
+        return personResult.error
     }
     for (const data of contactData) {
         const personContactDataBody = {
             personId,
+            contactDataId: data.id,
             typeId: data.typeId,
             value: data.value
         }
         const res = await postAuthRequestJson('person/contact-data/update', personContactDataBody);
         if (res.error != null) {
-            error = res.error;
+            return res.error;
         }
     }
-    for (const data of personTags) {
-        const personTagBody = {
-            personId,
-            tagName: data.tagName
-        }
-        const res = await postAuthRequestJson('person/tag/update', personTagBody);
-        if (res.error != null) {
-            error = res.error;
-        }
-    }
-    return { error }
+    return {}
 }
