@@ -1,18 +1,23 @@
 <script>
-	import { getPerson, getPersonIds } from '$lib/api/server/persons';
+	import { getPerson, getPersonAllFields, getPersonIds } from '$lib/api/server/persons';
 	import { getTrucks } from '$lib/api/server/transport';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import MiniCategoryLite from '$lib/mobile/components/MiniCategoryLite.svelte';
-	import { driverTag } from '../../../../../consts';
+	import { driverTag, emailDataType, phoneDataType } from '../../../../../consts';
 	import { Jumper } from 'svelte-loading-spinners';
 	import { slide } from 'svelte/transition';
 	import { goto } from '$app/navigation';
+	import FilterStore from '$lib/stores/FilterStore';
 
-	const getDriversFormatted = async () => {
-		return (await getPerson()).result;
+	$: filter = $FilterStore;
+
+	const getDriversFormatted = async (filters) => {
+		return await getPersonAllFields({
+			...filters
+		});
 	};
 
-	const driversFormatted = getDriversFormatted();
+	$: driversFormatted = getDriversFormatted(filter);
 
 	const gotoDriver = (/** @type {number} */ id) => {
 		goto(`/mobile/${id}/driver`);
