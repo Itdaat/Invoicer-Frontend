@@ -64,7 +64,6 @@ export async function createPerson(firstName, lastName, nickname, contactData = 
  * @returns 
  */
 export async function getPersonIds(firstName = null, lastName = null, nickname = null, contactData = null, personTags = null) {
-    let personIds = [];
     const reqBody = {
         firstName,
         lastName,
@@ -72,10 +71,7 @@ export async function getPersonIds(firstName = null, lastName = null, nickname =
         tags: personTags,
         contactData
     };
-    const [person] = (await postAuthRequestJson('person/get', reqBody)).result;
-    if (person) {
-        personIds.push(person.personId);
-    }
+    const persons = (await postAuthRequestJson('person/get', reqBody)).result;
 
     // if (contactData !== null && contactData !== undefined) {
     //     for (const contact of contactData) {
@@ -104,9 +100,83 @@ export async function getPersonIds(firstName = null, lastName = null, nickname =
     //         }
     //     }
     // }
-    return personIds || [];
+    return persons;
 }
 
+
+/**
+ * 
+ * 
+ * @export
+ * 
+ * @param {string | null} firstName 
+ * @param {string | null} lastName 
+ * @param {string | null} nickname
+ * @param {[{typeId : number, value : string}] | null} contactData 
+ * @param {[string] | null} personTags  
+ * @returns 
+ */
+/**
+ * 
+ * 
+ * @export
+ * @param {import('../../../types/Entities').Person} filter 
+ * @returns 
+ */
+export async function getPersonAllFields(filter) {
+    const contactDataUpdated = [];
+    contactDataUpdated[phoneDataType] = filter?.phone
+    contactDataUpdated[emailDataType] = filter?.email
+    let reqBody;
+    if (contactDataUpdated.length == 0) {
+        reqBody = {
+            firstName: filter.firstName,
+            lastName: filter.lastName,
+            nickname: filter.nickname,
+            tags: filter.tags,
+        };
+
+    } else {
+
+        reqBody = {
+            firstName: filter.firstName,
+            lastName: filter.lastName,
+            nickname: filter.nickname,
+            tags: filter.tags,
+            contactData: contactDataUpdated
+        };
+    }
+    const persons = (await postAuthRequestJson('person/get', reqBody)).result;
+
+    // if (contactData !== null && contactData !== undefined) {
+    //     for (const contact of contactData) {
+    //         const contactDataBody = {
+    //             typeId: contact.typeId,
+    //             value: contact.value
+    //         };
+    //         const contactDataPerson = await postAuthRequestJson('person/contact-data/get', contactDataBody);
+    //         const [contactData] = contactDataPerson.result;
+    //         if (contactData) {
+    //             console.log(contactData);
+    //             personIds.push(contactData.personId);
+    //         }
+    //     }
+    // }
+
+    // if (personTags !== null && personTags !== undefined) {
+    //     for (const personTag of personTags) {
+    //         const personTagBody = {
+    //             tagName: personTag.tagName
+    //         };
+    //         const personTagPerson = await postAuthRequestJson('person/tag/get', personTagBody);
+    //         if (personTagPerson) {
+    //             console.log(personTagPerson)
+    //             personIds.push(personTagPerson.result.id);
+    //         }
+    //     }
+    // }
+    return persons;
+}
 /**
  * 
  * 
