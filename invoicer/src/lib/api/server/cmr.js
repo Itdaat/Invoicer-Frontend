@@ -37,14 +37,29 @@ export async function getCmr(id = null, externalNumber = null) {
  * 
  * @export
  * @param {number | string} id 
- * @param {string} externalNumber 
+ * @param {string | null} externalNumber 
  * @returns {Promise<import('../../../types/Entities').Response<import('../../../types/Entities').CMR[]>>}
  */
-export async function updateCmr(id, externalNumber) {
+export async function updateCmr(id, externalNumber = null) {
     const reqBody = {
         cmrId: id,
         externalNumber
     };
     const result = await postAuthRequestJson('cmr/update', reqBody);
+    return result;
+}
+
+/**
+ * 
+ * 
+ * @export
+ * @param {string} cmrId 
+ * @returns 
+ */
+export async function deleteCmr(cmrId) {
+    const reqBody = {
+        cmrId
+    };
+    const result = await postAuthRequestJson('cmr/delete', reqBody);
     return result;
 }
