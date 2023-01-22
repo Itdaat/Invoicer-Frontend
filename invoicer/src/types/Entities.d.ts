@@ -49,6 +49,7 @@ export class Order {
 }
 
 export class CMR {
+    id : number,
     externalNumber : string;
     transport: Transport;
     image: string;
