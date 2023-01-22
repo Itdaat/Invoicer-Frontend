@@ -1,26 +1,45 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { getCmr } from '$lib/api/server/cmr';
 	import { getTrucks } from '$lib/api/server/transport';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import MiniCategoryLite from '$lib/mobile/components/MiniCategoryLite.svelte';
+	import FilterStore from '$lib/stores/FilterStore';
+	import { cmr, mobile } from '../../../../../consts';
 	import { Jumper } from 'svelte-loading-spinners';
 	import { slide } from 'svelte/transition';
+	import LanguageStore from '$lib/stores/Language';
 
-	const getCMRSFormatted = async () => {
-		console.log((await getCmr()).result);
+	$: filter = $FilterStore;
+	$: t = $LanguageStore;
+
+	const getCMRSFormatted = async (filters) => {
 		return (await getCmr()).result;
+	};
+
+	const cmrsFormatted = getCMRSFormatted(filter);
+
+	const gotoCmr = (/** @type {string | number} */ id) => {
+		goto(mobile + '/' + id + cmr);
 	};
 </script>
 
 <div class="main">
-	<MiniCategoryLite title="Trucks">
-		{#await getCMRSFormatted()}
+	<MiniCategoryLite title={t.cmr_many_titles}>
+		{#await cmrsFormatted}
 			<div class="loader-container">
 				<Loader status="inProcess" size="60" />
 			</div>
 		{:then cmrs}
 			{#each cmrs as cmr}
-				<div class="cmr" in:slide={{ duration: 700 }}>
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div
+					class="cmr ripple"
+					in:slide={{ duration: 700 }}
+					on:click={() => {
+						gotoCmr(cmr.id);
+					}}
+				>
 					<div class="license">{cmr.externalNumber}</div>
 					<!-- <div class="brand">{cmr.brandName}</div> -->
 				</div>
@@ -73,5 +92,20 @@
 		letter-spacing: 1px;
 
 		color: #6e6e8b;
+	}
+
+	.ripple {
+		user-select: none;
+		background-position: center;
+		background-size: 1000%;
+		transition: background 0.8s;
+	}
+	.ripple:hover {
+		background: #ffffff radial-gradient(circle, transparent 1%, #ffffff 1%) center/10000%;
+	}
+	.ripple:active {
+		background-color: #c7c6c6;
+		background-size: 100%;
+		transition: background 0s;
 	}
 </style>
