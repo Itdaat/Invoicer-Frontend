@@ -147,5 +147,7 @@
     "trailer_is_used_error": "Can't change transport, it is already used.",
     "trailer_wrong_trailer": "Wrong trailer",
     "trailer_deleted_successfully": "Trailer was deleted successfully",
-    "trailer_delete_title": "Delete"
+    "trailer_delete_title": "Delete",
+    "trailer_copied_license": "License number copied",
+    "trailer_copied_brand": "Brand copied"
 }

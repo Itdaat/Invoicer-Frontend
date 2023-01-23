@@ -89,12 +89,12 @@
 				<ListItem
 					name={t.trailer_license}
 					value={trailer?.licenseNumber}
-					messageText={t.person_copied_first_name}
+					messageText={t.trailer_copied_license}
 				/>
 				<ListItem
 					name={t.trailer_brand}
 					value={trailer?.brandName}
-					messageText={t.person_copied_last_name}
+					messageText={t.trailer_copied_brand}
 				/>
 			</MiniCategory>
 		{/await}
