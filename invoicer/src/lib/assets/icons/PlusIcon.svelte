@@ -1,4 +1,9 @@
-<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<script>
+	export let width = 30;
+	export let height = 30;
+</script>
+
+<svg {width} {height} viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
 	<rect x="12.439" width="5.12195" height="30" rx="2.56098" fill="#3D5A80" />
 	<rect x="12.439" width="5.12195" height="30" rx="2.56098" fill="#3D5A80" />
 	<rect
