@@ -11,6 +11,7 @@
 	import { deleteToken } from '$lib/api/server/user';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
+	import FilterStore from '$lib/stores/FilterStore';
 	export let showMenu = false;
 
 	/** @type {import('../../../types/Entities').Firm}*/
@@ -69,31 +70,37 @@
 
 	const gotoPocket = () => {
 		hideSelf();
+		FilterStore.set({});
 		goto('/mobile/pocket');
 	};
 
 	const gotoCMR = () => {
 		hideSelf();
+		FilterStore.set({});
 		goto('/mobile/cmrs');
 	};
 
 	const gotoDrivers = () => {
 		hideSelf();
+		FilterStore.set({});
 		goto('/mobile/drivers');
 	};
 
 	const gotoTruck = () => {
 		hideSelf();
+		FilterStore.set({});
 		goto('/mobile/trucks');
 	};
 
 	const gotoTrailer = () => {
 		hideSelf();
+		FilterStore.set({});
 		goto('/mobile/trailers');
 	};
 
 	const gotoSettings = () => {
 		hideSelf();
+		FilterStore.set({});
 		goto('/mobile/settings');
 	};
 
