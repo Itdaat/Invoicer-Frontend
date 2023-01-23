@@ -1,15 +1,15 @@
 <script>
-	import { getPerson, getPersonAllFields, getPersonIds } from '$lib/api/server/persons';
-	import { getTrucks } from '$lib/api/server/transport';
+	import { goto } from '$app/navigation';
+	import { getPersonAllFields } from '$lib/api/server/persons';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import MiniCategoryLite from '$lib/mobile/components/MiniCategoryLite.svelte';
-	import { driverTag, emailDataType, phoneDataType } from '../../../../../consts';
-	import { Jumper } from 'svelte-loading-spinners';
-	import { slide } from 'svelte/transition';
-	import { goto } from '$app/navigation';
 	import FilterStore from '$lib/stores/FilterStore';
+	import LanguageStore from '$lib/stores/Language';
+	import { quartInOut } from 'svelte/easing';
+	import { slide } from 'svelte/transition';
 
 	$: filter = $FilterStore;
+	$: t = $LanguageStore;
 
 	const getDriversFormatted = async (filters) => {
 		return await getPersonAllFields({
@@ -25,7 +25,7 @@
 </script>
 
 <div class="main">
-	<MiniCategoryLite title="Trucks">
+	<MiniCategoryLite title={t.person_many}>
 		{#await driversFormatted}
 			<div class="loader-container">
 				<Loader status="inProcess" size="60" />
@@ -35,7 +35,7 @@
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div
 					class="person ripple"
-					in:slide={{ duration: 700 }}
+					in:slide={{ duration: 700, easing: quartInOut }}
 					on:click={() => {
 						gotoDriver(person.id);
 					}}
