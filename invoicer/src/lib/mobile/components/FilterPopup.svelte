@@ -3,14 +3,28 @@
 	import CloseIcon from '$lib/assets/icons/CloseIcon.svelte';
 	import CloseMenuIcon from '$lib/assets/icons/CloseMenuIcon.svelte';
 	import { clickOutside } from '$lib/helpers/ClickOutside';
+	import FilterStore from '$lib/stores/FilterStore';
+	import FilterStoreHelper from '$lib/stores/FilterStoreHelper';
 	import LanguageStore from '$lib/stores/Language';
 	import { fade } from 'svelte/transition';
 	export let showFilter = true;
 	$: t = $LanguageStore;
 
+	$: count = $FilterStoreHelper.count;
+
 	let hideFilter = () => {
 		showFilter = false;
 	};
+
+	function showResult() {
+		hideFilter();
+	}
+
+	function clear() {
+		FilterStoreHelper.set({ cleared: true, count: 0 });
+	}
+
+	$: zero = count == 0;
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -21,6 +35,16 @@
 		</div>
 		<div class="title">{t.filter_title}</div>
 		<slot />
+		<div class="buttons">
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="clear" on:click={clear}>{t.filter_clear}</div>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="results" class:zero on:click={showResult}>
+				{t.filter_show_begin}
+				{count}
+				{t.filter_show_end}
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -46,9 +70,9 @@
 		position: absolute;
 		box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 		border-radius: 20px;
-		padding: 15px 15px 50px 15px;
+		padding: 15px 15px 25px 15px;
 		width: 80%;
-		min-height: 40%;
+		min-height: 30%;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
@@ -92,5 +116,31 @@
 		position: absolute;
 		bottom: -20%;
 		right: -10px;
+	}
+
+	.buttons {
+		display: flex;
+		justify-content: space-around;
+		margin-top: 30px;
+		width: 100%;
+	}
+
+	.clear,
+	.results {
+		font-family: 'Exo 2';
+		font-style: normal;
+		font-weight: 600;
+		font-size: 19px;
+		line-height: 40px;
+		/* or 211% */
+
+		letter-spacing: 1px;
+		text-decoration-line: underline;
+
+		color: #3d5a80;
+	}
+
+	.zero {
+		color: rgba(176, 26, 26, 0.7);
 	}
 </style>
