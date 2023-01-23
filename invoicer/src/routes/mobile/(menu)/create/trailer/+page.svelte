@@ -24,17 +24,11 @@
 	let license = null;
 	/** @type {string | null}*/
 	let brand = null;
-	/** @type {string | null}*/
-	let name = null;
 
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
 	let licenseStatus = 'ordinary';
-	/**
-	 * @type {'ordinary' | 'success' | 'error'}
-	 */
-	let nameStatus = 'ordinary';
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
@@ -46,7 +40,6 @@
 	let licenseText;
 
 	const save = async () => {
-		nameStatus = name ? 'ordinary' : 'error';
 		brandStatus = brand ? 'ordinary' : 'error';
 
 		if (!license) {
@@ -54,11 +47,11 @@
 			licenseStatus = 'error';
 		}
 
-		if (!name || !license || !brand) {
+		if (!license || !brand) {
 			return;
 		}
 		responseStatus = 'inProcess';
-		const result = await createTrailer(name, license, brand).then((res) => {
+		const result = await createTrailer(license, brand).then((res) => {
 			responseStatus = 'done';
 			return res;
 		});
@@ -74,20 +67,13 @@
 			openErrorMessage(t.message_unreachable_error, '');
 		} else {
 			goto('/mobile/trailers');
-			openSuccessMessage(t.transport_create_success, t.message_ok_button);
+			openSuccessMessage(t.transport_create_success);
 		}
 	};
 </script>
 
 <div class="main">
 	<MiniCategory title={t.transport_create_category}>
-		<LabeledInput
-			bind:value={name}
-			status={nameStatus}
-			label={t.transport_create_name}
-			message={t.transport_create_empty}
-			placeHolder={t.transport_create_name}
-		/>
 		<LabeledInput
 			bind:value={license}
 			status={licenseStatus}
@@ -104,12 +90,6 @@
 		/>
 	</MiniCategory>
 	<SaveEntity {save} status={responseStatus} />
-	<!-- <GlobalMessage
-		buttonAction={message}
-		buttonText={'super'}
-		message="asdf"
-		status={messageStatus}
-	/> -->
 </div>
 
 <style>

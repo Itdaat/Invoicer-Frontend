@@ -1,12 +1,18 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { getTrailers, getTrucks } from '$lib/api/server/transport';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import MiniCategoryLite from '$lib/mobile/components/MiniCategoryLite.svelte';
+	import { mobile, trailer } from '../../../../../consts';
 	import { Jumper } from 'svelte-loading-spinners';
 	import { slide } from 'svelte/transition';
 
 	const getTrucksFormatted = async () => {
 		return (await getTrailers()).result;
+	};
+
+	const gotoTruck = (/** @type {string | number} */ id) => {
+		goto(mobile + '/' + id + trailer);
 	};
 </script>
 
@@ -18,7 +24,14 @@
 			</div>
 		{:then trucks}
 			{#each trucks as truck}
-				<div class="truck" in:slide={{ duration: 700 }}>
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div
+					class="truck ripple"
+					in:slide={{ duration: 700 }}
+					on:click={() => {
+						gotoTruck(truck.id);
+					}}
+				>
 					<div class="license">{truck.licenseNumber}</div>
 					<div class="brand">{truck.brandName}</div>
 				</div>
@@ -71,5 +84,20 @@
 		letter-spacing: 1px;
 
 		color: #6e6e8b;
+	}
+
+	.ripple {
+		user-select: none;
+		background-position: center;
+		background-size: 1000%;
+		transition: background 0.8s;
+	}
+	.ripple:hover {
+		background: #ffffff radial-gradient(circle, transparent 1%, #ffffff 1%) center/10000%;
+	}
+	.ripple:active {
+		background-color: #c7c6c6;
+		background-size: 100%;
+		transition: background 0s;
 	}
 </style>
