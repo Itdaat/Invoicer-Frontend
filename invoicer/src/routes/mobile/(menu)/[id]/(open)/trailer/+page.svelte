@@ -1,7 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { deletePerson, getFullPerson, updateFullPerson } from '$lib/api/server/persons';
 	import { deleteTrailer, getTrailers, updateTrailer } from '$lib/api/server/transport';
 	import DeleteIcon from '$lib/assets/icons/DeleteIcon.svelte';
 	import { openErrorMessage, openSuccessMessage } from '$lib/helpers/message';
@@ -13,7 +12,6 @@
 	import MiniMenu from '$lib/mobile/templates/MiniMenu.svelte';
 	import LanguageStore from '$lib/stores/Language';
 	import {
-		driver,
 		entityIsUsed,
 		mobile,
 		mobileDrivers,
