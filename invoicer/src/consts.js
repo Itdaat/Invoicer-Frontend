@@ -41,10 +41,16 @@ export const transactionSlide = 4;
 
 // ! path
 export const mobile = '/mobile';
+export const messages = '/messages';
+export const invoices = '/invoices';
+export const orders = '/orders';
+export const transactions = '/transactions';
+export const payments = '/payments';
 export const drivers = '/drivers';
 export const cmrs = '/cmrs';
 export const trucks = '/trucks';
 export const trailers = '/trailers';
+export const settings = '/settings';
 export const pocket = '/pocket';
 export const cmr = '/cmr';
 export const truck = '/truck';
@@ -60,6 +66,7 @@ export const mobileCmrs = mobile + cmrs;
 export const mobileTrucks = mobile + trucks;
 export const mobileTrailers = mobile + trailers;
 export const mobilePocket = mobile + pocket;
+export const mobileSettings = mobile + settings;
 
 export const maxMessagesCount = 1;
 
