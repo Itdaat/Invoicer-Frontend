@@ -63,3 +63,17 @@ export async function deleteCmr(cmrId) {
     const result = await postAuthRequestJson('cmr/delete', reqBody);
     return result;
 }
+
+/**
+ * 
+ * 
+ * @export
+ * @param {import('../../../types/Entities').CMR} filter 
+ */
+export async function getCmrAllFields(filter) {
+    const reqBody = {
+        externalNumber: filter.externalNumber
+    }
+    const result = await postAuthRequestJson('cmr/get', reqBody);
+    return result;
+}
