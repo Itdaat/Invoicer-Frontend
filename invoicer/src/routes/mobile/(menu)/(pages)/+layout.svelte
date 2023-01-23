@@ -10,9 +10,6 @@
 	// $: showHorizontalMenu = true;
 	// $: showHorizontalMenu = !entitiesUrls.filter((url) => url == $page.url.pathname)[0];
 	$: showHorizontalMenu = $page.url.pathname == '/mobile';
-	// onMount(() => {
-	// 	FilterStore.set({});
-	// });
 	// $: alert($page.url.pathname);
 </script>
 
