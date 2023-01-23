@@ -83,7 +83,7 @@
     "transport_create_category": "Transport data",
     "transport_create_empty": "Empty field",
     "transport_create_name": "Name",
-    "transport_create_license": "License number",
+    "transport_create_license": "License",
     "transport_create_brand": "Brand",
     "transport_create_type": "Type",
     "transport_create_license_latin_error": "Please use only latin symbols",
@@ -132,6 +132,7 @@
     "person_no_data_email": "No email",
     "person_no_data_phone": "No phone",
     "person_main": "Driver",
+    "person_many": "Drivers",
     "person_is_used": "Can't change driver, he is already used.",
     "person_deleted_successfully": "Driver was deleted successfully",
     "person_wrong_person": "Wrong person",
@@ -139,6 +140,9 @@
     "person_title_update": "Update Driver",
     "FILTER": "______________FILTER______________",
     "filter_title": "Filters",
+    "filter_clear": "Clear",
+    "filter_show_begin": "Show",
+    "filter_show_end": "results",
     "TRAILER": "__________________TRAILER__________________",
     "trailer_main": "Trailer",
     "trailer_license": "Trailer license num",
@@ -149,5 +153,6 @@
     "trailer_deleted_successfully": "Trailer was deleted successfully",
     "trailer_delete_title": "Delete",
     "trailer_copied_license": "License number copied",
-    "trailer_copied_brand": "Brand copied"
+    "trailer_copied_brand": "Brand copied",
+    "trailers_many": "Trailers"
 }
