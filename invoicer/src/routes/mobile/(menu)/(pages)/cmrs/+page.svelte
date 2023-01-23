@@ -1,14 +1,13 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { getCmr, getCmrAllFields } from '$lib/api/server/cmr';
-	import { getTrucks } from '$lib/api/server/transport';
+	import { getCmrAllFields } from '$lib/api/server/cmr';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import MiniCategoryLite from '$lib/mobile/components/MiniCategoryLite.svelte';
 	import FilterStore from '$lib/stores/FilterStore';
-	import { cmr, mobile } from '../../../../../consts';
-	import { Jumper } from 'svelte-loading-spinners';
-	import { slide } from 'svelte/transition';
 	import LanguageStore from '$lib/stores/Language';
+	import { quartInOut } from 'svelte/easing';
+	import { slide } from 'svelte/transition';
+	import { cmr, mobile } from '../../../../../consts';
 
 	$: filter = $FilterStore;
 	$: t = $LanguageStore;
@@ -35,7 +34,7 @@
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div
 					class="cmr ripple"
-					in:slide={{ duration: 700 }}
+					in:slide={{ duration: 700, easing: quartInOut }}
 					on:click={() => {
 						gotoCmr(cmr.id);
 					}}
