@@ -5,14 +5,16 @@ export async function handle({ event, resolve }) {
     const host = event.url.origin;
     const userId = event.cookies.get('token');
     const mobileStartUrl = '/mobile';
+    const startUrl = '/invoices';
     const isLoginApi = event.url.pathname.startsWith('/api/reg');
     const isLoginPage = event.url.pathname.startsWith('/login'), isRegisterPage = event.url.pathname.startsWith('/register'), isResetPassPage = event.url.pathname.startsWith('/reset-password');
     if (!userId && !(isLoginPage || isRegisterPage || isResetPassPage || isLoginApi)) {
         return Response.redirect(host + '/login');
     }
 
-    if (userId && (isLoginPage || isRegisterPage || isResetPassPage || isLoginApi)) {
-        return Response.redirect(host + '/');
+    // console.log(event.url.pathname);
+    if (userId && (isLoginPage || isRegisterPage || isResetPassPage || isLoginApi || event.url.pathname == '/')) {
+        return Response.redirect(host + '/invoices');
     }
 
     if (!(isLoginPage || isRegisterPage || isRegisterPage || isLoginApi)) {
@@ -31,7 +33,7 @@ export async function handle({ event, resolve }) {
         if (isMobile && !event.url.pathname.startsWith(mobileStartUrl)) {
             return Response.redirect(host + mobileStartUrl);
         } else if (!isMobile && event.url.pathname.startsWith(mobileStartUrl)) {
-            return Response.redirect(host);
+            return Response.redirect(host + startUrl);
         }
     }
     return await resolve(event);
