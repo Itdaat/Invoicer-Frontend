@@ -138,5 +138,14 @@
     "person_update_success": "Driver updated",
     "person_title_update": "Update Driver",
     "FILTER": "______________FILTER______________",
-    "filter_title": "Filters"
+    "filter_title": "Filters",
+    "TRAILER": "__________________TRAILER__________________",
+    "trailer_main": "Trailer",
+    "trailer_license": "Trailer license num",
+    "trailer_brand": "Trailer Brand",
+    "trailer_update": "Update Trailer",
+    "trailer_is_used_error": "Can't change transport, it is already used.",
+    "trailer_wrong_trailer": "Wrong trailer",
+    "trailer_deleted_successfully": "Trailer was deleted successfully",
+    "trailer_delete_title": "Delete"
 }
