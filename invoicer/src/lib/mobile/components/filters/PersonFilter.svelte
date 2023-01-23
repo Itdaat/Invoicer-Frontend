@@ -1,18 +1,16 @@
 <script>
-	import InputDate from '$lib/templates/InputDate.svelte';
-	import dayjs from 'dayjs';
-	import { Datepicker } from 'svelte-calendar';
-	import { InlineCalendar } from 'svelte-calendar';
-	import { base } from '$app/paths';
-	import LabeledInput from '$lib/templates/LabeledInput.svelte';
-	import MiniCategory from '../MiniCategory.svelte';
-	import LanguageStore from '$lib/stores/Language';
+	import { getPersonAllFields } from '$lib/api/server/persons';
 	import FilterStore from '$lib/stores/FilterStore';
+	import FilterStoreHelper from '$lib/stores/FilterStoreHelper';
+	import LanguageStore from '$lib/stores/Language';
+	import LabeledInput from '$lib/templates/LabeledInput.svelte';
 	import { onMount } from 'svelte';
+	import MiniCategory from '../MiniCategory.svelte';
 	$: t = $LanguageStore;
 	let mounted = false;
 
 	$: filters = $FilterStore;
+	$: filterStoreHelper = $FilterStoreHelper;
 	// const filters = JSON.parse(localStorage.getItem('filter') || '{}');
 
 	/**
@@ -45,6 +43,19 @@
 		mounted = true;
 	});
 
+	const getDriversFormatted = async (filters) => {
+		return await getPersonAllFields({
+			...filters
+		});
+	};
+
+	$: {
+		if (filterStoreHelper.cleared) {
+			nickname = firstName = lastName = email = phone = null;
+			filterStoreHelper.cleared = false;
+		}
+	}
+
 	$: {
 		nickname = nickname == '' ? null : nickname;
 		firstName = firstName == '' ? null : firstName;
@@ -64,6 +75,10 @@
 		) {
 		} else {
 			FilterStore.set({ nickname, firstName, lastName, email, phone });
+			// @ts-ignore
+			getDriversFormatted({ nickname, firstName, lastName, email, phone }).then((res) =>
+				FilterStoreHelper.set({ count: res.length })
+			);
 		}
 	}
 </script>
