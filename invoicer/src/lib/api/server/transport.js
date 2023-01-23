@@ -5,13 +5,12 @@ import { TRANSPORT_TRAILER, TRANSPORT_TRUCK } from '../../../consts';
  * 
  * 
  * @export
- * @param {string} name 
  * @param {string} licenseNumber 
  * @param {string} transportBrand 
  */
-export async function createTrailer(name, licenseNumber, transportBrand) {
+export async function createTrailer(licenseNumber, transportBrand) {
     const reqBody = {
-        name, licenseNumber, transportBrand, transportTypeId: TRANSPORT_TRAILER
+        licenseNumber, transportBrand, transportTypeId: TRANSPORT_TRAILER
     };
     const result = await postAuthRequestJson('transport/create', reqBody);
     return result;
@@ -67,5 +66,37 @@ export async function getTrailers(id = null, name = null, licenseNumber = null, 
         id, name, licenseNumber, transportBrand, transportTypeId: TRANSPORT_TRAILER
     };
     const result = await postAuthRequestJson('transport/get', reqBody);
+    return result;
+}
+
+export async function deleteTruck(transportId) {
+    const reqBody = {
+        transportId
+    };
+    const result = await postAuthRequestJson('transport/delete', reqBody);
+    return result;
+}
+
+export async function deleteTrailer(transportId) {
+    const reqBody = {
+        transportId
+    };
+    const result = await postAuthRequestJson('transport/delete', reqBody);
+    return result;
+}
+
+export async function updateTruck(id, transportBrandName) {
+    const reqBody = {
+        transportId: id, transportBrandName, transportTypeId: TRANSPORT_TRUCK
+    };
+    const result = await postAuthRequestJson('transport/update', reqBody);
+    return result;
+}
+
+export async function updateTrailer(id, transportBrandName) {
+    const reqBody = {
+        transportId: id, transportBrandName, transportTypeId: TRANSPORT_TRAILER
+    };
+    const result = await postAuthRequestJson('transport/update', reqBody);
     return result;
 }
