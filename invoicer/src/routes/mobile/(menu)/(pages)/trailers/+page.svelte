@@ -1,24 +1,36 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { getTrailers, getTrucks } from '$lib/api/server/transport';
+	import { getTrailersAllFields } from '$lib/api/server/transport';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import MiniCategoryLite from '$lib/mobile/components/MiniCategoryLite.svelte';
-	import { mobile, trailer } from '../../../../../consts';
-	import { Jumper } from 'svelte-loading-spinners';
+	import FilterStore from '$lib/stores/FilterStore';
+	import LanguageStore from '$lib/stores/Language';
+	import { quartInOut } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
+	import { mobile, trailer } from '../../../../../consts';
 
-	const getTrucksFormatted = async () => {
-		return (await getTrailers()).result;
+	$: filter = $FilterStore;
+	$: t = $LanguageStore;
+
+	/**
+	 * @param {{ brand?: any; licenseNumber?: any; }} filters
+	 */
+	const getTrailersFormatted = async (filters) => {
+		return (await getTrailersAllFields({ ...filters })).result;
 	};
 
-	const gotoTruck = (/** @type {string | number} */ id) => {
+	$: trailers = getTrailersFormatted(filter);
+
+	console.log(trailers);
+
+	const gotoTrailer = (/** @type {string | number} */ id) => {
 		goto(mobile + '/' + id + trailer);
 	};
 </script>
 
 <div class="main">
-	<MiniCategoryLite title="Trailers">
-		{#await getTrucksFormatted()}
+	<MiniCategoryLite title={t.trailers_many}>
+		{#await trailers}
 			<div class="loader-container">
 				<Loader status="inProcess" size="60" />
 			</div>
@@ -27,9 +39,9 @@
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div
 					class="truck ripple"
-					in:slide={{ duration: 700 }}
+					in:slide={{ duration: 700, easing: quartInOut }}
 					on:click={() => {
-						gotoTruck(truck.id);
+						gotoTrailer(truck.id);
 					}}
 				>
 					<div class="license">{truck.licenseNumber}</div>
