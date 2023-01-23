@@ -1,6 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { createTruck } from '$lib/api/server/transport';
+	import { createTrailer, createTruck } from '$lib/api/server/transport';
 	import { openErrorMessage, openSuccessMessage } from '$lib/helpers/message';
 	import GlobalMessage from '$lib/mobile/components/GlobalMessage.svelte';
 	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
@@ -11,8 +11,10 @@
 	import LabeledInput from '$lib/templates/LabeledInput.svelte';
 	import {
 		entityAlreadyExists,
+		mobileTrailers,
+		mobileTrucks,
 		notLatinSymbol,
-		TRANSPORT_TRUCK,
+		TRANSPORT_TRAILER,
 		unreachableError
 	} from '../../../../../consts';
 
@@ -24,17 +26,11 @@
 	let license = null;
 	/** @type {string | null}*/
 	let brand = null;
-	/** @type {string | null}*/
-	let name = null;
 
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
 	let licenseStatus = 'ordinary';
-	/**
-	 * @type {'ordinary' | 'success' | 'error'}
-	 */
-	let nameStatus = 'ordinary';
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
@@ -46,7 +42,6 @@
 	let licenseText;
 
 	const save = async () => {
-		nameStatus = name ? 'ordinary' : 'error';
 		brandStatus = brand ? 'ordinary' : 'error';
 
 		if (!license) {
@@ -54,11 +49,11 @@
 			licenseStatus = 'error';
 		}
 
-		if (!name || !license || !brand) {
+		if (!license || !brand) {
 			return;
 		}
 		responseStatus = 'inProcess';
-		const result = await createTruck(name, license, brand, TRANSPORT_TRUCK).then((res) => {
+		const result = await createTruck(license, brand).then((res) => {
 			responseStatus = 'done';
 			return res;
 		});
@@ -73,7 +68,7 @@
 		} else if (result.error?.code == unreachableError.code) {
 			openErrorMessage(t.message_unreachable_error, '');
 		} else {
-			goto('/mobile/trucks');
+			goto(mobileTrucks);
 			openSuccessMessage(t.transport_create_success);
 		}
 	};
@@ -81,13 +76,6 @@
 
 <div class="main">
 	<MiniCategory title={t.transport_create_category}>
-		<LabeledInput
-			bind:value={name}
-			status={nameStatus}
-			label={t.transport_create_name}
-			message={t.transport_create_empty}
-			placeHolder={t.transport_create_name}
-		/>
 		<LabeledInput
 			bind:value={license}
 			status={licenseStatus}
@@ -104,12 +92,6 @@
 		/>
 	</MiniCategory>
 	<SaveEntity {save} status={responseStatus} />
-	<!-- <GlobalMessage
-		buttonAction={message}
-		buttonText={'super'}
-		message="asdf"
-		status={messageStatus}
-	/> -->
 </div>
 
 <style>
