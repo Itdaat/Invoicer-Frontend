@@ -107,7 +107,6 @@
 			return;
 		}
 		const person = personRes.result;
-		console.log(person);
 		if (!person) {
 			goto(mobileDrivers);
 			openErrorMessage(t.person_wrong_person);
@@ -153,7 +152,7 @@
 			bind:value={phone}
 			status={phoneStatus}
 			label={t.person_create_phone}
-			message={t.person_create_empty}
+			message={t.person_create_phone_not_valid}
 			type="tel"
 		/>
 

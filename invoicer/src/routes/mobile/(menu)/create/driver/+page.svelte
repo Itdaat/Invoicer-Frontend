@@ -41,9 +41,18 @@
 	const save = async () => {
 		firstNameStatus = lastNameStatus = emailStatus = phoneStatus = nicknameStatus = 'ordinary';
 
-		if (!firstName) firstNameStatus = 'error';
-		if (!lastName) lastNameStatus = 'error';
-		if (!phone || !isValidTelNum(phone)) phoneStatus = 'error';
+		if (!firstName) {
+			firstNameStatus = 'error';
+			return;
+		}
+		if (!lastName) {
+			lastNameStatus = 'error';
+			return;
+		}
+		if (!phone || !isValidTelNum(phone)) {
+			phoneStatus = 'error';
+			return;
+		}
 		if (email && !validateEmail(email)) emailStatus = 'error';
 		if (!nickname) {
 			nickNameErrorText = t.person_create_empty;
@@ -106,7 +115,7 @@
 			bind:value={phone}
 			status={phoneStatus}
 			label={t.person_create_phone}
-			message={t.person_create_empty}
+			message={t.person_create_phone_not_valid}
 			placeHolder={t.person_create_phone_placeholder}
 			type="tel"
 		/>
