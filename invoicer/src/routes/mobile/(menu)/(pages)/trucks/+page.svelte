@@ -1,24 +1,47 @@
 <script>
-	import { getTrucks } from '$lib/api/server/transport';
+	import { goto } from '$app/navigation';
+	import { getTrailersAllFields, getTrucksAllFields } from '$lib/api/server/transport';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import MiniCategoryLite from '$lib/mobile/components/MiniCategoryLite.svelte';
-	import { Jumper } from 'svelte-loading-spinners';
+	import FilterStore from '$lib/stores/FilterStore';
+	import LanguageStore from '$lib/stores/Language';
+	import { quartInOut } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
+	import { mobile, trailer, truck } from '../../../../../consts';
 
-	const getTrucksFormatted = async () => {
-		return (await getTrucks()).result;
+	$: filter = $FilterStore;
+	$: t = $LanguageStore;
+
+	/**
+	 * @param {{ brand?: any; licenseNumber?: any; }} filters
+	 */
+	const getTrailersFormatted = async (filters) => {
+		return (await getTrucksAllFields({ ...filters, licenseNumber: filter.license })).result;
+	};
+
+	$: trailers = getTrailersFormatted(filter);
+
+	const gotoTruck = (/** @type {string | number} */ id) => {
+		goto(mobile + '/' + id + truck);
 	};
 </script>
 
 <div class="main">
-	<MiniCategoryLite title="Trucks">
-		{#await getTrucksFormatted()}
+	<MiniCategoryLite title={t.trucks_many}>
+		{#await trailers}
 			<div class="loader-container">
 				<Loader status="inProcess" size="60" />
 			</div>
 		{:then trucks}
 			{#each trucks as truck}
-				<div class="truck" in:slide={{ duration: 700 }}>
+				<!-- svelte-ignore a11y-click-events-have-key-events -->
+				<div
+					class="truck ripple"
+					in:slide={{ duration: 700, easing: quartInOut }}
+					on:click={() => {
+						gotoTruck(truck.id);
+					}}
+				>
 					<div class="license">{truck.licenseNumber}</div>
 					<div class="brand">{truck.brandName}</div>
 				</div>
@@ -71,5 +94,20 @@
 		letter-spacing: 1px;
 
 		color: #6e6e8b;
+	}
+
+	.ripple {
+		user-select: none;
+		background-position: center;
+		background-size: 1000%;
+		transition: background 0.8s;
+	}
+	.ripple:hover {
+		background: #ffffff radial-gradient(circle, transparent 1%, #ffffff 1%) center/10000%;
+	}
+	.ripple:active {
+		background-color: #c7c6c6;
+		background-size: 100%;
+		transition: background 0s;
 	}
 </style>
