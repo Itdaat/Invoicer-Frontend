@@ -12,6 +12,7 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import FilterStore from '$lib/stores/FilterStore';
+	import FilterStoreHelper from '$lib/stores/FilterStoreHelper';
 	export let showMenu = false;
 
 	/** @type {import('../../../types/Entities').Firm}*/
@@ -71,36 +72,42 @@
 	const gotoPocket = () => {
 		hideSelf();
 		FilterStore.set({});
+		FilterStoreHelper.set({});
 		goto('/mobile/pocket');
 	};
 
 	const gotoCMR = () => {
 		hideSelf();
 		FilterStore.set({});
+		FilterStoreHelper.set({});
 		goto('/mobile/cmrs');
 	};
 
 	const gotoDrivers = () => {
 		hideSelf();
 		FilterStore.set({});
+		FilterStoreHelper.set({});
 		goto('/mobile/drivers');
 	};
 
 	const gotoTruck = () => {
 		hideSelf();
 		FilterStore.set({});
+		FilterStoreHelper.set({});
 		goto('/mobile/trucks');
 	};
 
 	const gotoTrailer = () => {
 		hideSelf();
 		FilterStore.set({});
+		FilterStoreHelper.set({});
 		goto('/mobile/trailers');
 	};
 
 	const gotoSettings = () => {
 		hideSelf();
 		FilterStore.set({});
+		FilterStoreHelper.set({});
 		goto('/mobile/settings');
 	};
 
