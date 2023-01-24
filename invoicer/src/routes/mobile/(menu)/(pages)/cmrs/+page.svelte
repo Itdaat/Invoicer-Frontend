@@ -20,6 +20,7 @@
 
 	const gotoCmr = (/** @type {string | number} */ id) => {
 		goto(mobile + '/' + id + cmr);
+		// window.location.href = '/mobile/' + id + cmr;
 	};
 </script>
 
