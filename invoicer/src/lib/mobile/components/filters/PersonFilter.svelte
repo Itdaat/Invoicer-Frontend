@@ -41,6 +41,10 @@
 		email = filters?.email;
 		phone = filters?.phone;
 		mounted = true;
+		// @ts-ignore
+		getDriversFormatted({ nickname, firstName, lastName, email, phone }).then((res) =>
+			FilterStoreHelper.set({ count: res.length })
+		);
 	});
 
 	const getDriversFormatted = async (filters) => {
@@ -53,6 +57,10 @@
 		if (filterStoreHelper.cleared) {
 			nickname = firstName = lastName = email = phone = null;
 			filterStoreHelper.cleared = false;
+			// @ts-ignore
+			getDriversFormatted({ nickname, firstName, lastName, email, phone }).then((res) =>
+				FilterStoreHelper.set({ count: res.length })
+			);
 		}
 	}
 
