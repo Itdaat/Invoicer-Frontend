@@ -94,7 +94,6 @@
 			responseStatus = 'inProcess';
 			return res;
 		});
-		console.log(result);
 		if (result.error) {
 			if (result.error?.code == userExists.code) {
 				loginStatus = 'error';

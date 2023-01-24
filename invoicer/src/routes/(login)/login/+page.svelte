@@ -31,7 +31,6 @@
 			responseStatus = 'done';
 			return res;
 		});
-		console.log(result);
 		if (result.error) {
 			if (result.error?.code == unreachableError.code) {
 				openErrorMessage(t.message_unreachable_error, '');
