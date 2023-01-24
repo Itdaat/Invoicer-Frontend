@@ -22,6 +22,7 @@
 		license = filter.license;
 		brand = filter.brand;
 		getTrailersFormatted({ licenseNumber: license, brand }).then((res) => {
+			// @ts-ignore
 			FilterStoreHelper.set({ count: res.length });
 		});
 		mounted = true;
@@ -49,8 +50,7 @@
 		} else {
 			FilterStore.set({ license, brand });
 			// @ts-ignore
-			getTrailersFormatted({ license, brand }).then((res) => {
-				console.log(res.length);
+			getTrailersFormatted({ licenseNumber: license, brand }).then((res) => {
 				FilterStoreHelper.set({ count: res.length });
 			});
 		}
