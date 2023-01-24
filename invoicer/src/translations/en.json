@@ -154,5 +154,21 @@
     "trailer_delete_title": "Delete",
     "trailer_copied_license": "License number copied",
     "trailer_copied_brand": "Brand copied",
-    "trailers_many": "Trailers"
+    "trailers_many": "Trailers",
+    "trailer_updated_successfully": "Trailer updated successfully",
+    "trailer_create_empty": "Empty field",
+    "TRUCK": "_____________TRUCK_____________",
+    "truck_main": "Truck",
+    "truck_license": "Truck license",
+    "truck_brand": "Truck Brand",
+    "truck_update": "Update Truck",
+    "truck_is_used_error": "Can't change transport, it is already used.",
+    "truck_wrong_truck": "Wrong truck",
+    "truck_deleted_successfully": "Truck was deleted successfully",
+    "truck_delete_title": "Delete",
+    "truck_copied_license": "License number copied",
+    "truck_copied_brand": "Brand copied",
+    "trucks_many": "Trucks",
+    "trucks_updated_successfully": "Truck updated successfully",
+    "trucks_create_empty": "Empty field"
 }
