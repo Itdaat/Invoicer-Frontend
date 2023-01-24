@@ -1,5 +1,7 @@
 <script>
+	import { getCmrAllFields } from '$lib/api/server/cmr';
 	import FilterStore from '$lib/stores/FilterStore';
+	import FilterStoreHelper from '$lib/stores/FilterStoreHelper';
 	import LanguageStore from '$lib/stores/Language';
 	import LabeledInput from '$lib/templates/LabeledInput.svelte';
 	import { onMount } from 'svelte';
@@ -8,6 +10,7 @@
 
 	$: t = $LanguageStore;
 	$: filters = $FilterStore;
+	$: filterStoreHelper = $FilterStoreHelper;
 
 	let mounted = false;
 
@@ -19,12 +22,24 @@
 	/** @type {string | null} */
 	let externalNumber;
 
+	const getCMRSFormatted = async (filters) => {
+		return (await getCmrAllFields(filters)).result;
+	};
+
+	$: {
+		if (filterStoreHelper.cleared) {
+			externalNumber = filters?.externalNumber;
+			getCMRSFormatted(filters).then((res) => FilterStoreHelper.set({ count: res.length }));
+		}
+	}
+
 	$: {
 		externalNumber = externalNumber == '' ? null : externalNumber;
 
 		if (externalNumber == filters.externalNumber || !mounted) {
 		} else {
 			FilterStore.set({ externalNumber });
+			getCMRSFormatted(filters).then((res) => FilterStoreHelper.set({ count: res.length }));
 		}
 	}
 </script>
