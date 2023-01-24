@@ -29,7 +29,6 @@
 			return;
 		}
 		const trailer = trailerRes.result[0];
-		console.log(trailer);
 		if (!trailer) {
 			goto(mobileTrucks);
 			openErrorMessage(t.truck_wrong_trailer);

@@ -9,7 +9,7 @@
 	import LanguageStore from '$lib/stores/Language';
 	import LabeledInput from '$lib/templates/LabeledInput.svelte';
 	import { onMount } from 'svelte';
-	import { mobileCmrs } from '../../../../../../consts';
+	import { mobileCmrs, mobileTrailers } from '../../../../../../consts';
 
 	const id = $page.params.id;
 
@@ -27,7 +27,7 @@
 
 		if (!brand) {
 			externalNumberStatus = 'error';
-			externalNumberErrorMessage = t.cmr_create_empty;
+			externalNumberErrorMessage = t.trailer_create_empty;
 			return;
 		}
 		responseStatus = 'inProcess';
@@ -38,7 +38,7 @@
 			return;
 		}
 		history.back();
-		openSuccessMessage(t.cmr_updated_successfully);
+		openSuccessMessage(t.trailer_updated_successfully);
 	};
 
 	const getTrailerFormatted = async () => {
@@ -48,8 +48,8 @@
 		}
 		const trailer = trailerRes.result[0];
 		if (!trailer) {
-			goto(mobileCmrs);
-			openErrorMessage(t.cmr_wrong_person);
+			goto(mobileTrailers);
+			openErrorMessage(t.trailer_wrong_trailer);
 			return;
 		}
 		// title = cmr.externalNumber;

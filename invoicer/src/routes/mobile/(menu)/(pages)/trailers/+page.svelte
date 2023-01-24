@@ -21,8 +21,6 @@
 
 	$: trailers = getTrailersFormatted(filter);
 
-	console.log(trailers);
-
 	const gotoTrailer = (/** @type {string | number} */ id) => {
 		goto(mobile + '/' + id + trailer);
 	};

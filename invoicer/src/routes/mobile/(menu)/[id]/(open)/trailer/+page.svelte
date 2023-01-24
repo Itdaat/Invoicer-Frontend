@@ -30,9 +30,8 @@
 			return;
 		}
 		const trailer = trailerRes.result[0];
-		console.log(trailer);
 		if (!trailer) {
-			goto(mobileDrivers);
+			goto(mobileTrailers);
 			openErrorMessage(t.trailer_wrong_trailer);
 			return;
 		}
