@@ -7,6 +7,7 @@
 	import FilterStoreHelper from '$lib/stores/FilterStoreHelper';
 	import LanguageStore from '$lib/stores/Language';
 	import { fade } from 'svelte/transition';
+	import Loader from './Loader.svelte';
 	export let showFilter = true;
 	$: t = $LanguageStore;
 
@@ -41,7 +42,11 @@
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<div class="results" class:zero on:click={showResult}>
 				{t.filter_show_begin}
-				{count}
+				{#if count !== undefined}
+					{count}
+				{:else}
+					<Loader size="20" />
+				{/if}
 				{t.filter_show_end}
 			</div>
 		</div>
