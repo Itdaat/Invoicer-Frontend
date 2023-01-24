@@ -3,7 +3,6 @@ import { TRANSPORT_TRAILER, TRANSPORT_TRUCK } from '../../../consts';
 
 /**
  * 
- * 
  * @export
  * @param {string} licenseNumber 
  * @param {string} transportBrand 
@@ -18,21 +17,18 @@ export async function createTrailer(licenseNumber, transportBrand) {
 
 /**
  * 
- * 
  * @export
- * @param {string} name 
  * @param {string} licenseNumber 
  * @param {string} transportBrand 
- * @param {number} transportTypeId 
+ * @returns 
  */
-export async function createTruck(name, licenseNumber, transportBrand, transportTypeId) {
+export async function createTruck(licenseNumber, transportBrand) {
     const reqBody = {
-        name, licenseNumber, transportBrand, transportTypeId
+        licenseNumber, transportBrand, transportTypeId: TRANSPORT_TRUCK
     };
     const result = await postAuthRequestJson('transport/create', reqBody);
     return result;
 }
-
 /**
  * 
  * 
@@ -64,6 +60,32 @@ export async function getTrucks(id = null, name = null, licenseNumber = null, tr
 export async function getTrailers(id = null, name = null, licenseNumber = null, transportBrand = null) {
     const reqBody = {
         id, name, licenseNumber, transportBrand, transportTypeId: TRANSPORT_TRAILER
+    };
+    const result = await postAuthRequestJson('transport/get', reqBody);
+    return result;
+}
+
+/**
+ * 
+ * 
+ * @export
+ * @param {{ brand?: any; licenseNumber?: any; }} filter
+ */
+export async function getTrailersAllFields(filter) {
+    const reqBody = {
+        transportBrandName: filter.brand,
+        licenseNumber: filter.licenseNumber,
+        transportTypeId: TRANSPORT_TRAILER
+    };
+    const result = await postAuthRequestJson('transport/get', reqBody);
+    return result;
+}
+
+export async function getTrucksAllFields(filter) {
+    const reqBody = {
+        transportBrandName: filter.brand,
+        licenseNumber: filter.licenseNumber,
+        transportTypeId: TRANSPORT_TRUCK
     };
     const result = await postAuthRequestJson('transport/get', reqBody);
     return result;
