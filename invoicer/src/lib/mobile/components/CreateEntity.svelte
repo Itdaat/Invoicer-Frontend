@@ -6,15 +6,18 @@
 	import { goto } from '$app/navigation';
 
 	$: t = $LanguageStore;
+	let rotated = false;
 
 	let showEntitiesList = false;
 
 	const clickOutsideEvent = () => {
 		showEntitiesList = false;
+		rotated = false;
 	};
 
 	const openPopup = () => {
 		showEntitiesList = !showEntitiesList;
+		rotated = !rotated;
 	};
 
 	const gotoInvoice = () => {
@@ -55,7 +58,7 @@
 
 <main use:clickOutside on:click_outside={clickOutsideEvent}>
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div class="icon-container" on:click={openPopup}>
+	<div class="icon-container" on:click={openPopup} class:rotated>
 		<PlusIcon />
 	</div>
 	{#if showEntitiesList}
@@ -89,6 +92,10 @@
 		z-index: 4;
 	}
 
+	.rotated {
+		transform: rotate(-135deg);
+	}
+
 	.icon-container {
 		width: 60px;
 		height: 60px;
@@ -100,6 +107,8 @@
 		background: #ffffff;
 		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 		border-radius: 100%;
+
+		transition-duration: 300ms;
 	}
 
 	.entities-list {
