@@ -46,7 +46,7 @@
 		display: grid;
 		grid-template-columns: 45% 55%;
 		margin: 14px 0px;
-		justify-content: center;
+		justify-content: space-between;
 		align-items: flex-start;
 		/* padding: 0px 30px; */
 		max-width: 90%;
@@ -58,7 +58,6 @@
 		display: flex;
 		align-items: center;
 		padding-top: 4px;
-		margin-right: 20px;
 
 		font-family: 'Istok Web';
 		font-style: normal;
@@ -75,7 +74,6 @@
 		border: none;
 		height: 80%;
 		border-bottom: 0.1px solid rgba(72, 97, 129, 0.631);
-		margin-left: 13px;
 		padding: 2px 14px;
 		/* width: 45%; */
 
@@ -136,6 +134,7 @@
 	@media only screen and (max-width: 350px) {
 		.input {
 			width: 50%;
+			min-width: 100px;
 		}
 	}
 </style>

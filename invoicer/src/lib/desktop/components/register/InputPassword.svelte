@@ -155,6 +155,7 @@
 	@media only screen and (max-width: 350px) {
 		.input {
 			width: 50%;
+			min-width: 100px;
 		}
 	}
 </style>
