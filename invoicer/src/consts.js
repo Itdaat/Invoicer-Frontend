@@ -77,6 +77,11 @@ export const paymentIban = 1;
 export const postalAddressType = 1;
 export const legalAddressType = 2;
 
+// ! order status
+export const unsignedStatus = 1;
+export const signedStatus = 2;
+export const brokenSignatureStatus = 3;
+
 
 export const responseErrors = [
     userExists, notValidPassword, needRealLogin, userNotFound, entityAlreadyExists, dataDuplication, entityIsUsed, notLatinSymbol
