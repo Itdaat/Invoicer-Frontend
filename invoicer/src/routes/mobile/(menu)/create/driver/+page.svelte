@@ -1,15 +1,14 @@
 <script>
-	import MiniCategory from '../../../../../lib/mobile/components/MiniCategory.svelte';
 	import { goto } from '$app/navigation';
-	import { createCmr } from '$lib/api/server/cmr';
+	import { createPerson, getPersonIds } from '$lib/api/server/persons';
 	import { validateEmail } from '$lib/helpers/email';
-	import { openErrorMessage, openSuccessMessage } from '$lib/helpers/message';
+	import { openSuccessMessage } from '$lib/helpers/message';
 	import { isValidTelNum } from '$lib/helpers/telNumber';
 	import SaveEntity from '$lib/mobile/components/SaveEntity.svelte';
 	import LanguageStore from '$lib/stores/Language';
 	import LabeledInput from '$lib/templates/LabeledInput.svelte';
-	import { createPerson, getPersonIds } from '$lib/api/server/persons';
 	import { driverTag, emailDataType, phoneDataType } from '../../../../../consts';
+	import MiniCategory from '../../../../../lib/mobile/components/MiniCategory.svelte';
 
 	$: t = $LanguageStore;
 	/** @type {import('src/types/Response').ResponseStatus}*/
