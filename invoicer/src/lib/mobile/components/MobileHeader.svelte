@@ -33,7 +33,8 @@
 	/**
 	 * @type {import('../../../types/Entities').Firm }
 	 */
-	const firm = JSON.parse(localStorage.getItem('firm') || '');
+	const firm = JSON.parse(localStorage.getItem('firm') || '{}');
+	// const firm = { name: 'Entities' };
 
 	let showFilter = false;
 	let showMenu = false;
