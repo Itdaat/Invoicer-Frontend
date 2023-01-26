@@ -3,19 +3,22 @@
 
 	export let number = '';
 	export let price = NaN;
-	/**@type {Date} */
+	/**@type {string} */
 	export let date;
 	export let truckNumber = '';
 	export let trailerNumber = '';
 	export let sign = '$';
+
+	const dateFormatter = new Date(date);
+
 	/**
 	 * @type {number}
 	 */
 	export let id;
 
-	const year = date.getFullYear();
-	const month = date.getMonth() + 1;
-	const day = date.getDate();
+	const year = dateFormatter.getFullYear();
+	const month = dateFormatter.getMonth() + 1;
+	const day = dateFormatter.getDate();
 	let monthStr = month < 10 ? '0' + month : month;
 	let dayStr = day < 10 ? '0' + day : day;
 </script>
@@ -118,14 +121,14 @@
 		margin-top: 1px;
 	}
 
-	:global(.ripple-light) {
+	.ripple-light {
 		background-position: center;
 		transition: background 0.8s;
 	}
-	:global(.ripple-light:hover) {
+	.ripple-light:hover {
 		background: #ffffff radial-gradient(circle, transparent 1%, #ffffff 1%) center/40000%;
 	}
-	:global(.ripple-light:active) {
+	.ripple-light:active {
 		background-color: #c7c6c6;
 		background-size: 100%;
 		transition: background 0s;
