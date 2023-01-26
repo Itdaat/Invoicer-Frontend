@@ -27,13 +27,15 @@
 		<div class="title">{title}</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<div class="actions" use:clickOutside on:click_outside={clickOutsideEvent}>
-			<div class="actions-container" on:click={openActions}>
-				<MoreActionsIcon />
-			</div>
-			{#if actionsActive}
-				<div class="actions-popup" in:slide out:slide on:click={() => {}}>
-					<slot name="actions">s</slot>
+			{#if $$slots.actions}
+				<div class="actions-container" on:click={openActions}>
+					<MoreActionsIcon />
 				</div>
+				{#if actionsActive}
+					<div class="actions-popup" in:slide out:slide on:click={() => {}}>
+						<slot name="actions">s</slot>
+					</div>
+				{/if}
 			{/if}
 		</div>
 	</div>
