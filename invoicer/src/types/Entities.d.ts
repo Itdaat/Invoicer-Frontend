@@ -49,7 +49,7 @@ export class Order {
 }
 
 export class CMR {
-    id : number,
+    id : number;
     externalNumber : string;
     transport: Transport;
     image: string;
@@ -102,9 +102,18 @@ export class Firm {
     id : string;
     name : string;
     messageCount? : number
+	length: number;
 }
 
 export class Response<T> {
     error : responseError | null;
     result : T
+}
+
+export class Address {
+    country : string;
+    town : string;
+    street : string;
+    postCode : string;
+    houseNumber : string;
 }
