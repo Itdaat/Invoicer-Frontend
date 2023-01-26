@@ -1,13 +1,13 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { getTrailersAllFields, getTrucksAllFields } from '$lib/api/server/transport';
+	import { getTrucksAllFields } from '$lib/api/server/transport';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import MiniCategoryLite from '$lib/mobile/components/MiniCategoryLite.svelte';
 	import FilterStore from '$lib/stores/FilterStore';
 	import LanguageStore from '$lib/stores/Language';
 	import { quartInOut } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
-	import { mobile, trailer, truck } from '../../../../../consts';
+	import { mobile, truck } from '../../../../../consts';
 
 	$: filter = $FilterStore;
 	$: t = $LanguageStore;
@@ -15,11 +15,11 @@
 	/**
 	 * @param {{ brand?: any; licenseNumber?: any; }} filters
 	 */
-	const getTrailersFormatted = async (filters) => {
+	const getTrucksFormatted = async (filters) => {
 		return (await getTrucksAllFields({ ...filters, licenseNumber: filter.license })).result;
 	};
 
-	$: trailers = getTrailersFormatted(filter);
+	$: trailers = getTrucksFormatted(filter);
 
 	const gotoTruck = (/** @type {string | number} */ id) => {
 		goto(mobile + '/' + id + truck);

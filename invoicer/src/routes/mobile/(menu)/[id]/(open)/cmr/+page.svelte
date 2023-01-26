@@ -11,13 +11,7 @@
 	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
 	import MiniMenu from '$lib/mobile/templates/MiniMenu.svelte';
 	import LanguageStore from '$lib/stores/Language';
-	import {
-		cmr,
-		entityIsUsed,
-		mobile,
-		mobileCmrs,
-		unreachableError
-	} from '../../../../../../consts';
+	import { cmr, entityIsUsed, mobile, mobileCmrs, unreachableError } from '../../../../../../consts';
 
 	export let title = '';
 	$: t = $LanguageStore;
@@ -87,17 +81,12 @@
 			</div>
 		{:then cmr}
 			<MiniCategory title={t.cmr_main}>
-				<ListItem
-					name={t.cmr_external_number}
-					value={cmr?.externalNumber}
-					messageText={t.cmr_copied_external_number}
-				/>
+				<ListItem name={t.cmr_external_number} value={cmr?.externalNumber} messageText={t.cmr_copied_external_number} />
 			</MiniCategory>
 		{/await}
 	</div>
 </MiniMenu>
 <ChangeEntity onClick={gotoUpdateCmr} status={gotoUpdateCmrStatus} />
-<GlobalMessages />
 
 <style>
 	.actions-item-title {

@@ -11,14 +11,7 @@
 	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
 	import MiniMenu from '$lib/mobile/templates/MiniMenu.svelte';
 	import LanguageStore from '$lib/stores/Language';
-	import {
-		entityIsUsed,
-		mobile,
-		mobileDrivers,
-		mobileTrailers,
-		trailer,
-		unreachableError
-	} from '../../../../../../consts';
+	import { entityIsUsed, mobile, mobileDrivers, mobileTrailers, trailer, unreachableError } from '../../../../../../consts';
 
 	export let title = '';
 	$: t = $LanguageStore;
@@ -83,22 +76,13 @@
 			</div>
 		{:then trailer}
 			<MiniCategory title={t.trailer_main}>
-				<ListItem
-					name={t.trailer_license}
-					value={trailer?.licenseNumber}
-					messageText={t.trailer_copied_license}
-				/>
-				<ListItem
-					name={t.trailer_brand}
-					value={trailer?.brandName}
-					messageText={t.trailer_copied_brand}
-				/>
+				<ListItem name={t.trailer_license} value={trailer?.licenseNumber} messageText={t.trailer_copied_license} />
+				<ListItem name={t.trailer_brand} value={trailer?.brandName} messageText={t.trailer_copied_brand} />
 			</MiniCategory>
 		{/await}
 	</div>
 </MiniMenu>
 <ChangeEntity onClick={gotoUpdateTrailer} />
-<GlobalMessages />
 
 <style>
 	.actions-item-title {
