@@ -1,11 +1,9 @@
 <script>
-	import { fade, fly } from 'svelte/transition';
-	import CreateEntity from '../../../../lib/mobile/components/CreateEntity.svelte';
-	import MobileHeader from '$lib/mobile/components/MobileHeader.svelte';
 	import { page } from '$app/stores';
 	import GlobalMessages from '$lib/mobile/components/GlobalMessages.svelte';
-	import { onMount } from 'svelte';
-	import FilterStore from '$lib/stores/FilterStore';
+	import MobileHeader from '$lib/mobile/components/MobileHeader.svelte';
+	import { fade } from 'svelte/transition';
+	import CreateEntity from '../../../../lib/mobile/components/CreateEntity.svelte';
 
 	// $: showHorizontalMenu = true;
 	// $: showHorizontalMenu = !entitiesUrls.filter((url) => url == $page.url.pathname)[0];

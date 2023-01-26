@@ -1,6 +1,6 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { getCurrentFirm, getFirm } from '$lib/api/server/firm';
+	import { getCurrentFirmId, getFirm } from '$lib/api/server/firm';
 	import CreateFirm from '$lib/desktop/components/firm/CreateFirm.svelte';
 	import { getCookie, setCookie } from '$lib/helpers/cookies';
 	import LanguageStore from '$lib/stores/Language';
@@ -21,7 +21,7 @@
 	const GetFirm = async () => {
 		let firm;
 		const firmId = getCookie('firmId');
-		const firmRes = await getFirm(firmId);
+		const firmRes = await getFirm(firmId || null);
 		if (firmRes.error) {
 			localStorage.setItem('create_title', t.firm_create);
 			goto('/mobile/create/firm');

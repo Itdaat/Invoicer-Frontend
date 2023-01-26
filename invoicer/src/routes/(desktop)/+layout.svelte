@@ -1,10 +1,10 @@
 <script>
-	import { getCurrentFirm } from '$lib/api/server/firm';
+	import { getCurrentFirmId } from '$lib/api/server/firm';
 	import CreateEntity from '$lib/desktop/components/CreateEntity.svelte';
 	import CreateFirm from '$lib/desktop/components/firm/CreateFirm.svelte';
 	import Menu from '$lib/desktop/components/Menu.svelte';
 
-	const firmId = getCurrentFirm();
+	const firmId = getCurrentFirmId();
 	const firm = JSON.parse(localStorage.getItem('firm') || '{}');
 
 	let showCreateFirm = !firm || firm.error;

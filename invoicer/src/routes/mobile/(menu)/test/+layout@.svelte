@@ -16,7 +16,6 @@
 </div>
 
 <GlobalMessages />
-<div class="create-entity" in:fade out:fade />
 
 <style>
 	.main {

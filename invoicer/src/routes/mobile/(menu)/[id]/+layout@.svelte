@@ -1,11 +1,13 @@
 <script>
 	import MobileHeaderMini from '../../../../lib/mobile/components/MobileHeaderMini.svelte';
 	import { slide, fade, fly } from 'svelte/transition';
+	import GlobalMessages from '$lib/mobile/components/GlobalMessages.svelte';
 </script>
 
 <main in:fade={{ duration: 300, delay: 300 }} out:fade={{ duration: 200 }}>
 	<slot />
 </main>
+<GlobalMessages />
 
 <style>
 	main {
