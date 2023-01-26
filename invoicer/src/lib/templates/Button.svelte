@@ -11,7 +11,9 @@
 </script>
 
 <div
-	class="container {type == 'dark' ? 'ripple-dark' : 'ripple-light'}"
+	class="container"
+	class:ripple-dark={type == 'dark'}
+	class:ripple-light={type == 'light'}
 	on:keypress={(e) => {}}
 	on:click={onClick}
 	class:light={type == 'light'}
@@ -77,27 +79,27 @@
 
 		color: #3d5a80;
 	}
-	:global(.ripple-light) {
+	.ripple-light {
 		background-position: center;
-		transition: background 0.8s;
+		transition: background 0.9s;
 	}
-	:global(.ripple-light:hover) {
-		background: #ffffff radial-gradient(circle, transparent 1%, #ffffff 1%) center/15000%;
+	.ripple-light:hover {
+		background: #ffff radial-gradient(circle, transparent 1%, #ffff 1%) center/15000%;
 	}
-	:global(.ripple-light:active) {
-		background-color: #c7c6c6;
+	.ripple-light:active {
+		background-color: #e7e2e2;
 		background-size: 100%;
 		transition: background 0s;
 	}
 
-	:global(.ripple-dark) {
+	.ripple-dark {
 		background-position: center;
 		transition: background 0.8s;
 	}
-	:global(.ripple-dark:hover) {
+	.ripple-dark:hover {
 		background: #3d5a80 radial-gradient(circle, transparent 1%, #3d5a80 1%) center/15000%;
 	}
-	:global(.ripple-dark:active) {
+	.ripple-dark:active {
 		background-color: #6280a7;
 		background-size: 100%;
 		transition: background 0s;
