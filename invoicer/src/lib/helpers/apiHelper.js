@@ -67,11 +67,12 @@ export async function postAuthRequestJson(path, body) {
 
             body: JSON.stringify(body)
         });
+
         const result = await resultJSON.json();
         const resultErr = getError(result);
         if (!result || resultErr) {
             return { error: resultErr, result: result || {} };
         }
         return { error: null, result: result };
-    } catch (e) { return { error: unreachableError, result: {} } }
+    } catch (e) { console.log(e); return { error: unreachableError, result: {} } }
 }
