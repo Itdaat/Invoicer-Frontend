@@ -4,7 +4,7 @@
 
 	/** @type {string} */
 	export let name;
-	/** @type {string | undefined} */
+	/** @type {string | number} */
 	export let value;
 	/** @type {string}*/
 	export let messageText;
@@ -15,6 +15,10 @@
 	const showMessage = () => {
 		openSuccessMessage(messageText, '', messageDuration);
 	};
+
+	if (typeof value !== 'string') {
+		value = value.toString();
+	}
 </script>
 
 {#if value}
