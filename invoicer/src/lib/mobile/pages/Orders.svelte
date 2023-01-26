@@ -1,11 +1,34 @@
 <script>
+	import { goto } from '$app/navigation';
+	import { getOrders } from '$lib/api/server/order';
+	import { getCookie } from '$lib/helpers/cookies';
+	import FilterStore from '$lib/stores/FilterStore';
 	import LanguageStore from '$lib/stores/Language';
+	import { mobile, order } from '../../../consts';
 	import CounterBig from '../components/CounterBig.svelte';
 	import CounterSmall from '../components/CounterSmall.svelte';
-	import InvoiceMini from '../components/InvoiceMini.svelte';
 	import MiniCategory from '../components/MiniCategory.svelte';
+	import OrderMini from '../components/OrderMini.svelte';
 
 	$: t = $LanguageStore;
+	$: filters = $FilterStore;
+
+	const firmId = getCookie('firmId');
+
+	/**
+	 * @param {{}} filters
+	 */
+	const getOrdersFormatted = async (filters) => {
+		// console.log((await getOrders(firmId, { ...filters, orderStatusId: 1 })).result);
+		return (await getOrders(firmId, filters)).result;
+	};
+
+	/** type {import('../../../types/Entities').InvoiceMini[]} */
+	$: futureOrdersApi = getOrdersFormatted(filters);
+
+	const gotoOrder = (id) => {
+		goto(mobile + '/' + id + order);
+	};
 
 	let data = {
 		sign: '$',
@@ -19,37 +42,6 @@
 		sign: '$',
 		title: 'В очікуванні'
 	};
-
-	/** @type {import('../../../types/Entities').InvoiceMini[]} */
-	let invoicesMini = [
-		{
-			id: 1,
-			trailerNumber: 'BO9999BO',
-			truckNumber: 'AO8888AO',
-			number: 'GPC-2314133',
-			date: new Date('2022-1-13'),
-			price: 11243,
-			status: 'missed'
-		},
-		{
-			id: 2,
-			trailerNumber: 'BO9999BO',
-			truckNumber: 'AO8888AO',
-			number: 'GPC-2314133',
-			date: new Date('2022-1-13'),
-			price: 11243,
-			status: 'missed'
-		},
-		{
-			id: 3,
-			trailerNumber: 'BO9999BO',
-			truckNumber: 'AO8888AO',
-			number: 'GPC-2314133',
-			date: new Date('2022-1-13'),
-			price: 11243,
-			status: 'missed'
-		}
-	];
 </script>
 
 <div class="main">
@@ -62,14 +54,16 @@
 		</div>
 	</div>
 	<MiniCategory title={t.invoices_mini_future}>
-		{#each invoicesMini as invoice}
-			<InvoiceMini {...invoice} />
-		{/each}
+		{#await futureOrdersApi then orders}
+			{#each orders as order}
+				<OrderMini price={order.price} date={order.date} trailerNumber={'dsfa'} truckNumber={'sdfe'} number={order.orderNumber} id={order.id} />
+			{/each}
+		{/await}
 	</MiniCategory>
 	<MiniCategory title={t.invoices_mini_future}>
-		{#each invoicesMini as invoice}
+		<!-- {#each orders as invoice}
 			<InvoiceMini {...invoice} />
-		{/each}
+		{/each} -->
 	</MiniCategory>
 </div>
 
