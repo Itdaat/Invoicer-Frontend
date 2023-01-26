@@ -28,7 +28,7 @@
 
 <style>
 	main {
-		height: 100vh;
+		height: 100%;
 		display: grid;
 		grid-template-rows: auto 1fr;
 	}
@@ -41,6 +41,7 @@
 		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 		padding: 0px 20px;
 		user-select: none;
+		z-index: 100;
 	}
 
 	.title {
@@ -56,26 +57,8 @@
 		color: #3d5a80;
 	}
 
-	.return,
-	.actions {
+	.return {
 		margin-top: 5px;
-	}
-
-	.actions-popup {
-		position: absolute;
-		top: 78px;
-		right: 8px;
-		background: linear-gradient(0deg, #ffffff, #ffffff), #ffffff;
-		box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-		border-radius: 10px;
-		width: 170px;
-		height: 137px;
-
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		padding-top: 2px;
-		user-select: none;
 	}
 
 	:global(.actions-item-title) {
@@ -107,5 +90,6 @@
 		flex-direction: column;
 		justify-content: flex-start;
 		align-items: center;
+		overflow: scroll;
 	}
 </style>
