@@ -35,17 +35,22 @@ export class Tag {
 }
 
 export class Order {
-    myNumber : string;
-    number? : string;
-    date? : string;
-    truck? : Transport;
-    trailer? : Transport;
-    person? : Person;
+    id : number;
+    orderNumber : string; 
+    externalOrderNumber : string;
+    date : string;
     downloadAddress : string;
     unloadAddress : string;
-    price: number;
-    currency : 'EUR' | 'USD';
-    paymentTerms: string;
+    price : number;
+    currencyId : number;
+    paymentTerms : string;
+    personId : number;
+    orderStatusId : number;
+    firmId : number;
+    lastName : string;
+    firstName: string;
+    nickname: string;
+    firmName: string;
 }
 
 export class CMR {
@@ -57,7 +62,7 @@ export class CMR {
 }
 
 export class Invoice {
-    number: string;
+    orderNumber: string;
     creationDate: string;
     paymentDate : string;
     order : Order;
