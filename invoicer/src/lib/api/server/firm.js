@@ -98,7 +98,7 @@ export async function createFirm(name, taxNumber, email, phone, legalAddress, po
     return firm;
 }
 
-export function getCurrentFirm() {
+export function getCurrentFirmId() {
     return JSON.parse(getCookie('firmId') || '{}');
 }
 
