@@ -17,6 +17,7 @@
 	onMount(async () => {
 		externalNumber = filters?.externalNumber;
 		mounted = true;
+		getCMRSFormatted(filters).then((res) => FilterStoreHelper.set({ count: res.length }));
 	});
 
 	/** @type {string | null} */
