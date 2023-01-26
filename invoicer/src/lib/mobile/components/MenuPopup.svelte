@@ -16,7 +16,7 @@
 	export let showMenu = false;
 
 	/** @type {import('../../../types/Entities').Firm}*/
-	const firm = JSON.parse(localStorage.getItem('firm') || '');
+	const firm = JSON.parse(localStorage.getItem('firm') || '{}');
 
 	let showFirms = false;
 
@@ -119,14 +119,8 @@
 
 {#if showMenu}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<main in:fade={{ duration: 200 }} out:fade={{ duration: 400 }}>
-		<div
-			class="menu"
-			use:clickOutside
-			on:click_outside={hideSelf}
-			in:fly={{ duration: 400, delay: 200, x: -40 }}
-			out:fly={{ duration: 400, x: -40 }}
-		>
+	<main in:fade|local={{ duration: 200 }} out:fade|local={{ duration: 400 }}>
+		<div class="menu" use:clickOutside on:click_outside={hideSelf} in:fly={{ duration: 400, delay: 200, x: -40 }} out:fly={{ duration: 400, x: -40 }}>
 			<div class="firms-container">
 				<div class="current-firm" on:click={showFirmsFunc}>
 					<div class="left">{firm.name}</div>
@@ -337,6 +331,8 @@
 		letter-spacing: 1px;
 
 		color: #3d5a80;
+
+		overflow: scroll;
 	}
 
 	.firms-container {
