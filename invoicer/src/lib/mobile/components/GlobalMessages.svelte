@@ -1,8 +1,11 @@
 <script>
+	import { closeMessages } from '$lib/helpers/message';
 	import GlobalMessageStore from '$lib/stores/GlobalMessage';
 	import GlobalMessage from './GlobalMessage.svelte';
 
 	$: globalMessages = $GlobalMessageStore;
+
+	closeMessages();
 </script>
 
 {#if globalMessages.arr.length > 0}
