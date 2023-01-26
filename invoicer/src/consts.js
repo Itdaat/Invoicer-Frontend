@@ -70,6 +70,14 @@ export const mobileSettings = mobile + settings;
 
 export const maxMessagesCount = 1;
 
+// ! 
+export const paymentIban = 1;
+
+// ! address type
+export const postalAddressType = 1;
+export const legalAddressType = 2;
+
+
 export const responseErrors = [
     userExists, notValidPassword, needRealLogin, userNotFound, entityAlreadyExists, dataDuplication, entityIsUsed, notLatinSymbol
 ]
