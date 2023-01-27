@@ -143,7 +143,13 @@
 										{/if}
 									</div>
 								{/each}
-								<a class="add-firm-button" href="/mobile/create/firm">{t.menu_add_firm}</a>
+								<a
+									class="add-firm-button"
+									href="/mobile/create/firm"
+									on:click={() => {
+										localStorage.setItem('create_title', t.firm_create);
+									}}>{t.menu_add_firm}</a
+								>
 							</div>
 						{/if}
 					{/await}
