@@ -51,6 +51,12 @@ export class Order {
     firstName: string;
     nickname: string;
     firmName: string;
+    products : OrderProduct[]
+}
+
+export class OrderProduct {
+    id : number;
+    name : string;
 }
 
 export class CMR {
