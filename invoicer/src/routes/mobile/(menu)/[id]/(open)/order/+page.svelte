@@ -18,6 +18,10 @@
 	import ListItemBill from '$lib/mobile/components/ListItemBill.svelte';
 	import { signedStatus, unsignedStatus } from '../../../../../../consts';
 	import ConclusionListItemBill from '$lib/mobile/components/ConclusionListItemBill.svelte';
+	import MiniCategoryLite from '$lib/mobile/components/MiniCategoryLite.svelte';
+	import Loader from '$lib/mobile/components/Loader.svelte';
+	import { slide } from 'svelte/transition';
+	import { quartIn, quartInOut } from 'svelte/easing';
 
 	$: t = $LanguageStore;
 	$: globalMessages = $GlobalMessageStore;
@@ -31,6 +35,7 @@
 
 	const getOrderFormatted = async () => {
 		const order = await getOrder(firmId, id);
+		console.log(order);
 		title = t.order_title + ' ' + order.orderNumber;
 		// status = order.orderStatusId == signedStatus ;
 		if (order.orderStatusId == signedStatus) {
@@ -48,8 +53,10 @@
 
 <MiniMenu {title}>
 	<div class="main" slot="main">
-		<div class="container">
-			{#await orderAPI then order}
+		{#await orderAPI}
+			<Loader type="circle" status="inProcess" size="60" />
+		{:then order}
+			<div class="container" in:slide={{ duration: 700, easing: quartIn }}>
 				<ListItemBill name={t.order_number} value={order.orderNumber} messageText={t.order_number_copied} />
 				<ListItemBill name={t.order_external_number} value={order.externalOrderNumber} messageText={t.order_external_number_copied} />
 				<ListItemBill name={t.order_date} value={formateDate(order.date)} messageText={t.order_date_copied} />
@@ -59,9 +66,28 @@
 				<ListItemBill name={t.order_payment_terms} value={formateDate(order.paymentTerms)} messageText={t.order_payment_terms_copied} />
 				<ListItemBill name={t.order_status} value={status} messageText={t.order_status_copied} />
 				<ListItemBill name={t.order_firm} value={order.firmName} messageText={t.order_firm_copied} />
-				<ConclusionListItemBill name={t.order_price} value={order.price} messageText={t.order_price} />
-			{/await}
-		</div>
+				{#if order.products?.length == 1}
+					<ListItemBill name={t.order_price} value={order.price} messageText={t.order_price} />
+				{/if}
+			</div>
+			{#if order.products?.length > 1}
+				{#await orderAPI then order}
+					<div class="container" style="margin-top:20px;" in:slide={{ duration: 400, delay: 600, easing: quartIn }}>
+						<!-- <div style="margin-left: -21px; margin-top: 10px;"> -->
+						<!-- <MiniCategoryLite title="Products"> -->
+						<ListItemBill
+							name={'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis '}
+							value={12399}
+							messageText={t.order_firm_copied}
+						/>
+						<ListItemBill name={t.order_firm} value={999} messageText={t.order_firm_copied} />
+						<!-- </MiniCategoryLite> -->
+						<!-- </div> -->
+						<ConclusionListItemBill name={t.order_price} value={order.price} messageText={t.order_price} />
+					</div>
+				{/await}
+			{/if}
+		{/await}
 		<div class="buttons-container">
 			<div class="left-button-container">
 				<Button type="light" onClick={sign}>{t.invoice_sign}</Button>
