@@ -4,7 +4,7 @@
 
 	/** @type {string} */
 	export let name;
-	/** @type {string | number} */
+	/** @type {any} */
 	export let value;
 	/** @type {string}*/
 	export let messageText;
