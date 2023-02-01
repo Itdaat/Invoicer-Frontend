@@ -36,15 +36,18 @@ export async function getOrder(firmId, orderId) {
  * @param {any} firmId 
  * @param {import('../../../types/Entities').Transport} truck 
  * @param {import('../../../types/Entities').Transport} trailer 
- * @param {import('../../../types/Entities').Person} driver 
+ * @param {import('../../../types/Entities').Person} personId 
  * @param {any} [orderNumber=null] 
  * @returns 
  */
-export async function updateOrder(orderId, firmId, truck, trailer, driver, orderNumber = null) {
+export async function updateOrder(orderId, firmId, truck, trailer, personId, orderNumber = null) {
     // const reqBody = { orderId, firmId, orderNumber };
     // const result = await postAuthRequestJson('/order/update', reqBody);
     // return result;
 
+    const reqBody = { orderId, firmId, truck, trailer, personId };
+    const result = await postAuthRequestJson('order/update', reqBody);
+    return result;
+
 
 }
-
