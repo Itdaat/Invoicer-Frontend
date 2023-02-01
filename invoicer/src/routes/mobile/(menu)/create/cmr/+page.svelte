@@ -32,7 +32,9 @@
 			return;
 		}
 		goto(mobileCmrs);
-		openSuccessMessage(t.cmr_created_successfully);
+		setTimeout(() => {
+			openSuccessMessage(t.cmr_created_successfully);
+		}, 500);
 	};
 </script>
 

@@ -80,7 +80,9 @@
 		const result = await createPerson(firstName, lastName, nickname, contactData, [driverTag]);
 		if (result.ok) {
 			goto('/mobile/drivers');
-			openSuccessMessage(t.person_create_success);
+			setTimeout(() => {
+				openSuccessMessage(t.person_create_success);
+			}, 500);
 		}
 	};
 </script>

@@ -9,12 +9,7 @@
 	import LanguageStore from '$lib/stores/Language';
 	import SliderStore from '$lib/stores/Slides';
 	import LabeledInput from '$lib/templates/LabeledInput.svelte';
-	import {
-		entityAlreadyExists,
-		notLatinSymbol,
-		TRANSPORT_TRAILER,
-		unreachableError
-	} from '../../../../../consts';
+	import { entityAlreadyExists, notLatinSymbol, TRANSPORT_TRAILER, unreachableError } from '../../../../../consts';
 
 	$: t = $LanguageStore;
 	/** @type {import('src/types/Response').ResponseStatus}*/
@@ -67,7 +62,9 @@
 			openErrorMessage(t.message_unreachable_error, '');
 		} else {
 			goto('/mobile/trailers');
-			openSuccessMessage(t.transport_create_success);
+			setTimeout(() => {
+				openSuccessMessage(t.transport_create_success);
+			}, 500);
 		}
 	};
 </script>
