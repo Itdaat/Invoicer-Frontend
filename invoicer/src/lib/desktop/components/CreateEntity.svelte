@@ -4,11 +4,35 @@
 	import PlusIcon from './../../assets/icons/PlusIcon.svelte';
 	import { clickOutside } from '$lib/helpers/ClickOutside.js';
 	import { goto } from '$app/navigation';
+	import CreatePopup from '../templates/CreatePopup.svelte';
+	import { cmr, driver, invoice, payment, trailer, transaction, truck } from '../../../consts.js';
+	import InvoiceFilter from '$lib/mobile/components/filters/InvoiceFilter.svelte';
+	import PaymentFilter from '$lib/mobile/components/filters/PaymentFilter.svelte';
+	import PersonFilter from '$lib/mobile/components/filters/PersonFilter.svelte';
+	import TransactionFilter from '$lib/mobile/components/filters/TransactionFilter.svelte';
+	import OrderFilter from '$lib/mobile/components/filters/OrderFilter.svelte';
+	import CreateInvoice from './create/CreateInvoice.svelte';
+	import CreatePayment from './create/CreatePayment.svelte';
+	import CreateDriver from './create/CreateDriver.svelte';
+	import CreateTrailer from './create/CreateTrailer.svelte';
+	import CreateCmr from './create/CreateCmr.svelte';
+	import CreateTruck from './create/CreateTruck.svelte';
 
 	$: t = $LanguageStore;
 	let rotated = false;
 
 	let showEntitiesList = false;
+	let showCreatePopup = false;
+
+	let showCreateInvoice = false,
+		showCreateTransaction = false,
+		showCreateTruck = false,
+		showCreateTrailer = false,
+		showCreatePayment = false,
+		showCreatePerson = false,
+		showCreateCmr = false;
+
+	let type = '';
 
 	const clickOutsideEvent = () => {
 		showEntitiesList = false;
@@ -20,39 +44,50 @@
 		rotated = !rotated;
 	};
 
-	const gotoInvoice = () => {
-		localStorage.setItem('create_title', t.title_invoice);
-		goto('/create/invoice');
+	const openCreatePopup = () => {
+		showCreatePopup = !showCreatePopup;
 	};
 
-	const gotoTransaction = () => {
-		localStorage.setItem('create_title', t.title_transaction);
-		goto('/create/transaction');
+	const createInvoice = () => {
+		type = invoice;
+		showCreateInvoice = !showCreateInvoice;
+		openCreatePopup();
 	};
 
-	const gotoTruck = () => {
-		localStorage.setItem('create_title', t.title_truck);
-		goto('/create/truck');
+	const createTransaction = () => {
+		type = transaction;
+		showCreateTransaction = !showCreateTransaction;
+		openCreatePopup();
 	};
 
-	const gotoTrailer = () => {
-		localStorage.setItem('create_title', t.title_trailer);
-		goto('/create/trailer');
+	const createTuck = () => {
+		type = truck;
+		showCreateTruck = !showCreateTruck;
+		openCreatePopup();
 	};
 
-	const gotoPayment = () => {
-		localStorage.setItem('create_title', t.title_payment);
-		goto('/create/payment');
+	const createTrailer = () => {
+		type = trailer;
+		showCreateTrailer = !showCreateTrailer;
+		openCreatePopup();
 	};
 
-	const gotoPerson = () => {
-		localStorage.setItem('create_title', t.title_person);
-		goto('/create/driver');
+	const createPayment = () => {
+		type = payment;
+		showCreatePayment = !showCreatePayment;
+		openCreatePopup();
 	};
 
-	const gotoCmr = () => {
-		localStorage.setItem('create_title', t.title_cmr);
-		goto('/create/cmr');
+	const createPerson = () => {
+		type = driver;
+		showCreatePerson = !showCreatePerson;
+		openCreatePopup();
+	};
+
+	const createCmr = () => {
+		type = cmr;
+		showCreateCmr = !showCreateCmr;
+		openCreatePopup();
 	};
 </script>
 
@@ -63,26 +98,48 @@
 	</div>
 	{#if showEntitiesList}
 		<div class="entities-list" in:slide|local out:slide|local>
-			<a class="entity-item" href="/mobile/create/invoice" on:click={gotoInvoice}>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="entity-item" on:click={createInvoice}>
 				{t.entity_invoice}
-			</a>
-			<a class="entity-item" href="/mobile/create/transaction" on:click={gotoTransaction}>
+			</div>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="entity-item" on:click={createTransaction}>
 				{t.entity_transaction}
-			</a>
-			<a class="entity-item" href="/mobile/create/truck" on:click={gotoTruck}>{t.entity_truck}</a>
-			<a class="entity-item" href="/mobile/create/trailer" on:click={gotoTrailer}>
+			</div>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="entity-item" on:click={createTuck}>{t.entity_truck}</div>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="entity-item" on:click={createTrailer}>
 				{t.entity_trailer}
-			</a>
-			<a class="entity-item" href="/mobile/create/payment" on:click={gotoPayment}>
+			</div>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="entity-item" on:click={createPayment}>
 				{t.entity_payment}
-			</a>
-			<a class="entity-item" href="/mobile/create/driver" on:click={gotoPerson}>
+			</div>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="entity-item" on:click={createPerson}>
 				{t.entity_person}
-			</a>
-			<a class="entity-item" href="/mobile/create/cmr" on:click={gotoCmr}>{t.entity_cmr}</a>
+			</div>
+			<!-- svelte-ignore a11y-click-events-have-key-events -->
+			<div class="entity-item" on:click={createCmr}>{t.entity_cmr}</div>
 		</div>
 	{/if}
 </main>
+{#if type == invoice}
+	<CreateInvoice />
+{:else if type == payment}
+	<CreatePayment />
+{:else if type == driver}
+	<CreateDriver />
+{:else if type == trailer}
+	<CreateTrailer bind:show={showCreateTrailer} />
+{:else if type == transaction}
+	<TransactionFilter />
+{:else if type == truck}
+	<CreateTruck />
+{:else if type == cmr}
+	<CreateCmr />
+{/if}
 
 <style>
 	main {
@@ -90,6 +147,9 @@
 		right: 90px;
 		bottom: 50px;
 		z-index: 4;
+
+		user-select: none;
+		cursor: pointer;
 	}
 
 	.rotated {
