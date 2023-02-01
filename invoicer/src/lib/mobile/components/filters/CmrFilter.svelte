@@ -26,13 +26,14 @@
 	let externalNumber;
 
 	const getCMRSFormatted = async (filters) => {
-		return (await getCmrAllFields(filters)).result;
+		return (await getCmrAllFields({ ...filters })).result;
 	};
 
 	$: {
 		if (filterStoreHelper.cleared) {
-			externalNumber = filters?.externalNumber;
-			getCMRSFormatted(filters).then((res) => FilterStoreHelper.set({ count: res.length }));
+			externalNumber = null;
+			filterStoreHelper.cleared = false;
+			getCMRSFormatted({ ...filters }).then((res) => FilterStoreHelper.set({ count: res.length }));
 		}
 	}
 
