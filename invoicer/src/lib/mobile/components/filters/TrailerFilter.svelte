@@ -12,16 +12,16 @@
 	$: filterStoreHelper = $FilterStoreHelper;
 	// const filters = JSON.parse(localStorage.getItem('filter') || '{}');
 
-	/** @type {string} */
-	let license;
+	/** @type {string | null} */
+	let licenseNumber;
 
-	/** @type {string}*/
+	/** @type {string | null}*/
 	let brand;
 
 	onMount(async () => {
-		license = filter.license;
+		licenseNumber = filter.licenseNumber;
 		brand = filter.brand;
-		getTrailersFormatted({ licenseNumber: license, brand }).then((res) => {
+		getTrailersFormatted({ licenseNumber, brand }).then((res) => {
 			// @ts-ignore
 			FilterStoreHelper.set({ count: res.length });
 		});
@@ -36,21 +36,20 @@
 	};
 
 	$: if (filterStoreHelper.cleared) {
-		license = null;
+		licenseNumber = null;
 		brand = null;
 		filterStoreHelper.cleared = false;
 	}
 
 	$: {
-		license = license == '' ? null : license;
+		licenseNumber = licenseNumber == '' ? null : licenseNumber;
 		brand = brand == '' ? null : brand;
 
-		// console.log(filters);
-		if ((license == filter.license && brand == filter.brand) || !mounted) {
+		if ((licenseNumber == filter.licenseNumber && brand == filter.brand) || !mounted) {
 		} else {
-			FilterStore.set({ license, brand });
-			// @ts-ignore
-			getTrailersFormatted({ licenseNumber: license, brand }).then((res) => {
+			FilterStore.set({ licenseNumber, brand });
+			// // @ts-ignore
+			getTrailersFormatted({ licenseNumber, brand }).then((res) => {
 				FilterStoreHelper.set({ count: res.length });
 			});
 		}
@@ -59,17 +58,8 @@
 
 <div class="main">
 	<MiniCategory title={t.trailer_main}>
-		<LabeledInput
-			bind:value={license}
-			label={t.transport_create_license}
-			placeHolder={t.transport_create_license}
-		/>
-		<LabeledInput
-			bind:value={brand}
-			label={t.transport_create_brand}
-			placeHolder={t.transport_create_brand}
-			message={t.transport_create_empty}
-		/>
+		<LabeledInput bind:value={licenseNumber} label={t.transport_create_license} placeHolder={t.transport_create_license} />
+		<LabeledInput bind:value={brand} label={t.transport_create_brand} placeHolder={t.transport_create_brand} message={t.transport_create_empty} />
 	</MiniCategory>
 </div>
 
