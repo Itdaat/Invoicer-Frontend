@@ -69,6 +69,7 @@
     "entity_cmr": "CMR",
     "entity_order": "Order",
     "entity_driver": "Driver",
+    "entity_create": "Create",
     "TITLE": "____________TITLE_____________",
     "title_cmr": "New CMR",
     "title_firm": "New Firm",
