@@ -32,7 +32,7 @@
 	export let showMenu = false;
 
 	/** @type {import('../../../types/Entities').Firm}*/
-	const firm = JSON.parse(localStorage.getItem('firm') || '');
+	const firm = JSON.parse(localStorage.getItem('firm') || '{}');
 
 	let showFirms = false;
 
@@ -241,6 +241,11 @@
 		overflow-y: scroll;
 
 		color: #3d5a80;
+	}
+
+	/* width */
+	.menu::-webkit-scrollbar {
+		display: none;
 	}
 
 	.firms-container {
