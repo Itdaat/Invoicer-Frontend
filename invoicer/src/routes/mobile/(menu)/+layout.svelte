@@ -22,7 +22,7 @@
 		let firm;
 		const firmId = getCookie('firmId');
 		const firmRes = await getFirm(firmId || null);
-		if (firmRes.error) {
+		if (firmRes.error || firmRes.result.length <= 0) {
 			localStorage.setItem('create_title', t.firm_create);
 			goto('/mobile/create/firm');
 		}

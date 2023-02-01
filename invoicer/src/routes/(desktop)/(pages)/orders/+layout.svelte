@@ -1,18 +1,9 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { getCmr, getCmrAllFields } from '$lib/api/server/cmr';
-	import ListContainer from '$lib/desktop/components/ListContainer.svelte';
-	import { openErrorMessage } from '$lib/helpers/message';
-	import CounterBig from '$lib/mobile/components/CounterBig.svelte';
-	import CounterSmall from '$lib/mobile/components/CounterSmall.svelte';
-	import ListItem from '$lib/mobile/components/ListItem.svelte';
-	import Loader from '$lib/mobile/components/Loader.svelte';
-	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
+	import { getCmrAllFields } from '$lib/api/server/cmr';
 	import FilterStore from '$lib/stores/FilterStore';
 	import LanguageStore from '$lib/stores/Language';
 	import { cmrs } from '../../../../consts';
-	import { fade, slide } from 'svelte/transition';
 
 	$: t = $LanguageStore;
 

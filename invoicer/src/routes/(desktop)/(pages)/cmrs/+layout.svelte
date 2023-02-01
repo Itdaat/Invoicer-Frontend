@@ -1,18 +1,13 @@
 <script>
 	import { goto } from '$app/navigation';
-	import { page } from '$app/stores';
-	import { getCmr, getCmrAllFields } from '$lib/api/server/cmr';
+	import { getCmrAllFields } from '$lib/api/server/cmr';
 	import ListContainer from '$lib/desktop/components/ListContainer.svelte';
-	import { openErrorMessage } from '$lib/helpers/message';
-	import CounterBig from '$lib/mobile/components/CounterBig.svelte';
-	import CounterSmall from '$lib/mobile/components/CounterSmall.svelte';
-	import ListItem from '$lib/mobile/components/ListItem.svelte';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
 	import FilterStore from '$lib/stores/FilterStore';
 	import LanguageStore from '$lib/stores/Language';
-	import { cmrs } from '../../../../consts';
 	import { fade, slide } from 'svelte/transition';
+	import { cmrs } from '../../../../consts';
 
 	$: t = $LanguageStore;
 
@@ -44,20 +39,11 @@
 
 <div class="main">
 	<div class="menu">
-		<!-- <div class="container"> -->
-		<!-- </div> -->
-
-		<div class="lists" transition:fade|local={{ duration: 700 }}>
-			<ListContainer>
-				{#await cmrsFormatted}
-					<div class="loader-container">
-						<Loader status="inProcess" size="60" />
-					</div>
-				{:then cmrs}
+		<div class="lists" in:fade|local={{ duration: 700, delay: 400 }} out:fade|local={{ duration: 400 }}>
+			{#await cmrsFormatted then cmrs}
+				<ListContainer>
 					<MiniCategory title="super">
-						<!-- hello -->
 						{#each cmrs as cmr}
-							<!-- <ListItem name="da" value="lele">Test</ListItem> -->
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
 							<div
 								class="cmr ripple"
@@ -67,12 +53,11 @@
 								}}
 							>
 								<div class="license">{cmr.externalNumber}</div>
-								<!-- <div class="brand">{cmr.brandName}</div> -->
 							</div>
 						{/each}
 					</MiniCategory>
-				{/await}
-			</ListContainer>
+				</ListContainer>
+			{/await}
 		</div>
 	</div>
 	<div class="data">
