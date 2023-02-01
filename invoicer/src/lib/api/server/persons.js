@@ -1,5 +1,5 @@
 import { postAuthRequestJson } from "$lib/helpers/apiHelper";
-import { emailDataType, phoneDataType } from "../../../consts";
+import { driver, emailDataType, phoneDataType } from "../../../consts";
 
 /**
  * 
@@ -121,7 +121,8 @@ export async function getPersonIds(firstName = null, lastName = null, nickname =
  * 
  * @export
  * @param {import('../../../types/Entities').Person} filter 
- * @returns 
+ * @returns {Promise<import('../../../types/Entities').Person[]>}
+ * 
  */
 export async function getPersonAllFields(filter) {
     const contactDataUpdated = [];
@@ -298,4 +299,37 @@ export async function updateFullPerson(personId, firstName = null, lastName = nu
         }
     }
     return {}
+}
+
+
+export async function getDriverAutocomplete(name) {
+    let nickName = await getPersonAllFields({ nickname: name });
+    let drivers = [...nickName];
+    if (name) {
+        let firstName = await getPersonAllFields({ firstName: name });
+        let lastName = await getPersonAllFields({ lastName: name });
+        let phone = await getPersonAllFields({ phone: name });
+        let email = await getPersonAllFields({ email: name });
+        drivers = [
+            ...nickName,
+            ...firstName,
+            ...lastName,
+            ...phone,
+            ...email
+        ]
+    }
+    let driversRes = [];
+    drivers.forEach((driverRes) => {
+        let nickname = '';
+        if (driverRes.nickname) {
+            nickname = ' (' + driverRes.nickname + ')';
+        }
+        const newDriver = driverRes.firstName + ' ' + driverRes.lastName + nickname;
+        driversRes.push({
+            value: newDriver,
+            name: newDriver,
+            pseudoValue: driverRes.id
+        });
+    })
+    return driversRes;
 }
