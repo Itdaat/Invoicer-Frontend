@@ -1,4 +1,6 @@
 <script>
+	// @ts-nocheck
+
 	import { getCmrAllFields } from '$lib/api/server/cmr';
 	import FilterStore from '$lib/stores/FilterStore';
 	import FilterStoreHelper from '$lib/stores/FilterStoreHelper';
@@ -40,18 +42,14 @@
 		if (externalNumber == filters.externalNumber || !mounted) {
 		} else {
 			FilterStore.set({ externalNumber });
-			getCMRSFormatted(filters).then((res) => FilterStoreHelper.set({ count: res.length }));
+			getCMRSFormatted({ externalNumber }).then((res) => FilterStoreHelper.set({ count: res.length }));
 		}
 	}
 </script>
 
 <div class="main">
 	<MiniCategory title={t.title_cmr}>
-		<LabeledInput
-			bind:value={externalNumber}
-			label={t.cmr_external_number}
-			placeHolder={t.cmr_external_number_placeholder}
-		/>
+		<LabeledInput bind:value={externalNumber} label={t.cmr_external_number} placeHolder={t.cmr_external_number_placeholder} />
 	</MiniCategory>
 </div>
 
