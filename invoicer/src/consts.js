@@ -62,6 +62,7 @@ export const payment = '/payment';
 export const transaction = '/transaction';
 
 export const mobileDrivers = mobile + drivers;
+export const mobileOrders = mobile + orders;
 export const mobileCmrs = mobile + cmrs;
 export const mobileTrucks = mobile + trucks;
 export const mobileTrailers = mobile + trailers;
@@ -81,6 +82,7 @@ export const legalAddressType = 2;
 export const unsignedStatus = 1;
 export const signedStatus = 2;
 export const brokenSignatureStatus = 3;
+
 
 
 export const responseErrors = [
