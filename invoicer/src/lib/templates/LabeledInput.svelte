@@ -1,4 +1,6 @@
 <script>
+	import { clickOutside } from '$lib/helpers/ClickOutside';
+	import Loader from '$lib/mobile/components/Loader.svelte';
 	import { fade, slide } from 'svelte/transition';
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
@@ -12,6 +14,18 @@
 	export let message = '';
 	export let onBlurFunc = () => {};
 	export let onFocusFunc = () => {};
+	export let autocomplete = false;
+	export let pseudoValue = '';
+	export let noText = '';
+
+	let copyValue = '';
+	$: selected = copyValue != value;
+	let focused = false;
+	let outside = true;
+	/**
+	 * @type {Promise<{ value: string; name: string; pseudoValue : string; }[]>}
+	 */
+	export let suggestionsApi;
 
 	export let label = '';
 
@@ -19,23 +33,69 @@
 		error = false;
 	$: success = status == 'success';
 	$: error = status == 'error';
+
+	const focus = () => {
+		outside = false;
+		focused = true;
+		onBlurFunc();
+	};
+
+	const blur = () => {
+		focused = false;
+		onFocusFunc();
+	};
+
+	/**
+	 * @param {string | null} val
+	 * @param {string | null} pVal
+	 */
+	const onSuggestionClick = (val, pVal) => {
+		copyValue = value = val;
+		pseudoValue = pVal;
+		outside = true;
+		selected = true;
+	};
+
+	const clickOutsideEv = () => (outside = true);
 </script>
 
 <div class="container">
 	<div class="left">
 		<div class="label" class:success class:error>{label}</div>
 	</div>
-	<input
-		class="input"
-		class:success
-		class:error
-		placeholder={placeHolder}
-		{disabled}
-		{...{ type }}
-		bind:value
-		on:blur={onBlurFunc}
-		on:focus={onFocusFunc}
-	/>
+	<div class="input-container" use:clickOutside on:click_outside={clickOutsideEv}>
+		<input class="input" class:success class:error placeholder={placeHolder} {disabled} {...{ type }} bind:value on:blur={blur} on:focus={focus} />
+		{#if autocomplete && (!outside || focused)}
+			{#await suggestionsApi then suggestions}
+				<div class="suggestions">
+					{#if suggestions.length > 0}
+						{#each suggestions as suggestion}
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<div
+								class="suggestion"
+								on:click={() => {
+									onSuggestionClick(suggestion.value, suggestion.pseudoValue);
+								}}
+								out:fade={{ duration: 100 }}
+							>
+								{suggestion.name}
+							</div>
+						{/each}
+					{:else if selected}
+						<!-- svelte-ignore a11y-click-events-have-key-events -->
+						<div
+							class="suggestion"
+							on:click={() => {
+								onSuggestionClick(null, null);
+							}}
+						>
+							{noText}
+						</div>
+					{/if}
+				</div>
+			{/await}
+		{/if}
+	</div>
 </div>
 {#if status == 'error' && message != ''}
 	<div class="message-container" transition:slide={{ duration: 200 }}>{message}</div>
@@ -67,6 +127,11 @@
 		letter-spacing: 1px;
 
 		color: #3d5a80;
+	}
+
+	.input-container {
+		overflow-x: hidden;
+		/* position: relative; */
 	}
 
 	.input {
@@ -129,6 +194,48 @@
 		text-align: center;
 		margin-top: 9px;
 		/* margin-bottom: -10px; */
+	}
+
+	.suggestions {
+		/* min-height: 10px; */
+		max-height: 170px;
+
+		overflow-y: scroll;
+		background-color: white;
+		position: absolute;
+		right: 15px;
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+
+		border-radius: 10px;
+		width: 200px;
+		z-index: 90;
+		/* display: flex;
+		justify-content: center;
+		flex-direction: column; */
+	}
+
+	.suggestions:empty {
+		display: none;
+	}
+
+	.suggestion {
+		/* overflow: hidden; */
+
+		font-family: 'Exo 2';
+		text-decoration: none;
+		font-style: normal;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 40px;
+		/* or 211% */
+		padding: 0px 10px;
+
+		letter-spacing: 1px;
+
+		color: #3d5a80;
+
+		/* overflow-x: hidden; */
+		/* word-wrap: break-word; */
 	}
 
 	@media only screen and (max-width: 350px) {
