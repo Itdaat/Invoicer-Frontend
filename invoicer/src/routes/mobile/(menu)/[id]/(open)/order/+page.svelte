@@ -1,27 +1,19 @@
 <script>
-	import LanguageStore from '$lib/stores/Language';
-	import ShareIcon from '$lib/assets/icons/ShareIcon.svelte';
-	import PrintIcon from '$lib/assets/icons/PrintIcon.svelte';
-	import DeleteIcon from '$lib/assets/icons/DeleteIcon.svelte';
-	import Button from '$lib/templates/Button.svelte';
-	import MiniMenu from '$lib/mobile/templates/MiniMenu.svelte';
-	import { getInvoice } from '$lib/api/server/invoice';
-	import { getOrder } from '$lib/api/server/order';
-	import { getCurrentFirmId } from '$lib/api/server/firm';
+	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import ListItem from '$lib/mobile/components/ListItem.svelte';
-	import GlobalMessages from '$lib/mobile/components/GlobalMessages.svelte';
-	import GlobalMessage from '$lib/mobile/components/GlobalMessage.svelte';
-	import GlobalMessageStore from '$lib/stores/GlobalMessage';
-	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
+	import { getCurrentFirmId } from '$lib/api/server/firm';
+	import { getOrder } from '$lib/api/server/order';
 	import { formateDate, formatName } from '$lib/helpers/format';
-	import ListItemBill from '$lib/mobile/components/ListItemBill.svelte';
-	import { signedStatus, unsignedStatus } from '../../../../../../consts';
 	import ConclusionListItemBill from '$lib/mobile/components/ConclusionListItemBill.svelte';
-	import MiniCategoryLite from '$lib/mobile/components/MiniCategoryLite.svelte';
+	import ListItemBill from '$lib/mobile/components/ListItemBill.svelte';
 	import Loader from '$lib/mobile/components/Loader.svelte';
+	import MiniMenu from '$lib/mobile/templates/MiniMenu.svelte';
+	import GlobalMessageStore from '$lib/stores/GlobalMessage';
+	import LanguageStore from '$lib/stores/Language';
+	import Button from '$lib/templates/Button.svelte';
+	import { quartIn } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
-	import { quartIn, quartInOut } from 'svelte/easing';
+	import { mobile, order, signedStatus, unsignedStatus } from '../../../../../../consts';
 
 	$: t = $LanguageStore;
 	$: globalMessages = $GlobalMessageStore;
@@ -33,9 +25,13 @@
 
 	const sign = () => {};
 
+	const change = () => {
+		localStorage.setItem('create_title', t.order_update_title);
+		goto(mobile + '/' + id + '/update' + order);
+	};
+
 	const getOrderFormatted = async () => {
 		const order = await getOrder(firmId, id);
-		console.log(order);
 		title = t.order_title + ' ' + order.orderNumber;
 		// status = order.orderStatusId == signedStatus ;
 		if (order.orderStatusId == signedStatus) {
@@ -64,28 +60,22 @@
 				<ListItemBill name={t.order_unload_address} value={order.unloadAddress} messageText={t.order_unload_address} />
 				<ListItemBill name={t.order_person} value={formatName(order.firstName, order.lastName, order.nickname)} messageText={t.order_person_copied} />
 				<ListItemBill name={t.order_payment_terms} value={formateDate(order.paymentTerms)} messageText={t.order_payment_terms_copied} />
-				<ListItemBill name={t.order_status} value={status} messageText={t.order_status_copied} />
+				<ListItemBill name={t.order_status} value={status} messageText={t.order_status_copied} makeCopy={false} />
 				<ListItemBill name={t.order_firm} value={order.firmName} messageText={t.order_firm_copied} />
+				<ListItemBill name={t.order_truck} value={order.truck.licenseNumber} messageText={t.order_truck_copied} />
+				<ListItemBill name={t.order_trailer} value={order.trailer.licenseNumber} messageText={t.order_trailer_copied} />
 				{#if order.products?.length == 1}
-					<ListItemBill name={t.order_price} value={order.price} messageText={t.order_price} />
+					<ListItemBill name={t.order_price} value={order.price} messageText={t.order_price_copied} />
 				{/if}
 			</div>
 			{#if order.products?.length > 1}
-				{#await orderAPI then order}
-					<div class="container" style="margin-top:20px;" in:slide={{ duration: 400, delay: 600, easing: quartIn }}>
-						<!-- <div style="margin-left: -21px; margin-top: 10px;"> -->
-						<!-- <MiniCategoryLite title="Products"> -->
-						<ListItemBill
-							name={'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corporis '}
-							value={12399}
-							messageText={t.order_firm_copied}
-						/>
-						<ListItemBill name={t.order_firm} value={999} messageText={t.order_firm_copied} />
-						<!-- </MiniCategoryLite> -->
-						<!-- </div> -->
-						<ConclusionListItemBill name={t.order_price} value={order.price} messageText={t.order_price} />
-					</div>
-				{/await}
+				<div class="container" style="margin-top:20px;" in:slide={{ duration: 400, delay: 400, easing: quartIn }}>
+					{#each order.products as product}
+						<ListItemBill name={product.name} value={product.price} messageText={t.order_product_price_copied} />
+					{/each}
+					<!-- <ConclusionListItemBill name={t.order_price} value={product.price} messageText={t.order_price} /> -->
+					<ConclusionListItemBill name={t.order_price} value={order.price} messageText={t.order_price_copied} />
+				</div>
 			{/if}
 		{/await}
 		<div class="buttons-container">
@@ -93,7 +83,7 @@
 				<Button type="light" onClick={sign}>{t.invoice_sign}</Button>
 			</div>
 			<div class="right-button-container">
-				<Button type="dark" onClick={sign}>{t.invoice_reject}</Button>
+				<Button type="dark" onClick={change}>{t.invoice_reject}</Button>
 			</div>
 		</div>
 	</div>
