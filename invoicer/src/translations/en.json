@@ -196,8 +196,10 @@
     "ORDER": "____________ORDER___________",
     "order_main": "Order",
     "order_title": "Order",
+    "order_update_title": "Update Order",
     "order_number": "Order number",
     "order_number_copied": "Number copied",
+    "order_number_empty": "Empty field",
     "order_external_number": "External order number",
     "order_external_number_copied": "External order copied",
     "order_date": "Date",
@@ -220,5 +222,16 @@
     "order_firm_copied": "Firm copied",
     "order_status_signed": "Signed",
     "order_status_unsigned": "Unsigned",
-    "order_status_broken_signature": "broken signature"
+    "order_status_broken_signature": "broken signature",
+    "order_error_wrong_order": "Wrong order",
+    "order_trailer": "Trailer license",
+    "order_trailer_copied": "Trailer license copied",
+    "order_truck": "Truck license",
+    "order_truck_copied": "Truck license copied",
+    "order_product_price_copied": "Product price copied",
+    "order_truck_empty": "Empty field",
+    "order_trailer_empty": "Empty field",
+    "order_person_empty": "Empty field",
+    "order_transport": "Transport",
+    "order_driver_no_driver": "+ Add driver"
 }
