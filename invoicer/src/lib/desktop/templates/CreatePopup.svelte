@@ -1,19 +1,17 @@
 <script>
 	import CloseMenuIcon from '$lib/assets/icons/CloseMenuIcon.svelte';
 	import { clickOutside } from '$lib/helpers/ClickOutside';
-	import FilterStoreHelper from '$lib/stores/FilterStoreHelper';
 	import LanguageStore from '$lib/stores/Language';
 	import { fade } from 'svelte/transition';
-	export let showFirm = true;
+	export let show = true;
+	export let save = () => {};
 	$: t = $LanguageStore;
 	let hideFilter = () => {
-		showFirm = false;
+		show = false;
 	};
-
-	function save() {}
 </script>
 
-{#if showFirm}
+{#if show}
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div class="main" transition:fade={{ duration: 300 }}>
 		<div class="container" use:clickOutside on:click_outside={hideFilter}>
@@ -24,7 +22,7 @@
 			<slot />
 			<div class="buttons">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
-				<div class="clear" on:click={save}>{t.filter_clear}</div>
+				<div class="save" on:click={save}>{t.entity_create}</div>
 			</div>
 		</div>
 	</div>
@@ -52,13 +50,13 @@
 		position: absolute;
 		box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
 		border-radius: 20px;
-		padding: 15px 15px 25px 15px;
+		padding: 20px 10px;
 		width: 80%;
-		max-width: 800px;
+		max-width: fit-content;
 		min-height: 30%;
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-start;
+		justify-content: center;
 		align-items: center;
 	}
 
@@ -74,7 +72,7 @@
 
 		color: #3d5a80;
 
-		margin-bottom: 20px;
+		margin-bottom: 10px;
 	}
 
 	.icon-button {
@@ -89,18 +87,18 @@
 
 	.close-button {
 		position: absolute;
-		top: -15%;
-		right: -15px;
+		top: -12%;
+		right: -35px;
 	}
 
 	.buttons {
 		display: flex;
 		justify-content: space-around;
-		margin-top: 30px;
+		margin-top: 20px;
 		width: 100%;
 	}
 
-	.clear {
+	.save {
 		font-family: 'Exo 2';
 		font-style: normal;
 		font-weight: 600;
@@ -110,6 +108,9 @@
 
 		letter-spacing: 1px;
 		text-decoration-line: underline;
+
+		user-select: none;
+		cursor: pointer;
 
 		color: #3d5a80;
 	}
