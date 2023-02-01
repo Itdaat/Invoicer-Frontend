@@ -12,15 +12,14 @@ export class Transport {
 }
 
 export class Person {
-    id : number;
-    firstName : string; 
-    lastName: string;
-    telNumber: string;
-    nickname : string;
-    isUsed : boolean;
-    phone : ContactData;
-    email : ContactData;
-    tags : Tag[];
+    id? : number;
+    firstName? : string; 
+    lastName?: string;
+    nickname? : string;
+    isUsed? : boolean;
+    phone? : ContactData;
+    email? : ContactData;
+    tags? : Tag[];
 }
 
 export class ContactData {
@@ -51,12 +50,23 @@ export class Order {
     firstName: string;
     nickname: string;
     firmName: string;
-    products : OrderProduct[]
+    products : OrderProduct[];
+    truck : Transport;
+    trailer : Transport;
+}
+
+export class Transport {
+    id : number;
+    licenseNumber : string;
+    transportBrandId : number;
+    transportTypeId : number;
+    brandName : string;
 }
 
 export class OrderProduct {
     id : number;
     name : string;
+    price: string;
 }
 
 export class CMR {
