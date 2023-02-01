@@ -4,13 +4,15 @@
 
 	/** @type {string} */
 	export let name;
-	/** @type {string | number} */
+	/** @type {any} */
 	export let value;
 	/** @type {string}*/
 	export let messageText;
 	/** @type {string}*/
 	export let noDataText = '';
 	const messageDuration = 1500;
+	/** @type {boolean}*/
+	export let makeCopy = true;
 
 	const showMessage = () => {
 		openSuccessMessage(messageText, '', messageDuration);
@@ -25,7 +27,11 @@
 	<div class="list-item">
 		<div class="left">{name}</div>
 		<!-- svelte-ignore a11y-click-events-have-key-events -->
-		<div class="right" use:copy={value} on:click={showMessage}>{value}</div>
+		{#if makeCopy}
+			<div class="right" use:copy={value} on:click={showMessage}>{value}</div>
+		{:else}
+			<div class="right">{value}</div>
+		{/if}
 	</div>
 {:else}
 	<div class="no-data">{noDataText}</div>
