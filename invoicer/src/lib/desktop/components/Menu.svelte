@@ -26,6 +26,7 @@
 		settings,
 		trailers,
 		transactions,
+		truck,
 		trucks
 	} from '../../../consts';
 	export let showMenu = false;
@@ -37,34 +38,6 @@
 
 	$: rotate = showFirms;
 	$: t = $LanguageStore;
-	$: slider = $SliderStore;
-
-	const pocketPath = '/mobile/pocket';
-	const cmrPath = '/mobile/cmrs';
-	const driversPath = '/mobile/drivers';
-	const trucksPath = '/mobile/trucks';
-	const trailerPath = '/mobile/trailers';
-
-	const pocketCount = 20;
-	const messagesCount = 0;
-	const invoiceCount = 2;
-	const orderCount = 33;
-	const transactionsCount = 0;
-	const paymentCount = 0;
-	const trucksCount = 0;
-	const trailerCount = 0;
-	const cmrCount = 0;
-	const driverCount = 0;
-
-	const gotoSlide = (/** @type {number} */ index) => {
-		hideSelf();
-		if ($page.url.pathname != '/mobile') {
-			slider.activeIndex = index;
-			goto('/mobile');
-		} else {
-			slider.slider?.slideTo(index);
-		}
-	};
 
 	const gotoPage = (path) => {
 		hideSelf();
@@ -79,6 +52,66 @@
 	};
 
 	$: path = $page.url.pathname;
+
+	const initItems = async () => {
+		return [
+			{
+				path: invoices,
+				count: 0,
+				name: t.entity_invoice
+			},
+			{
+				path: orders,
+				count: 0,
+				name: t.entity_order
+			},
+			{
+				path: payments,
+				count: 0,
+				name: t.entity_payment
+			},
+			{
+				path: transactions,
+				count: 0,
+				name: t.entity_transaction
+			},
+			{
+				path: trucks,
+				count: 0,
+				name: t.entity_truck
+			},
+			{
+				path: trailers,
+				count: 0,
+				name: t.entity_trailer
+			},
+			{
+				path: cmrs,
+				count: 0,
+				name: t.entity_cmr
+			},
+			{
+				path: drivers,
+				count: 0,
+				name: t.entity_driver
+			}
+		];
+	};
+
+	const initSecondContainer = async () => {
+		return [
+			{
+				path: pocket,
+				count: 10,
+				name: t.menu_pocket
+			},
+			{
+				path: messages,
+				count: 20,
+				name: t.menu_messages
+			}
+		];
+	};
 
 	const changeFirmClick = (/** @type {string} */ firmId) => {
 		changeFirm(firmId);
@@ -109,13 +142,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div
-	class="menu"
-	use:clickOutside
-	on:click_outside={hideSelf}
-	in:fly={{ duration: 400, delay: 200, x: -40 }}
-	out:fly={{ duration: 400, x: -40 }}
->
+<div class="menu" use:clickOutside on:click_outside={hideSelf} in:fly={{ duration: 400, delay: 200, x: -40 }} out:fly={{ duration: 400, x: -40 }}>
 	<div class="firms-container">
 		<div class="current-firm" on:click={showFirmsFunc}>
 			<div class="left">{firm.name}</div>
@@ -145,117 +172,40 @@
 		{/if}
 	</div>
 	<div class="second-container">
-		<div class="pocket menu-item {path == pocketPath ? 'active' : ''}" on:click={gotoPocket}>
-			<div class="pocket-main">{t.menu_pocket}</div>
-			{#if pocketCount > 0}
-				<div class="counter">{pocketCount}</div>
-			{/if}
-		</div>
-		<div
-			class="messages menu-item {slider.slider?.activeIndex == 0 ? 'active' : ''}"
-			on:click={() => {
-				gotoPage(messages);
-			}}
-		>
-			<div class="messages-main">
-				{t.menu_messages}
-			</div>
-			{#if messagesCount}
-				<div class="counter">{messagesCount}</div>
-			{/if}
-		</div>
+		{#await initSecondContainer() then menuItems}
+			{#each menuItems as item}
+				<div
+					class="menu-item"
+					class:active={path.startsWith(item.path)}
+					on:click={() => {
+						gotoPage(item.path);
+					}}
+				>
+					<div class="main">{item.name}</div>
+					{#if item.count}
+						<div class="counter">{item.count}</div>
+					{/if}
+				</div>
+			{/each}
+		{/await}
 	</div>
 	<div class="menu-container">
-		<div
-			class="menu-item invoice {slider.slider?.activeIndex == 1 ? 'active' : ''}"
-			on:click={() => {
-				gotoPage(invoices);
-			}}
-		>
-			<div class="invoice-main">{t.entity_invoice}</div>
-			{#if invoiceCount}
-				<div class="counter">{invoiceCount}</div>
-			{/if}
-		</div>
-		<div
-			class="menu-item order"
-			on:click={() => {
-				gotoPage(orders);
-			}}
-		>
-			<div class="order-main {slider.slider?.activeIndex == 2 ? 'active' : ''}">
-				{t.entity_order}
-			</div>
-			{#if orderCount}
-				<div class="counter">{orderCount}</div>
-			{/if}
-		</div>
-		<div
-			class="menu-item payment {slider.slider?.activeIndex == 3 ? 'active' : ''}"
-			on:click={() => {
-				gotoPage(payments);
-			}}
-		>
-			<div class="payment-main">{t.entity_payment}</div>
-			{#if paymentCount}
-				<div class="counter">{paymentCount}</div>
-			{/if}
-		</div>
-		<div
-			class="menu-item transaction {slider.slider?.activeIndex == 4 ? 'active' : ''}"
-			on:click={() => {
-				gotoPage(transactions);
-			}}
-		>
-			<div class="transaction-main">{t.entity_transaction}</div>
-			{#if transactionsCount}
-				<div class="counter">{transactionsCount}</div>
-			{/if}
-		</div>
-		<div
-			class="menu-item truck {path == trucksPath ? 'active' : ''}"
-			on:click={() => {
-				gotoPage(trucks);
-			}}
-		>
-			<div class="truck-main">{t.entity_truck}</div>
-			{#if trucksCount}
-				<div class="counter">{trucksCount}</div>
-			{/if}
-		</div>
-		<div
-			class="menu-item trailer {path == trailerPath ? 'active' : ''}"
-			on:click={() => {
-				gotoPage(trailers);
-			}}
-		>
-			<div class="trailer-main">{t.entity_trailer}</div>
-			{#if trailerCount}
-				<div class="counter">{trailerCount}</div>
-			{/if}
-		</div>
-		<div
-			class="menu-item cmr {path == cmrPath ? 'active' : ''}"
-			on:click={() => {
-				gotoPage(cmrs);
-			}}
-		>
-			<div class="trailer-main">{t.entity_cmr}</div>
-			{#if cmrCount}
-				<div class="counter">{cmrCount}</div>
-			{/if}
-		</div>
-		<div
-			class="menu-item driver {path == driversPath ? 'active' : ''}"
-			on:click={() => {
-				gotoPage(trailers);
-			}}
-		>
-			<div class="driver-main">{t.entity_driver}</div>
-			{#if driverCount}
-				<div class="counter">{driverCount}</div>
-			{/if}
-		</div>
+		{#await initItems() then menuItems}
+			{#each menuItems as item}
+				<div
+					class="menu-item"
+					class:active={path.startsWith(item.path)}
+					on:click={() => {
+						gotoPage(item.path);
+					}}
+				>
+					<div class="main">{item.name}</div>
+					{#if item.count}
+						<div class="counter">{item.count}</div>
+					{/if}
+				</div>
+			{/each}
+		{/await}
 	</div>
 	<div class="bottom-menu">
 		<div class="settings-link" on:click={gotoSettings}>
@@ -286,6 +236,9 @@
 		/* or 250% */
 
 		letter-spacing: 1px;
+
+		user-select: none;
+		overflow-y: scroll;
 
 		color: #3d5a80;
 	}
@@ -391,13 +344,6 @@
 		cursor: pointer;
 	}
 
-	.pocket {
-	}
-
-	.messages {
-		margin-top: 5px;
-	}
-
 	.menu-container {
 		padding: 10px 25px 15px 25px;
 	}
@@ -447,7 +393,7 @@
 		font-family: 'Poppins';
 		font-style: normal;
 		font-weight: 600;
-		font-size: 16px;
+		font-size: 16.5px;
 		line-height: 40px;
 		/* or 250% */
 
