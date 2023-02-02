@@ -41,8 +41,10 @@
 
 	const gotoPage = (path) => {
 		hideSelf();
-		FilterStore.set({});
 		goto(path);
+		setTimeout(() => {
+			FilterStore.set({});
+		}, 300);
 	};
 
 	$: if (!showMenu) showFirms = showMenu;
