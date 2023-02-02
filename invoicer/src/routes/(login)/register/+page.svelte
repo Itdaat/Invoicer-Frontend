@@ -5,9 +5,10 @@
 	import InputPassword from '$lib/desktop/components/register/InputPassword.svelte';
 	import { setCookie } from '$lib/helpers/cookies';
 	import { validateEmail } from '$lib/helpers/email';
+	import { openErrorMessage } from '$lib/helpers/message';
 	import Button from '$lib/templates/Button.svelte';
 	import Input from '$lib/templates/Input.svelte';
-	import { notValidLogin, notValidPassword, userExists, userNotFound } from '../../../consts';
+	import { notValidLogin, notValidPassword, unreachableError, userExists, userNotFound } from '../../../consts';
 	import RegisterOrLogin from '../../../lib/desktop/components/register/RegisterOrLogin.svelte';
 
 	/** @type {import('./$types').PageData} */
@@ -23,6 +24,10 @@
 	 */
 	async function checkLogin(login) {
 		const userLoginResponse = await checkUserLogin(login);
+		if (userLoginResponse.error?.code == unreachableError.code) {
+			openErrorMessage(t.message_unreachable_error);
+			return;
+		}
 		if (userLoginResponse.error?.code != userNotFound.code) {
 			loginErrorMessage = t.register_accountAlreadyExists;
 			loginStatus = 'error';
@@ -171,9 +176,7 @@
 			</div>
 
 			<div class="button-container login">
-				<Button type="dark" status={responseStatus} onClick={onRegisterClick}
-					>{t.register_registerButton}</Button
-				>
+				<Button type="dark" status={responseStatus} onClick={onRegisterClick}>{t.register_registerButton}</Button>
 			</div>
 
 			<!-- <div class="text-container">{t.register_textOr}</div>
@@ -188,11 +191,7 @@
 			</div> -->
 		</div>
 		<div class="goto-register-container">
-			<RegisterOrLogin
-				link={gotoRegisterLink}
-				linkText={t.register_gotoLoginLink}
-				text={t.register_gotoLogin}
-			/>
+			<RegisterOrLogin link={gotoRegisterLink} linkText={t.register_gotoLoginLink} text={t.register_gotoLogin} />
 		</div>
 	</div>
 </div>
