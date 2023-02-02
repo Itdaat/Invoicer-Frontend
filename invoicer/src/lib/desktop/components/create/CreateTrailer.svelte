@@ -1,4 +1,5 @@
 <script>
+	import { goto } from '$app/navigation';
 	import { createTrailer } from '$lib/api/server/transport';
 	import CreatePopup from '$lib/desktop/templates/CreatePopup.svelte';
 	import { openErrorMessage, openSuccessMessage } from '$lib/helpers/message';
@@ -6,7 +7,7 @@
 	import FilterStore from '$lib/stores/FilterStore';
 	import LanguageStore from '$lib/stores/Language';
 	import LabeledInput from '$lib/templates/LabeledInput.svelte';
-	import { entityAlreadyExists, notLatinSymbol, unreachableError } from '../../../../consts';
+	import { entityAlreadyExists, notLatinSymbol, trailer, trailers, unreachableError } from '../../../../consts';
 
 	/**
 	 * @type {boolean}
@@ -64,6 +65,7 @@
 			FilterStore.set({});
 			show = false;
 			setTimeout(() => {
+				goto(trailers + '/' + result.result.id);
 				openSuccessMessage(t.transport_create_success);
 			}, 500);
 		}
