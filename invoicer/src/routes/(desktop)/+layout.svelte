@@ -5,6 +5,7 @@
 	import CreateFirm from '$lib/desktop/components/firm/CreateFirm.svelte';
 	import Menu from '$lib/desktop/components/Menu.svelte';
 	import { getCookie, setCookie } from '$lib/helpers/cookies';
+	import GlobalMessages from '$lib/mobile/components/GlobalMessages.svelte';
 	import LanguageStore from '$lib/stores/Language';
 	import { fade } from 'svelte/transition';
 	$: t = $LanguageStore;
@@ -42,6 +43,7 @@
 		<!-- <div class="data"><slot /></div> -->
 	</div>
 	<CreateEntity />
+	<GlobalMessages />
 {/await}
 
 <style>
