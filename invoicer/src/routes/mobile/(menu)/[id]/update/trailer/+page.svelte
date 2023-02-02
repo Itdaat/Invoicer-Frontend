@@ -19,15 +19,13 @@
 
 	let brand = '';
 	/** @type {'ordinary' | 'success' | 'error'}*/
-	let externalNumberStatus = 'ordinary';
-	let externalNumberErrorMessage = '';
+	let trailerBrandStatus = 'ordinary';
 
 	const save = async () => {
-		externalNumberStatus = 'ordinary';
+		trailerBrandStatus = 'ordinary';
 
 		if (!brand) {
-			externalNumberStatus = 'error';
-			externalNumberErrorMessage = t.trailer_create_empty;
+			trailerBrandStatus = 'error';
 			return;
 		}
 		responseStatus = 'inProcess';
@@ -64,12 +62,7 @@
 
 <div class="main">
 	<MiniCategory title={t.trailer_main}>
-		<LabeledInput
-			bind:value={brand}
-			status={externalNumberStatus}
-			label={t.trailer_brand}
-			placeHolder={t.transport_create_brand}
-		/>
+		<LabeledInput bind:value={brand} status={trailerBrandStatus} label={t.trailer_brand} placeHolder={t.transport_create_brand} />
 	</MiniCategory>
 	<SaveEntity {save} status={responseStatus} />
 </div>
