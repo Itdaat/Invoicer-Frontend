@@ -16,7 +16,7 @@
 		openSuccessMessage(messageText, '', messageDuration);
 	};
 
-	if (typeof value !== 'string') {
+	if (typeof value !== 'string' && value) {
 		value = value.toString();
 	}
 </script>
