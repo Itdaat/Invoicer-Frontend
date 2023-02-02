@@ -39,6 +39,10 @@
 		licenseNumber = null;
 		brand = null;
 		filterStoreHelper.cleared = false;
+
+		getTrailersFormatted({ licenseNumber, brand }).then((res) => {
+			FilterStoreHelper.set({ count: res.length });
+		});
 	}
 
 	$: {
