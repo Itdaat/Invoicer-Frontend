@@ -133,8 +133,8 @@
 	<CreateDriver />
 {:else if type == trailer}
 	<CreateTrailer bind:show={showCreateTrailer} />
-{:else if type == transaction}
-	<TransactionFilter />
+	<!-- {:else if type == transaction} -->
+	<!-- <CreateTransaction /> -->
 {:else if type == truck}
 	<CreateTruck />
 {:else if type == cmr}
