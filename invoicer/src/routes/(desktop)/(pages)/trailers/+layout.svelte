@@ -1,19 +1,18 @@
 <script>
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { getTrailersAllFields } from '$lib/api/server/transport';
 	import ListContainer from '$lib/desktop/components/ListContainer.svelte';
-	import PageTemplate from '$lib/desktop/templates/PageTemplate.svelte';
-	import Loader from '$lib/mobile/components/Loader.svelte';
-	import FilterStore from '$lib/stores/FilterStore';
-	import { trailer, trailers } from '../../../../consts';
-	import { quartInOut } from 'svelte/easing';
-	import { slide } from 'svelte/transition';
-	import LanguageStore from '$lib/stores/Language';
 	import MiniCategory from '$lib/desktop/components/MiniCategory.svelte';
+	import MainPageTemplate from '$lib/desktop/templates/MainPageTemplate.svelte';
+	import PageTemplate from '$lib/desktop/templates/PageTemplate.svelte';
 	import FilterPopup from '$lib/mobile/components/FilterPopup.svelte';
 	import TrailerFilter from '$lib/mobile/components/filters/TrailerFilter.svelte';
-	import MainPageTemplate from '$lib/desktop/templates/MainPageTemplate.svelte';
-	import { page } from '$app/stores';
+	import Loader from '$lib/mobile/components/Loader.svelte';
+	import FilterStore from '$lib/stores/FilterStore';
+	import LanguageStore from '$lib/stores/Language';
+	import { slide } from 'svelte/transition';
+	import { trailers } from '../../../../consts';
 
 	$: filter = $FilterStore;
 	$: t = $LanguageStore;
@@ -30,6 +29,10 @@
 	};
 
 	$: trailersApi = getTrailersFormatted(filter);
+	$: if ($page.url.pathname == trailers) {
+		trailersApi = getTrailersFormatted(filter);
+	}
+	/** @type {string} id*/
 	const gotoTrailer = (id) => {
 		goto(trailers + '/' + id);
 	};
@@ -41,22 +44,24 @@
 			{#await trailersApi}
 				<Loader status="inProcess" />
 			{:then trailers}
-				{#each trailers as trailer}
-					<div class="trailer-container" class:active={id == trailer.id}>
-						<!-- svelte-ignore a11y-click-events-have-key-events -->
-						<div
-							class="trailer"
-							on:click={() => {
-								gotoTrailer(trailer.id);
-							}}
-						>
-							<div class="license">{trailer.licenseNumber}</div>
-							{#if trailer.brandName}
-								<div class="brand">{trailer.brandName}</div>
-							{/if}
+				<div class="main" in:slide={{ delay: 400 }} out:slide={{ duration: 300 }}>
+					{#each trailers as trailer}
+						<div class="trailer-container" class:active={id == trailer.id}>
+							<!-- svelte-ignore a11y-click-events-have-key-events -->
+							<div
+								class="trailer"
+								on:click={() => {
+									gotoTrailer(trailer.id);
+								}}
+							>
+								<div class="license">{trailer.licenseNumber}</div>
+								{#if trailer.brandName}
+									<div class="brand">{trailer.brandName}</div>
+								{/if}
+							</div>
 						</div>
-					</div>
-				{/each}
+					{/each}
+				</div>
 			{/await}
 		</MiniCategory>
 		{#if showFilter}
@@ -80,37 +85,32 @@
 		padding: 18px 10px;
 	}
 
+	.main {
+		width: 100%;
+	}
+
 	/* .trailer:last-of-type {
 		border-top: 0.2px solid rgba(54, 56, 59, 0.233);
 		border-bottom: 0.2px solid rgba(54, 56, 59, 0.233);
 	} */
 
 	.trailer-container {
-		width: 100%;
 		display: flex;
 		justify-content: center;
 		transition: all 5s;
 		transition: background 1s;
+		user-select: none;
+		cursor: pointer;
+		padding: 0px 5px 0px 12px;
 	}
 
 	.active {
+		width: 100%;
 		background: rgba(61, 90, 128, 0.1);
-		padding-right: 30px;
+		/* padding-right: 20px; */
+		/* padding-left: 300px; */
+		margin-left: -20px;
+		padding-right: 20px;
 		color: #3f3f57;
-	}
-
-	.ripple {
-		user-select: none;
-		background-position: center;
-		background-size: 1000%;
-		transition: background 0.8s;
-	}
-	.ripple:hover {
-		background: #ffff radial-gradient(circle, transparent 1%, #ffff 1%) center/15000%;
-	}
-	.ripple:active {
-		background-color: rgba(61, 90, 128, 0.1);
-		background-size: 100%;
-		transition: background 0s;
 	}
 </style>
