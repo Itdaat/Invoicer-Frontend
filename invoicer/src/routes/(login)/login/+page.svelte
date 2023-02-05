@@ -6,7 +6,7 @@
 	import { openErrorMessage } from '$lib/helpers/message';
 	import Button from '$lib/templates/Button.svelte';
 	import Input from '$lib/templates/Input.svelte';
-	import { needRealLogin, notValidPassword, unreachableError, userNotFound } from '../../../consts';
+	import { loginError, needRealLogin, notValidPassword, unreachableError, userNotFound } from '../../../consts';
 	import ForgotPassword from '../../../lib/desktop/components/register/ForgotPassword.svelte';
 	import RegisterOrLogin from '../../../lib/desktop/components/register/RegisterOrLogin.svelte';
 	/** @type {import('./$types').PageData} */
@@ -31,17 +31,18 @@
 			responseStatus = 'done';
 			return res;
 		});
+
+		console.log(result);
 		if (result.error) {
 			if (result.error?.code == unreachableError.code) {
 				openErrorMessage(t.message_unreachable_error, '');
 				return;
 			}
-			if (result.error.code == userNotFound.code) {
-				loginStatus = 'error';
+			if (result.error?.code == loginError.code) {
+				passwordStatus = loginStatus = 'error';
+				openErrorMessage(t.login_error);
 			}
-			if (result.error.code == notValidPassword.code) {
-				passwordStatus = 'error';
-			}
+
 			if (result.error.code == needRealLogin.code) {
 				// @ts-ignore
 				setToken(result.result.token);
@@ -50,33 +51,17 @@
 			}
 		} else {
 			// @ts-ignore
-			setToken(result.result.token);
-			window.location.href = '/';
+			// setToken(result.result.token);
+			// window.location.href = '/';
 		}
 	};
+
+	const makeOrdinary = () => {
+		passwordStatus = loginStatus = 'ordinary';
+	};
+
 	// ! login
 	let login = '';
-
-	/**
-	 *
-	 * @param {string} login
-	 */
-	async function checkLogin(login) {
-		const userLoginResponse = await checkUserLogin(login);
-		if (userLoginResponse.error?.code == unreachableError.code) {
-			openErrorMessage(t.message_unreachable_error, '');
-			return;
-		}
-		if (userLoginResponse.error?.code == userNotFound.code) {
-			loginStatus = 'error';
-		} else {
-			loginStatus = 'success';
-		}
-	}
-
-	function loginFocus() {
-		loginStatus = 'ordinary';
-	}
 
 	// ! password
 	let password = '';
@@ -97,43 +82,21 @@
 		</div>
 		<div class="invisible-block">
 			<div class="element" id="login-input">
-				<Input
-					placeHolder={t.login_accountPlaceHolder}
-					bind:value={login}
-					status={loginStatus}
-					message={t.login_loginErrorMessage}
-					onBlurFunc={() => {
-						checkLogin(login);
-					}}
-					onFocusFunc={() => {
-						loginFocus();
-					}}
-				>
+				<Input placeHolder={t.login_accountPlaceHolder} bind:value={login} status={loginStatus} onFocusFunc={makeOrdinary}>
 					<AccountIcon slot="left" status={loginStatus} />
 				</Input>
 			</div>
 
 			<div class="element">
-				<InputPassword
-					status={passwordStatus}
-					placeHolder={t.login_passwordPlaceHolder}
-					bind:value={password}
-					message={t.login_passwordErrorMessage}
-				/>
+				<InputPassword status={passwordStatus} placeHolder={t.login_passwordPlaceHolder} bind:value={password} onFocusFunc={makeOrdinary} />
 			</div>
 
 			<div class="element">
-				<ForgotPassword
-					linkText={t.login_forgotPasswordLink}
-					link={forgotPasswordLink}
-					text={t.login_forgotPassword}
-				/>
+				<ForgotPassword linkText={t.login_forgotPasswordLink} link={forgotPasswordLink} text={t.login_forgotPassword} />
 			</div>
 
 			<div class="button-container login">
-				<Button type="dark" status={responseStatus} onClick={onLoginClick}
-					>{t.login_loginButton}</Button
-				>
+				<Button type="dark" status={responseStatus} onClick={onLoginClick}>{t.login_loginButton}</Button>
 			</div>
 
 			<!-- <div class="text-container">{t.login_textOr}</div> -->
@@ -148,11 +111,7 @@
 			</div> -->
 		</div>
 		<div class="goto-register-container">
-			<RegisterOrLogin
-				link={gotoRegisterLink}
-				linkText={t.login_gotoRegisterLink}
-				text={t.login_gotoRegister}
-			/>
+			<RegisterOrLogin link={gotoRegisterLink} linkText={t.login_gotoRegisterLink} text={t.login_gotoRegister} />
 		</div>
 	</div>
 </div>

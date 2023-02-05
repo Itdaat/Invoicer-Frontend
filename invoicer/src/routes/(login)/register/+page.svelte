@@ -8,7 +8,7 @@
 	import { openErrorMessage } from '$lib/helpers/message';
 	import Button from '$lib/templates/Button.svelte';
 	import Input from '$lib/templates/Input.svelte';
-	import { notValidLogin, notValidPassword, unreachableError, userExists, userNotFound } from '../../../consts';
+	import { loginError, notValidLogin, notValidPassword, unreachableError, userExists, userNotFound } from '../../../consts';
 	import RegisterOrLogin from '../../../lib/desktop/components/register/RegisterOrLogin.svelte';
 
 	/** @type {import('./$types').PageData} */
@@ -17,25 +17,6 @@
 
 	/** @type {import('src/types/Response').ResponseStatus}*/
 	let responseStatus = 'none';
-
-	/**
-	 *
-	 * @param {string} login
-	 */
-	async function checkLogin(login) {
-		const userLoginResponse = await checkUserLogin(login);
-		if (userLoginResponse.error?.code == unreachableError.code) {
-			openErrorMessage(t.message_unreachable_error);
-			return;
-		}
-		if (userLoginResponse.error?.code != userNotFound.code) {
-			loginErrorMessage = t.register_accountAlreadyExists;
-			loginStatus = 'error';
-		} else {
-			loginStatus = 'ordinary';
-			loginErrorMessage = t.register_accountErrorMessage;
-		}
-	}
 
 	const checkLoginBlur = () => {
 		loginErrorMessage = t.register_accountErrorMessage;
@@ -53,12 +34,9 @@
 	let loginStatus = 'ordinary';
 	let loginErrorMessage = t.register_accountErrorMessage;
 
-	let loginButtonLink = '#',
-		gotoRegisterLink = '/login';
+	let gotoRegisterLink = '/login';
 	// ! login
 	let login = '';
-	let lastLogin = login;
-	$: checkLogin(login);
 
 	// ! password
 	let password = '';
@@ -100,10 +78,7 @@
 			return res;
 		});
 		if (result.error) {
-			if (result.error?.code == userExists.code) {
-				loginStatus = 'error';
-				loginErrorMessage = t.register_accountAlreadyExists;
-			} else if (result.error?.code == notValidPassword.code) {
+			if (result.error?.code == notValidPassword.code) {
 				passwordStatus = 'error';
 			} else if (result.error.code == notValidLogin.code) {
 				loginStatus = 'error';
@@ -111,9 +86,6 @@
 		} else {
 			// @ts-ignore
 			setToken(result.result.token);
-			// setCookie('token', result.result.token);
-			// goto('/');
-			// window.location.href = window.location.host;
 			window.location.href = '/';
 		}
 	};
