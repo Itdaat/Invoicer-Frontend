@@ -38,7 +38,7 @@
 			openErrorMessage(t.message_server_error);
 			return;
 		}
-		FilterStore.set({ ...$FilterStore });
+		// FilterStore.set({ ...$FilterStore });
 		openSuccessMessage(t.trailer_updated_successfully);
 		show = false;
 		done = true;
