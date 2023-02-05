@@ -4,6 +4,7 @@
 	import { getTrailersAllFields, getTrucksAllFields } from '$lib/api/server/transport';
 	import FilterPopup from '$lib/desktop/components/FilterPopup.svelte';
 	import ListContainer from '$lib/desktop/components/ListContainer.svelte';
+	import ListItems from '$lib/desktop/components/ListItems.svelte';
 	import MiniCategory from '$lib/desktop/components/MiniCategory.svelte';
 	import MainPageTemplate from '$lib/desktop/templates/MainPageTemplate.svelte';
 	import PageTemplate from '$lib/desktop/templates/PageTemplate.svelte';
@@ -45,25 +46,25 @@
 		<MiniCategory title={t.trailers_many} filter bind:showFilter>
 			{#await trucksApi}
 				<Loader status="inProcess" />
-			{:then trailers}
-				<div class="main" in:slide={{ delay: 400 }} out:slide={{ duration: 300 }}>
-					{#each trailers as trailer}
-						<div class="trailer-container" class:active={id == trailer.id}>
+			{:then trucks}
+				<ListItems animate={trucks.length < 10}>
+					{#each trucks as truck}
+						<div class="trailer-container" class:active={id == truck.id}>
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
 							<div
 								class="trailer"
 								on:click={() => {
-									gotoTrucks(trailer.id);
+									gotoTrucks(truck.id);
 								}}
 							>
-								<div class="license">{trailer.licenseNumber}</div>
-								{#if trailer.brandName}
-									<div class="brand">{trailer.brandName}</div>
+								<div class="license">{truck.licenseNumber}</div>
+								{#if truck.brandName}
+									<div class="brand">{truck.brandName}</div>
 								{/if}
 							</div>
 						</div>
 					{/each}
-				</div>
+				</ListItems>
 			{/await}
 		</MiniCategory>
 		{#if showFilter}
@@ -85,10 +86,6 @@
 		margin-left: -20px;
 		border-top: 0.2px solid rgba(54, 56, 59, 0.233);
 		padding: 18px 10px;
-	}
-
-	.main {
-		width: 100%;
 	}
 
 	/* .trailer:last-of-type {
