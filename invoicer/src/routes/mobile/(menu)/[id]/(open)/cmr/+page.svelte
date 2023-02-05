@@ -61,7 +61,7 @@
 			openErrorMessage(t.message_unreachable_error);
 			return;
 		}
-		localStorage.setItem('create_title', t.cmr_title);
+		localStorage.setItem('create_title', t.cmr_update_title);
 		goto(mobile + '/' + id + '/update' + cmr);
 	};
 </script>

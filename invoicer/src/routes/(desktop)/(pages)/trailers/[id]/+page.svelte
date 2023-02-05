@@ -20,7 +20,7 @@
 
 	let updated = false;
 	/** @type {boolean | null}*/
-	let confirmed = null;
+	let confirmed = false;
 	let showDelete = false;
 
 	/**
@@ -31,6 +31,7 @@
 	const getTrailerFormatted = async (id, updated) => {
 		if (updated) {
 			deleteTrailerFun();
+			confirmed = false;
 		}
 		return (await getTrailers(id)).result[0];
 	};
@@ -62,7 +63,9 @@
 
 	$: trailerApi = getTrailerFormatted(id, confirmed);
 	$: if (updated) {
+		updated = false;
 		trailerApi = getTrailerFormatted(id, confirmed);
+		FilterStore.set({ ...$FilterStore });
 	}
 </script>
 
