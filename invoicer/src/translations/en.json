@@ -180,6 +180,7 @@
     "trucks_many": "Trucks",
     "trucks_updated_successfully": "Truck updated successfully",
     "trucks_create_empty": "Empty field",
+    "no_selected_truck": "No selected truck",
     "FIRM": "_____________FIRM_____________",
     "firm_main": "Firm",
     "firm_name": "Firm name",
