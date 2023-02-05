@@ -96,10 +96,10 @@
 	<ConfirmPopup
 		bind:confirmed
 		bind:show={showDelete}
-		title={t.trailer_delete_confirm_title}
-		confirmText={t.trailer_delete_confirm_button}
-		rejectText={t.trailer_delete_reject_button}
-		description={t.trailer_delete_confirm_description}
+		title={t.cmr_delete_confirm_title}
+		confirmText={t.cmr_delete_confirm_button}
+		rejectText={t.cmr_delete_reject_button}
+		description={t.cmr_delete_confirm_description}
 	/>
 {/await}
 
