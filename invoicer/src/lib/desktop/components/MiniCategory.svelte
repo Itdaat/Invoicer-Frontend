@@ -1,6 +1,7 @@
 <script>
 	import OpenFilterButton from '$lib/assets/icons/OpenFilterButton.svelte';
 	import SmallFilterIcon from '$lib/assets/icons/SmallFilterIcon.svelte';
+	import { slide } from 'svelte/transition';
 
 	export let title = '';
 	export let filter = false;
@@ -60,6 +61,6 @@
 		align-items: center;
 		flex-direction: column;
 		margin-top: 14px;
-		padding: 0px 5px 0px 12px;
+		/* padding: 0px 5px 0px 12px; */
 	}
 </style>
