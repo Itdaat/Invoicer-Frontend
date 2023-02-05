@@ -23,9 +23,9 @@
 	let focused = false;
 	let outside = true;
 	/**
-	 * @type {Promise<{ value: string; name: string; pseudoValue : string; }[]>}
+	 * @type {Promise<{ value: string; name: string; pseudoValue : string; }[]> | null}
 	 */
-	export let suggestionsApi;
+	export let suggestionsApi = null;
 
 	export let label = '';
 
