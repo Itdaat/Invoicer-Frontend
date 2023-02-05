@@ -25,5 +25,6 @@
 		overflow: hidden;
 		width: 100%;
 		min-height: 100px;
+		z-index: 20000;
 	}
 </style>

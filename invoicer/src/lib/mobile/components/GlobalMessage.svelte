@@ -21,13 +21,7 @@
 </script>
 
 <!-- {#if status == 'error' || status == 'success'} -->
-<div
-	class="main"
-	class:hide={status == 'ordinary'}
-	in:fly={{ x: -100 }}
-	out:fly={{ x: 100 }}
-	id={id.toString()}
->
+<div class="main" class:hide={status == 'ordinary'} in:fly={{ x: -100 }} out:fly={{ x: 100 }} id={id.toString()}>
 	<div class="message" class:error={status == 'error'} class:success={status == 'success'}>
 		{message}
 	</div>
