@@ -14,6 +14,14 @@
 		background: white;
 		box-shadow: 0px 0px 9px rgba(0, 0, 0, 0.1);
 		border-radius: 6px;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		overflow-x: hidden;
+
+		padding: 10px 0px;
 	}
 
 	/* width */
