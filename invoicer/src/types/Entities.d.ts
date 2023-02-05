@@ -70,7 +70,7 @@ export class OrderProduct {
 }
 
 export class CMR {
-    id : number;
+    id : string;
     externalNumber : string;
     transport: Transport;
     image: string;
