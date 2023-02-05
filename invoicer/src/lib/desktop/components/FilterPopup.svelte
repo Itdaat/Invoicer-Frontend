@@ -80,7 +80,7 @@
 		padding: 15px 15px 25px 15px;
 		width: 80%;
 		max-width: fit-content;
-		min-height: 30%;
+		/* min-height: 30%; */
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-start;
