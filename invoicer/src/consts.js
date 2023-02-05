@@ -23,6 +23,7 @@ export const dataDuplication = { code: 6, message: 'Entity data duplication' };
 export const entityIsUsed = { code: 7, message: 'Entity is used' }
 export const notLatinSymbol = { code: 8, message: 'Some entity uses not latin symbols' };
 export const notValidLogin = { code: 9, message: 'This login is not valid' };
+export const loginError = { code: 10, message: 'Login Error' }
 
 // ! tags
 export const driverTag = 'driver';
@@ -86,5 +87,5 @@ export const brokenSignatureStatus = 3;
 
 
 export const responseErrors = [
-    userExists, notValidPassword, needRealLogin, userNotFound, entityAlreadyExists, dataDuplication, entityIsUsed, notLatinSymbol
+    userExists, notValidPassword, needRealLogin, userNotFound, entityAlreadyExists, dataDuplication, entityIsUsed, notLatinSymbol, loginError
 ]
