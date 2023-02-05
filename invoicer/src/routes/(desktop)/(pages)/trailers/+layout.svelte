@@ -2,11 +2,11 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { getTrailersAllFields } from '$lib/api/server/transport';
+	import FilterPopup from '$lib/desktop/components/FilterPopup.svelte';
 	import ListContainer from '$lib/desktop/components/ListContainer.svelte';
 	import MiniCategory from '$lib/desktop/components/MiniCategory.svelte';
 	import MainPageTemplate from '$lib/desktop/templates/MainPageTemplate.svelte';
 	import PageTemplate from '$lib/desktop/templates/PageTemplate.svelte';
-	import FilterPopup from '$lib/mobile/components/FilterPopup.svelte';
 	import TrailerFilter from '$lib/mobile/components/filters/TrailerFilter.svelte';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import FilterStore from '$lib/stores/FilterStore';
@@ -32,7 +32,7 @@
 	$: if ($page.url.pathname == trailers) {
 		trailersApi = getTrailersFormatted(filter);
 	}
-	/** @type {string} id*/
+	/** @param {string} id*/
 	const gotoTrailer = (id) => {
 		goto(trailers + '/' + id);
 	};
@@ -109,8 +109,8 @@
 		background: rgba(61, 90, 128, 0.1);
 		/* padding-right: 20px; */
 		/* padding-left: 300px; */
-		margin-left: -20px;
-		padding-right: 20px;
+		margin-left: -17px;
+		/* padding-right: 10px; */
 		color: #3f3f57;
 	}
 </style>
