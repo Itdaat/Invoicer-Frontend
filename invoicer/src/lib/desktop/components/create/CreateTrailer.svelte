@@ -7,6 +7,7 @@
 	import FilterStore from '$lib/stores/FilterStore';
 	import LanguageStore from '$lib/stores/Language';
 	import LabeledInput from '$lib/templates/LabeledInput.svelte';
+	import { onMount } from 'svelte';
 	import { entityAlreadyExists, notLatinSymbol, trailer, trailers, unreachableError } from '../../../../consts';
 
 	/**
@@ -65,11 +66,16 @@
 			FilterStore.set({});
 			show = false;
 			setTimeout(() => {
+				license = brand = null;
 				goto(trailers + '/' + result.result.id);
 				openSuccessMessage(t.transport_create_success);
 			}, 500);
 		}
 	};
+
+	onMount(() => {
+		license = brand = null;
+	});
 </script>
 
 <CreatePopup bind:show {save}>
