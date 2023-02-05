@@ -89,8 +89,8 @@
 
 	.close-button {
 		position: absolute;
-		top: -12%;
-		right: -35px;
+		top: -17%;
+		right: -40px;
 	}
 
 	.buttons {
@@ -115,5 +115,7 @@
 		cursor: pointer;
 
 		color: #3d5a80;
+
+		z-index: 40000;
 	}
 </style>
