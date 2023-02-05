@@ -1,19 +1,18 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { deleteTrailer, getTrailers, getTrucks } from '$lib/api/server/transport';
+	import { deleteTruck, getTrucks } from '$lib/api/server/transport';
 	import SmallDeleteIcon from '$lib/assets/icons/SmallDeleteIcon.svelte';
 	import SmallPencilIcon from '$lib/assets/icons/SmallPencilIcon.svelte';
 	import ListItem from '$lib/desktop/components/ListItem.svelte';
-	import UpdateTrailer from '$lib/desktop/components/update/UpdateTrailer.svelte';
+	import UpdateTruck from '$lib/desktop/components/update/UpdateTruck.svelte';
 	import ConfirmPopup from '$lib/desktop/templates/ConfirmPopup.svelte';
 	import { openErrorMessage, openSuccessMessage } from '$lib/helpers/message';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import FilterStore from '$lib/stores/FilterStore';
 	import LanguageStore from '$lib/stores/Language';
-	import { entityIsUsed, mobileTrailers, trailers, unreachableError } from '../../../../../consts';
 	import { fade } from 'svelte/transition';
-	import UpdateTruck from '$lib/desktop/components/update/UpdateTruck.svelte';
+	import { entityIsUsed, trucks, unreachableError } from '../../../../../consts';
 
 	$: filter = $FilterStore;
 	$: t = $LanguageStore;
@@ -42,18 +41,18 @@
 	};
 
 	const deleteTruckFun = async () => {
-		const result = await deleteTrailer(id);
+		const result = await deleteTruck(id);
 		if (result.error?.code == entityIsUsed.code) {
-			openErrorMessage(t.trailer_is_used_error);
+			openErrorMessage(t.truck_is_used_error);
 			return;
 		}
 		if (result.error?.code == unreachableError.code) {
 			openErrorMessage(t.message_unreachable_error);
 			return;
 		}
-		goto(trailers);
+		goto(trucks);
 		confirmed = false;
-		openSuccessMessage(t.trailer_deleted_successfully);
+		openSuccessMessage(t.truck_deleted_successfully);
 	};
 
 	const openDeleteTruck = async () => {
@@ -71,10 +70,10 @@
 <!-- <MainPageTemplate> -->
 {#await truckApi}
 	<Loader />
-{:then trailer}
+{:then truck}
 	<div class="container" in:fade={{ duration: 300, delay: 200 }} out:fade={{ duration: 200 }}>
 		<div class="header">
-			<div class="title">{trailer?.licenseNumber}</div>
+			<div class="title">{truck?.licenseNumber}</div>
 			<div class="right">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div class="icon delete" on:click={openDeleteTruck}><SmallDeleteIcon /></div>
@@ -84,21 +83,19 @@
 		</div>
 		<div class="main">
 			<div class="main-container">
-				<ListItem name={t.trailer_license} value={trailer?.licenseNumber} messageText={t.trailer_copied_license} />
-				<ListItem name={t.trailer_brand} value={trailer?.brandName} messageText={t.trailer_copied_brand} noDataText={t.trailer_no_brand} />
+				<ListItem name={t.truck_license} value={truck?.licenseNumber} messageText={t.truck_copied_license} />
+				<ListItem name={t.truck_brand} value={truck?.brandName} messageText={t.truck_copied_brand} noDataText={t.truck_no_brand} />
 			</div>
-			<!-- <MiniCategory title={t.trailer_main}> -->
-			<!-- </MiniCategory> -->
 		</div>
 	</div>
 	<UpdateTruck bind:show={showUpdate} bind:done={updated} />
 	<ConfirmPopup
 		bind:confirmed
 		bind:show={showDelete}
-		title={t.trailer_delete_confirm_title}
-		confirmText={t.trailer_delete_confirm_button}
-		rejectText={t.trailer_delete_reject_button}
-		description={t.trailer_delete_confirm_description}
+		title={t.truck_delete_confirm_title}
+		confirmText={t.truck_delete_confirm_button}
+		rejectText={t.truck_delete_reject_button}
+		description={t.truck_delete_confirm_description}
 	/>
 {/await}
 
