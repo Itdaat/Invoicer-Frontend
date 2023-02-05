@@ -11,6 +11,7 @@
     "login_loginWithGoogle": "Login With Google",
     "login_gotoRegister": "Have no account ?",
     "login_gotoRegisterLink": "Create it!",
+    "login_error": "Login Error",
     "REGISTER": "______________________REGISTER________________________",
     "register_title": "Register",
     "register_accountPlaceHolder": "Login",
