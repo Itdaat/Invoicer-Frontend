@@ -27,12 +27,6 @@
 
 	$: trailersApi = getTrailersFormatted(filter);
 
-	const tra = async (d) => {
-		// console.log(await filter);
-	};
-
-	$: tra(trailersApi);
-
 	const gotoTrailer = (id) => {
 		goto(trailers + '/' + id);
 	};
