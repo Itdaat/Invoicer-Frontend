@@ -5,7 +5,7 @@
 	export let animate;
 </script>
 
-{#if animate}
+{#if true}
 	<div class="main" in:slide={{ delay: 400 }} out:slide={{ duration: 300 }}>
 		<slot />
 	</div>
