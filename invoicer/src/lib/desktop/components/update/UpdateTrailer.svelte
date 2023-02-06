@@ -32,7 +32,7 @@
 		}
 		const result = await updateTrailer(id, brand);
 		if (result.error?.code == entityIsUsed.code) {
-			openErrorMessage(t.cmr_is_used);
+			openErrorMessage(t.trailer_is_used_error);
 			return;
 		}
 		if (result.error != null) {
