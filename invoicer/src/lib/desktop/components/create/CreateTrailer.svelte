@@ -78,7 +78,7 @@
 	});
 </script>
 
-<CreatePopup bind:show {save}>
+<CreatePopup bind:show {save} title={t.title_trailer}>
 	<div class="main">
 		<MiniCategory title={t.transport_create_category}>
 			<LabeledInput
