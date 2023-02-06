@@ -7,6 +7,7 @@
 	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
 	import LanguageStore from '$lib/stores/Language';
 	import LabeledInput from '$lib/templates/LabeledInput.svelte';
+	import { entityIsUsed } from '../../../../consts';
 
 	/**
 	 * @type {boolean}
@@ -31,6 +32,10 @@
 			return;
 		}
 		const result = await updateCmr(id, externalNumber);
+		if (result.error?.code == entityIsUsed.code) {
+			openErrorMessage(t.cmr_is_used);
+			return;
+		}
 		if (result.error != null) {
 			openErrorMessage(t.message_server_error);
 			return;
