@@ -1,5 +1,5 @@
 import { postAuthRequestJson } from '$lib/helpers/apiHelper';
-import { trailers, TRANSPORT_TRAILER, TRANSPORT_TRUCK, trucks } from '../../../consts';
+import { TRANSPORT_TRAILER, TRANSPORT_TRUCK } from '../../../consts';
 
 /**
  * 
@@ -19,12 +19,12 @@ export async function createTrailer(licenseNumber, transportBrand) {
  * 
  * @export
  * @param {string} licenseNumber 
- * @param {string} transportBrandName 
+ * @param {string} transportBrand 
  * @returns 
  */
-export async function createTruck(licenseNumber, transportBrandName) {
+export async function createTruck(licenseNumber, transportBrand) {
     const reqBody = {
-        licenseNumber, transportBrandName, transportTypeId: TRANSPORT_TRUCK
+        licenseNumber, transportBrandName: transportBrand, transportTypeId: TRANSPORT_TRUCK
     };
     const result = await postAuthRequestJson('transport/create', reqBody);
     return result;
