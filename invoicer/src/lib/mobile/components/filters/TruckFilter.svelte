@@ -60,7 +60,7 @@
 </script>
 
 <div class="main">
-	<MiniCategory title={t.trailer_main}>
+	<MiniCategory title={t.truck_main}>
 		<LabeledInput bind:value={licenseNumber} label={t.transport_create_license} placeHolder={t.transport_create_license} />
 		<LabeledInput bind:value={brand} label={t.transport_create_brand} placeHolder={t.transport_create_brand} message={t.transport_create_empty} />
 	</MiniCategory>
