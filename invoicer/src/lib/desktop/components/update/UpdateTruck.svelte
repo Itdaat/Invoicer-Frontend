@@ -32,7 +32,6 @@
 			brandStatus = 'error';
 			return;
 		}
-		console.log(brand);
 		const result = await updateTruck(id, brand);
 		if (result.error != null) {
 			openErrorMessage(t.message_server_error);
