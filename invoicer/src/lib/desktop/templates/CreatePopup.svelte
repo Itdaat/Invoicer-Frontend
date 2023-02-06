@@ -54,7 +54,6 @@
 		padding: 20px 10px;
 		width: 80%;
 		max-width: fit-content;
-		min-height: 30%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
