@@ -76,7 +76,7 @@
 {:then cmr}
 	<div class="container" in:fade={{ duration: 300, delay: 200 }} out:fade={{ duration: 200 }}>
 		<div class="header">
-			<div class="title">{cmr.externalNumber}</div>
+			<div class="title">{cmr?.externalNumber}</div>
 			<div class="right">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
 				<div class="icon delete" on:click={openDeleteTrailer}><SmallDeleteIcon /></div>
