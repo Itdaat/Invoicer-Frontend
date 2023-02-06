@@ -138,7 +138,7 @@
 {:else if type == truck}
 	<CreateTruck bind:show={showCreateTruck} />
 {:else if type == cmr}
-	<CreateCmr />
+	<CreateCmr bind:show={showCreateCmr} />
 {/if}
 
 <style>
