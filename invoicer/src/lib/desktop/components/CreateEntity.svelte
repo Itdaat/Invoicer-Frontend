@@ -136,7 +136,7 @@
 	<!-- {:else if type == transaction} -->
 	<!-- <CreateTransaction /> -->
 {:else if type == truck}
-	<CreateTruck />
+	<CreateTruck bind:show={showCreateTruck} />
 {:else if type == cmr}
 	<CreateCmr />
 {/if}
