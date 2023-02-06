@@ -73,7 +73,7 @@
 {#await trailerApi}
 	<Loader />
 {:then trailer}
-	<div class="container" in:fade={{ duration: 300, delay: 200 }} out:fade={{ duration: 200 }}>
+	<div class="container">
 		<div class="header">
 			<div class="title">{trailer?.licenseNumber}</div>
 			<div class="right">
