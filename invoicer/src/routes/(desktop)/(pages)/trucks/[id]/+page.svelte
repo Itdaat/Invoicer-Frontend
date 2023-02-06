@@ -63,7 +63,9 @@
 
 	$: truckApi = getTruckFormatted(id, confirmed);
 	$: if (updated) {
+		updated = false;
 		truckApi = getTruckFormatted(id, confirmed);
+		FilterStore.set({ ...$FilterStore });
 	}
 </script>
 
@@ -71,7 +73,8 @@
 {#await truckApi}
 	<Loader />
 {:then truck}
-	<div class="container" in:fade={{ duration: 300, delay: 200 }} out:fade={{ duration: 200 }}>
+	<!-- <div class="container"> -->
+	<div class="container" in:fade={{ duration: 300, delay: 200 }}>
 		<div class="header">
 			<div class="title">{truck?.licenseNumber}</div>
 			<div class="right">
@@ -97,6 +100,7 @@
 		rejectText={t.truck_delete_reject_button}
 		description={t.truck_delete_confirm_description}
 	/>
+	<!-- </div> -->
 {/await}
 
 <!-- </MainPageTemplate> -->

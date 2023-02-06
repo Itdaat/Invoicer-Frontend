@@ -1,20 +1,17 @@
 <script>
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { getTrailersAllFields, getTrucksAllFields } from '$lib/api/server/transport';
+	import { getTrucksAllFields } from '$lib/api/server/transport';
 	import FilterPopup from '$lib/desktop/components/FilterPopup.svelte';
 	import ListContainer from '$lib/desktop/components/ListContainer.svelte';
 	import ListItems from '$lib/desktop/components/ListItems.svelte';
 	import MiniCategory from '$lib/desktop/components/MiniCategory.svelte';
 	import MainPageTemplate from '$lib/desktop/templates/MainPageTemplate.svelte';
 	import PageTemplate from '$lib/desktop/templates/PageTemplate.svelte';
-	import TrailerFilter from '$lib/mobile/components/filters/TrailerFilter.svelte';
 	import TruckFilter from '$lib/mobile/components/filters/TruckFilter.svelte';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import FilterStore from '$lib/stores/FilterStore';
 	import LanguageStore from '$lib/stores/Language';
-	import { quartInOut } from 'svelte/easing';
-	import { slide } from 'svelte/transition';
 	import { trucks } from '../../../../consts';
 
 	$: filter = $FilterStore;
