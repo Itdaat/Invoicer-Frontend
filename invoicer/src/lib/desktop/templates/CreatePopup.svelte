@@ -4,6 +4,7 @@
 	import LanguageStore from '$lib/stores/Language';
 	import { fade } from 'svelte/transition';
 	export let show = true;
+	export let title = '';
 	export let save = () => {};
 	$: t = $LanguageStore;
 	let hideFilter = () => {
@@ -18,7 +19,7 @@
 			<div class="close-button icon-button" on:click={hideFilter}>
 				<CloseMenuIcon />
 			</div>
-			<div class="title">{t.filter_title}</div>
+			<div class="title">{title}</div>
 			<slot />
 			<div class="buttons">
 				<!-- svelte-ignore a11y-click-events-have-key-events -->
