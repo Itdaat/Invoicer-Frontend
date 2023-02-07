@@ -2,6 +2,18 @@
 	import { clickOutside } from '$lib/helpers/ClickOutside';
 	import Loader from '$lib/mobile/components/Loader.svelte';
 	import { fade, slide } from 'svelte/transition';
+
+	/**
+	 * @param {string} val?
+	 * @param {string} pVal?
+	 */
+	const suggestionClickDefault = (val, pVal) => {
+		copyValue = value = val;
+		pseudoValue = pVal;
+		outside = true;
+		selected = true;
+	};
+
 	/**
 	 * @type {'ordinary' | 'success' | 'error'}
 	 */
@@ -14,6 +26,7 @@
 	export let message = '';
 	export let onBlurFunc = () => {};
 	export let onFocusFunc = () => {};
+	export let suggestionClick = suggestionClickDefault;
 	export let autocomplete = false;
 	export let pseudoValue = '';
 	export let noText = '';
@@ -44,18 +57,6 @@
 		focused = false;
 		onFocusFunc();
 	};
-
-	/**
-	 * @param {string | null} val
-	 * @param {string | null} pVal
-	 */
-	const onSuggestionClick = (val, pVal) => {
-		copyValue = value = val;
-		pseudoValue = pVal;
-		outside = true;
-		selected = true;
-	};
-
 	const clickOutsideEv = () => (outside = true);
 </script>
 
@@ -64,17 +65,28 @@
 		<div class="label" class:success class:error>{label}</div>
 	</div>
 	<div class="input-container" use:clickOutside on:click_outside={clickOutsideEv}>
-		<input class="input" class:success class:error placeholder={placeHolder} {disabled} {...{ type }} bind:value on:blur={blur} on:focus={focus} />
+		<input
+			class="input"
+			class:success
+			class:error
+			class:disabled
+			placeholder={placeHolder}
+			{disabled}
+			{...{ type }}
+			bind:value
+			on:blur={blur}
+			on:focus={focus}
+		/>
 		{#if autocomplete && (!outside || focused)}
 			{#await suggestionsApi then suggestions}
 				<div class="suggestions">
-					{#if suggestions.length > 0}
+					{#if suggestions?.length > 0}
 						{#each suggestions as suggestion}
 							<!-- svelte-ignore a11y-click-events-have-key-events -->
 							<div
 								class="suggestion"
 								on:click={() => {
-									onSuggestionClick(suggestion.value, suggestion.pseudoValue);
+									suggestionClick(suggestion.value, suggestion.pseudoValue);
 								}}
 								out:fade={{ duration: 100 }}
 							>
@@ -98,7 +110,7 @@
 	</div>
 </div>
 {#if status == 'error' && message != ''}
-	<div class="message-container" transition:slide={{ duration: 200 }}>{message}</div>
+	<div class="message-container" in:slide>{message}</div>
 {/if}
 
 <style>
@@ -111,6 +123,7 @@
 		/* padding: 0px 30px; */
 		max-width: 90%;
 		width: 90%;
+		position: relative;
 	}
 
 	.left {
@@ -153,6 +166,10 @@
 		color: #3d5a80;
 	}
 
+	.disabled {
+		cursor: not-allowed;
+	}
+
 	.input::placeholder {
 		font-family: 'Istok Web';
 		font-style: normal;
@@ -168,6 +185,13 @@
 		border: none;
 		outline: none;
 		border-bottom: 0.9px solid #3d5a80;
+	}
+
+	[type='date']::-webkit-inner-spin-button {
+		display: none;
+	}
+	[type='date']::-webkit-calendar-picker-indicator {
+		display: none;
 	}
 
 	.success {
@@ -203,7 +227,7 @@
 		overflow-y: scroll;
 		background-color: white;
 		position: absolute;
-		right: 15px;
+		right: -7px;
 		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 
 		border-radius: 10px;
