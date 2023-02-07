@@ -10,6 +10,7 @@ import { postAuthRequestJson } from '$lib/helpers/apiHelper';
  */
 export async function getOrders(firmId, filters) {
     const reqBody = { firmId, ...filters };
+    console.log('puk')
     const result = await postAuthRequestJson('order/get', reqBody);
     return result;
 }
@@ -48,6 +49,36 @@ export async function updateOrder(orderId, firmId, truck, trailer, personId, ord
     const reqBody = { orderId, firmId, truck, trailer, personId };
     const result = await postAuthRequestJson('order/update', reqBody);
     return result;
+}
 
+export async function getOrderAutoComplete(firmId, orderNumber) {
+    const reqBody = { name: orderNumber, firmId: firmId };
+    const orders = await postAuthRequestJson('order/get/autocomplete', reqBody)
+    // let orders = await getOrders(firmId, { orderNumber });
+
+    // const ordersExternal = await getOrder(firmId, { externalOrderNumber: orderNumber });
+    // const ordersTrailer = await getOrder
+
+    if (!orders.result || orders.result.length <= 0) {
+        return;
+    }
+
+    /**
+     * @type {{ value: any; name: string; }[]}
+     */
+    let ordersRes = [];
+    orders.result.forEach(order => {
+        // order.orderNumber;
+        let res = '';
+        res += ' (' + order.truck.licenseNumber + ") ";
+        res = order.orderNumber + res;
+        ordersRes.push({
+            value: order.orderNumber,
+            pseudoValue: order.id,
+            name: res
+        })
+    })
+
+    return ordersRes;
 
 }
