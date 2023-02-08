@@ -78,7 +78,7 @@
 		downloadAddress = order.downloadAddress;
 		truck = order.truck.licenseNumber;
 		trailer = order.trailer.licenseNumber;
-		sum = order.price;
+		// sum = order.price;
 
 		for (let product of order.products) {
 			createProduct(product.name, product.price);
@@ -94,7 +94,9 @@
 	 * @param {string} value
 	 */
 	const createProduct = (name, value) => {
-		console.log(name, value);
+		if (!name || isNaN(value)) {
+			return;
+		}
 		products = [
 			...products,
 			{
@@ -103,7 +105,19 @@
 				price: value
 			}
 		];
+		productName = productValue = null;
 	};
+
+	/** @param {Array<{id:number,name: string, price : string}>} productsList */
+	const calc = (productsList) => {
+		let sumRes = 0;
+		for (let product of productsList) {
+			sumRes += Number.parseFloat(product.price);
+		}
+		sum = sumRes.toFixed(2);
+	};
+
+	$: console.log(products);
 
 	/**
 	 * @param {number} id
@@ -118,6 +132,7 @@
 	$: orderSuggestions = getOrderAutoComplete(firmId, orderNumber);
 
 	$: orderChanged(orderId);
+	$: calc(products);
 
 	$: productsList = products;
 	// $: products = createProduct(productName, productValue);
@@ -216,7 +231,15 @@
 		/>
 	</MiniCategory>
 	<MiniCategory title={t.invoice_conclusion}>
-		<LabeledInput bind:value={sum} status={sumStatus} label={t.invoice_sum} placeHolder={t.invoice_sum} message={t.invoice_sum_empty} type="number" />
+		<LabeledInput
+			bind:value={sum}
+			status={sumStatus}
+			label={t.invoice_sum}
+			placeHolder={t.invoice_sum}
+			message={t.invoice_sum_empty}
+			type="number"
+			disabled
+		/>
 	</MiniCategory>
 	<SaveEntity {save} status={responseStatus} />
 </div>
