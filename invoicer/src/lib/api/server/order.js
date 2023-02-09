@@ -10,7 +10,6 @@ import { postAuthRequestJson } from '$lib/helpers/apiHelper';
  */
 export async function getOrders(firmId, filters) {
     const reqBody = { firmId, ...filters };
-    console.log('puk')
     const result = await postAuthRequestJson('order/get', reqBody);
     return result;
 }
@@ -59,12 +58,14 @@ export async function getOrderAutoComplete(firmId, orderNumber) {
     // const ordersExternal = await getOrder(firmId, { externalOrderNumber: orderNumber });
     // const ordersTrailer = await getOrder
 
-    if (!orders.result || orders.result.length <= 0) {
+    if (!orders.result || !Array.isArray(orders.result) || orders.result.length <= 0) {
         return;
     }
 
+    console.log(orders.result);
+
     /**
-     * @type {{ value: any; name: string; }[]}
+     * @type {{ value: any; name: string; pseudoValue : string }[]}
      */
     let ordersRes = [];
     orders.result.forEach(order => {
