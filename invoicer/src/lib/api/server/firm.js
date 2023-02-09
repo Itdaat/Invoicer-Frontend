@@ -12,11 +12,12 @@ export async function getFirms() {
 }
 /**
  * @param {string | null} firmId
+ * @param {string | null} name
  * @export
- * @returns {Promise<import('../../../types/Entities').Response<import('../../../types/Entities').Firm>>}
+ * @returns {Promise<import('../../../types/Entities').Response<import('../../../types/Entities').Firm[]>>}
  */
-export async function getFirm(firmId = null) {
-    const firm = await postAuthRequestJson('firm/get', { firmId });
+export async function getFirm(firmId = null, name = null) {
+    const firm = await postAuthRequestJson('firm/get', { firmId, name });
     return firm;
 }
 
@@ -120,11 +121,33 @@ export async function setCurrentFirm(firmId = null) {
  * @returns {Promise<boolean>}
  */
 export async function changeFirm(firmId) {
-    const firm = await getFirm(firmId);
-    if (!firm.result || firm.error) {
+    const firmRes = await getFirm(firmId);
+    // console.log(firmRes)
+    if (!firmRes.result || firmRes.error) {
         return false;
     }
-    setCookie('firmId', firm.result.id.toString());
-    localStorage.setItem('firm', JSON.stringify(firm.result));
+    const [firm] = firmRes.result;
+    setCookie('firmId', firm.id.toString());
+    localStorage.setItem('firm', JSON.stringify(firmRes.result));
     return true;
+}
+
+export async function getFirmAutoComplete(firm) {
+    const firms = await getFirm();
+    /**
+     * @type {{ value: any; name: string; pseudoValue: string }[]}
+     */
+    let firmsRes = [];
+
+
+    firms.result.forEach(invoice => {
+        firmsRes.push({
+            name: invoice.name,
+            value: invoice.name,
+            pseudoValue: invoice.id
+        })
+    })
+    // console.log(firmsRes);
+
+    return firmsRes;
 }
