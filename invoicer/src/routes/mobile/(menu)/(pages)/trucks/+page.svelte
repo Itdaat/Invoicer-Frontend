@@ -16,7 +16,7 @@
 	 * @param {{ brand?: any; licenseNumber?: any; }} filters
 	 */
 	const getTrucksFormatted = async (filters) => {
-		return (await getTrucksAllFields({ ...filters, licenseNumber: filter.license })).result;
+		return (await getTrucksAllFields({ ...filters })).result;
 	};
 
 	$: trailers = getTrucksFormatted(filter);
