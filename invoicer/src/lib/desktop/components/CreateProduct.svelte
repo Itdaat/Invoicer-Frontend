@@ -49,10 +49,6 @@
 </script>
 
 <div class="container">
-	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div class="left" on:click={onButtonClick}>
-		<div class="label">{t.invoice_create_product}</div>
-	</div>
 	<InputUpgraded
 		bind:value={name}
 		autocomplete
@@ -77,6 +73,10 @@
 		suggestionsApi={valueSuggestionApi}
 		type={valueType}
 	/>
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
+	<div class="left" on:click={onButtonClick}>
+		<div class="label">{t.invoice_create_product}</div>
+	</div>
 </div>
 {#if status == 'error' && message != ''}
 	<div class="message-container" transition:slide={{ duration: 200 }}>{message}</div>
@@ -85,7 +85,8 @@
 <style>
 	.container {
 		display: grid;
-		grid-template-columns: 26% 37% 37%;
+		/* grid-template-columns: 26% 37% 37%; */
+		grid-template-columns: 37% 37% 26%;
 		/* margin: 14px 0px; */
 		justify-content: space-between;
 		align-items: flex-start;
