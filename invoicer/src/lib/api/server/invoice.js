@@ -1,3 +1,31 @@
+import { postAuthRequestJson } from '$lib/helpers/apiHelper';
+
+
+/**
+ * 
+ * 
+ * @export
+ * @param {string} firmId 
+ * @param {string} number 
+ * @param {string} downloadAddress 
+ * @param {string} unloadAddress 
+ * @param {string} orderNumber 
+ * @param {string} truckLicense 
+ * @param {string} trailerLicense
+ * @param {string} date 
+ * @param {number} sum 
+ * @param {Array<{id : string}>} orders 
+ * @param {Array<{name : string, price : string}>} products 
+ */
+export async function createInvoice(firmId, number, downloadAddress, unloadAddress, orderNumber, truckLicense, trailerLicense, date, sum, orders, products) {
+    const reqBody = {
+        firmId, invoiceNumber: number, downloadAddress, unloadAddress, orderNumber, truckLicense, trailerLicense, invoiceDate: date, sum, orders, products
+    }
+    const result = await postAuthRequestJson('invoice/create', reqBody);
+    return result;
+}
+
+
 /**
  * 
  * 
