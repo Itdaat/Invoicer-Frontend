@@ -227,7 +227,7 @@
 		overflow-y: scroll;
 		background-color: white;
 		position: absolute;
-		right: -7px;
+		/* right: -7px; */
 		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 
 		border-radius: 10px;
