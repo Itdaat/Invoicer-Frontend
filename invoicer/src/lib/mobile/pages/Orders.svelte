@@ -73,6 +73,7 @@
 	}
 	.counter {
 		margin: 20px 0px;
+		margin-bottom: 35px;
 	}
 
 	.small-counter-container {
