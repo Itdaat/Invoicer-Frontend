@@ -1,19 +1,26 @@
 <script>
+	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { getCmr } from '$lib/api/server/cmr';
-	import { getCurrentFirmId } from '$lib/api/server/firm';
+	import { getCurrentFirmId, getFirm, getFirmAutoComplete } from '$lib/api/server/firm';
+	import { createInvoice } from '$lib/api/server/invoice';
 	import { getOrder, getOrderAutoComplete } from '$lib/api/server/order';
 	import { getTrailersAutocomplete, getTrucksAutocomplete } from '$lib/api/server/transport';
 	import CreateProduct from '$lib/desktop/components/CreateProduct.svelte';
 	import { dateToString } from '$lib/helpers/date';
+	import { openSuccessMessage } from '$lib/helpers/message';
 	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
 	import SaveEntity from '$lib/mobile/components/SaveEntity.svelte';
 	import LanguageStore from '$lib/stores/Language';
+	import SliderStore from '$lib/stores/Slides';
 	import LabeledInput from '$lib/templates/LabeledInput.svelte';
+	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
 
 	$: t = $LanguageStore;
+	$: slider = $SliderStore;
 
-	const firmId = getCurrentFirmId();
+	let firmId = getCurrentFirmId();
 	let lastProductId = 0;
 
 	/** @type {import('src/types/Response').ResponseStatus}*/
@@ -21,9 +28,13 @@
 
 	/** @type {string} */
 	let date = dateToString(new Date());
+	/** @type {string} */
+	let paymentDate = dateToString(new Date());
 	// let date;
 	/** @type {string} */
 	let number;
+	/** @type {string} */
+	let firm;
 	/** @type {string} */
 	let downloadAddress;
 	/** @type {string} */
@@ -32,8 +43,6 @@
 	let sum;
 	/** @type {Array<{id:number,name: string, price : string}>} */
 	let products = [];
-	/** @type {Array<number>} */
-	let orders;
 	/** @type {string} */
 	let orderNumber;
 	/** @type {string} */
@@ -43,6 +52,10 @@
 
 	/** @type {'ordinary' | 'success' | 'error'}*/
 	let dateStatus;
+	/** @type {'ordinary' | 'success' | 'error'}*/
+	let firmStatus;
+	/** @type {'ordinary' | 'success' | 'error'}*/
+	let paymentDateStatus;
 	/** @type {'ordinary' | 'success' | 'error'}*/
 	let numberStatus;
 	/** @type {'ordinary' | 'success' | 'error'}*/
@@ -66,27 +79,90 @@
 	let productValue;
 
 	/** @type {string}*/
+	let order;
+
+	/** @type {string}*/
 	let orderId;
 
 	/** @param {string} id */
 	const orderChanged = async (id) => {
-		orderId = '';
+		orderId = order;
+		order = '';
 		if (id === null || id === undefined || id === '') return;
 
-		const order = await getOrder(firmId, id);
-		unloadAddress = order.unloadAddress;
-		downloadAddress = order.downloadAddress;
-		truck = order.truck.licenseNumber;
-		trailer = order.trailer.licenseNumber;
+		const orderRes = await getOrder(firmId, id);
+		unloadAddress = orderRes.unloadAddress;
+		downloadAddress = orderRes.downloadAddress;
+		truck = orderRes.truck.licenseNumber;
+		trailer = orderRes.trailer.licenseNumber;
 		// sum = order.price;
 
-		for (let product of order.products) {
+		for (let product of orderRes.products) {
 			createProduct(product.name, product.price);
 		}
 	};
 
-	const save = () => {
+	const gotoSlide = (/** @type {number} */ index) => {
+		if ($page.url.pathname != '/mobile') {
+			slider.activeIndex = index;
+			goto('/mobile');
+		} else {
+			slider.slider?.slideTo(index);
+		}
+	};
+
+	const save = async () => {
 		responseStatus = 'inProcess';
+		paymentDateStatus =
+			numberStatus =
+			downloadAddressStatus =
+			unloadAddressStatus =
+			orderNumberStatus =
+			truckStatus =
+			trailerStatus =
+			dateStatus =
+				firmStatus;
+		('ordinary');
+
+		if (!number) numberStatus = 'error';
+		if (!downloadAddress) downloadAddressStatus = 'error';
+		if (!unloadAddress) unloadAddressStatus = 'error';
+		if (!orderNumber) orderNumberStatus = 'error';
+		if (!truck) truckStatus = 'error';
+		if (!trailer) trailerStatus = 'error';
+		if (!date) dateStatus = 'error';
+		if (!paymentDate) paymentDateStatus = 'error';
+		if (!firm) firmStatus = 'error';
+
+		if (
+			numberStatus == 'error' ||
+			downloadAddressStatus == 'error' ||
+			unloadAddressStatus == 'error' ||
+			dateStatus == 'error' ||
+			orderNumberStatus == 'error' ||
+			truckStatus == 'error' ||
+			trailerStatus == 'error' ||
+			paymentDate == 'error' ||
+			firmStatus == 'error'
+		) {
+			responseStatus = 'none';
+			return;
+		}
+
+		const orders = [{ id: orderId }];
+
+		const result = await createInvoice(firmId, number, downloadAddress, unloadAddress, orderNumber, truck, trailer, date, sum, orders, productsList);
+
+		if (result.error) {
+			responseStatus = 'none';
+			return;
+		}
+
+		gotoSlide(1);
+		setTimeout(() => {
+			openSuccessMessage(t.invoice_create_success);
+		}, 500);
+		responseStatus = 'none';
 	};
 
 	/**
@@ -117,8 +193,6 @@
 		sum = sumRes.toFixed(2);
 	};
 
-	$: console.log(products);
-
 	/**
 	 * @param {number} id
 	 */
@@ -127,30 +201,45 @@
 		products = newProductsList;
 	};
 
+	onMount(async () => {
+		firm = (await getFirm(firmId)).result[0].name;
+	});
+
 	$: trucksSuggestions = getTrucksAutocomplete(truck);
 	$: trailerSuggestions = getTrailersAutocomplete(trailer);
 	$: orderSuggestions = getOrderAutoComplete(firmId, orderNumber);
+	$: firmsAutocomplete = getFirmAutoComplete(firm);
 
-	$: orderChanged(orderId);
+	$: orderChanged(order);
 	$: calc(products);
 
 	$: productsList = products;
-	// $: products = createProduct(productName, productValue);
 </script>
 
 <div class="main">
 	<MiniCategory title={t.invoice_main}>
+		<LabeledInput
+			bind:value={firm}
+			bind:pseudoValue={firmId}
+			status={firmStatus}
+			label={t.invoice_firm}
+			placeHolder={t.invoice_firm}
+			message={t.invoice_firm_empty}
+			autocomplete
+			suggestionsApi={firmsAutocomplete}
+		/>
 		<LabeledInput
 			bind:value={number}
 			status={numberStatus}
 			label={t.invoice_number}
 			placeHolder={t.invoice_number}
 			message={t.invoice_number_empty}
+			type="number"
 		/>
 		<LabeledInput
 			bind:value={date}
 			status={dateStatus}
-			label="{t.invoice_date}pseudoValue"
+			label={t.invoice_date}
 			placeHolder={t.invoice_date}
 			message={t.invoice_date_empty}
 			type="date"
@@ -164,7 +253,7 @@
 			placeHolder={t.invoice_order_number}
 			message={t.invoice_order_number_empty}
 			autocomplete
-			bind:pseudoValue={orderId}
+			bind:pseudoValue={order}
 			suggestionsApi={orderSuggestions}
 		/>
 		<LabeledInput
@@ -231,6 +320,14 @@
 		/>
 	</MiniCategory>
 	<MiniCategory title={t.invoice_conclusion}>
+		<LabeledInput
+			bind:value={paymentDate}
+			status={paymentDateStatus}
+			label={t.invoice_payment_date}
+			placeHolder={t.invoice_payment_date}
+			message={t.invoice_date_empty}
+			type="date"
+		/>
 		<LabeledInput
 			bind:value={sum}
 			status={sumStatus}
