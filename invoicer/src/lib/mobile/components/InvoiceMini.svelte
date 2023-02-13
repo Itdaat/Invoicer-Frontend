@@ -1,5 +1,7 @@
 <script>
 	import { goto } from '$app/navigation';
+	import { quartInOut } from 'svelte/easing';
+	import { slide } from 'svelte/transition';
 
 	export let number = '';
 	export let price = NaN;
@@ -24,11 +26,12 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<main
+<div
+	class="main ripple-light"
 	on:click={() => {
 		goto(`/mobile/${id}/invoice`);
 	}}
-	class="ripple-light"
+	in:slide={{ duration: 700 }}
 >
 	<div class="left">
 		<div class="number">{number}</div>
@@ -43,10 +46,10 @@
 		<div class="price">{price}{sign}</div>
 		<div class="date">{dayStr}.{monthStr}.{year}</div>
 	</div>
-</main>
+</div>
 
 <style>
-	main {
+	.main {
 		display: flex;
 		justify-content: space-between;
 		padding: 14px 0px;
