@@ -1,6 +1,6 @@
 import { postAuthRequestJson } from '$lib/helpers/apiHelper';
 import { getCookie, setCookie } from '$lib/helpers/cookies';
-import { emailDataType, legalAddressType, paymentIban, phoneDataType, postalAddressType } from '../../../consts';
+import { emailDataType, legalAddressType, paymentIban, phoneDataType, postalAddressType, unreachableError } from '../../../consts';
 
 /**
  * @export
