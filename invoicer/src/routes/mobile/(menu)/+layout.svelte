@@ -3,8 +3,11 @@
 	import { getCurrentFirmId, getFirm } from '$lib/api/server/firm';
 	import CreateFirm from '$lib/desktop/components/firm/CreateFirm.svelte';
 	import { getCookie, setCookie } from '$lib/helpers/cookies';
+	import { openErrorMessage } from '$lib/helpers/message';
 	import LanguageStore from '$lib/stores/Language';
+	import { unreachableError } from '../../../consts';
 	import { beforeUpdate, onMount } from 'svelte';
+	import GlobalMessage from '$lib/mobile/components/GlobalMessage.svelte';
 	$: t = $LanguageStore;
 
 	// const firm = JSON.parse(localStorage.getItem('firm') || '{}');
@@ -22,6 +25,10 @@
 		let firm;
 		const firmId = getCookie('firmId');
 		const firmRes = await getFirm(firmId || null);
+		if (firmRes.error?.code == unreachableError.code) {
+			openErrorMessage(t.message_unreachable_error);
+			return;
+		}
 		if (firmRes.error || firmRes.result.length <= 0) {
 			localStorage.setItem('create_title', t.firm_create);
 			goto('/mobile/create/firm');
@@ -43,4 +50,5 @@
 
 {#await GetFirm() then Get}
 	<slot />
+	<GlobalMessage />
 {/await}
