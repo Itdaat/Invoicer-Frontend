@@ -1,15 +1,15 @@
 import type { responseError } from "src/consts";
 
-export class Transport {
-    id : number;
-    licenseNumber : string;
-    name : string;
-    transportBrandId : number;
-    transportTypeId : number;
-    brandName : string;
-    number : string;
-    type : 'truck' | 'trailer'
-}
+// export class Transport {
+//     id : number;
+//     licenseNumber : string;
+//     name : string;
+//     transportBrandId : number;
+//     transportTypeId : number;
+//     brandName : string;
+//     number : string;
+//     type : 'truck' | 'trailer'
+// }
 
 export class Person {
     id? : number;
@@ -99,10 +99,10 @@ export class InvoiceMini {
 }
 
 export class InvoiceCounts {
-    all : number;
-    soon : number;
-    overdue : number;
-    future : number;
+    allSum : number;
+    received : number;
+    outdated : number;
+    inProcess : number;
 }
 
 export class OrderCounts {
