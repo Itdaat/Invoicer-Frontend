@@ -151,7 +151,20 @@
 
 		const orders = [{ id: orderId }];
 
-		const result = await createInvoice(firmId, number, downloadAddress, unloadAddress, orderNumber, truck, trailer, date, sum, orders, productsList);
+		const result = await createInvoice(
+			firmId,
+			number,
+			downloadAddress,
+			unloadAddress,
+			orderNumber,
+			truck,
+			trailer,
+			date,
+			sum,
+			orders,
+			productsList,
+			paymentDate
+		);
 
 		if (result.error) {
 			responseStatus = 'none';
