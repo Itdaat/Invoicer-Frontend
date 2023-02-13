@@ -1,19 +1,15 @@
 <script>
-	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { getCmr } from '$lib/api/server/cmr';
 	import { getCurrentFirmId } from '$lib/api/server/firm';
 	import { getOrder, updateOrder } from '$lib/api/server/order';
 	import { createPerson, getDriverAutocomplete, getPerson, getPersonAllFields } from '$lib/api/server/persons';
-	import { getTrailersAutocomplete, getTrucks, getTrucksAutocomplete } from '$lib/api/server/transport';
-	import { openErrorMessage } from '$lib/helpers/message';
+	import { getTrailersAutocomplete, getTrucksAutocomplete } from '$lib/api/server/transport';
 	import MiniCategory from '$lib/mobile/components/MiniCategory.svelte';
 	import SaveEntity from '$lib/mobile/components/SaveEntity.svelte';
 	import LanguageStore from '$lib/stores/Language';
 	import LabeledInput from '$lib/templates/LabeledInput.svelte';
 	import { onMount } from 'svelte';
 	import { slide } from 'svelte/transition';
-	import { mobileOrders, responseErrors } from '../../../../../../consts';
 
 	const firmId = getCurrentFirmId();
 	const id = $page.params.id;
