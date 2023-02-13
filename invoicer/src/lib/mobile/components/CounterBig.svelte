@@ -1,7 +1,17 @@
 <script>
+	import { onMount } from 'svelte';
+
 	export let sign = '$';
 	export let cash = 0;
 	export let cent = 0;
+
+	// onMount(() => {
+	// 	if (!cent) {
+	// 		const strNum = cash.toString().split('.');
+	// 		cash = Number.parseInt(strNum[0]);
+	// 		cent = Number.parseInt(strNum[1]);
+	// 	}
+	// });
 </script>
 
 <main>
