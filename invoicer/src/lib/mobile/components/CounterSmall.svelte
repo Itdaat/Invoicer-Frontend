@@ -1,4 +1,6 @@
 <script>
+	import { onMount } from 'svelte';
+
 	export let cash = 0;
 	export let cent = 0;
 	export let sign = '$';
