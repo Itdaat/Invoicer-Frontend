@@ -84,6 +84,11 @@ export const unsignedStatus = 1;
 export const signedStatus = 2;
 export const brokenSignatureStatus = 3;
 
+// ! invoice statuses
+export const createdInvoice = 0;
+export const outdatedInvoice = 1;
+export const plannedInvoice = 2;
+export const payedInvoice = 3;
 
 
 export const responseErrors = [
