@@ -29,12 +29,7 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<main
-	on:click={() => {
-		gotoOrder(id);
-	}}
-	class="ripple-light"
->
+<main class="ripple-light">
 	<div class="left">
 		<div class="number">{number}</div>
 		{#if truckNumber != '' && trailerNumber != ''}

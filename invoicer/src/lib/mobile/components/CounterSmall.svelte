@@ -5,21 +5,20 @@
 	export let cent = 0;
 	export let sign = '$';
 	export let title = '';
+	export let onClick = () => {};
 </script>
 
-<main>
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<div on:click={onClick}>
 	<span class="title">{title}</span>
 	<div class="value">
 		<span class="cash">{cash},</span>
 		<span class="cent">{cent}</span>
 		<span class="sign">{sign}</span>
 	</div>
-</main>
+</div>
 
 <style>
-	main {
-	}
-
 	.title {
 		display: flex;
 		justify-content: center;

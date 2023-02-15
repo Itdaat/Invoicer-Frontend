@@ -9,6 +9,7 @@
 	import CounterSmall from '../components/CounterSmall.svelte';
 	import MiniCategory from '../components/MiniCategory.svelte';
 	import OrderMini from '../components/OrderMini.svelte';
+	import PaymentMini from '../components/PaymentMini.svelte';
 
 	$: t = $LanguageStore;
 	$: filters = $FilterStore;
@@ -32,15 +33,8 @@
 
 	let data = {
 		sign: '$',
-		cash: 23494,
-		cent: 0
-	};
-
-	let counterSmall = {
-		cash: 23494,
-		cent: 2,
-		sign: '$',
-		title: 'В очікуванні'
+		cash: 12333,
+		cent: 90
 	};
 </script>
 
@@ -48,7 +42,7 @@
 	<div class="counter">
 		<CounterBig {...data} />
 		<div class="small-counter-container">
-			<CounterSmall cash={23494} cent={0} title={t.orders_done} />
+			<CounterSmall cash={12333.9} cent={0} title={t.orders_done} />
 			<CounterSmall cash={0} cent={0} title={t.orders_created} />
 			<CounterSmall cash={0} cent={0} title={t.orders_outdated} />
 		</div>
@@ -56,7 +50,7 @@
 	<MiniCategory title={t.orders_done}>
 		{#await futureOrdersApi then orders}
 			{#each orders as order}
-				<OrderMini price={order.price} date={order.date} trailerNumber={'dsfa'} truckNumber={'sdfe'} number={order.orderNumber} id={order.id} />
+				<PaymentMini price={12333.9} date={order.date} number={'Bank'} id={order.id} />
 			{/each}
 		{/await}
 	</MiniCategory>

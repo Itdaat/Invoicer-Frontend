@@ -31,7 +31,7 @@
 	on:click={() => {
 		goto(`/mobile/${id}/invoice`);
 	}}
-	in:slide={{ duration: 700 }}
+	transition:slide={{ duration: 700 }}
 >
 	<div class="left">
 		<div class="number">{number}</div>

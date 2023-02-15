@@ -7,6 +7,7 @@
 	import Orders from '$lib/mobile/pages/Orders.svelte';
 	import { Swiper, SwiperSlide } from 'swiper/svelte';
 	import { removeURLParameter } from '$lib/helpers/url';
+	import Payments from '$lib/mobile/pages/Payments.svelte';
 
 	$: slider = $SliderStore;
 
@@ -48,7 +49,7 @@
 			</div>
 		</SwiperSlide>
 		<SwiperSlide>
-			<div class="slide">Payments</div>
+			<div class="slide"><Payments /></div>
 		</SwiperSlide>
 		<SwiperSlide>
 			<div class="slide">hello</div>

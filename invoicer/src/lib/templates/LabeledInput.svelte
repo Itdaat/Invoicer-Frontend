@@ -98,7 +98,7 @@
 						<div
 							class="suggestion"
 							on:click={() => {
-								onSuggestionClick(null, null);
+								suggestionClick(null, null);
 							}}
 						>
 							{noText}

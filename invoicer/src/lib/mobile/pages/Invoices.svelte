@@ -28,69 +28,59 @@
 	// 	plannedInvoices = [],
 	// 	createdInvoices = [];
 
-	const getInvoicesCountVals = async () => {
+	const showPlannedFun = () => {
+		showOutdated = showCreated = false;
+		showPlanned = true;
+	};
+
+	const showCreatedFun = () => {
+		showOutdated = showPlanned = false;
+		showCreated = true;
+	};
+
+	const showOutdatedFun = () => {
+		showPlanned = showCreated = false;
+		showOutdated = true;
+	};
+
+	const getInvoicesCountVals = async (filter) => {
 		const countsResult = await getInvoicesCount(firmId);
 		if (countsResult.error || !countsResult.result) {
 			return;
 		}
-		outdatedCount = countsResult.result[0].outdated;
+		outdatedCount = countsResult.result[0].outdated || 0.0;
 		outdatedCent = outdatedCount.toString().split('.')[1];
 		outdatedCount = outdatedCount.toString().split('.')[0];
-		allCount = countsResult.result[0].allSum;
+		allCount = countsResult.result[0].allSum || 0.0;
 		allCent = allCount.toString().split('.')[1];
 		allCount = allCount.toString().split('.')[0];
-		plannedCount = countsResult.result[0].planned;
+		plannedCount = countsResult.result[0].planned || 0.0;
 		plannedCent = plannedCount.toString().split('.')[1];
 		plannedCount = plannedCount.toString().split('.')[0];
-		createdCount = countsResult.result[0].created;
+		createdCount = countsResult.result[0].created || 0.0;
 		createdCent = createdCount.toString().split('.')[1];
 		createdCount = createdCount.toString().split('.')[0];
 	};
 
-	// const getAllInvoices = async (filters) => {
-	// 	// const
-	// 	outdatedInvoices = (await getInvoices({ ...filters, invoiceStatusId: outdatedInvoice })).result || [];
-	// 	plannedInvoices = (await getInvoices({ ...filters, invoiceStatusId: plannedInvoice })).result || [];
-	// 	createdInvoices = (await getInvoices({ ...filters, invoiceStatusId: createdInvoice })).result || [];
-	// 	console.log(outdatedInvoices[0]);
-	// };
-
-	getInvoicesCountVals();
+	$: getInvoicesCountVals(filter);
 
 	// $: getAllInvoices(filter);
-	$: outdatedInvoicesApi = getInvoices({ ...filter, invoiceStatusId: outdatedInvoice });
-	$: plannedInvoicesApi = getInvoices({ ...filter, invoiceStatusId: plannedInvoice });
-	$: createdInvoicesApi = getInvoices({ ...filter, invoiceStatusId: createdInvoice });
+	$: outdatedInvoicesApi = getInvoices({ ...filter, invoiceStatusId: outdatedInvoice }, firmId);
+	$: plannedInvoicesApi = getInvoices({ ...filter, invoiceStatusId: plannedInvoice }, firmId);
+	$: createdInvoicesApi = getInvoices({ ...filter, invoiceStatusId: createdInvoice }, firmId);
 </script>
 
 <main>
 	<div class="counter">
 		<CounterBig cash={allCount} cent={allCent} />
 		<div class="small-counter-container">
-			<CounterSmall cash={plannedCount} cent={plannedCent} title={t.invoices_planned} />
-			<CounterSmall cash={createdCount} cent={createdCent} title={t.invoices_created} />
-			<CounterSmall cash={outdatedCount} cent={outdatedCent} title={t.invoices_outdated} />
+			<CounterSmall cash={plannedCount} cent={plannedCent} title={t.invoices_planned} onClick={showPlannedFun} />
+			<CounterSmall cash={createdCount} cent={createdCent} title={t.invoices_created} onClick={showCreatedFun} />
+			<CounterSmall cash={outdatedCount} cent={outdatedCent} title={t.invoices_outdated} onClick={showOutdatedFun} />
 		</div>
 	</div>
-	{#if showPlanned}
-		<MiniCategory title={t.invoices_planned}>
-			{#await plannedInvoicesApi}
-				<Loader size="45" type="circle" colorTheme="dark" status="inProcess" />
-			{:then plannedInvoices}
-				{#each plannedInvoices.result as invoice}
-					<InvoiceMini
-						date={invoice.invoiceDate}
-						price={invoice.sum}
-						number={invoice.invoiceNumber}
-						trailerNumber={invoice.trailer?.licenseNumber}
-						truckNumber={invoice.truck?.licenseNumber}
-					/>
-				{/each}
-			{/await}
-		</MiniCategory>
-	{/if}
-	{#if showCreated}
-		<MiniCategory title={t.invoices_created}>
+	<MiniCategory title={t.invoices_created}>
+		{#if showCreated}
 			{#await createdInvoicesApi}
 				<Loader size="45" type="circle" colorTheme="dark" status="inProcess" />
 			{:then createdInvoices}
@@ -104,10 +94,10 @@
 					/>
 				{/each}
 			{/await}
-		</MiniCategory>
-	{/if}
-	{#if showOutdated}
-		<MiniCategory title={t.invoices_outdated}>
+		{/if}
+	</MiniCategory>
+	<MiniCategory title={t.invoices_outdated}>
+		{#if showOutdated}
 			{#await outdatedInvoicesApi}
 				<Loader size="45" type="circle" colorTheme="dark" status="inProcess" />
 			{:then outdatedInvoices}
@@ -121,8 +111,25 @@
 					/>
 				{/each}
 			{/await}
-		</MiniCategory>
-	{/if}
+		{/if}
+	</MiniCategory>
+	<MiniCategory title={t.invoices_planned}>
+		{#if showPlanned}
+			{#await plannedInvoicesApi}
+				<Loader size="45" type="circle" colorTheme="dark" status="inProcess" />
+			{:then plannedInvoices}
+				{#each plannedInvoices.result as invoice}
+					<InvoiceMini
+						date={invoice.invoiceDate}
+						price={invoice.sum}
+						number={invoice.invoiceNumber}
+						trailerNumber={invoice.trailer?.licenseNumber}
+						truckNumber={invoice.truck?.licenseNumber}
+					/>
+				{/each}
+			{/await}
+		{/if}
+	</MiniCategory>
 </main>
 
 <style>

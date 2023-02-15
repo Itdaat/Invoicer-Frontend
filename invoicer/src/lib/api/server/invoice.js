@@ -28,12 +28,12 @@ export async function createInvoice(firmId, number, downloadAddress, unloadAddre
 
 
 /**
- * 
- * 
  * @export
+ * @param {{ invoiceNumber: any; downloadAddress: any; unloadAddress: any; orderNumber: any; truckLicense: any; trailerLicense: any; dateFrom: any; dateTo: any; sum: any; orders: any; paymentDateFrom: any; paymentDateTo: any; invoiceStatusId: any; }} filters
+ * @param {any} firmId
  * @returns {Promise<import('../../../types/Entities').Response<import('../../../types/Entities').Invoice[]>>}
  */
-export async function getInvoices(filters) {
+export async function getInvoices(filters, firmId) {
     const reqBody = {
         invoiceNumber: filters.invoiceNumber,
         downloadAddress: filters.downloadAddress,
@@ -48,6 +48,7 @@ export async function getInvoices(filters) {
         paymentDateFrom: filters.paymentDateFrom,
         paymentDateTo: filters.paymentDateTo,
         invoiceStatusId: filters.invoiceStatusId,
+        firmId
     };
 
     const result = await postAuthRequestJson('invoice/get', reqBody);

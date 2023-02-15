@@ -68,6 +68,7 @@
 
 		border-radius: 20px;
 		padding: 10px 15px;
+		padding-left: 20px;
 		width: 375px;
 		/* height: 179px; */
 		/* min-height: 30%; */

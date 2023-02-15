@@ -43,6 +43,9 @@
     "menu_order": "Order",
     "menu_transaction": "Transaction",
     "menu_payment": "Payment",
+    "SET-PASSWORD": "_____________SET-PASSWORD_______________",
+    "set_password_login": "Set password",
+    "set_password_button": "Set password",
     "INVOICES": "__________INVOICES___________",
     "invoices_created": "Future",
     "invoices_outdated": "Outdated",
@@ -172,6 +175,7 @@
     "person_wrong_person": "Wrong person",
     "person_update_success": "Driver updated",
     "person_title_update": "Update Driver",
+    "no_selected_person": "No driver selected",
     "FILTER": "______________FILTER______________",
     "filter_title": "Filters",
     "filter_clear": "Clear",
@@ -279,6 +283,9 @@
     "order_person_empty": "Empty field",
     "order_transport": "Transport",
     "order_driver_no_driver": "+ Add driver",
+    "orders_done": "Done",
+    "orders_created": "Future",
+    "orders_outdated": "Outdated",
     "TRANSPORT": "____________________TRANSPORT___________________",
     "transport_title": "Transport"
 }
