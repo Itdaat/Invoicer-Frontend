@@ -74,7 +74,7 @@
 	<Loader />
 {:then truck}
 	<!-- <div class="container"> -->
-	<div class="container" in:fade={{ duration: 300, delay: 200 }}>
+	<div class="container" in:fade={{ duration: 300, delay: 200 }} out:fade={{ duration: 200 }}>
 		<div class="header">
 			<div class="title">{truck?.licenseNumber}</div>
 			<div class="right">

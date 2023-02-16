@@ -73,7 +73,7 @@
 {#await trailerApi}
 	<Loader />
 {:then trailer}
-	<div class="container">
+	<div class="container" in:fade={{ duration: 300, delay: 200 }} out:fade={{ duration: 200 }}>
 		<div class="header">
 			<div class="title">{trailer?.licenseNumber}</div>
 			<div class="right">
@@ -85,6 +85,7 @@
 		</div>
 		<div class="main">
 			<div class="main-container">
+				1
 				<ListItem name={t.trailer_license} value={trailer?.licenseNumber} messageText={t.trailer_copied_license} />
 				<ListItem name={t.trailer_brand} value={trailer?.brandName} messageText={t.trailer_copied_brand} noDataText={t.trailer_no_brand} />
 			</div>
